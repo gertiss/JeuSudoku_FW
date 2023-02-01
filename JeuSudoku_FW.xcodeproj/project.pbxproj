@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50820DFE298AC7940087CF21 /* Grille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFD298AC7940087CF21 /* Grille.swift */; };
+		50820E00298AE2F70087CF21 /* Bijection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFF298AE2F70087CF21 /* Bijection.swift */; };
 		509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */ = {isa = PBXBuildFile; fileRef = 509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */; };
 		509EC74329897D6E004B1139 /* JeuSudoku_FW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */; };
 		509EC74829897D6E004B1139 /* JeuSudoku_FWTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC74729897D6E004B1139 /* JeuSudoku_FWTests.swift */; };
 		509EC74929897D6E004B1139 /* JeuSudoku_FW.h in Headers */ = {isa = PBXBuildFile; fileRef = 509EC73B29897D6E004B1139 /* JeuSudoku_FW.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		509EC75529897F41004B1139 /* UneZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC75429897F41004B1139 /* UneZone.swift */; };
+		509EC75729898047004B1139 /* Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC75629898047004B1139 /* Testable.swift */; };
+		509EC7592989809A004B1139 /* Cellule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC7582989809A004B1139 /* Cellule.swift */; };
+		509EC75B298980C0004B1139 /* Carre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC75A298980C0004B1139 /* Carre.swift */; };
+		509EC75D298980CE004B1139 /* Ligne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC75C298980CE004B1139 /* Ligne.swift */; };
+		509EC75F298980DA004B1139 /* Colonne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC75E298980D9004B1139 /* Colonne.swift */; };
+		509EC76129898666004B1139 /* Extension Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76029898665004B1139 /* Extension Swift.swift */; };
+		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
+		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,11 +35,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50820DFD298AC7940087CF21 /* Grille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grille.swift; sourceTree = "<group>"; };
+		50820DFF298AE2F70087CF21 /* Bijection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bijection.swift; sourceTree = "<group>"; };
 		509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeuSudoku_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		509EC73B29897D6E004B1139 /* JeuSudoku_FW.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JeuSudoku_FW.h; sourceTree = "<group>"; };
 		509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = JeuSudoku_FW.docc; sourceTree = "<group>"; };
 		509EC74229897D6E004B1139 /* JeuSudoku_FWTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JeuSudoku_FWTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		509EC74729897D6E004B1139 /* JeuSudoku_FWTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeuSudoku_FWTests.swift; sourceTree = "<group>"; };
+		509EC75429897F41004B1139 /* UneZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UneZone.swift; sourceTree = "<group>"; };
+		509EC75629898047004B1139 /* Testable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testable.swift; sourceTree = "<group>"; };
+		509EC7582989809A004B1139 /* Cellule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cellule.swift; sourceTree = "<group>"; };
+		509EC75A298980C0004B1139 /* Carre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carre.swift; sourceTree = "<group>"; };
+		509EC75C298980CE004B1139 /* Ligne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ligne.swift; sourceTree = "<group>"; };
+		509EC75E298980D9004B1139 /* Colonne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colonne.swift; sourceTree = "<group>"; };
+		509EC76029898665004B1139 /* Extension Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension Swift.swift"; sourceTree = "<group>"; };
+		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
+		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +93,7 @@
 		509EC73A29897D6E004B1139 /* JeuSudoku_FW */ = {
 			isa = PBXGroup;
 			children = (
+				509EC75229897DBC004B1139 /* Sources */,
 				509EC73B29897D6E004B1139 /* JeuSudoku_FW.h */,
 				509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */,
 			);
@@ -83,6 +106,32 @@
 				509EC74729897D6E004B1139 /* JeuSudoku_FWTests.swift */,
 			);
 			path = JeuSudoku_FWTests;
+			sourceTree = "<group>";
+		};
+		509EC75229897DBC004B1139 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				509EC76029898665004B1139 /* Extension Swift.swift */,
+				509EC75629898047004B1139 /* Testable.swift */,
+				509EC75329897DE8004B1139 /* Topologie */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		509EC75329897DE8004B1139 /* Topologie */ = {
+			isa = PBXGroup;
+			children = (
+				509EC75429897F41004B1139 /* UneZone.swift */,
+				50820DFD298AC7940087CF21 /* Grille.swift */,
+				509EC7582989809A004B1139 /* Cellule.swift */,
+				509EC75A298980C0004B1139 /* Carre.swift */,
+				509EC75C298980CE004B1139 /* Ligne.swift */,
+				509EC75E298980D9004B1139 /* Colonne.swift */,
+				509EC76229898839004B1139 /* BandeH.swift */,
+				509EC76429898843004B1139 /* BandeV.swift */,
+				50820DFF298AE2F70087CF21 /* Bijection.swift */,
+			);
+			path = Topologie;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +243,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				509EC76329898839004B1139 /* BandeH.swift in Sources */,
+				509EC75529897F41004B1139 /* UneZone.swift in Sources */,
+				509EC7592989809A004B1139 /* Cellule.swift in Sources */,
+				509EC76129898666004B1139 /* Extension Swift.swift in Sources */,
+				509EC75729898047004B1139 /* Testable.swift in Sources */,
+				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
 				509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */,
+				509EC75B298980C0004B1139 /* Carre.swift in Sources */,
+				509EC76529898843004B1139 /* BandeV.swift in Sources */,
+				50820E00298AE2F70087CF21 /* Bijection.swift in Sources */,
+				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
+				509EC75D298980CE004B1139 /* Ligne.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +453,7 @@
 		509EC75029897D6E004B1139 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -407,6 +468,7 @@
 		509EC75129897D6E004B1139 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
