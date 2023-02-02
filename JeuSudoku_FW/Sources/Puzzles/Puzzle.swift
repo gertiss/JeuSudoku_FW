@@ -19,6 +19,30 @@ public struct Puzzle: Codable {
 
 public extension Puzzle {
     
+    /// Les 27 bijections toujours associées implicitement aux zones
+    static var bijectionsZones: Set<Bijection> {
+        Grille.zones.map { zone in
+            Bijection(zone.cellules, (1...9).map { $0 }.ensemble)
+        }.ensemble
+    }
+    
+    var singletons: Set<Bijection> {
+        bijections.filter { $0.cardinal == 1 }.ensemble
+    }
+    
+    var paires: Set<Bijection> {
+        bijections.filter { $0.cardinal == 2 }.ensemble
+    }
+    
+    var triplets: Set<Bijection> {
+        bijections.filter { $0.cardinal == 3 }.ensemble
+    }
+
+}
+
+// MARK: - Codage
+public extension Puzzle {
+    
     /// Le code est une ligne de la banque de grilles
     /// publiée sur Sudoku Exchange "Puzzle Bank"
     /// https://sudokuexchange.com
@@ -32,7 +56,7 @@ public extension Puzzle {
                 if chiffre != 0 { ensemble.insert(Bijection([Cellule(indexLigne, indexColonne)], [chiffre]))}
             }
         }
-        self = Self(bijections: ensemble)
+        self = Self(bijections: ensemble.union(Puzzle.bijectionsZones))
     }
     
     var json: Result<String, String> {
