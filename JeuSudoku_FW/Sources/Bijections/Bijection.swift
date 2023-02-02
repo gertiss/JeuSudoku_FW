@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Avec cellules.count == valeurs.count, parmi 1, 2, 3.
+/// Avec cellules.count == valeurs.count
 public struct Bijection: Testable {
     
     public let cellules: Set<Cellule>

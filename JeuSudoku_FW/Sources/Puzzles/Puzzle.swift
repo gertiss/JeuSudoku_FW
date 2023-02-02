@@ -8,7 +8,7 @@
 import Foundation
 
 /// Un Puzzle est défini par un ensemble de bijections et le problème à résoudre est de réduire cet ensemble à un ensemble équivalent de singletons.
-public struct Puzzle {
+public struct Puzzle: Codable {
     
     public let bijections: Set<Bijection>
     
@@ -34,5 +34,34 @@ public extension Puzzle {
         }
         self = Self(bijections: ensemble)
     }
+    
+    var json: Result<String, String> {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(self)
+            guard let texte = String(data: data, encoding: .utf8) else {
+                return .failure("Codage json : Impossible de créer data")
+            }
+            return .success(texte)
+        } catch {
+            return .failure("Erreur de décodage json : \(error)")
+        }
+    }
+    
+    static func avecJson(_ code: String) -> Result<Puzzle, String> {
+        let decoder = JSONDecoder()
+        guard let data = code.data(using: .utf8) else {
+            return .failure("Decodage: Impossible de créer data. Le code est censé être du json valide en utf8")
+        }
+        do {
+            let instance = try decoder.decode(Puzzle.self, from: data)
+            return .success(instance)
+        } catch {
+            return .failure("Erreur de décodage json : \(error)")
+        }
+    }
+
+    
+    
 }
 

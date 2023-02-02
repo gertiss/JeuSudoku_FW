@@ -8,6 +8,7 @@
 import Foundation
 
 struct CodagePuzzle {
+    /// Format : id (12 caractères) + 1 espace + 81 chiffres + 2 espaces + niveau (3 caractères)
     let code: String
     
     init(_ code: String) {
@@ -25,13 +26,14 @@ extension CodagePuzzle {
         code.map { String($0) }
     }
     
-    /// L'identificteur dans le préfixe
+    /// L'identificteur dans le préfixe, sur 12 caractères
     var id: String {
         caracteres.prefix(12).joined()
     }
     
     /// Les 81 caractères des chiffres
     var sourceChiffres: String {
+        // Avant les chiffres, il y a 12 + 1 caractères (id + un espace)
         let resultat = caracteres[13...(12+81)].joined()
         assert(resultat.count == 81)
         return resultat
