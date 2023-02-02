@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
+		507B3D62298BA6010051FCB4 /* OutilsPourResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D61298BA6010051FCB4 /* OutilsPourResolution.swift */; };
+		507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */; };
+		507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */; };
+		507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D67298BAA780051FCB4 /* CodagePuzzle.swift */; };
 		50820DFE298AC7940087CF21 /* Grille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFD298AC7940087CF21 /* Grille.swift */; };
 		50820E00298AE2F70087CF21 /* Bijection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFF298AE2F70087CF21 /* Bijection.swift */; };
 		509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */ = {isa = PBXBuildFile; fileRef = 509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */; };
@@ -35,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		507B3D5E298BA5290051FCB4 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
+		507B3D61298BA6010051FCB4 /* OutilsPourResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutilsPourResolution.swift; sourceTree = "<group>"; };
+		507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesFaciles.swift; sourceTree = "<group>"; };
+		507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesMoyens.swift; sourceTree = "<group>"; };
+		507B3D67298BAA780051FCB4 /* CodagePuzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodagePuzzle.swift; sourceTree = "<group>"; };
 		50820DFD298AC7940087CF21 /* Grille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grille.swift; sourceTree = "<group>"; };
 		50820DFF298AE2F70087CF21 /* Bijection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bijection.swift; sourceTree = "<group>"; };
 		509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeuSudoku_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +82,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		507B3D5C298BA3480051FCB4 /* Bijections */ = {
+			isa = PBXGroup;
+			children = (
+				50820DFF298AE2F70087CF21 /* Bijection.swift */,
+			);
+			path = Bijections;
+			sourceTree = "<group>";
+		};
+		507B3D5D298BA3800051FCB4 /* Puzzles */ = {
+			isa = PBXGroup;
+			children = (
+				507B3D5E298BA5290051FCB4 /* Puzzle.swift */,
+				507B3D67298BAA780051FCB4 /* CodagePuzzle.swift */,
+				507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */,
+				507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */,
+			);
+			path = Puzzles;
+			sourceTree = "<group>";
+		};
+		507B3D60298BA5E10051FCB4 /* Resolution */ = {
+			isa = PBXGroup;
+			children = (
+				507B3D61298BA6010051FCB4 /* OutilsPourResolution.swift */,
+			);
+			path = Resolution;
+			sourceTree = "<group>";
+		};
 		509EC72E29897D6E004B1139 = {
 			isa = PBXGroup;
 			children = (
@@ -113,12 +150,15 @@
 			children = (
 				509EC76029898665004B1139 /* Extension Swift.swift */,
 				509EC75629898047004B1139 /* Testable.swift */,
-				509EC75329897DE8004B1139 /* Topologie */,
+				509EC75329897DE8004B1139 /* Geometrie */,
+				507B3D5C298BA3480051FCB4 /* Bijections */,
+				507B3D5D298BA3800051FCB4 /* Puzzles */,
+				507B3D60298BA5E10051FCB4 /* Resolution */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		509EC75329897DE8004B1139 /* Topologie */ = {
+		509EC75329897DE8004B1139 /* Geometrie */ = {
 			isa = PBXGroup;
 			children = (
 				509EC75429897F41004B1139 /* UneZone.swift */,
@@ -129,9 +169,8 @@
 				509EC75E298980D9004B1139 /* Colonne.swift */,
 				509EC76229898839004B1139 /* BandeH.swift */,
 				509EC76429898843004B1139 /* BandeV.swift */,
-				50820DFF298AE2F70087CF21 /* Bijection.swift */,
 			);
-			path = Topologie;
+			path = Geometrie;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,16 +282,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507B3D62298BA6010051FCB4 /* OutilsPourResolution.swift in Sources */,
 				509EC76329898839004B1139 /* BandeH.swift in Sources */,
+				507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */,
 				509EC75529897F41004B1139 /* UneZone.swift in Sources */,
 				509EC7592989809A004B1139 /* Cellule.swift in Sources */,
 				509EC76129898666004B1139 /* Extension Swift.swift in Sources */,
+				507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */,
 				509EC75729898047004B1139 /* Testable.swift in Sources */,
 				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
 				509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */,
 				509EC75B298980C0004B1139 /* Carre.swift in Sources */,
 				509EC76529898843004B1139 /* BandeV.swift in Sources */,
 				50820E00298AE2F70087CF21 /* Bijection.swift in Sources */,
+				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
+				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
 				509EC75D298980CE004B1139 /* Ligne.swift in Sources */,
 			);
