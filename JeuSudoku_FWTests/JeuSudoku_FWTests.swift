@@ -71,4 +71,37 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(colonne, Colonne(2))
    }
     
+    func testSuppressionEspaces() {
+        let texte = """
+012 456 789
+
+987 654 321
+"""
+        print(texte.avecSuppressionEspacesTabsNewlines)
+        
+    }
+    
+    func testSaisieChiffres() {
+        // Le monde jeudi 2 février facile
+        let saisie = """
+000 000 000
+000 000 008
+000 003 724
+
+000 040 005
+005 002 010
+008 010 207
+
+082 007 050
+051 024 096
+082 039 000
+"""
+        
+        // fatalError si saisie invalide
+        let code = CodagePuzzle.codeDepuisSaisie(saisie)
+        let puzzle = Puzzle(code)
+        XCTAssertEqual(puzzle.singletons.count, 28)
+        XCTAssertEqual(puzzle.bijections.count, 55)
+    }
+    
 }

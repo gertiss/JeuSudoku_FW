@@ -12,9 +12,13 @@ public struct CodagePuzzle {
     /// Format : id (12 caractères) + 1 espace + 81 chiffres + 2 espaces + niveau (3 caractères)
     public let code: String
     
+    /// code doit être valide, sinon fatalError
     public init(_ code: String) {
         assert(code.count == 99)
         self.code = code
+        guard essaiChiffres != nil else {
+            fatalError("chiffres invalides")
+        }
     }
 }
 
@@ -40,9 +44,23 @@ public extension CodagePuzzle {
         return resultat
     }
     
-    /// Les 81 chiffres
+    /// Essaye de lire les chiffres, nil si erreur.
+    /// Les caractères doivent être des chiffres et il doit y en avoir 81.
+    var essaiChiffres: [Int]? {
+        let essai = sourceChiffres.map { Int(String($0)) }
+        if essai.contains(Optional<Int>.none) {
+            return nil
+        }
+        guard essai.count == 81 else { return nil }
+        return essai.map { $0! }
+    }
+    
+    /// Les 81 chiffres, valides
     var chiffres: [Int] {
-        sourceChiffres.map { Int(String($0))! }
+        guard let chiffresValides = essaiChiffres else {
+            fatalError("chiffres invalides")
+        }
+        return chiffresValides
     }
     
     var niveau: Double {
@@ -55,6 +73,14 @@ public extension CodagePuzzle {
     var puzzle: Puzzle {
         Puzzle(code)
     }
-
     
+    /// `saisieChiffres` ne contient que les 81 chiffres.
+    /// Ils peuvent être écrits avec des espaces, tabs et return qui seront supprimés.
+    /// On retourne un code normalisé, avec un id et un niveau factices.
+    static func codeDepuisSaisie(_ saisieChiffres: String) -> String {
+        let chiffres = saisieChiffres.avecSuppressionEspacesTabsNewlines
+        return "012345678901" + " " + chiffres + "  " + "1.0"
+    }
 }
+
+

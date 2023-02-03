@@ -93,4 +93,16 @@ extension Set {
     }
 }
 
+public extension String {
+    
+    func avecSuppression(de caracteres: String) -> String {
+        var copie = self
+        copie.removeAll { caracteres.contains($0) }
+        return copie
+    }
+    
+    var avecSuppressionEspacesTabsNewlines: String {
+        avecSuppression(de: " \t\n")
+    }
+}
 
