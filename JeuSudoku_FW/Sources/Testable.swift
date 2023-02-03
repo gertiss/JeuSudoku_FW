@@ -19,3 +19,4 @@ public protocol Testable: Hashable, CustomStringConvertible, Codable, Identifiab
 public extension Testable {
     var id: String { nom }
 }
+

@@ -7,17 +7,18 @@
 
 import Foundation
 
-struct CodagePuzzle {
+/// Codage suivant le format de la banque Sudoku Exchange.
+public struct CodagePuzzle {
     /// Format : id (12 caractères) + 1 espace + 81 chiffres + 2 espaces + niveau (3 caractères)
-    let code: String
+    public let code: String
     
-    init(_ code: String) {
+    public init(_ code: String) {
         assert(code.count == 99)
         self.code = code
     }
 }
 
-extension CodagePuzzle {
+public extension CodagePuzzle {
     
     static let exemple1 = "0000183b305c 050703060007000800000816000000030000005000100730040086906000204840572093000409000  1.2"
     
@@ -26,7 +27,7 @@ extension CodagePuzzle {
         code.map { String($0) }
     }
     
-    /// L'identificteur dans le préfixe, sur 12 caractères
+    /// L'identificateur dans le préfixe, sur 12 caractères
     var id: String {
         caracteres.prefix(12).joined()
     }
@@ -45,8 +46,14 @@ extension CodagePuzzle {
     }
     
     var niveau: Double {
-        let source = caracteres[((12+81+3))...].joined()
+        let source = caracteres[((12 + 1 + 81 + 2))...].joined()
         return Double(source)!
+    }
+    
+    /// Le puzzle créé à partir du code. On oublie id et niveau.
+    /// On suppose le code correct.
+    var puzzle: Puzzle {
+        Puzzle(code)
     }
 
     

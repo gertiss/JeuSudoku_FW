@@ -7,13 +7,23 @@
 
 import Foundation
 
-public struct BandeH: Testable {
+public struct BandeH: Testable, InstanciableParNom {
     
     public let index: Int // de 0 à 2
     
+    /// Peut échouer si les données sont incohérentes. fatalError  dans ce cas.
     public init(_ index: Int) {
         assert(index >= 0 && index <= 2)
         self.index = index
+    }
+    
+    /// Exemple : `BandeH(nom: "N") -> BandeH(1)`.
+    /// Peut échouer, retourne alors nil.
+    public init?(_ nom: String) {
+        guard let index = Self.noms.firstIndex(of: nom) else {
+            return nil
+        }
+        self = Self(index)
     }
     
     public var description: String {
@@ -30,6 +40,16 @@ public extension BandeH {
         Self.noms[index]
     }
     
+    /// Exemple : `Bande(nom: "N") -> Bande(1)`.
+    /// Peut échouer, retourne alors nil.
+    init?(nom: String) {
+        guard let index = Self.noms.firstIndex(of: nom) else {
+            return nil
+        }
+        self = Self(index)
+    }
+    
+
     /// Les 3 lignes de la bande
     var lignes: Set<Ligne> {
         [Ligne(index * 3), Ligne(index * 3 + 1), Ligne(index * 3 + 2)]

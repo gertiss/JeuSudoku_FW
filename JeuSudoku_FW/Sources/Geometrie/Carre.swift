@@ -16,6 +16,7 @@ public struct Carre: UneZone {
     public let indexBandeH: Int // de 0 à 2
     public let indexBandeV: Int // de 0 à 2
     
+    /// Peut échouer si données incohérentes. fatalError dans ce cas.
     public init(_ indexBandeH: Int, _ indexBandeV: Int) {
         self.type = .carre
         assert(indexBandeH >= 0 && indexBandeH <= 2)
@@ -23,6 +24,21 @@ public struct Carre: UneZone {
         self.indexBandeH = indexBandeH
         self.indexBandeV = indexBandeV
     }
+    
+    /// Exemple : `Carre(nom: "Mn") -> Carre(0, 1)`.
+    /// Peut échouer, retourne alors nil.
+    public init?(nom: String) {
+        let bandeHV = nom.map { String($0) }
+        if bandeHV.count != 2 { return nil }
+        let nomBandeH = bandeHV[0]
+        let nomBandeV = bandeHV[1]
+        if !BandeH.noms.contains(nomBandeH) { return nil }
+        if !BandeV.noms.contains(nomBandeV) { return nil }
+        let indexBandeH = BandeH.noms.firstIndex(of: nomBandeH)!
+        let indexBandeV = BandeV.noms.firstIndex(of: nomBandeV)!
+        self = Carre(indexBandeH, indexBandeV)
+    }
+
 }
 
 extension Carre {

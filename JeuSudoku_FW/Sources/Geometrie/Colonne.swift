@@ -19,6 +19,15 @@ public struct Colonne: UneZone {
         self.type = .colonne
     }
     
+    /// Exemple : `Colonne(nom: "b") -> Colonne(1)`
+    /// Peut échouer, retourne alors nil.
+    public init?(nom: String) {
+        guard let index = Self.noms.firstIndex(of: nom) else {
+            return nil
+        }
+        self = Self(index)
+    }
+
     public static let noms = "abcdefghi".map { String($0) }
 }
 

@@ -25,9 +25,9 @@ public enum TypeZone: String, Testable {
 
 /// UneZone est une Ligne ou une Colonne ou un Carre
 /// Si on veut une liste de UneZone, il faut écrire `[any UneZone]`
-/// Mais `any UneZone` ne peut pas être Equatable ni Hashable
-/// bien que UneZone le soit
-public protocol UneZone: Testable {
+/// Mais `any UneZone` ne peut pas être Equatable ni Hashable bien que UneZone le soit.
+/// Donc on ne peut pas écrire `Set<any UneZone>`
+public protocol UneZone: Testable, InstanciableParNom {
     var cellules: Set<Cellule> { get }
     var type: TypeZone { get }
 }

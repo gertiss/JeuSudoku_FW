@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Un domaine de noms static, implémenté comme enum sans cas (c'est la technique Apple)
+/// Ce n'est qu'un recueil de constantes.
 public enum Grille { }
 
 public extension Grille {
@@ -55,7 +57,7 @@ extension Grille {
     /// On ne peut pas rendre `Set<Zone>` on est obligé de rendre `[any UneZone]`
     /// Utilisation d'un type "existentiel" `any UneZone`
     /// Ce genre de type a des restrictions :
-    /// Type 'any UneZone' cannot conform to 'Equatable'
+    /// Type `any UneZone` cannot conform to 'Equatable'
     /// Et cela même si UneZone est Equatable
     private static var calculZones: [any UneZone] {
         calculCarres.array + calculLignes.array + calculColonnes.array

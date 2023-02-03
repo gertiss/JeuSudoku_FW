@@ -8,15 +8,17 @@
 import Foundation
 
 /// Une bande verticale formée de 3 colonnes
-public struct BandeV: Testable {
+public struct BandeV: Testable, InstanciableParNom {
     
     public let index: Int // de 0 à 2
     
-    public init(_ index: Int) {
+    /// Peut échouer si données incohérentes. fatalError dans ce cas.
+   public init(_ index: Int) {
         assert(index >= 0 && index <= 2)
         self.index = index
     }
     
+
     public var description: String {
         "BandeV(\(index))"
     }
@@ -30,6 +32,15 @@ public extension BandeV {
     /// Le nom de la bande, qui sert d'id pour  le protocole Identifiable
     var nom: String {
         Self.noms[index]
+    }
+
+    /// Exemple : `BandeV(nom: "n") -> BandeV(1)`.
+    /// Peut échouer, retourne alors nil.
+    init?(nom: String) {
+        guard let index = Self.noms.firstIndex(of: nom) else {
+            return nil
+        }
+        self = Self(index)
     }
 
     /// les 3 colonnes de la bande

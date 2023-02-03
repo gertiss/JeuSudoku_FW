@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// L'affirmation de l'existence d'une bijection entre un ensemble de cellules contenues dans une même zone et un ensemble de valeurs.
 /// Avec cellules.count == valeurs.count
+/// Mais on ne précise pas quelle bijection exactement.
 public struct Bijection: Testable {
     
     public let cellules: Set<Cellule>
@@ -15,6 +17,7 @@ public struct Bijection: Testable {
     public let nom: String
 
     public init(_ cellules: Set<Cellule>, _ valeurs: Set<Int>) {
+        assert(cellules.count == valeurs.count)
         self.cellules = cellules
         self.valeurs = valeurs
         let nomsCellules = cellules.map { $0.nom }

@@ -8,13 +8,15 @@
 import Foundation
 
 /// Un Puzzle est défini par un ensemble de bijections et le problème à résoudre est de réduire cet ensemble à un ensemble équivalent de singletons.
-public struct Puzzle: Codable {
+/// Ces bijections incluent les 27 bijections sur les zones.
+public struct Puzzle: Hashable, Codable {
     
     public let bijections: Set<Bijection>
     
     public init(bijections: Set<Bijection>) {
         self.bijections = bijections
     }
+    
 }
 
 public extension Puzzle {
@@ -37,6 +39,14 @@ public extension Puzzle {
     var triplets: Set<Bijection> {
         bijections.filter { $0.cardinal == 3 }.ensemble
     }
+    
+    /// L'unique bijection dont l'ensemble de cellules est le singleton [cellule]
+    /// Peut échouer, retourne alors nil.
+    func leSingleton(cellule: Cellule) -> Bijection? {
+        singletons.filter { singleton in singleton.cellules.contains(cellule) }
+            .uniqueValeur
+        }
+
 
 }
 
@@ -58,7 +68,7 @@ public extension Puzzle {
         }
         self = Self(bijections: ensemble.union(Puzzle.bijectionsZones))
     }
-    
+        
     var json: Result<String, String> {
         do {
             let encoder = JSONEncoder()
