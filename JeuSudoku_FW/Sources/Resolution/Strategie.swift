@@ -18,6 +18,11 @@ public struct RechercheDeDomaines {
     public var valeurs: Set<Int>
 }
 
+extension RechercheDeDomaines {
+    
+}
+
+
 /// On cherche  l'ensemble des valeurs possibles pour le `domaine` sur lequel on se focalise
 public struct RechercheDeValeurs {
     public var domaine: Domaine
