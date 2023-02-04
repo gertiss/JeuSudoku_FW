@@ -106,3 +106,21 @@ public extension String {
     }
 }
 
+extension Set<Cellule>: UnDomaine {
+    
+    public var cellules: Set<Cellule> {
+        self
+    }
+    
+    /// est inclus dans une zone ligne, carré ou colonne
+    /// donc peut servir de domaine à une bijection
+    public var estUnDomaine: Bool {
+        for zone in Grille.zones {
+            if allSatisfy({ zone.cellules.contains($0) }) {
+                return true
+            }
+        }
+        return false
+    }
+}
+

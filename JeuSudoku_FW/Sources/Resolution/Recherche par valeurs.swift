@@ -7,10 +7,12 @@
 
 import Foundation
 
-
-/// Découvrir toutes les nouvelles bijections dont on donne l'ensemble des valeurs.
-/// On se "focalise" sur ces valeurs.
-func nouvellesBijections(dans puzzle: Puzzle, avec valeurs: Set<Int>) -> Set<Bijection> {
-    fatalError("à implémenter")
+extension Puzzle {
+    
+    /// Découvrir toutes les nouvelles contraintes dont on donne l'ensemble des valeurs.
+    /// On se "focalise" sur ces valeurs et on cherche des domaines possibles.
+    func nouvellesContraintes(valeurs: Set<Int>) -> Set<ExistenceBijection> {
+        fatalError("à implémenter")
+    }
+    
 }
-

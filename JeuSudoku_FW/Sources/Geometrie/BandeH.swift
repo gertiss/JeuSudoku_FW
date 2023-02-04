@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BandeH: Testable, InstanciableParNom {
+public struct BandeH {
     
     public let index: Int // de 0 à 2
     
@@ -16,39 +16,41 @@ public struct BandeH: Testable, InstanciableParNom {
         assert(index >= 0 && index <= 2)
         self.index = index
     }
-    
-    /// Exemple : `BandeH(nom: "N") -> BandeH(1)`.
-    /// Peut échouer, retourne alors nil.
-    public init?(_ nom: String) {
-        guard let index = Self.noms.firstIndex(of: nom) else {
-            return nil
-        }
-        self = Self(index)
-    }
+}
+
+// MARK: - Testable
+
+extension BandeH: Testable {
     
     public var description: String {
         "BandeH(\(index))"
     }
 }
 
-public extension BandeH {
+// MARK: - InstanciableParNom
+
+extension BandeH: InstanciableParNom {
     
     static let noms = ["M", "N", "P"]
     
     /// Le nom de la bande, qui sert d'id pour  le protocole Identifiable
-    var nom: String {
+    public var nom: String {
         Self.noms[index]
     }
     
-    /// Exemple : `Bande(nom: "N") -> Bande(1)`.
-    /// Peut échouer, retourne alors nil.
-    init?(nom: String) {
+    /// Exemple : `BandeH(nom: "N") -> BandeH(1)`.
+    /// Peut échouer, fatalError()
+    public init(nom: String) {
         guard let index = Self.noms.firstIndex(of: nom) else {
-            return nil
+            fatalError()
         }
         self = Self(index)
     }
-    
+}
+
+// MARK: - Geometrie
+
+extension BandeH {
 
     /// Les 3 lignes de la bande
     var lignes: Set<Ligne> {
@@ -70,5 +72,4 @@ public extension BandeH {
         [Carre(index, 0), Carre(index, 1), Carre(index, 2)]
     }
 
-    
 }

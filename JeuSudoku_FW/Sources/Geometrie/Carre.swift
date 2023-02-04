@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct Carre: UneZone {
-    
-    public let type: TypeZone
+public struct Carre {
     
     // Un carré est l'intersection d'une bande horizontale et d'une bande verticale
     
@@ -18,40 +16,28 @@ public struct Carre: UneZone {
     
     /// Peut échouer si données incohérentes. fatalError dans ce cas.
     public init(_ indexBandeH: Int, _ indexBandeV: Int) {
-        self.type = .carre
         assert(indexBandeH >= 0 && indexBandeH <= 2)
         assert(indexBandeV >= 0 && indexBandeV <= 2)
         self.indexBandeH = indexBandeH
         self.indexBandeV = indexBandeV
     }
-    
-    /// Exemple : `Carre(nom: "Mn") -> Carre(0, 1)`.
-    /// Peut échouer, retourne alors nil.
-    public init?(nom: String) {
-        let bandeHV = nom.map { String($0) }
-        if bandeHV.count != 2 { return nil }
-        let nomBandeH = bandeHV[0]
-        let nomBandeV = bandeHV[1]
-        if !BandeH.noms.contains(nomBandeH) { return nil }
-        if !BandeV.noms.contains(nomBandeV) { return nil }
-        let indexBandeH = BandeH.noms.firstIndex(of: nomBandeH)!
-        let indexBandeV = BandeV.noms.firstIndex(of: nomBandeV)!
-        self = Carre(indexBandeH, indexBandeV)
-    }
-
 }
 
-extension Carre {
-    
-    /// Le nom du carré, qui sert d'id pour  le protocole Identifiable
-    public var nom: String {
-        return "le carré \(bandeH.nom)\(bandeV.nom)"
-    }
+// MARK: - Testable
+
+extension Carre: Testable {
     
     public var description: String {
         "Carre(\(indexBandeH), \(indexBandeV))"
     }
-    
+}
+
+// MARK: - UnDomaine
+
+extension Carre: UnDomaine {
+
+    public var estUnDomaine: Bool { true }
+
     /// Les 9 cellules du carré
     public var cellules: Set<Cellule> {
         var ensemble = Set<Cellule>()
@@ -63,6 +49,38 @@ extension Carre {
         assert(ensemble.count == 9)
         return ensemble
     }
+}
+
+// MARK: - InstanciableParNom
+
+extension Carre: InstanciableParNom {
+    
+    /// InstanciableParNom
+    /// Le nom du carré, qui sert d'id pour  le protocole Identifiable
+    public var nom: String {
+        return "le carré \(bandeH.nom)\(bandeV.nom)"
+    }
+
+    /// InstanciableParNom
+    /// Exemple : `Carre(nom: "Mn") -> Carre(0, 1)`.
+    /// Peut échouer, fatalError
+    public init(nom: String) {
+        let bandeHV = nom.map { String($0) }
+        if bandeHV.count != 2 { fatalError() }
+        let nomBandeH = bandeHV[0]
+        let nomBandeV = bandeHV[1]
+        if !BandeH.noms.contains(nomBandeH) { fatalError() }
+        if !BandeV.noms.contains(nomBandeV) { fatalError() }
+        let indexBandeH = BandeH.noms.firstIndex(of: nomBandeH)!
+        let indexBandeV = BandeV.noms.firstIndex(of: nomBandeV)!
+        self = Carre(indexBandeH, indexBandeV)
+    }
+
+}
+
+// MARK: - Geometrie
+
+public extension Carre {
 
     /// L'unique bande horizontale qui contient le carré
     var bandeH: BandeH {
@@ -74,5 +92,4 @@ extension Carre {
         BandeV(indexBandeV)
     }
     
-
 }

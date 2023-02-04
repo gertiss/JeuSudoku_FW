@@ -8,7 +8,7 @@
 import Foundation
 
 /// Un domaine de noms static, implémenté comme enum sans cas (c'est la technique Apple)
-/// Ce n'est qu'un recueil de constantes.
+/// Ce n'est qu'un recueil de constantes, calculées une fois pour toutes au démarrage.
 public enum Grille { }
 
 public extension Grille {
@@ -19,7 +19,9 @@ public extension Grille {
     static let carres: Set<Carre> = calculCarres
     static let bandesH: Set<BandeH> = calculBandesH
     static let bandesV: Set<BandeV> = calculBandesV
-    static let zones: [any UneZone] = calculZones
+    
+    /// Les lignes, colonnes, carrés
+    static let zones: [any UnDomaine] = calculZones
 }
 
 // MARK: - Private
@@ -54,12 +56,7 @@ extension Grille {
         (0...8).map { Colonne($0) }.ensemble
     }
     
-    /// On ne peut pas rendre `Set<Zone>` on est obligé de rendre `[any UneZone]`
-    /// Utilisation d'un type "existentiel" `any UneZone`
-    /// Ce genre de type a des restrictions :
-    /// Type `any UneZone` cannot conform to 'Equatable'
-    /// Et cela même si UneZone est Equatable
-    private static var calculZones: [any UneZone] {
+    private static var calculZones: [any UnDomaine] {
         calculCarres.array + calculLignes.array + calculColonnes.array
     }
     

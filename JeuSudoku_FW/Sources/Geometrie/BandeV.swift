@@ -35,20 +35,20 @@ public extension BandeV {
     }
 
     /// Exemple : `BandeV(nom: "n") -> BandeV(1)`.
-    /// Peut échouer, retourne alors nil.
-    init?(nom: String) {
+    /// Peut échouer, fatalError()
+    init(nom: String) {
         guard let index = Self.noms.firstIndex(of: nom) else {
-            return nil
+            fatalError()
         }
         self = Self(index)
     }
 
-    /// les 3 colonnes de la bande
+    /// les 3 colonnes de la bande self
     var colonnes: Set<Colonne> {
         [Colonne(index * 3), Colonne(index * 3 + 1), Colonne(index * 3 + 2)]
     }
     
-    /// Les 27 cellules de la bande : 3 colonnes x 9
+    /// Les 27 cellules de la bande self : 3 colonnes x 9
     var cellules: Set<Cellule> {
         var ensemble = Set<Cellule>()
         colonnes.forEach {
