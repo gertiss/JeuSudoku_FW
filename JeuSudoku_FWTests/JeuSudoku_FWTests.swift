@@ -124,9 +124,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         let code = CodagePuzzle.codeDepuisSaisie(saisie)
         // à tester : validité sémantique (unicités)
         let puzzle = Puzzle(code)
-        _ = Exemple(
-            etapes: [
-                Etape(
+        _ = ExempleResolu(
                     puzzle: puzzle,
                     rapport: RapportDeRecherche(
                         decouvertes: [
@@ -136,7 +134,11 @@ final class JeuSudoku_FWTests: XCTestCase {
                                     [5]),
                                 strategie: .rechercheDeDomaines(RechercheDeDomaines(
                                     contexte: (Carre(nom: "Pn").cellules), valeurs: [5]
-                                    )))]))])
-        
+                                    )))]))
+    }
+    
+    func testExpert() {
+        let expert = Expert(Puzzle.exemplesFaciles[0])
+        print(expert.nouvellesContraintes)
     }
 }

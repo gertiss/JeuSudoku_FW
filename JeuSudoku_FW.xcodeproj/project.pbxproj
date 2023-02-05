@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		505DE21C298E4D6400B6BB13 /* UnDomaine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DE21B298E4D6400B6BB13 /* UnDomaine.swift */; };
 		505DE21E298E69AC00B6BB13 /* Strategie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DE21D298E69AC00B6BB13 /* Strategie.swift */; };
+		505DE221298EAA4900B6BB13 /* Expert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DE220298EAA4900B6BB13 /* Expert.swift */; };
+		505DE225298EB47000B6BB13 /* ExemplesResolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DE224298EB47000B6BB13 /* ExemplesResolus.swift */; };
+		50638AFA299022FB0096B3D2 /* Exemples résolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50638AF9299022FB0096B3D2 /* Exemples résolus.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
 		507B3D62298BA6010051FCB4 /* Recherche par valeurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D61298BA6010051FCB4 /* Recherche par valeurs.swift */; };
 		507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */; };
@@ -19,7 +22,7 @@
 		50820E00298AE2F70087CF21 /* ExistenceBijection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFF298AE2F70087CF21 /* ExistenceBijection.swift */; };
 		509659A7298D06EF004CEE8E /* Recherche par cellules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509659A6298D06EF004CEE8E /* Recherche par cellules.swift */; };
 		509659A9298D6644004CEE8E /* RapportDeRecherche.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509659A8298D6644004CEE8E /* RapportDeRecherche.swift */; };
-		509659AB298D6D63004CEE8E /* Exemple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509659AA298D6D63004CEE8E /* Exemple.swift */; };
+		509659AB298D6D63004CEE8E /* ExempleResolu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509659AA298D6D63004CEE8E /* ExempleResolu.swift */; };
 		509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */ = {isa = PBXBuildFile; fileRef = 509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */; };
 		509EC74329897D6E004B1139 /* JeuSudoku_FW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */; };
 		509EC74829897D6E004B1139 /* JeuSudoku_FWTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC74729897D6E004B1139 /* JeuSudoku_FWTests.swift */; };
@@ -47,6 +50,9 @@
 /* Begin PBXFileReference section */
 		505DE21B298E4D6400B6BB13 /* UnDomaine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnDomaine.swift; sourceTree = "<group>"; };
 		505DE21D298E69AC00B6BB13 /* Strategie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strategie.swift; sourceTree = "<group>"; };
+		505DE220298EAA4900B6BB13 /* Expert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expert.swift; sourceTree = "<group>"; };
+		505DE224298EB47000B6BB13 /* ExemplesResolus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesResolus.swift; sourceTree = "<group>"; };
+		50638AF9299022FB0096B3D2 /* Exemples résolus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exemples résolus.swift"; sourceTree = "<group>"; };
 		507B3D5E298BA5290051FCB4 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		507B3D61298BA6010051FCB4 /* Recherche par valeurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recherche par valeurs.swift"; sourceTree = "<group>"; };
 		507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesFaciles.swift; sourceTree = "<group>"; };
@@ -57,7 +63,7 @@
 		50820DFF298AE2F70087CF21 /* ExistenceBijection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistenceBijection.swift; sourceTree = "<group>"; };
 		509659A6298D06EF004CEE8E /* Recherche par cellules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recherche par cellules.swift"; sourceTree = "<group>"; };
 		509659A8298D6644004CEE8E /* RapportDeRecherche.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapportDeRecherche.swift; sourceTree = "<group>"; };
-		509659AA298D6D63004CEE8E /* Exemple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exemple.swift; sourceTree = "<group>"; };
+		509659AA298D6D63004CEE8E /* ExempleResolu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExempleResolu.swift; sourceTree = "<group>"; };
 		509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeuSudoku_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		509EC73B29897D6E004B1139 /* JeuSudoku_FW.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JeuSudoku_FW.h; sourceTree = "<group>"; };
 		509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = JeuSudoku_FW.docc; sourceTree = "<group>"; };
@@ -92,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		505DE21F298EA9D100B6BB13 /* Expertise */ = {
+			isa = PBXGroup;
+			children = (
+				505DE220298EAA4900B6BB13 /* Expert.swift */,
+				505DE224298EB47000B6BB13 /* ExemplesResolus.swift */,
+			);
+			path = Expertise;
+			sourceTree = "<group>";
+		};
 		507B3D5C298BA3480051FCB4 /* Bijections */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +133,8 @@
 				507B3D61298BA6010051FCB4 /* Recherche par valeurs.swift */,
 				509659A6298D06EF004CEE8E /* Recherche par cellules.swift */,
 				509659A8298D6644004CEE8E /* RapportDeRecherche.swift */,
-				509659AA298D6D63004CEE8E /* Exemple.swift */,
+				509659AA298D6D63004CEE8E /* ExempleResolu.swift */,
+				50638AF9299022FB0096B3D2 /* Exemples résolus.swift */,
 			);
 			path = Resolution;
 			sourceTree = "<group>";
@@ -169,6 +185,7 @@
 				507B3D5C298BA3480051FCB4 /* Bijections */,
 				507B3D5D298BA3800051FCB4 /* Puzzles */,
 				507B3D60298BA5E10051FCB4 /* Resolution */,
+				505DE21F298EA9D100B6BB13 /* Expertise */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -297,12 +314,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				505DE225298EB47000B6BB13 /* ExemplesResolus.swift in Sources */,
 				507B3D62298BA6010051FCB4 /* Recherche par valeurs.swift in Sources */,
 				509EC76329898839004B1139 /* BandeH.swift in Sources */,
 				507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */,
+				505DE221298EAA4900B6BB13 /* Expert.swift in Sources */,
 				509EC7592989809A004B1139 /* Cellule.swift in Sources */,
-				509659AB298D6D63004CEE8E /* Exemple.swift in Sources */,
+				509659AB298D6D63004CEE8E /* ExempleResolu.swift in Sources */,
 				509EC76129898666004B1139 /* Extension Swift.swift in Sources */,
+				50638AFA299022FB0096B3D2 /* Exemples résolus.swift in Sources */,
 				507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */,
 				509EC75729898047004B1139 /* Testable.swift in Sources */,
 				505DE21E298E69AC00B6BB13 /* Strategie.swift in Sources */,
