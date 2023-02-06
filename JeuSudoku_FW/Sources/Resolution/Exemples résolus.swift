@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Puzzle {
+public extension Puzzle {
     static var exempleResolu1: ExempleResolu {
         // Le monde jeudi 2 février facile
         let saisie = """
