@@ -29,13 +29,13 @@ public extension Testable {
         }
     }
     
-    static func avecJson(_ code: String) -> Result<Puzzle, String> {
+    static func avecJson(_ code: String) -> Result<Self, String> where Self: Codable {
         let decoder = JSONDecoder()
         guard let data = code.data(using: .utf8) else {
             return .failure("\(Self.self) Decodage: Impossible de créer data. Le code est censé être du json valide en utf8")
         }
         do {
-            let instance = try decoder.decode(Puzzle.self, from: data)
+            let instance = try decoder.decode(Self.self, from: data)
             return .success(instance)
         } catch {
             return .failure("\(Self.self) Erreur de décodage json : \(error)")

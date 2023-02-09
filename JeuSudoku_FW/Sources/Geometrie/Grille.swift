@@ -61,9 +61,9 @@ extension Grille {
     }
     
     private static var calculZones: [any UneZone] {
-        let carres = calculCarres.array as! [any UneZone]
-        let lignes = calculLignes.array as! [any UneZone]
-        let colonnes = calculColonnes.array as! [any UneZone]
+        let carres = calculCarres.array as [any UneZone]
+        let lignes = calculLignes.array as [any UneZone]
+        let colonnes = calculColonnes.array as [any UneZone]
         return carres + colonnes + lignes
     }
     

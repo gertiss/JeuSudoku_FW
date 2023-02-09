@@ -70,7 +70,7 @@ public extension Puzzle {
         let chiffres = codage.chiffres
         var listeContraintes = [ExistenceBijection]()
         
-        var puzzle = Puzzle(contraintes: [])
+        let puzzle = Puzzle(contraintes: [])
         for indexLigne in 0...8 {
             for indexColonne in 0...8 {
                 let chiffre = chiffres[indexLigne * 9 + indexColonne]
