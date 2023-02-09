@@ -68,11 +68,6 @@ public extension CodagePuzzle {
         return Double(source)!
     }
     
-    /// Le puzzle créé à partir du code. On oublie id et niveau.
-    /// On suppose le code correct.
-    var puzzle: Puzzle {
-        Puzzle(code)
-    }
     
     /// `saisieChiffres` ne contient que les 81 chiffres.
     /// Ils peuvent être écrits avec des espaces, tabs et return qui seront supprimés.
@@ -82,5 +77,6 @@ public extension CodagePuzzle {
         return "012345678901" + " " + chiffres + "  " + "1.0"
     }
 }
+
 
 

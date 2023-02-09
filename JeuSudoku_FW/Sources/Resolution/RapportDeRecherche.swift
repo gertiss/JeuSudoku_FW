@@ -8,11 +8,11 @@
 import Foundation
 
 /// Un compte rendu de recherche de contraintes
-public struct RapportDeRecherche: Hashable {
+public struct RapportDeRecherche {
     var decouvertes: [DecouverteDeContrainte]
 }
 
-public struct DecouverteDeContrainte: Hashable {
+public struct DecouverteDeContrainte {
     public var contrainte: ExistenceBijection
     public var strategie: Strategie
 }

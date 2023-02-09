@@ -13,6 +13,7 @@ public enum Grille { }
 
 public extension Grille {
     
+    /// Les éléments géométriques pouvant être calculés statiquement sont stockés
     static let cellules: Set<Cellule> = calculCellules
     static let lignes: Set<Ligne> = calculLignes
     static let colonnes: Set<Colonne> = calculColonnes
@@ -21,10 +22,13 @@ public extension Grille {
     static let bandesV: Set<BandeV> = calculBandesV
     
     /// Les lignes, colonnes, carrés
-    static let zones: [any UnDomaine] = calculZones
+    static let zones: [any UneZone] = calculZones
 }
 
 // MARK: - Private
+
+// Calcul des éléments géométriques statiques
+// Ne sera effectué qu'une fois
 
 extension Grille {
     
@@ -56,8 +60,11 @@ extension Grille {
         (0...8).map { Colonne($0) }.ensemble
     }
     
-    private static var calculZones: [any UnDomaine] {
-        calculCarres.array + calculLignes.array + calculColonnes.array
+    private static var calculZones: [any UneZone] {
+        let carres = calculCarres.array as! [any UneZone]
+        let lignes = calculLignes.array as! [any UneZone]
+        let colonnes = calculColonnes.array as! [any UneZone]
+        return carres + colonnes + lignes
     }
     
     private static var calculBandesH: Set<BandeH> {

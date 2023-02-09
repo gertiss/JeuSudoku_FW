@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ExempleResolu: Hashable {
+public struct ExempleResolu {
     
     public let puzzle: Puzzle
     public let rapport: RapportDeRecherche

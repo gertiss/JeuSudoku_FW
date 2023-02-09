@@ -25,11 +25,10 @@ extension Colonne: Testable {
     }
 }
 
-// MARK: - UnDomaine
+// MARK: - UneZone
 
-extension Colonne: UnDomaine {
-    
-    public var estUnDomaine: Bool { true }
+extension Colonne: UneZone {
+    public var type: TypeZone { .colonne }
 
     /// Les 9 cellules de la colonne self
     public var cellules: Set<Cellule> {

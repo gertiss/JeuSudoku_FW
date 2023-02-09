@@ -34,10 +34,11 @@ public extension Puzzle {
                 decouvertes: [
                     DecouverteDeContrainte(
                         contrainte: ExistenceBijection(
-                            [Cellule(nom: "Id")].ensemble,
+                            puzzle: puzzle, [Cellule(nom: "Id")].ensemble,
                             [5]),
                         strategie: .rechercheDeDomaines(RechercheDeDomaines(
-                            contexte: (Carre(nom: "Pn").cellules), valeurs: [5]
+                            contexte: [Cellule(nom: "Gd"), Cellule(nom: "Ge"), Cellule(nom: "Hd"), Cellule(nom: "Id")],
+                            valeurs: [5]
                         )))]))
         
     }

@@ -27,11 +27,11 @@ extension Ligne: Testable {
     }
 }
 
-// MARK: - UnDomaine
+// MARK: - UneZone
 
-extension Ligne: UnDomaine {
-
-    public var estUnDomaine: Bool { true }
+extension Ligne: UneZone {
+    
+    public var type: TypeZone { .ligne }
     
     /// Les 9 cellules de la ligne
     public var cellules: Set<Cellule> {

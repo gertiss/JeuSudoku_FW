@@ -23,21 +23,11 @@ public struct Carre {
     }
 }
 
-// MARK: - Testable
+// MARK: - UneZone
 
-extension Carre: Testable {
+extension Carre: UneZone {
+    public var type: TypeZone { .carre }
     
-    public var description: String {
-        "Carre(\(indexBandeH), \(indexBandeV))"
-    }
-}
-
-// MARK: - UnDomaine
-
-extension Carre: UnDomaine {
-
-    public var estUnDomaine: Bool { true }
-
     /// Les 9 cellules du carré
     public var cellules: Set<Cellule> {
         var ensemble = Set<Cellule>()
@@ -48,6 +38,31 @@ extension Carre: UnDomaine {
         }
         assert(ensemble.count == 9)
         return ensemble
+    }
+}
+
+// MARK: - Geometrie
+
+public extension Carre {
+
+    /// L'unique bande horizontale qui contient le carré
+    var bandeH: BandeH {
+        BandeH(indexBandeH)
+    }
+    
+    /// L'unique bande verticale qui contient le carré
+    var bandeV: BandeV {
+        BandeV(indexBandeV)
+    }
+    
+}
+
+// MARK: - Testable
+
+extension Carre: Testable {
+    
+    public var description: String {
+        "Carre(\(indexBandeH), \(indexBandeV))"
     }
 }
 
@@ -76,20 +91,4 @@ extension Carre: InstanciableParNom {
         self = Carre(indexBandeH, indexBandeV)
     }
 
-}
-
-// MARK: - Geometrie
-
-public extension Carre {
-
-    /// L'unique bande horizontale qui contient le carré
-    var bandeH: BandeH {
-        BandeH(indexBandeH)
-    }
-    
-    /// L'unique bande verticale qui contient le carré
-    var bandeV: BandeV {
-        BandeV(indexBandeV)
-    }
-    
 }

@@ -20,55 +20,6 @@ public struct Cellule {
     }
 }
 
-// MARK: - Testable
-
-extension Cellule: Testable {
-    
-    public var description: String {
-        "Cellule(\(indexLigne), \(indexColonne))"
-    }
-}
-
-// MARK: - InstanciableParNom
-
-extension Cellule: InstanciableParNom {
-    
-    /// InstanciableParNom
-    /// Exemple :  `Cellule(0, 0)` a pour nom `"Aa"`
-    public var nom: String {
-        return "\(ligne.nom)\(colonne.nom)"
-    }
-
-    /// InstanciableParNom
-    /// Exemple `Cellule(nom: "Ac") -> Cellule(0, 2)`
-    /// Peut échouer (fatalError)
-    public init(nom: String) {
-        let ligneColonne = nom.map { String($0) }
-        if ligneColonne.count != 2 { fatalError() }
-        let ligne = ligneColonne[0]
-        let colonne = ligneColonne[1]
-        if !Ligne.noms.contains(ligne) { fatalError() }
-        if !Colonne.noms.contains(colonne) { fatalError() }
-        let indexLigne = Ligne.noms.firstIndex(of: ligne)!
-        let indexColonne = Colonne.noms.firstIndex(of: colonne)!
-        self = Cellule(indexLigne, indexColonne)
-    }
-}
-
-// MARK: - UnDomaine
-
-extension Cellule: UnDomaine {
-
-    public var estUnDomaine: Bool { true }
-
-    /// Une Cellule est considérée comme une région à une seule cellule
-    public var cellules: Set<Cellule> {
-        [self]
-    }
-    
-    
-}
-
 // MARK: - Geometrie
 
 public extension Cellule {
@@ -111,5 +62,40 @@ public extension Cellule {
         return ensemble
     }
     
-    
 }
+
+// MARK: - Testable
+
+extension Cellule: Testable {
+    
+    public var description: String {
+        "Cellule(\(indexLigne), \(indexColonne))"
+    }
+}
+
+// MARK: - InstanciableParNom
+
+extension Cellule: InstanciableParNom {
+    
+    /// InstanciableParNom
+    /// Exemple :  `Cellule(0, 0)` a pour nom `"Aa"`
+    public var nom: String {
+        return "\(ligne.nom)\(colonne.nom)"
+    }
+
+    /// InstanciableParNom
+    /// Exemple `Cellule(nom: "Ac") -> Cellule(0, 2)`
+    /// Peut échouer (fatalError)
+    public init(nom: String) {
+        let ligneColonne = nom.map { String($0) }
+        if ligneColonne.count != 2 { fatalError() }
+        let ligne = ligneColonne[0]
+        let colonne = ligneColonne[1]
+        if !Ligne.noms.contains(ligne) { fatalError() }
+        if !Colonne.noms.contains(colonne) { fatalError() }
+        let indexLigne = Ligne.noms.firstIndex(of: ligne)!
+        let indexColonne = Colonne.noms.firstIndex(of: colonne)!
+        self = Cellule(indexLigne, indexColonne)
+    }
+}
+
