@@ -33,9 +33,8 @@ public extension Puzzle {
             rapport: RapportDeRecherche(
                 decouvertes: [
                     DecouverteDeContrainte(
-                        contrainte: ExistenceBijection(
-                            puzzle: puzzle, [Cellule(nom: "Id")].ensemble,
-                            [5]),
+                        contrainte: ExistenceBijection(domaine: [Cellule(nom: "Id")].ensemble,
+                            valeurs: [5]),
                         strategie: .rechercheDeDomaines(RechercheDeDomaines(
                             contexte: [Cellule(nom: "Gd"), Cellule(nom: "Ge"), Cellule(nom: "Hd"), Cellule(nom: "Id")],
                             valeurs: [5]

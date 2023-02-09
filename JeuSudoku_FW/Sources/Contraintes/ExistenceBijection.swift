@@ -14,7 +14,6 @@ import Foundation
 /// Si elle n'est pas encore mémorisée, on affirme qu'elle pourra l'être.
 public struct ExistenceBijection: UneContrainte {
     public var type: TypeContrainte { .existenceBijection }
-    public var puzzle: Puzzle
     
     /// Un ensemble de cellules inclus dans une ligne, une colonne ou un carré,
     /// qui constitue le domaine de la bijection.
@@ -22,11 +21,10 @@ public struct ExistenceBijection: UneContrainte {
     
     public let valeurs: Set<Int>
     
-    /// Exemple de nom : `"AaAb_37"`\(puzzle)
+    /// Exemple de nom : `"AaAb_37"`
     public let nom: String
     
-    public init(puzzle: Puzzle, _ domaine: Set<Cellule>, _ valeurs: Set<Int>) {
-        self.puzzle = puzzle
+    public init(domaine: Set<Cellule>, valeurs: Set<Int>) {
         assert(domaine.count == valeurs.count)
         self.domaine = domaine
         self.valeurs = valeurs
@@ -48,7 +46,7 @@ public struct ExistenceBijection: UneContrainte {
 extension ExistenceBijection {
     
     public var description: String {
-        "ExistenceBijection(puzzle: \(puzzle), \(domaine), \(valeurs))"
+        "ExistenceBijection(\(domaine), \(valeurs))"
     }
 
 }

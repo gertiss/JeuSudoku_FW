@@ -15,5 +15,4 @@ public enum TypeContrainte: Hashable, Codable {
 public protocol UneContrainte {
     
     var type: TypeContrainte { get }
-    var puzzle: Puzzle { get }
 }

@@ -23,13 +23,16 @@ public struct Puzzle {
 public extension Puzzle {
     
     var contraintesExistenceBijection: [ExistenceBijection] {
-        contraintes.filter { $0.type == .existenceBijection }.map { $0 as! ExistenceBijection }
+        contraintes.filter { $0.type == .existenceBijection }
+            .map { $0 as! ExistenceBijection }
     }
     
     /// Les 27 contraintes de bijection toujours associées implicitement aux zones
     var contraintesBijectionZone: [ExistenceBijection]  {
         Grille.zones.map { zone in
-            ExistenceBijection(puzzle: self, zone.cellules, (1...9).map { $0 }.ensemble)
+            ExistenceBijection(
+                domaine: zone.cellules,
+                valeurs: [1, 2, 3, 4, 5, 6, 7, 8, 9])
         }
     }
     
@@ -74,8 +77,11 @@ public extension Puzzle {
         for indexLigne in 0...8 {
             for indexColonne in 0...8 {
                 let chiffre = chiffres[indexLigne * 9 + indexColonne]
-                if chiffre != 0 { listeContraintes.append(ExistenceBijection(puzzle: puzzle, [Cellule(indexLigne, indexColonne)], [chiffre]))}
-            }
+                if chiffre == 0 { continue }
+                listeContraintes.append(
+                    ExistenceBijection(
+                        domaine: [Cellule(indexLigne, indexColonne)],
+                        valeurs: [chiffre]))}
         }
         self = Self(contraintes: listeContraintes + puzzle.contraintesBijectionZone)
     }
