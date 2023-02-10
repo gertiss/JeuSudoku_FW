@@ -31,6 +31,7 @@
 		509EC76129898666004B1139 /* Extension Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76029898665004B1139 /* Extension Swift.swift */; };
 		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
 		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
+		50CE5DE8299655F6002E36E4 /* AbsenceValeurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE5DE7299655F6002E36E4 /* AbsenceValeurs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		509EC76029898665004B1139 /* Extension Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension Swift.swift"; sourceTree = "<group>"; };
 		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
+		50CE5DE7299655F6002E36E4 /* AbsenceValeurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsenceValeurs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				5032C38C2994EFD50047E3BA /* PresenceValeurs.swift */,
+				50CE5DE7299655F6002E36E4 /* AbsenceValeurs.swift */,
 			);
 			path = Contraintes;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				509EC75B298980C0004B1139 /* Carre.swift in Sources */,
 				509EC76529898843004B1139 /* BandeV.swift in Sources */,
 				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
+				50CE5DE8299655F6002E36E4 /* AbsenceValeurs.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
 				509EC75D298980CE004B1139 /* Ligne.swift in Sources */,

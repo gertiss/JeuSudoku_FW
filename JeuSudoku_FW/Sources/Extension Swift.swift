@@ -142,6 +142,10 @@ extension Set<Cellule>  {
         map { $0.colonne }.ensemble.uniqueValeur
     }
     
+    public var carreCommun: Carre? {
+        map { $0.carre }.ensemble.uniqueValeur
+    }
+    
     
 }
 

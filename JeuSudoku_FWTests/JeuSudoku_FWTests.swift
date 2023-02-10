@@ -106,7 +106,26 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(puzzle.contraintes.count, 55)
     }
     
-    func testExemple() {
+    func testEliminations() {
+        func test(_ nomContrainte: String, _ nomEliminations: String = "_") -> Result<Bool, String> {
+            print("\n> \(nomContrainte) -> \(nomEliminations) ?")
+            let contrainte = PresenceValeurs(nom: nomContrainte)
+            let eliminations = contrainte.eliminations
+            if eliminations.nom != nomEliminations {
+                let resultat = Result<Bool, String>.failure("On attend \(eliminations.nom), \(eliminations.count) cellules")
+                XCTFail("\(resultat)")
+                return resultat
+            }
+            return .success(true)
+        }
+        print(test("AaAb_12", "AcAdAeAfAgAhAiBaBbBcCaCbCc"))
+        
+        print(test("AaAbBa_1", "AcBbBcCaCbCc"))
+        print(test("AaAbBa_12", "AcBbBcCaCbCc"))
+        print(test("AaAbBa_123", "AcBbBcCaCbCc"))
+
+        print(test("AaAd_1", "AbAcAeAfAgAhAi"))
+
     }
     
 }

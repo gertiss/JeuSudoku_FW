@@ -8,7 +8,7 @@
 import Foundation
 
 /// Une contrainte qui affirme que les `valeurs` doivent être obligatoirement présentes dans la `region`
-/// Cette affirmation est définitive une fois qu'elle est démontrée.
+/// Cette affirmation est définitive une fois qu'elle est démontrée. Mais elle peut être précisée par la suite.
 public struct PresenceValeurs: Testable, Comparable, InstanciableParNom {
     
     public let valeurs: Set<Int>
@@ -49,26 +49,68 @@ public struct PresenceValeurs: Testable, Comparable, InstanciableParNom {
 
 public extension PresenceValeurs {
     
-    var estUneBijection: Bool {
+    var estUneBijectionUnaire: Bool {
+        valeurs.count == 1 &&  region.count == 1
+    }
+    
+    var estUneBijectionBinaire: Bool {
+        valeurs.count == 2 &&  region.count == 2
+    }
+ 
+    var estUneBijectionTernaire: Bool {
+        valeurs.count == 3 &&  region.count == 3
+    }
+
+   var estUneBijection: Bool {
         valeurs.count == region.count
     }
     
-    var eliminations: Set<Cellule> {
-        
-        /// Si la région est réduite à une cellule, on élimine 20 autres cellules dépendantes
-        if region.count == 1 {
-            let cellule = region.uniqueElement
-            return cellule.dependantes
+    /// La présence d'une contrainte dans le Puzzle avec la `valeur`
+    /// provoque des éliminations de cellules pour cette valeur
+    /// sinon `[]`
+    /// Ces éliminations sont purement géométriques et ne dépendent pas du contenu du Puzzle
+    func eliminations(pour valeur: Int) -> Set<Cellule> {
+        guard valeurs.contains(valeur) else {
+            return []
         }
-        /// Si les cellules sont dans une même ligne, toutes les autres cases de la ligne sont éliminées
+        var cellulesEliminees = Set<Cellule>()
+        /// Si les cellules de self sont dans une même ligne, toutes les autres cases de la ligne sont éliminées
         if let ligne = region.ligneCommune {
-            return ligne.cellules.subtracting(self.region)
+            cellulesEliminees = cellulesEliminees
+                .union(ligne.cellules.subtracting(self.region))
         }
-        /// Si les cellules sont dans une même colonne, toutes les autres cases de la colonne sont éliminées
+        /// Si les cellules de self sont dans une même colonne, toutes les autres cases de la colonne sont éliminées
         if let colonne = region.colonneCommune {
-            return colonne.cellules.subtracting(self.region)
+            cellulesEliminees = cellulesEliminees
+                .union(colonne.cellules.subtracting(self.region))
         }
-        return []
+        /// Si les cellules de self sont dans un même carré, toutes les autres cases du carré sont éliminées
+        if let carre = region.carreCommun {
+            cellulesEliminees = cellulesEliminees
+                .union(carre.cellules.subtracting(self.region))
+        }
+       return cellulesEliminees
+    }
+    
+    func eliminations(pour: Set<Int>) -> Set<Cellule> {
+        var cellulesEliminees = Set<Cellule>()
+        for valeur in valeurs {
+            cellulesEliminees = cellulesEliminees.union(eliminations(pour: valeur))
+        }
+        return cellulesEliminees
+    }
+    
+    /// L'ensemble des cases qui ne peuvent contenir aucune des valeurs de la contrainte, comme conséquence de la contrainte.
+    /// Si la contrainte est une bijection unaire, il y a 20 cases éliminées.
+    /// La contrainte est vue comme un émetteur d'éliminations
+    /// Ces éliminations sont définitives.
+    /// Toute contrainte de présence implique une contrainte "complémentaire" d'éliminations
+    var eliminations: Set<Cellule> {
+        eliminations(pour: valeurs)
+    }
+    
+    var absenceComplementaire: AbsenceValeurs {
+        return AbsenceValeurs(valeurs, dans: eliminations)
     }
     
 }
