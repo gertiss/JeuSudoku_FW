@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// Equivalent à "dans tel puzzle, on a effectué telle recherche qui a donné tels résultats"
 public struct ExempleResolu {
     
     public let puzzle: Puzzle
@@ -17,5 +19,22 @@ public struct ExempleResolu {
         self.rapport = rapport
     }
     
+}
+
+public extension ExempleResolu {
+    
+    /// La contrainte qui a été découverte : certaines valeurs doivent être obligatoirement présentes dans une certaine région.
+    var contrainte:  PresenceValeurs {
+        rapport.decouverte.contrainte
+    }
+    
+    var region: Set<Cellule> {
+        contrainte.region
+    }
+    
+    var valeurs: Set<Int> {
+        contrainte.valeurs
+    }
+
 }
 

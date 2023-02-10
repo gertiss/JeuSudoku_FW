@@ -8,6 +8,7 @@
 import Foundation
 
 public extension Puzzle {
+    
     static var exempleResolu1: ExempleResolu {
         // Le monde jeudi 2 février facile
         let saisie = """
@@ -24,21 +25,21 @@ public extension Puzzle {
 082 039 000
 """
         
-        // fatalError si saisie invalide
-        let code = CodagePuzzle.codeDepuisSaisie(saisie)
         // à tester : validité sémantique (unicités)
-        let puzzle = Puzzle(code)
+        let puzzle = Puzzle(chiffres: saisie)
+        let focalisation: Focalisation = .surValeursDansContexte(valeurs: [5], contexte: [Cellule(nom: "Gd"), Cellule(nom: "Ge"), Cellule(nom: "Hd"), Cellule(nom: "Id")])
+        let recherche = RechercheDeRegions(focalisation: focalisation)
+
         return ExempleResolu(
             puzzle: puzzle,
             rapport: RapportDeRecherche(
-                decouvertes: [
+                decouverte: 
                     DecouverteDeContrainte(
-                        contrainte: ExistenceBijection(domaine: [Cellule(nom: "Id")].ensemble,
-                            valeurs: [5]),
-                        strategie: .rechercheDeDomaines(RechercheDeDomaines(
-                            contexte: [Cellule(nom: "Gd"), Cellule(nom: "Ge"), Cellule(nom: "Hd"), Cellule(nom: "Id")],
-                            valeurs: [5]
-                        )))]))
+                        contrainte: PresenceValeurs(nom: "Id_5"),
+                        strategie: .rechercheDeRegions(recherche)
+                        )
+                )
+            )
         
     }
 }

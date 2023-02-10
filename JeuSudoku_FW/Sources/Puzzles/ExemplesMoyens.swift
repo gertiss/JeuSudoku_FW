@@ -29,7 +29,7 @@ public extension Puzzle {
     static var exemplesMoyens: [Puzzle] {
         
         let lignes = codeExemplesMoyens.components(separatedBy: .newlines)
-        return lignes.map { Puzzle($0) }
+        return lignes.map { Puzzle(code: $0) }
     }
     
 }

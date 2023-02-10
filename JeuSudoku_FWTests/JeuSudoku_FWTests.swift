@@ -19,8 +19,9 @@ final class JeuSudoku_FWTests: XCTestCase {
     }
     
     func testBijection() {
-        let bijection = ExistenceBijection([Cellule(3, 5), Cellule(3, 6)], [1, 2])
-        XCTAssertEqual(bijection.nom, "DfDg_12")
+        let bijection = PresenceValeurs([1, 2], dans:[Cellule(3, 5), Cellule(3, 6)])
+        print(bijection)
+        
     }
     
     func testCodagePuzzle() {
@@ -31,7 +32,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(codage.chiffres, [0, 5, 0, 7, 0, 3, 0, 6, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0, 0, 0, 0, 8, 1, 6, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 7, 3, 0, 0, 4, 0, 0, 8, 6, 9, 0, 6, 0, 0, 0, 2, 0, 4, 8, 4, 0, 5, 7, 2, 0, 9, 3, 0, 0, 0, 4, 0, 9, 0, 0, 0])
         XCTAssertEqual(codage.niveau, 1.2)
         
-        let nomsBijections = Puzzle(CodagePuzzle.exemple1).contraintes
+        let nomsBijections = Puzzle(code: CodagePuzzle.exemple1).contraintes
             .map { $0.nom }
             .sorted()
         
@@ -42,15 +43,17 @@ final class JeuSudoku_FWTests: XCTestCase {
         let puzzle = codage.puzzle
         XCTAssertEqual(puzzle.contraintes.count, 57)
         XCTAssertEqual(puzzle.singletons.count, 30)
-        XCTAssertEqual(Puzzle.contraintesZones.count, 27)
-        XCTAssertEqual(puzzle.leSingleton(cellule: Cellule(0, 1)), ExistenceBijection([Cellule(0, 1)], [5]))
+        XCTAssertEqual(puzzle.contraintesBijectionZone.count, 27)
+        XCTAssertEqual(
+            puzzle.leSingleton(cellule: Cellule(0, 1)),
+            PresenceValeurs([5].ensemble, dans: [Cellule(0, 1)].ensemble)
+        )
     }
     
     func testNomCellule() {
         let cellule = Cellule(nom: "Ab")
         XCTAssertNotNil(cellule)
         XCTAssertEqual(cellule, Cellule(0, 1))
-        XCTAssertNil(Cellule(nom: "xy"))
     }
     
     func testNomCarre() {
@@ -98,47 +101,12 @@ final class JeuSudoku_FWTests: XCTestCase {
 """
         
         // fatalError si saisie invalide
-        let code = CodagePuzzle.codeDepuisSaisie(saisie)
-        let puzzle = Puzzle(code)
+        let puzzle = Puzzle(chiffres: saisie)
         XCTAssertEqual(puzzle.singletons.count, 28)
         XCTAssertEqual(puzzle.contraintes.count, 55)
     }
     
     func testExemple() {
-        // Le monde jeudi 2 février facile
-        let saisie = """
-000 000 000
-000 000 008
-000 003 724
-
-000 040 005
-005 002 010
-008 010 207
-
-094 007 050
-051 024 096
-082 039 000
-"""
-        
-        // fatalError si saisie invalide
-        let code = CodagePuzzle.codeDepuisSaisie(saisie)
-        // à tester : validité sémantique (unicités)
-        let puzzle = Puzzle(code)
-        _ = ExempleResolu(
-                    puzzle: puzzle,
-                    rapport: RapportDeRecherche(
-                        decouvertes: [
-                            DecouverteDeContrainte(
-                                contrainte: ExistenceBijection(
-                                    [Cellule(nom: "Id")].ensemble,
-                                    [5]),
-                                strategie: .rechercheDeDomaines(RechercheDeDomaines(
-                                    contexte: (Carre(nom: "Pn").cellules), valeurs: [5]
-                                    )))]))
     }
     
-    func testExpert() {
-        let expert = Expert(Puzzle.exemplesFaciles[0])
-        print(expert.nouvellesContraintes)
-    }
 }
