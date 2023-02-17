@@ -17,12 +17,15 @@ public struct Colonne {
     }
 }
 
-// MARK: - Testable
+// MARK: - Geometrie
 
-extension Colonne: Testable {
-    public var description: String {
-        "Colonne(\(index))"
+extension Colonne {
+    
+    /// L'unique bande verticale qui contient la colonne self
+    public var bande: BandeV {
+        BandeV(index / 3)
     }
+
 }
 
 // MARK: - UneZone
@@ -37,6 +40,16 @@ extension Colonne: UneZone {
         return ensemble
     }
 }
+
+
+// MARK: - Testable
+
+extension Colonne: Testable {
+    public var description: String {
+        "Colonne(\(index))"
+    }
+}
+
 
 // MARK: - InstanciableParNom
 
@@ -62,13 +75,3 @@ extension Colonne: InstanciableParNom {
 
 }
 
-// MARK: - Geometrie
-
-extension Colonne {
-    
-    /// L'unique bande verticale qui contient la colonne self
-    public var bande: BandeV {
-        BandeV(index / 3)
-    }
-
-}

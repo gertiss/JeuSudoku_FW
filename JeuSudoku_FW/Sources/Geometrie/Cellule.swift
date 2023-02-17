@@ -52,11 +52,11 @@ public extension Cellule {
     /// L'ensemble des 20 cases "dépendantes" de self
     /// Ce sont les 20 cases qui sont dans le champ de vision de la cellule : ligne, colonne, carré
     /// Toute valeur présente dans ce champ interdit cette valeur dans self si self est vide.
-    var dependantes: Set<Cellule> {
-        var ensemble = Set<Cellule>()
-        ensemble = ensemble.union(ligne.cellules)
-        ensemble = ensemble.union(colonne.cellules)
-        ensemble = ensemble.union(carre.cellules)
+    var dependantes: Region {
+        var ensemble = Region()
+            .union(ligne.cellules)
+            .union(colonne.cellules)
+            .union(carre.cellules)
         ensemble.remove(self)
         assert(ensemble.count == 20)
         return ensemble
@@ -87,12 +87,17 @@ extension Cellule: InstanciableParNom {
     /// Exemple `Cellule(nom: "Ac") -> Cellule(0, 2)`
     /// Peut échouer (fatalError)
     public init(nom: String) {
+        let message = "Nom de Cellule incorrect: \"\(nom)\""
+        
         let ligneColonne = nom.map { String($0) }
-        if ligneColonne.count != 2 { fatalError() }
+        assert(ligneColonne.count == 2, message)
+        
         let ligne = ligneColonne[0]
+        assert(Ligne.noms.contains(ligne), message)
+        
         let colonne = ligneColonne[1]
-        if !Ligne.noms.contains(ligne) { fatalError() }
-        if !Colonne.noms.contains(colonne) { fatalError() }
+        assert(Colonne.noms.contains(colonne), message)
+        
         let indexLigne = Ligne.noms.firstIndex(of: ligne)!
         let indexColonne = Colonne.noms.firstIndex(of: colonne)!
         self = Cellule(indexLigne, indexColonne)

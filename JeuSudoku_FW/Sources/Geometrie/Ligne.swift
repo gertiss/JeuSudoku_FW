@@ -15,16 +15,17 @@ public struct Ligne {
         assert(index >= 0 && index <= 8)
         self.index = index
     }
-    
 }
 
-// MARK: - Testable
+// MARK: - Geometrie
 
-extension Ligne: Testable {
+public extension Ligne {
     
-    public var description: String {
-        "Ligne(\(index))"
+    /// L'unique bande horizontale qui contient la ligne
+    var bande: BandeH {
+        BandeH(index / 3)
     }
+    
 }
 
 // MARK: - UneZone
@@ -38,6 +39,18 @@ extension Ligne: UneZone {
         (0...8).map { Cellule(index, $0) }.ensemble
     }
 }
+
+
+// MARK: - Testable
+
+extension Ligne: Testable {
+    
+    public var description: String {
+        "Ligne(\(index))"
+    }
+}
+
+
 
 // MARK: - InstanciableParNom
 
@@ -60,14 +73,5 @@ extension Ligne: InstanciableParNom {
     public static let noms = "ABCDEFGHI".map { String($0) }
 }
 
-// MARK: - Geometrie
+    
 
-public extension Ligne {
-    
-    /// L'unique bande horizontale qui contient la ligne
-    var bande: BandeH {
-        BandeH(index / 3)
-    }
-    
-    
-}

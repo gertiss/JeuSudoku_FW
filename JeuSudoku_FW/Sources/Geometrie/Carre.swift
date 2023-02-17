@@ -26,11 +26,12 @@ public struct Carre {
 // MARK: - UneZone
 
 extension Carre: UneZone {
+    
     public var type: TypeZone { .carre }
     
     /// Les 9 cellules du carré
-    public var cellules: Set<Cellule> {
-        var ensemble = Set<Cellule>()
+    public var cellules: Region {
+        var ensemble = Region()
         for dl in 0...2 {
             for dc in 0...2 {
                 ensemble.insert(Cellule(indexBandeH * 3 + dl, indexBandeV * 3 + dc))
@@ -53,6 +54,27 @@ public extension Carre {
     /// L'unique bande verticale qui contient le carré
     var bandeV: BandeV {
         BandeV(indexBandeV)
+    }
+    
+    /// Les lignes qui coupent le carré, ordonnées par indices
+    var lignes: [Ligne] {
+        let indicesLignes = (indexBandeH * 3)...(indexBandeH * 3 + 2)
+        return indicesLignes.map { Ligne($0) }
+    }
+    
+    /// Les colonnes qui coupent le carré, ordonnées par indices
+    var colonnes: [Colonne] {
+        let indicesColonnes = (indexBandeV * 3)...(indexBandeV * 3 + 2)
+        return indicesColonnes.map { Colonne($0) }
+    }
+     
+    
+    func contient(cellule: Cellule) -> Bool {
+        cellule.carre == self
+    }
+    
+    func contient(region: Region) -> Bool {
+        region.allSatisfy { contient(cellule: $0) }
     }
     
 }

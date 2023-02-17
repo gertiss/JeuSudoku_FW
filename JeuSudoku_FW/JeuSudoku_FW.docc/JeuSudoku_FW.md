@@ -1,41 +1,28 @@
 # ``JeuSudoku_FW``
 
 
+Système "expert" de résolution d'un système de contraintes.
 
-    
-Raisonnement par complémentaires, pour décomposer un domaine
+La base de "faits" est une base de contraintes, de différents types :
 
-    SI f est une bijection de E vers U
-    SI A est inclus dans E
-    SI f réalise une bijection de A dans S (S inclus dans U)
-    ALORS f réalise une bijection de A' dans S' (où A' désigne le complémentaire de A dans E et S' le complémentaire de S dans U)
+- Présence : telle valeur figure exactement une fois dans tel ensemble de cellules
+- Absence : telle valeur ne figure pas dans tel ensemble de cellules
+- bijection : tel ensemble de cellules contint exactement telle valeur
 
-Raisonnement par complémentaires et cardinaux, pour découvrir un domaine :
+Règles :
 
-    Si f est une bijection de E vers U
-    Si A est inclus dans E
-    Si f(A) est inclus dans S
-    Si card(A) == card(S)
-    Alors f réalise une bijection de A vers S
-    
-
-Lemmes pour des ensembles finis
-
-    les images de deux ensembles disjoints par une injection sont deux ensembles disjoints
-
-    l'image d'un ensemble par une injection est un ensemble de même cardinal
-    
-
-    le cardinal d'une réunion disjointe d'ensembles est la somme des cardinaux de ces ensembles.
-
-    si un ensemble est inclus dans un autre et si les deux ont le même cardinal, alors les deux ensembles sont égaux
-
-     l'image du complémentaire de A par une bijection est le complémentaire de l'image de A.
+- Règle de rayons secondaires : quand on a une contrainte d'absence, si le complémentaire de l'absence dans un carré est une région R alignée, alors on peut déduire une nouvelle absence, dans le complémentaire de R dans l'alignement.
+- Inclusion d'une bijection dans une autre. On peut réduire la bijection contenante : on lui enlève les cellules et les valeurs de la bijection contenue.
+- Inclusion d'une absence dans une bijection.  
 
 
-Heuristiques :
-- petits domaines
-- valeurs fréquentes
-- cellules beaucoup ciblées
+Il ne s'agit en gros "que" d'un démonstrateur de théorèmes qui utilise uniquement la théorie des ensembles basique avec union, intersection, complémentaire, bijection, injection, surjection.
 
-    
+Les contraintes et règles sont réifiées par des types Swift déclaratifs et fonctionnels.
+
+Il y a plusieurs aspects informatiques potentiellement combinatoires :
+
+- la recherche d'instances pertinentes pour trouver une règle à appliquer. L'efficacité peut dépendre grandement d'heuristiques et d'indexations compilées. Il s'agit du problème général des requêtes dans une base de données.
+- ayant trouvé des instances, appliquer une règle pour créer des déductions n'est pas vraiment combinatoire. C'est fonctionnel.
+- la propagation des déductions faites. Etant donné que le raisonnement est monotone (toutes les contraintes trouvées restent définitivement valides, sauf qu'elles sont parfois remplacées pour des questions de minimalité), on peut penser à procéder de manière parallèle asynchrone. Un système réactif comme Combine semble indiqué. Un tableur fonctionne suivant ce genre d'idées.
+- la réduction de la base de contraintes. Là-aussi, Combine semble indiqué. Et la réduction peut se faire incrémentalement lors de la phase de propagation.

@@ -18,6 +18,32 @@ public struct BandeH {
     }
 }
 
+// MARK: - Geometrie
+
+extension BandeH {
+
+    /// Les 3 lignes de la bande
+    var lignes: Set<Ligne> {
+        [Ligne(index * 3), Ligne(index * 3 + 1), Ligne(index * 3 + 2)]
+    }
+    
+    /// Les 27 cellules de la bande : 3 lignes x 9
+    var cellules: Set<Cellule> {
+        var ensemble = Set<Cellule>()
+        lignes.forEach {
+            ensemble = ensemble.union($0.cellules)
+        }
+        assert(ensemble.count == 27)
+        return ensemble
+    }
+    
+    /// Les 3 carrés de la bande self
+    var carres: Set<Carre> {
+        [Carre(index, 0), Carre(index, 1), Carre(index, 2)]
+    }
+
+}
+
 // MARK: - Testable
 
 extension BandeH: Testable {
@@ -48,28 +74,3 @@ extension BandeH: InstanciableParNom {
     }
 }
 
-// MARK: - Geometrie
-
-extension BandeH {
-
-    /// Les 3 lignes de la bande
-    var lignes: Set<Ligne> {
-        [Ligne(index * 3), Ligne(index * 3 + 1), Ligne(index * 3 + 2)]
-    }
-    
-    /// Les 27 cellules de la bande : 3 lignes x 9
-    var cellules: Set<Cellule> {
-        var ensemble = Set<Cellule>()
-        lignes.forEach {
-            ensemble = ensemble.union($0.cellules)
-        }
-        assert(ensemble.count == 27)
-        return ensemble
-    }
-    
-    /// Les 3 carrés de la bande self
-    var carres: Set<Carre> {
-        [Carre(index, 0), Carre(index, 1), Carre(index, 2)]
-    }
-
-}
