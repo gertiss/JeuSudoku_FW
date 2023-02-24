@@ -15,7 +15,9 @@ public protocol Testable:  Hashable, CustomStringConvertible, Codable {
     
 }
 
-public extension Testable {
+public extension Encodable {
+    
+    /// Encodage en JSON
     var json: Result<String, String> {
         do {
             let encoder = JSONEncoder()
@@ -28,7 +30,11 @@ public extension Testable {
             return .failure("\(Self.self) Erreur de décodage json : \(error)")
         }
     }
+}
     
+public extension Decodable {
+
+    /// Decodage depuis JSON
     static func avecJson(_ code: String) -> Result<Self, String> where Self: Codable {
         let decoder = JSONDecoder()
         guard let data = code.data(using: .utf8) else {

@@ -90,67 +90,6 @@ public extension Set {
     }
 }
 
-extension Set<Int>  {
-    
-    /// On suppose que chaque caractère du nom est un chiffre
-    /// et que les chiffres sont tous distincts
-    /// "123" -> [1, 2, 3]
-    public init(nom: String) {
-        let chiffres = nom.map { Int(String($0))! }.ensemble
-        assert(chiffres.count == nom.count)
-        self = chiffres
-    }
-    
-    /// [3, 1, 4, 2] -> "1234"
-    public var nom: String {
-        assert(allSatisfy{ $0 >= 0 && $0 <= 9 })
-        return self.array.sorted().map { $0.description }.joined()
-    }
-    
-}
-
-extension Set<Cellule>  {
-    
-    /// "AaAb" -> [C(0,0), C(0,1)]
-    /// On suppose les noms syntaxiquement valides et tous distincts
-    public init(nom: String) {
-        var cellules = [Cellule]()
-        assert(nom.count.isMultiple(of: 2))
-        let nbCellules = nom.count / 2
-        let caracteres = nom.map { String($0) }
-        for index in  0...(nbCellules - 1) {
-            let (li, co) = (caracteres[index * 2], caracteres[index * 2 + 1])
-            cellules.append(Cellule(nom: li + co))
-        }
-        let ensemble = cellules.ensemble
-        assert(ensemble.count == nbCellules)
-        self = ensemble
-    }
-    
-    /// [C(0,0), C(0,1)] -> "AaAb"
-    public var nom: String {
-        return self.array.map { $0.nom }.sorted().joined()
-    }
-    
-    /// La ligne éventuelle qui contient toutes les cellules de self
-    public var ligneCommune: Ligne? {
-        map { $0.ligne }.ensemble.uniqueValeur
-    }
-    
-    /// La colonne éventuelle qui contient toutes les cellules de self
-    public var colonneCommune: Colonne? {
-        map { $0.colonne }.ensemble.uniqueValeur
-    }
-    
-    public var carreCommun: Carre? {
-        map { $0.carre }.ensemble.uniqueValeur
-    }
-    
-    
-}
-
-
-
 public extension String {
     
     func avecSuppression(de caracteres: String) -> String {

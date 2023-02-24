@@ -35,8 +35,8 @@ public extension BandeV {
     }
     
     /// Les 27 cellules de la bande self : 3 colonnes x 9
-    var cellules: Set<Cellule> {
-        var ensemble = Set<Cellule>()
+    var cellules: Region {
+        var ensemble = Region()
         colonnes.forEach {
             ensemble = ensemble.union($0.cellules)
         }

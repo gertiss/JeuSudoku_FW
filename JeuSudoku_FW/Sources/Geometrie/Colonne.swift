@@ -34,7 +34,7 @@ extension Colonne: UneZone {
     public var type: TypeZone { .colonne }
 
     /// Les 9 cellules de la colonne self
-    public var cellules: Set<Cellule> {
+    public var cellules: Region {
         let ensemble = (0...8).map { Cellule($0, index) }.ensemble
         assert(ensemble.count == 9)
         return ensemble

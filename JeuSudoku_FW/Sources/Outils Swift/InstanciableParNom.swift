@@ -11,13 +11,15 @@ import Foundation
 /// Ce nom est un id au sens de Identifiable, il sert d'identificateur unique pour la valeur.
 /// Peut échouer si nom incorrect, retourne alors nil.
 /// Le nom définit une sorte de langage de sérialisation permettant de lire et écrire la valeur sous forme compacte.
-public protocol InstanciableParNom: Identifiable {
+public protocol InstanciableParNom: Comparable {
     
     var nom: String { get }
     init(nom: String)
 }
 
 public extension InstanciableParNom {
-    var id: String { nom }
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.nom < rhs.nom
+    }
 }
 

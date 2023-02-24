@@ -28,8 +28,8 @@ extension BandeH {
     }
     
     /// Les 27 cellules de la bande : 3 lignes x 9
-    var cellules: Set<Cellule> {
-        var ensemble = Set<Cellule>()
+    var cellules: Region {
+        var ensemble = Region()
         lignes.forEach {
             ensemble = ensemble.union($0.cellules)
         }

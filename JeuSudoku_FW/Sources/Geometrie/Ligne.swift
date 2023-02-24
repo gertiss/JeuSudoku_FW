@@ -35,7 +35,7 @@ extension Ligne: UneZone {
     public var type: TypeZone { .ligne }
     
     /// Les 9 cellules de la ligne
-    public var cellules: Set<Cellule> {
+    public var cellules: Region {
         (0...8).map { Cellule(index, $0) }.ensemble
     }
 }

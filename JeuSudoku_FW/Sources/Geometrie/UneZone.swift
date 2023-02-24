@@ -17,7 +17,7 @@ public enum TypeZone: Hashable, Codable {
 /// Si on veut une collection de UneZone, il faut écrire `[any UneZone]`,
 /// car `Set<UneZone>` est impossible à résoudre pour l'inférence de types.
 public protocol UneZone: Testable {
-    var cellules: Set<Cellule> { get }
+    var cellules: Region { get }
     var type: TypeZone { get }
     
     var nom: String { get }

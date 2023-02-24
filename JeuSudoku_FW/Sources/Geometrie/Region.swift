@@ -9,6 +9,33 @@ import Foundation
 
 public typealias Region = Set<Cellule>
 
+extension Region: InstanciableParNom, Testable {
+    
+    /// [C(0,0), C(0,1)] -> "AaAb"
+    public var nom: String {
+        return self.array.map { $0.nom }.sorted().joined()
+    }
+    
+
+    /// "AaAb" -> [C(0,0), C(0,1)]
+    /// On suppose les noms syntaxiquement valides et tous distincts
+    public init(nom: String) {
+        var cellules = [Cellule]()
+        assert(nom.count.isMultiple(of: 2))
+        let nbCellules = nom.count / 2
+        let caracteres = nom.map { String($0) }
+        for index in  0...(nbCellules - 1) {
+            let (li, co) = (caracteres[index * 2], caracteres[index * 2 + 1])
+            cellules.append(Cellule(nom: li + co))
+        }
+        let ensemble = cellules.ensemble
+        assert(ensemble.count == nbCellules)
+        self = ensemble
+    }
+    
+
+}
+
 public extension Region {
     
     /// Si toutes les cellules appartiennent à une même ligne, on renvoie cette ligne, sinon nil

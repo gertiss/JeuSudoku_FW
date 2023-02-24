@@ -7,12 +7,14 @@
 
 import Foundation
 
-/// Codage suivant le format de la banque Sudoku Exchange.
+/// Codage suivant le format de la banque Sudoku Exchange :
+/// un puzzle est codé sur une ligne de 99 caractères.
 public struct CodagePuzzle {
     /// Format : id (12 caractères) + 1 espace + 81 chiffres + 2 espaces + niveau (3 caractères)
     public let code: String
     
-    /// code doit être valide, sinon fatalError
+    /// code doit être valide syntaxiquement, sinon fatalError
+    /// On ne teste pas la validité sémantique
     public init(_ code: String) {
         assert(code.count == 99)
         self.code = code
@@ -71,10 +73,32 @@ public extension CodagePuzzle {
     
     /// `saisieChiffres` ne contient que les 81 chiffres.
     /// Ils peuvent être écrits avec des espaces, tabs et return qui seront supprimés.
+    /// L'indication d'absence peut être ce qu'on veut à part espace tab return (pas forcément 0).
     /// On retourne un code normalisé, avec un id et un niveau factices.
     static func codeDepuisSaisie(_ saisieChiffres: String) -> String {
         let chiffres = saisieChiffres.avecSuppressionEspacesTabsNewlines
+            .map { Int(String($0)) == nil ? "0" : $0 }
         return "012345678901" + " " + chiffres + "  " + "1.0"
+    }
+    
+    func chiffresLigneDansCode(_ indexLigne: Int) -> [Int] {
+        chiffres[(indexLigne * 9)...(indexLigne * 9 + 8)].map { $0 }
+    }
+    
+    var texteDessin: String {
+        let lignesChiffres = (0...8)
+            .map { indexLigne in
+                chiffresLigneDansCode(indexLigne)
+            }.map { ligneChiffres in
+                ligneChiffres[0...2].map { $0.description }.joined()
+                + " " + ligneChiffres[3...5].map { $0.description }.joined()
+                + " " + ligneChiffres[6...8].map { $0.description }.joined()
+            }
+        
+        let bande0 = lignesChiffres[0...2].map { $0 }.joined(separator: "\n")
+        let bande1 = lignesChiffres[3...5].map { $0 }.joined(separator: "\n")
+        let bande2 = lignesChiffres[6...8].map { $0 }.joined(separator: "\n")
+        return [bande0, bande1, bande2].joined(separator: "\n\n").replacingOccurrences(of: "0", with: "·")
     }
 }
 

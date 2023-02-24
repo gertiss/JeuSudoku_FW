@@ -95,7 +95,7 @@ extension Carre: InstanciableParNom {
     /// InstanciableParNom
     /// Le nom du carré, qui sert d'id pour  le protocole Identifiable
     public var nom: String {
-        return "le carré \(bandeH.nom)\(bandeV.nom)"
+        return "\(bandeH.nom)\(bandeV.nom)"
     }
 
     /// InstanciableParNom
@@ -114,3 +114,4 @@ extension Carre: InstanciableParNom {
     }
 
 }
+

@@ -28,6 +28,6 @@ public extension Puzzle {
     
     static var exemplesFaciles: [Puzzle] {
         let lignes = codeExemplesFaciles.components(separatedBy: .newlines)
-        return lignes.map { Puzzle(code: $0) }
+        return lignes.map { _ in Puzzle() }
     }
 }
