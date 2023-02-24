@@ -9,7 +9,7 @@ import Foundation
 
 public typealias Region = Set<Cellule>
 
-extension Region: InstanciableParNom, Testable {
+extension Region: InstanciableParNom, Testable, Comparable {
     
     /// [C(0,0), C(0,1)] -> "AaAb"
     public var nom: String {
