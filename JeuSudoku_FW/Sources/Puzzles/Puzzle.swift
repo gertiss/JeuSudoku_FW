@@ -21,7 +21,7 @@ public struct Puzzle: Equatable  {
 public extension Puzzle {
     
     func contraintes(_ cellule: Cellule) -> [Presence] {
-        contraintes.filter { $0.region.contains(cellule) }
+        contraintes.filter { $0.contient(cellule: cellule) }
     }
 }
 

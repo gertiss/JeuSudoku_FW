@@ -99,6 +99,20 @@ public extension Region {
         estDansUnAlignement && estDansUnCarre
     }
     
+    func estDans(_ zone: any UneZone) -> Bool {
+        switch zone.type {
+        case .carre: return carre == (zone as! Carre)
+        case .ligne: return ligne == (zone as! Ligne)
+        case .colonne: return colonne == (zone as! Colonne)
+        }
+    }
+    
+    var alignement: (any UneZone)? {
+        if let ligne { return ligne }
+        if let colonne { return colonne }
+        return nil
+    }
+    
     
 }
 

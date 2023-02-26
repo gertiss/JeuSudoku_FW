@@ -21,6 +21,12 @@ public protocol UneContrainte {
     var type: TypeContrainte { get }
     
     init(_ valeurs: Valeurs, dans region: Region)
+    
+    func contient(valeur: Int) -> Bool
+    func contient(cellule: Cellule) -> Bool
+    var estUneBijection: Bool { get }
+    var alignement: (any UneZone)? { get }
+    
 }
 
 public extension UneContrainte {
@@ -33,5 +39,25 @@ public extension UneContrainte {
         case (2, 2): return .paire2
         default: fatalError("Une contrainte ne peut avoir que 1 ou 2 cellules et 1 ou 2 valeurs")
         }
+    }
+    
+    func contient(valeur: Int) -> Bool {
+        valeurs.contains(valeur)
+    }
+    
+    func contient(cellule: Cellule) -> Bool {
+        region.contains(cellule)
+    }
+    
+    var estUneBijection: Bool {
+        region.count == valeurs.count
+    }
+    
+    var estDansUnAlignement: Bool {
+        region.estDansUnAlignement
+    }
+    
+    var alignement: (any UneZone)? {
+        region.alignement
     }
 }

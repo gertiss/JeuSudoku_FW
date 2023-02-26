@@ -8,7 +8,8 @@
 import Foundation
 
 /// Une Presence est une contrainte qui affirme que les `valeurs` doivent être obligatoirement présentes dans la `region`
-public struct Presence: Testable, InstanciableParNom {
+/// Voir les protocoles pour les méthodes par défaut
+public struct Presence: UneContrainte, Testable, InstanciableParNom {
     
     public let valeurs: Valeurs
     public let region: Region
@@ -55,13 +56,3 @@ public struct Presence: Testable, InstanciableParNom {
     
 }
 
-public extension Presence {
-    
-    func contient(cellule: Cellule) -> Bool {
-        region.contains(cellule)
-    }
-    
-    var estUneBijection: Bool {
-        region.count == valeurs.count
-    }
-}

@@ -8,17 +8,17 @@ L'évolution se fait par des *coups*. Un coup consiste en deux étapes : d'abord
 
 Chaque coup est assorti d'une explication indiquant dans quel processus de recherche ce coup a été trouvé, le principe qui a permis de le trouver, avec les informations qui ont été nécessaires.
 
-La découverte d'un coup se place souvent dans un processus de recherche : on se focalise sur une valeur x et sur une zone z, et on se pose la question "quelles sont les cellules vides possibles pour x dans z, après élimination par tel procédé d'élimination ?"
+La découverte d'un coup se place souvent dans un processus de recherche par élimination : on se focalise sur une valeur x et sur une zone z, et on se pose la question "quelles sont les cellules vides possibles pour x dans z, après élimination par tel procédé d'élimination ?"
 
 ## Découverte dans une zone sans élimination de cellules
 
 ### Dernière cellule
 
-Si dans une zone z il ne reste plus qu'une cellule vide, alors on peut affirmer un singleton avec cette cellule et la dernière valeur possible.
+Si dans une zone z il ne reste plus qu'une cellule "libre", alors on peut affirmer un singleton avec cette cellule et la dernière valeur possible.
 
 ### Deux dernières cellules
 
-Si dans une zone z il ne reste plus que deux cellules vides, alors on peut affirmer une paire2 avec les deux valeurs restantes.
+Si dans une zone z il ne reste plus que deux cellules "libres", alors on peut affirmer une paire2 avec les deux valeurs restantes.
 
 ## Elimination de cellules pour une valeur x dans une zone z
 
