@@ -105,6 +105,4 @@ extension Puzzle {
         let absentes = Int.lesChiffres.subtracting(valeursPresentes(dans: zone))
         return absentes.count == 2 ? absentes.array.sorted() : nil
     }
-    
-
 }
