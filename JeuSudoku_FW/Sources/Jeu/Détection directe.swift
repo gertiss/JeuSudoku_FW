@@ -7,17 +7,17 @@
 
 import Foundation
 
-// MARK: - Détection directe dans une zone
+// MARK: - Détection locale dans une zone
 
-/// Ces propriétés se détectent visuellement en observant seulement la zone.
+/// Ces propriétés se détectent "visuellement", localement, en observant seulement la zone.
 /// Elles n'utilisent pas les rayons venant des autres zones.
 /// On peut détecter un singleton1 ou une paire2
 
 extension Puzzle {
  
-    /// Singleton1 détecté directement dans la zone : seule cellule libre, seule valeur absente.
+    /// Singleton1 détecté localement dans la zone : seule cellule libre, seule valeur absente.
     /// On peut "remplir" la cellule par la valeur.
-    func singleton1DetecteDirectement(dans zone: any UneZone) -> Presence? {
+    func singleton1DetecteLocalement(dans zone: any UneZone) -> Presence? {
         guard let cellule = seuleCelluleLibre(dans: zone) else {
             return nil
         }
@@ -30,8 +30,8 @@ extension Puzzle {
         return contrainte
     }
     
-    /// Paire2 détectée directement dans la zone : deux  cellules libres, deux valeurs absentes.
-    func paire2DetecteeDirectement(dans zone: any UneZone) -> Presence? {
+    /// Paire2 détectée localement dans la zone : deux  cellules libres, deux valeurs absentes.
+    func paire2DetecteeLocalement(dans zone: any UneZone) -> Presence? {
         guard let deuxCellules = deuxSeulesCellulesLibres(dans: zone) else {
             return nil
         }

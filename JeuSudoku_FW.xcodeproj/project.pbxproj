@@ -12,6 +12,7 @@
 		5032C38D2994EFD50047E3BA /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032C38C2994EFD50047E3BA /* Presence.swift */; };
 		505215E3299FE5CC00DEDF57 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505215E2299FE5CC00DEDF57 /* Region.swift */; };
 		5062258929AB633600AE3362 /* Detection par élimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258829AB633600AE3362 /* Detection par élimination.swift */; };
+		5062258B29AB8D4300AE3362 /* Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258A29AB8D4300AE3362 /* Detection.swift */; };
 		506841A029A917F300395531 /* Détection directe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068419F29A917F300395531 /* Détection directe.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
 		507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */; };
@@ -53,6 +54,7 @@
 		5032C38C2994EFD50047E3BA /* Presence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
 		505215E2299FE5CC00DEDF57 /* Region.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		5062258829AB633600AE3362 /* Detection par élimination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection par élimination.swift"; sourceTree = "<group>"; };
+		5062258A29AB8D4300AE3362 /* Detection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detection.swift; sourceTree = "<group>"; };
 		5068419E29A8ED8B00395531 /* Jeu doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Jeu doc.md"; sourceTree = "<group>"; };
 		5068419F29A917F300395531 /* Détection directe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Détection directe.swift"; sourceTree = "<group>"; };
 		507B3D5E298BA5290051FCB4 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
@@ -107,9 +109,10 @@
 			children = (
 				5068419E29A8ED8B00395531 /* Jeu doc.md */,
 				50FB543B29A505A6005E5E5E /* Coup.swift */,
-				5068419F29A917F300395531 /* Détection directe.swift */,
 				502A302929AA54CB00C198EB /* Elimination.swift */,
+				5068419F29A917F300395531 /* Détection directe.swift */,
 				5062258829AB633600AE3362 /* Detection par élimination.swift */,
+				5062258A29AB8D4300AE3362 /* Detection.swift */,
 			);
 			path = Jeu;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				508B291629A0DBFA006BDBA6 /* Exemples bootstrap.swift in Sources */,
 				507B3D6A298C4DBE0051FCB4 /* InstanciableParNom.swift in Sources */,
 				509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */,
+				5062258B29AB8D4300AE3362 /* Detection.swift in Sources */,
 				509EC75B298980C0004B1139 /* Carre.swift in Sources */,
 				509EC76529898843004B1139 /* BandeV.swift in Sources */,
 				509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */,

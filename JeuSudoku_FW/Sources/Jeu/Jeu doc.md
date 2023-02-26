@@ -6,9 +6,6 @@ Jouer au sudoku consiste à faire évoluer un ensemble de contraintes relatives 
 
 L'évolution se fait par des *coups*. Un coup consiste en deux étapes : d'abord supprimer certaines contraintes (une ou deux), et ensuite insérer une nouvelle contrainte.
 
-Chaque coup est assorti d'une explication indiquant dans quel processus de recherche ce coup a été trouvé, le principe qui a permis de le trouver, avec les informations qui ont été nécessaires.
-
-La découverte d'un coup se place souvent dans un processus de recherche par élimination : on se focalise sur une valeur x et sur une zone z, et on se pose la question "quelles sont les cellules vides possibles pour x dans z, après élimination par tel procédé d'élimination ?"
 
 ## Découverte dans une zone sans élimination de cellules
 
@@ -24,19 +21,20 @@ Si dans une zone z il ne reste plus que deux cellules "libres", alors on peut af
 
 Les procédés d'élimination de cellules sont les suivants :
 
-### Elimination par singleton non x
+### Elimination par singleton1 x
 
-Toute cellule singleton de valeur différente de x est impossible pour x
+Si une contrainte est un singleton1 x, alors toute cellule de la réunion de sa ligne, sa colonne et son carré est impossible pour x. C'est la règle du jeu.
 
-### Elimination par singleton x
+### Elimination par singleton 1 ou 2 ou paire2 ne contenant pas x
 
-Si une contrainte est un singleton x, alors toute cellule de la réunion de sa ligne, sa colonne et son carré est impossible pour x.
+Toute cellule d'un singleton 1 ou 2 ou d'une paire2 ne contenant pas x est impossible pour x. C'est une éliminaton "interne".
 
-### Elimination par contrainte alignée
 
-Si une région forme une contrainte alignée qui contient la valeur x, alors toute cellule de l'alignement en dehors de la région est impossible pour x.
+### Elimination par contrainte alignée contenant x
 
-C'est vrai en particulier pour une paire1 ou une paire2. Les singletons sont aussi un cas particulier, mais en plus ils éliminent tout leur carré, et ils sont utilisés dans un autre procédé.
+Si une région forme une contrainte alignée qui contient la valeur x, alors toute cellule de l'alignement en dehors de la région est impossible pour x. C'est une élimination "externe".
+
+C'est vrai en particulier pour une paire1 ou une paire2 si elles sont alignées. Les singletons sont aussi un cas particulier, mais en plus ils éliminent tout leur carré, et ils sont utilisés dans un autre procédé.
 
 ## Découverte après élimination
 
