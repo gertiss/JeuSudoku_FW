@@ -11,9 +11,9 @@
 		5032C3892994E7060047E3BA /* UneZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032C3882994E7060047E3BA /* UneZone.swift */; };
 		5032C38D2994EFD50047E3BA /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032C38C2994EFD50047E3BA /* Presence.swift */; };
 		505215E3299FE5CC00DEDF57 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505215E2299FE5CC00DEDF57 /* Region.swift */; };
-		5062258929AB633600AE3362 /* Detection par élimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258829AB633600AE3362 /* Detection par élimination.swift */; };
+		5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258829AB633600AE3362 /* Detection par elimination.swift */; };
 		5062258B29AB8D4300AE3362 /* Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258A29AB8D4300AE3362 /* Detection.swift */; };
-		506841A029A917F300395531 /* Détection directe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068419F29A917F300395531 /* Détection directe.swift */; };
+		506841A029A917F300395531 /* Detection directe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068419F29A917F300395531 /* Detection directe.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
 		507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */; };
 		507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */; };
@@ -53,10 +53,10 @@
 		5032C3882994E7060047E3BA /* UneZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UneZone.swift; sourceTree = "<group>"; };
 		5032C38C2994EFD50047E3BA /* Presence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
 		505215E2299FE5CC00DEDF57 /* Region.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
-		5062258829AB633600AE3362 /* Detection par élimination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection par élimination.swift"; sourceTree = "<group>"; };
+		5062258829AB633600AE3362 /* Detection par elimination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection par elimination.swift"; sourceTree = "<group>"; };
 		5062258A29AB8D4300AE3362 /* Detection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detection.swift; sourceTree = "<group>"; };
 		5068419E29A8ED8B00395531 /* Jeu doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Jeu doc.md"; sourceTree = "<group>"; };
-		5068419F29A917F300395531 /* Détection directe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Détection directe.swift"; sourceTree = "<group>"; };
+		5068419F29A917F300395531 /* Detection directe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection directe.swift"; sourceTree = "<group>"; };
 		507B3D5E298BA5290051FCB4 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesFaciles.swift; sourceTree = "<group>"; };
 		507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesMoyens.swift; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 				5068419E29A8ED8B00395531 /* Jeu doc.md */,
 				50FB543B29A505A6005E5E5E /* Coup.swift */,
 				502A302929AA54CB00C198EB /* Elimination.swift */,
-				5068419F29A917F300395531 /* Détection directe.swift */,
-				5062258829AB633600AE3362 /* Detection par élimination.swift */,
+				5068419F29A917F300395531 /* Detection directe.swift */,
+				5062258829AB633600AE3362 /* Detection par elimination.swift */,
 				5062258A29AB8D4300AE3362 /* Detection.swift */,
 			);
 			path = Jeu;
@@ -325,7 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50FB543C29A505A6005E5E5E /* Coup.swift in Sources */,
-				506841A029A917F300395531 /* Détection directe.swift in Sources */,
+				506841A029A917F300395531 /* Detection directe.swift in Sources */,
 				505215E3299FE5CC00DEDF57 /* Region.swift in Sources */,
 				509EC76329898839004B1139 /* BandeH.swift in Sources */,
 				507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */,
@@ -346,7 +346,7 @@
 				509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */,
 				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
 				50CE5DE8299655F6002E36E4 /* Absence.swift in Sources */,
-				5062258929AB633600AE3362 /* Detection par élimination.swift in Sources */,
+				5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
