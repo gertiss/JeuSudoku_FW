@@ -18,11 +18,67 @@ public struct Puzzle: Equatable  {
     
 }
 
+
+// MARK: - Etat
+
+// Différentes requêtes permettant de décrire l'état de résolution du puzzle
+
 public extension Puzzle {
     
-    func contraintes(_ cellule: Cellule) -> [Presence] {
-        contraintes.filter { $0.contient(cellule: cellule) }
+    /// La valeur de la cellule si elle est résolue, nil sinon.
+    func valeur(_ cellule: Cellule) -> Int? {
+        let singletons = contraintes(cellule: cellule).filter { $0.type == .singleton1 }
+        return singletons.ensemble.uniqueValeur?.valeurs.uniqueElement
     }
+    
+    /// Indique s'il existe au moins une cellule remplie avec le chiffre.
+    func contient(chiffre: Int) -> Bool {
+        contraintes.contains(where: {$0.type == .singleton1 && $0.valeurs.uniqueElement == chiffre})
+    }
+
+    /// Les contraintes dont la région contient la cellule.
+    func contraintes(cellule: Cellule) -> [Presence] {
+        contraintes.filter { $0.region.contains(cellule) }
+    }
+    
+    /// Les contraintes dont la valeur contient le chiffre.
+    func contraintes(chiffre: Int) -> [Presence] {
+        contraintes.filter { $0.valeurs.contains(chiffre) }
+    }
+    
+    func celluleEstResolue(_ cellule: Cellule) -> Bool {
+        contraintes(cellule: cellule).contains { $0.type == .singleton1 }
+    }
+
+    func cellulesResolues(dans zone: any UneZone) -> [Cellule] {
+        zone.cellules.filter { celluleEstResolue($0) }.ensemble.array.sorted()
+    }
+    
+    func cellulesNonResolues(dans zone: any UneZone) -> [Cellule] {
+        zone.cellules.filter { !celluleEstResolue($0) }.ensemble.array.sorted()
+    }
+    
+    func valeursResolues(dans zone: any UneZone) -> [Int] {
+        cellulesResolues(dans: zone).map { valeur($0)! }.ensemble.array.sorted()
+    }
+
+    func valeursNonResolues(dans zone: any UneZone) -> [Int] {
+        Int.lesChiffres.subtracting(valeursResolues(dans: zone))
+            .array.sorted()
+    }
+    
+    func estSingleton1Valide(_ singleton: Presence) -> Bool {
+        assert(singleton.type == .singleton1)
+        let  celluleSingleton = singleton.region.uniqueElement
+        return celluleSingleton.dependantes
+            .allSatisfy { cellule in
+                let valeurCellule = valeur(cellule)
+                let valeurSingleton = singleton.valeurs.uniqueElement
+                let test = valeur(cellule) != valeurSingleton
+                return test
+            }
+    }
+
 }
 
 // MARK: - Codage SudokuExchangeBank
@@ -52,6 +108,12 @@ public extension Puzzle {
     
     /// Code avec id et niveaux factices
     var code: String {
+        let codeFactice = "012345678901"
+        let niveauFactice = "1.0"
+        return codeFactice + " " + codeChiffres + "  " + niveauFactice
+    }
+    
+    var codeChiffres: String {
         let singletons = contraintes.filter { $0.type == .singleton1 }
         var dico = [Cellule: Int]()
         singletons.forEach {
@@ -64,11 +126,8 @@ public extension Puzzle {
                 let valeur = dico[cellule] ?? 0
                 txtChiffres += "\(valeur)"
             }
-            
         }
-        let codeFactice = "012345678901"
-        let niveauFactice = "1.0"
-        return codeFactice + " " + txtChiffres + "  " + niveauFactice
+        return txtChiffres
     }
     
     /// La représentation sous forme de texte formaté figurant un dessin
@@ -76,4 +135,3 @@ public extension Puzzle {
         CodagePuzzle(code).texteDessin
     }
 }
-

@@ -22,6 +22,7 @@ public struct Presence: UneContrainte, Testable, InstanciableParNom {
         case (1, 2): type = .singleton2
         case (2, 1): type = .paire1
         case (2, 2): type = .paire2
+        case (3, 3): type = .triplet3
         default: fatalError("Une contrainte ne peut avoir que 1 ou 2 cellules et 1 ou 2 valeurs")
         }
         self.valeurs  = valeurs

@@ -40,6 +40,7 @@ public extension Region {
     
     /// Si toutes les cellules appartiennent à une même ligne, on renvoie cette ligne, sinon nil
     var ligne: Ligne?  {
+        // ligne de la première cellule
         guard let ligne0 = first?.ligne else {
             return nil
         }
@@ -48,6 +49,7 @@ public extension Region {
     
     /// Si toutes les cellules appartiennent à une même colonne, on renvoie cette colonne, sinon nil
     var colonne: Colonne?  {
+        // colonne de la première cellule
         guard let colonne0 = first?.colonne else {
             return nil
         }
@@ -56,6 +58,7 @@ public extension Region {
     
     /// Si toutes les cellules appartiennent à un même carré, on renvoie ce carré, sinon nil
     var carre: Carre? {
+        // carré de la première cellule
         guard let carre0 = first?.carre else {
             return nil
         }
@@ -83,28 +86,33 @@ public extension Region {
         return liste
     }
     
-    var estDansUnAlignement: Bool {
+    var estIncluseDansUnAlignement: Bool {
         ligne != nil || colonne != nil
     }
     
-    var estDansUnCarre: Bool {
+    var estIncluseDansUnCarre: Bool {
         carre != nil
     }
-    var estDansUneZone: Bool {
+    var estIncluseDansUneZone: Bool {
         ligne != nil || colonne != nil || carre != nil
     }
 
     /// Un segment est un alignement à l'intérieur d'un carré (3 cellules)
-    var estDansUnSegment: Bool {
-        estDansUnAlignement && estDansUnCarre
+    var estIncluseDansUnSegment: Bool {
+        estIncluseDansUnAlignement && estIncluseDansUnCarre
     }
     
-    func estDans(_ zone: any UneZone) -> Bool {
+    /// On utilise les fonctions carre, ligne, colonne qui donnent le carré, la ligne ou la colonne qui contient la région si existe.
+    func estIncluseDans(_ zone: any UneZone) -> Bool {
         switch zone.type {
-        case .carre: return carre == (zone as! Carre)
-        case .ligne: return ligne == (zone as! Ligne)
-        case .colonne: return colonne == (zone as! Colonne)
+        case .carre: return self.carre == (zone as! Carre)
+        case .ligne: return self.ligne == (zone as! Ligne)
+        case .colonne: return self.colonne == (zone as! Colonne)
         }
+    }
+    
+    func intersecte(_ zone: any UneZone) -> Bool {
+        !self.intersection(zone.cellules).isEmpty
     }
     
     var alignement: (any UneZone)? {

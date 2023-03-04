@@ -11,6 +11,17 @@ public enum TypeZone: Hashable, Codable {
     case carre
     case ligne
     case colonne
+    
+    var visibilite: Int {
+        switch self {
+        case .carre:
+            return 2
+        case .ligne:
+            return 1
+        case .colonne:
+            return 0
+        }
+    }
 }
 
 /// UneZone est une Ligne ou une Colonne ou un Carre

@@ -1,5 +1,5 @@
 //
-//  Détection_directe.swift
+//  Detection locale.swift
 //  JeuSudoku_FW
 //
 //  Created by Gérard Tisseau on 24/02/2023.
@@ -17,12 +17,13 @@ extension Puzzle {
  
     /// Singleton1 détecté localement dans la zone : seule cellule libre, seule valeur absente.
     /// On peut "remplir" la cellule par la valeur.
+    /// C'est lorsqu'il ne reste plus qu'une case libre dans une zone.
     func singleton1DetecteLocalement(dans zone: any UneZone) -> Presence? {
         guard let cellule = seuleCelluleLibre(dans: zone) else {
             return nil
         }
-        guard let valeur = seuleValeurAbsente(dans: zone) else {
-            fatalError("On attend une valeur absente exactement  dans \(zone.type) \(zone.nom)")
+        guard let valeur =  seuleValeurAbsente(dans: zone) else {
+            return nil
         }
         let contrainte = Presence([valeur], dans: [cellule])
         assert(contrainte.estUneBijection)
@@ -31,47 +32,58 @@ extension Puzzle {
     }
     
     /// Paire2 détectée localement dans la zone : deux  cellules libres, deux valeurs absentes.
+    /// Mais on ne retient que les alignements.
+    /// Les paires2 obliques ont provoqué des bugs.
     func paire2DetecteeLocalement(dans zone: any UneZone) -> Presence? {
         guard let deuxCellules = deuxSeulesCellulesLibres(dans: zone) else {
             return nil
         }
         guard let deuxValeurs = deuxSeulesValeurAbsentes(dans: zone) else {
-            fatalError("On attend deux valeurs absentes exactement dans \(zone.type) \(zone.nom)")
+            return nil
         }
         let contrainte = Presence(deuxValeurs.ensemble, dans: deuxCellules.ensemble)
+        guard contrainte.region.estIncluseDansUnAlignement else {
+            return nil
+        }
         assert(contrainte.estUneBijection)
         assert(contrainte.type == .paire2)
         return contrainte
     }
 
-    /// Les contraintes dont la région est incluse dans la zone.
+    /// Les contraintes dont la région intersecte la zone.
     /// Liste sans doublon, classée par nom.
-    func contraintes(dans zone: any UneZone) -> [Presence] {
-        contraintes.filter { $0.region.estDans(zone) }
+    func contraintes(intersectant zone: any UneZone) -> [Presence] {
+        contraintes.filter { $0.region.intersecte(zone) }
             .ensemble.array.sorted()
     }
     
-    func contraintesBijectives(dans zone: any UneZone) -> [Presence] {
-        contraintes(dans: zone).filter { $0.estUneBijection }
+    func contraintesBijectivesIntersectant(_ zone: any UneZone) -> [Presence] {
+        contraintes(intersectant: zone).filter { $0.estUneBijection }
     }
     
-    /// Les valeurs qui apparaissent dans les contraintes bijectives de la zone.
+    func contraintesBijectivesIncluses(dans zone: any UneZone) -> [Presence] {
+        contraintesBijectivesIntersectant(zone).filter { $0.region.isSubset(of: zone.cellules) }
+    }
+    
+    /// Les valeurs qui apparaissent dans les contraintes bijectives incluses dans la zone.
     /// Liste sans doublon, classée par valeur.
     /// Plus le cardinal de cette valeur est élevé, plus la zone est "prometteuse" pour découvrir une contrainte
    func valeursPresentes(dans zone: any UneZone) -> [Int] {
         var ensemble = Set<Int>()
-        for contrainte in contraintesBijectives(dans: zone) {
+       for contrainte in contraintesBijectivesIncluses(dans: zone) {
                 ensemble = ensemble.union(contrainte.valeurs)
         }
         return ensemble.array.sorted()
     }
     
-    /// Les cellules de la zone qui n'ont aucune contrainte bijective associée incluse dan la zone.
+    /// Les cellules de la zone qui n'ont aucune contrainte bijective associée incluse dans la zone.
     /// Liste sans doublon, classée par nom.
+    /// Remarque : une cellule peut aussi appartenir à une contrainte bijective d'une autre zone.
+    /// Il faudra alors faire l'intersection des bijections
     func cellulesSansContrainteBijective(dans zone: any UneZone) -> [Cellule] {
         zone.cellules
             .filter { cellule in
-                contraintesBijectives(dans: zone)
+                contraintesBijectivesIntersectant(zone)
                     .filter { $0.contient(cellule: cellule) }
                     .isEmpty
             }
