@@ -350,7 +350,7 @@ final class JeuSudoku_FWTests: XCTestCase {
     
     func testAPIDifficileA1() {
         let puzzle = Puzzle.difficilesA[1]
-        let essai = suiteDesCoups(presences: puzzle.codeChiffres)
+        let essai = suiteDesCoups(puzzle: puzzle.codeChiffres)
         print()
         switch essai {
         case .success(let success):
@@ -363,7 +363,7 @@ final class JeuSudoku_FWTests: XCTestCase {
     func testAPIMoyenB0() {
         // Pour tester l'affichage des éliminations indirectes par paire1
         let puzzle = Puzzle.moyensB[0]
-        let essai = suiteDesCoups(presences: puzzle.codeChiffres)
+        let essai = suiteDesCoups(puzzle: puzzle.codeChiffres)
         print()
         
         switch essai {

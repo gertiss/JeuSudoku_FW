@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../../../../Projets OSX/Projets JD/PrototypeSudoku JD WS/PrototypeSudoku_FW/PrototypeSudoku_FW.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../../../../../Projets OSX/Projets JD/PrototypeSudoku JD WS/Mon Sudoku/Mon Sudoku.xcodeproj">
+   </FileRef>
+</Workspace>

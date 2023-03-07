@@ -16,7 +16,7 @@
 		5062258B29AB8D4300AE3362 /* Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258A29AB8D4300AE3362 /* Detection.swift */; };
 		506841A029A917F300395531 /* Detection locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068419F29A917F300395531 /* Detection locale.swift */; };
 		507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507ADB1829ACE79C00D793D5 /* Verification.swift */; };
-		507B255B29AE6E20009217A8 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B255A29AE6E20009217A8 /* API.swift */; };
+		507B255B29AE6E20009217A8 /* API coups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B255A29AE6E20009217A8 /* API coups.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
 		507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */; };
 		507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */; };
@@ -37,6 +37,8 @@
 		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
 		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
 		50A8E92029B4E988005ED674 /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8E91F29B4E988005ED674 /* Coup.swift */; };
+		50BF6CE129B7A23A0028F583 /* API VueGT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE029B7A23A0028F583 /* API VueGT.swift */; };
+		50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE229B7AB250028F583 /* API Exemples.swift */; };
 		50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EB023529B5C6FB00AA82CD /* Combinatoire.swift */; };
 		50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB543B29A505A6005E5E5E /* Jeu.swift */; };
 		50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEF8529B33B9D001717BB /* Recherche globale.swift */; };
@@ -63,7 +65,7 @@
 		5068419E29A8ED8B00395531 /* Jeu doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Jeu doc.md"; sourceTree = "<group>"; };
 		5068419F29A917F300395531 /* Detection locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection locale.swift"; sourceTree = "<group>"; };
 		507ADB1829ACE79C00D793D5 /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
-		507B255A29AE6E20009217A8 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		507B255A29AE6E20009217A8 /* API coups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API coups.swift"; sourceTree = "<group>"; };
 		507B255C29AE6E9E009217A8 /* API doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "API doc.md"; sourceTree = "<group>"; };
 		507B3D5E298BA5290051FCB4 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesFaciles.swift; sourceTree = "<group>"; };
@@ -86,6 +88,8 @@
 		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
 		50A8E91F29B4E988005ED674 /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
+		50BF6CE029B7A23A0028F583 /* API VueGT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API VueGT.swift"; sourceTree = "<group>"; };
+		50BF6CE229B7AB250028F583 /* API Exemples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Exemples.swift"; sourceTree = "<group>"; };
 		50CAD39B29A61F0E004917C2 /* Geometrie doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Geometrie doc.md"; sourceTree = "<group>"; };
 		50D191D529A64E47000CFA64 /* Contraintes doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Contraintes doc.md"; sourceTree = "<group>"; };
 		50D191DE29A678F9000CFA64 /* Puzzle doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Puzzle doc.md"; sourceTree = "<group>"; };
@@ -130,13 +134,15 @@
 			path = Jeu;
 			sourceTree = "<group>";
 		};
-		507B255929AE6DFB009217A8 /* Public */ = {
+		507B255929AE6DFB009217A8 /* API */ = {
 			isa = PBXGroup;
 			children = (
 				507B255C29AE6E9E009217A8 /* API doc.md */,
-				507B255A29AE6E20009217A8 /* API.swift */,
+				50BF6CE229B7AB250028F583 /* API Exemples.swift */,
+				507B255A29AE6E20009217A8 /* API coups.swift */,
+				50BF6CE029B7A23A0028F583 /* API VueGT.swift */,
 			);
-			path = Public;
+			path = API;
 			sourceTree = "<group>";
 		};
 		507B3D5C298BA3480051FCB4 /* Contraintes */ = {
@@ -184,7 +190,7 @@
 		509EC73A29897D6E004B1139 /* JeuSudoku_FW */ = {
 			isa = PBXGroup;
 			children = (
-				507B255929AE6DFB009217A8 /* Public */,
+				507B255929AE6DFB009217A8 /* API */,
 				509EC75229897DBC004B1139 /* Sources */,
 				509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */,
 			);
@@ -361,8 +367,10 @@
 				502A302A29AA54CB00C198EB /* Elimination.swift in Sources */,
 				50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */,
 				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
-				507B255B29AE6E20009217A8 /* API.swift in Sources */,
+				507B255B29AE6E20009217A8 /* API coups.swift in Sources */,
 				507B3D6A298C4DBE0051FCB4 /* InstanciableParNom.swift in Sources */,
+				50BF6CE129B7A23A0028F583 /* API VueGT.swift in Sources */,
+				50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */,
 				50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */,
 				509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */,
 				5062258B29AB8D4300AE3362 /* Detection.swift in Sources */,

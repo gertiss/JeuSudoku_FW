@@ -1,21 +1,12 @@
 //
-//  API.swift
+//  VueGT.swift
 //  JeuSudoku_FW
 //
-//  Created by Gérard Tisseau on 28/02/2023.
+//  Created by Gérard Tisseau on 07/03/2023.
 //
 
 import Foundation
 import SwiftUI
-
-public func suiteDesCoups(presences: String) -> Result<String, String> {
-    let puzzle = Puzzle(chiffres: presences)
-    guard puzzle.estValide else {
-        return .failure("L'état initial n'est pas valide")
-    }
-    let coups = puzzle.suiteDeCoups()
-    return .success(coups.map { $0.nom }.joined(separator: "\n"))
-}
 
 public func vueGT(presences: String) -> VueGT {
     VueGT(presences: presences)
