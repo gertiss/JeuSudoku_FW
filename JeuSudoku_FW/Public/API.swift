@@ -9,11 +9,12 @@ import Foundation
 import SwiftUI
 
 public func suiteDesCoups(presences: String) -> Result<String, String> {
-    if presences.count < 100 {
-        return .success(String(presences.prefix(10)))
-    } else {
-        return .failure("Erreur suiteDesCoups")
+    let puzzle = Puzzle(chiffres: presences)
+    guard puzzle.estValide else {
+        return .failure("L'état initial n'est pas valide")
     }
+    let coups = puzzle.suiteDeCoups()
+    return .success(coups.map { $0.nom }.joined(separator: "\n"))
 }
 
 public func vueGT(presences: String) -> VueGT {

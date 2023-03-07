@@ -34,3 +34,16 @@ public protocol UneZone: Testable {
     var nom: String { get }
 }
 
+extension UneZone {
+    var texteLaZone: String {
+        switch type {
+        case .carre:
+            return "le carré \(nom)"
+        case .ligne:
+            return "la ligne \(nom)"
+        case .colonne:
+            return "la colonne \(nom)"
+        }
+    }
+}
+

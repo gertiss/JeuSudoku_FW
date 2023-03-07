@@ -11,19 +11,21 @@ Le raisonnement est monotone : une fois qu'une contrainte a été affirmée, ell
 ## Principe de la recherche
 
 On cherche une bijection de cardinal p dans une région de cardinal n, incluse dans une zone.
-n ≤ 6, p ≤ n, p ≤ 3.
 
 D'après le triangle de Pascal :
 
-    1
-    1  1
-    1  2  1
-    1  3  3  1
-    1  4  6  4  1
-    1  5  10 10 5  1
-    1  6  15 20 15 6  1
+    0: 1
+    1: 1  1
+    2: 1  2  1
+    3: 1  3  3  1
+    4: 1  4  6  4  1
+    5: 1  5  10 10 5  1
+    6: 1  6  15 20 15 6  1
+    7: 1  7  21 35 35 21  7  1
+    8: 1  8  28 56 70 56  28 8 1
+    9: 1  9  36 84 126 126 84  36 9  1
     
-le nombre d'essais de p-uplets pour trouver une bijection de cardinal p parmi n ne dépasse pas 20.
+On peut aller jusqu'à C(8, 3) = 56
 
 Une fois qu'on a trouvé une bijection de cardinal p, on étudie la région complémentaire dans la zone. C'est aussi une bijection, de cardinal n - p. On parcourt les n - p valeurs possibles pour cette zone, et pour chacune d'entre elles on fait émettre tous les rayons possibles de la grille pour éliminer des cellules. Si pour une de ces valeurs on trouve une région restante qui n'a qu'une seule cellule, alors on a réussi à déterminer la valeur qui doit aller dans cette cellule restante.
 

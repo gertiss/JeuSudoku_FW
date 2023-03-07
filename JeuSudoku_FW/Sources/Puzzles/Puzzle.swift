@@ -67,16 +67,23 @@ public extension Puzzle {
             .array.sorted()
     }
     
+    
     func estSingleton1Valide(_ singleton: Presence) -> Bool {
-        assert(singleton.type == .singleton1)
+        guard singleton.type == .singleton1 else {
+            return false
+        }
         let  celluleSingleton = singleton.region.uniqueElement
-        return celluleSingleton.dependantes
-            .allSatisfy { cellule in
-                let valeurCellule = valeur(cellule)
-                let valeurSingleton = singleton.valeurs.uniqueElement
-                let test = valeur(cellule) != valeurSingleton
-                return test
+        let valeurSingleton = singleton.valeurs.uniqueElement
+        return celluleSingleton.dependantes.allSatisfy { cellule in
+                valeur(cellule) != valeurSingleton
             }
+    }
+    
+    /// Toutes les contraintes singleton1 sont valides
+    var estValide: Bool {
+        contraintes.allSatisfy { singleton1 in
+            estSingleton1Valide(singleton1)
+        }
     }
 
 }

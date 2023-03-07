@@ -44,7 +44,7 @@ public struct Presence: UneContrainte, Testable, InstanciableParNom {
     public var nom: String {
         "\(region.nom)_\(valeurs.nom)"
     }
-    
+        
     /// `Presence(nom: "AaAb_12")`
     public init(nom: String) {
         let champs = nom.components(separatedBy: "_")

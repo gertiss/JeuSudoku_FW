@@ -33,7 +33,6 @@ extension Puzzle {
     
     /// Paire2 détectée localement dans la zone : deux  cellules libres, deux valeurs absentes.
     /// Mais on ne retient que les alignements.
-    /// Les paires2 obliques ont provoqué des bugs.
     func paire2DetecteeLocalement(dans zone: any UneZone) -> Presence? {
         guard let deuxCellules = deuxSeulesCellulesLibres(dans: zone) else {
             return nil

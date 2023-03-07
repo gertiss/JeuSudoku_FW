@@ -37,58 +37,43 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertNotNil(ligne)
         XCTAssertEqual(ligne, Ligne(2))
         XCTAssertEqual(Ligne(nom: "C").nom, "C")
-   }
+    }
     
     func testNomColonne() {
         let colonne = Colonne(nom: "c")
         XCTAssertNotNil(colonne)
         XCTAssertEqual(colonne, Colonne(2))
         XCTAssertEqual(Colonne(nom: "c").nom, "c")
-   }
-      
+    }
+    
     func testPresence() {
         
         let singleton1 = Presence([1], dans:[Cellule(3, 5)])
         XCTAssertEqual(singleton1.nom, "Df_1")
         XCTAssertEqual(singleton1.type, .singleton1)
         XCTAssertEqual(Presence(nom: "Df_1").nom, "Df_1")
-
+        
         let singleton2 = Presence([1, 2], dans:[Cellule(3, 5)])
         XCTAssertEqual(singleton2.nom, "Df_12")
         XCTAssertEqual(singleton2.type, .singleton2)
         XCTAssertEqual(Presence(nom: "Df_12").nom, "Df_12")
-
+        
         let paire1 = Presence([1], dans:[Cellule(3, 5), Cellule(3, 6)])
         XCTAssertEqual(paire1.nom, "DfDg_1")
         XCTAssertEqual(paire1.type, .paire1)
         XCTAssertEqual(Presence(nom: "DfDg_1").nom, "DfDg_1")
-
+        
         let paire2 = Presence([1, 2], dans:[Cellule(3, 5), Cellule(3, 6)])
         XCTAssertEqual(paire2.nom, "DfDg_12")
         XCTAssertEqual(paire2.type, .paire2)
         XCTAssertEqual(Presence(nom: "DfDg_12").nom, "DfDg_12")
-
-
+        
+        
     }
     
-    func testContraintesPuzzle() {
-        let puzzle = Puzzle.bootstrap1
-        XCTAssertEqual(puzzle, Puzzle(contraintes: [Presence([1], dans: [Cellule(0, 0)]), Presence([2, 3], dans: [Cellule(0, 1)]), Presence([4], dans: [Cellule(1, 0), Cellule(1, 1)]), Presence([5, 6], dans: [Cellule(2, 0), Cellule(2, 1)])]))
-        
-        XCTAssertEqual(puzzle.contraintes(cellule: Cellule(nom: "Aa")), [Presence([1], dans: [Cellule(0, 0)])])
-        
-        XCTAssertEqual(puzzle.contraintes(cellule: Cellule(nom: "Ab")), [Presence([2, 3], dans: [Cellule(0, 1)])])
-        
-        XCTAssertEqual(puzzle.contraintes(cellule: Cellule(nom: "Ba")), [Presence([4], dans: [Cellule(1, 0), Cellule(1, 1)])])
-        
-        XCTAssertEqual(puzzle.contraintes(cellule: Cellule(nom: "Bb")), [Presence([4], dans: [Cellule(1, 0), Cellule(1, 1)])])
-        
-        XCTAssertEqual(puzzle.contraintes(cellule: Cellule(nom: "Ca")), [Presence([5, 6], dans: [Cellule(2, 1), Cellule(2, 0)])])
-        
-    }
     
     func testLectureCode() {
-                
+        
         let puzzle = Puzzle.moyensA[0]
         let dessin = puzzle.texteDessin
         
@@ -106,7 +91,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 14· ·8· ·63
 ·3· ·5· ·8·
 """)
-
+        
         // Ce "dessin" peut être utilisé directement comme code pour le puzzle
         let puzzleBis = Puzzle(chiffres: dessin)
         XCTAssertEqual(puzzleBis, puzzle)
@@ -155,14 +140,14 @@ final class JeuSudoku_FWTests: XCTestCase {
         )
         // Jeu
         
-        var nouvelleContrainte = puzzle.contrainteDetectee!
-        print("détectée :", nouvelleContrainte.nom) // paire1 GbGc_8
-        var etat = puzzle.plus(nouvelleContrainte)
+        var nouveauCoup = puzzle.premierCoup!
+        print("détectée :", nouveauCoup.nom) // paire1 GbGc_8
+        var etat = puzzle.plus(nouveauCoup.singleton)
         
-        nouvelleContrainte = etat.contrainteDetectee!
-        print("détectée :", nouvelleContrainte.nom) // Df_8
-        etat = puzzle.plus(nouvelleContrainte)
-
+        nouveauCoup = etat.premierCoup!
+        print("détectée :", nouveauCoup.nom) // Df_8
+        etat = puzzle.plus(nouveauCoup.singleton)
+        
     }
     
     func testPartieMoyenA0() {
@@ -184,8 +169,8 @@ final class JeuSudoku_FWTests: XCTestCase {
 236 457 981
 """
         let solution = Puzzle(chiffres: chiffresSolution)
-
-        let _ = puzzle.jeuAvecVerification(solution: solution)
+        
+        let _ = puzzle.suiteDeCoups(solution: solution)
     }
     
     func testPartieMoyenB0() {
@@ -207,7 +192,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 """
         
         let solution = Puzzle(chiffres: codeSolution)
-        let _ = puzzle.jeuAvecVerification(solution: solution)
+        let _ = puzzle.suiteDeCoups(solution: solution)
     }
     
     func testPartieMoyenC0() {
@@ -228,55 +213,166 @@ final class JeuSudoku_FWTests: XCTestCase {
 564187923
 """
         let solution = Puzzle(chiffres: codeSolution)
-        let _ = puzzle.jeuAvecVerification(solution: solution)
-
-    }
-    
-    func testPartieMoyenD0() {
-        let puzzle = Puzzle.moyensD[0]
-        print(puzzle.texteDessin)
+        let _ = puzzle.suiteDeCoups(solution: solution)
         
-        _ = puzzle.suiteDeContraintesDetectees
-                
     }
     
-    func testPartiesMoyens() {
-        print("// moyensD")
-        for puzzle in Puzzle.moyensD {
-            print("\n// \(puzzle.codeChiffres)")
-            let _ = puzzle.suiteDeContraintesDetectees
+    func testPartiesMoyensA() {
+        // Niveau 2.0
+        // 100%
+        for (n, puzzle) in Puzzle.moyensA.enumerated() {
+            print("\n-- moyensA[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+    }
+    
+    
+    
+    func testPartiesMoyensB() {
+        // Niveau 2.0
+        // 100%
+        for (n, puzzle) in Puzzle.moyensB.enumerated() {
+            print("\n-- moyensB[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+    }
+    
+    func testPartiesMoyensC() {
+        // Niveau 2.0
+        // 100%
+        for (n, puzzle) in Puzzle.moyensC.enumerated() {
+            print("\n-- moyensC[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+        
+    }
+    
+    func testPartiesMoyensD() {
+        // Niveau 2.3
+        // 100%
+        for (n, puzzle) in Puzzle.moyensD.enumerated() {
+            print("\n-- moyensD[\(n)]")
+            let _ = puzzle.suiteDeCoups()
         }
     }
     
     func testPartiesDifficilesA() {
-        print("// difficiles")
+        // Niveau 2.5
+        // 100%
         for (n, puzzle) in Puzzle.difficilesA.enumerated() {
-            print("\n-- difficilesA[\(n)]: \n\(puzzle.texteDessin)")
-            print("\n// \(puzzle.codeChiffres)")
-            let _ = puzzle.suiteDeContraintesDetectees
+            print("\n-- difficilesA[\(n)]")
+            let _ = puzzle.suiteDeCoups()
         }
         
         /*
-         SudokuExchange dit que certains puzzles n'ont pas une solution unique
-         3,
+         SudokuExchange dit que le puzzle 3 n'a pas une solution unique
          */
         
     }
     
-    func testMoyenD009610720() {
-        let puzzle = Puzzle.moyensD[6]
-        print("\n\(puzzle.texteDessin)")
-        print("\n// \(puzzle.codeChiffres)")
-        
-        let _ = puzzle.suiteDeContraintesDetectees
-    }
-    
     func testDifficileA5() {
         // Niveau 2.5
+        // Demande une recherche de 3 parmi 8
+        // Complexité : 56
         let puzzle = Puzzle.difficilesA[5]
-        print("\n\(puzzle.texteDessin)")
-        print("\n// \(puzzle.codeChiffres)")
-        let _ = puzzle.suiteDeContraintesDetectees
+        let _ = puzzle.suiteDeCoups()
+    }
+    
+    func testPartiesDifficilesB() {
+        // Niveau 2.6
+        // 50%
+        for (n, puzzle) in Puzzle.difficilesB.enumerated() {
+            print("\n-- difficilesB[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+    }
+    
+    func testPartiesDifficilesC() {
+        // Niveau 2.8
+        for (n, puzzle) in Puzzle.difficilesC.enumerated() {
+            print("\n-- difficilesC[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+    }
+    
+    func testPartiesDifficilesD() {
+        // Niveau 3.0
+        for (n, puzzle) in Puzzle.difficilesD.enumerated() {
+            print("\n-- difficilesD[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+    }
+    
+    func testPartiesDifficilesE() {
+        // Niveau 3.2
+        for (n, puzzle) in Puzzle.difficilesE.enumerated() {
+            print("\n-- difficilesE[\(n)]")
+            let _ = puzzle.suiteDeCoups()
+        }
+    }
+    
+    func testCombinaisons2() {
+        XCTAssertEqual(combinaisons2(parmi: 2).count, 1)
+        XCTAssertEqual(combinaisons2(parmi: 3).count, 3)
+        XCTAssertEqual(combinaisons2(parmi: 4).count, 6)
+        XCTAssertEqual(combinaisons2(parmi: 5).count, 10)
+        XCTAssertEqual(combinaisons2(parmi: 6).count, 15)
+        XCTAssertEqual(combinaisons2(parmi: 7).count, 21)
+        XCTAssertEqual(combinaisons2(parmi: 8).count, 28)
+
+       let liste5 = combinaisons2(parmi: 5)
+        XCTAssertEqual(liste5.count, 10)
+        // Tuple ne peut être conforme à Equatable, donc on teste juste la description
+        XCTAssertEqual(liste5.description, "[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]")
+        
+        let liste8 = combinaisons2(parmi: 8)
+        XCTAssertEqual(liste8.count, 28)
+        XCTAssertEqual(liste8.description, "[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (3, 4), (3, 5), (3, 6), (3, 7), (4, 5), (4, 6), (4, 7), (5, 6), (5, 7), (6, 7)]")
+        
+    }
+    
+    func testCombinaisons3() {
+        XCTAssertEqual(combinaisons3(parmi: 3).count, 1)
+        XCTAssertEqual(combinaisons3(parmi: 4).count, 4)
+        XCTAssertEqual(combinaisons3(parmi: 5).count, 10)
+        XCTAssertEqual(combinaisons3(parmi: 6).count, 20)
+        XCTAssertEqual(combinaisons3(parmi: 7).count, 35)
+        XCTAssertEqual(combinaisons3(parmi: 8).count, 56)
+
+        let liste5 = combinaisons3(parmi: 5)
+        XCTAssertEqual(liste5.count, 10)
+        // Tuple ne peut être conforme à Equatable, donc on teste juste la description
+        XCTAssertEqual(liste5.description, "[(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 3), (0, 2, 4), (0, 3, 4), (1, 2, 3), (1, 2, 4), (1, 3, 4), (2, 3, 4)]")
+        
+        let liste8 = combinaisons3(parmi: 8)
+        XCTAssertEqual(liste8.count, 56)
+    }
+    
+    func testAPIDifficileA1() {
+        let puzzle = Puzzle.difficilesA[1]
+        let essai = suiteDesCoups(presences: puzzle.codeChiffres)
+        print()
+        switch essai {
+        case .success(let success):
+            print(success)
+        case .failure(let failure):
+            print(failure)
+        }
+    }
+    
+    func testAPIMoyenB0() {
+        // Pour tester l'affichage des éliminations indirectes par paire1
+        let puzzle = Puzzle.moyensB[0]
+        let essai = suiteDesCoups(presences: puzzle.codeChiffres)
+        print()
+        
+        switch essai {
+        case .success(let success):
+            print(success)
+        case .failure(let failure):
+            print(failure)
+        }
+
         
     }
 }

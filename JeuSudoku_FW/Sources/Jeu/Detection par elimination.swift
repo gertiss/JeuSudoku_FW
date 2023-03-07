@@ -14,7 +14,7 @@ import Foundation
 
 public extension Puzzle {
     
-    /// Une seule cellule restante après élimination directe
+    /// Une seule cellule restante après élimination directe, sinon nil
     func singleton1DetecteParEliminationDirecte(pour valeur: Int, dans region: Region) -> Presence? {
         let eliminees = cellulesEliminees(pour: valeur)
         let restantes = region.subtracting(eliminees)
@@ -28,7 +28,7 @@ public extension Puzzle {
         return contrainte
     }
  
-    /// Une seule cellule restante après élimination indirecte
+    /// Une seule cellule restante après élimination indirecte, sinon nil
     func singleton1DetecteParEliminationIndirecte(pour valeur: Int, dans region: Region) -> Presence? {
         let paires1 = paires1AligneesDetecteesParElimination(pour: valeur).ensemble
         // On fait la recherche dans un puzzle temporaire
@@ -43,8 +43,7 @@ public extension Puzzle {
 
     
     /// Deux seules cellules restantes alignées après élimination
-    /// Attention: tant qu'une paire1 n'a pas été réduite, elle sera retrouvée à chaque fois.
-    /// Donc on ne la "détecte" que la première fois.
+    /// Mais on se limite aux paires "utiles", susceptible d'éliminer de nouvelles cellules.
     func paire1AligneeDetecteeParElimination(pour valeur: Int, dans zone: any UneZone) -> Presence? {
         let eliminees = cellulesEliminees(pour: valeur)
         let restantes = zone.cellules.subtracting(eliminees)
@@ -52,12 +51,13 @@ public extension Puzzle {
        guard restantes.count == 2 && restantes.estIncluseDansUnAlignement else {
             return nil
         }
-        let contrainte = Presence([valeur], dans: restantes)
-        assert(contrainte.type == .paire1)
-        if contraintes.contains(contrainte) {
-            return nil // déjà présente
+        let paire1 = Presence([valeur], dans: restantes)
+        assert(paire1.type == .paire1)
+        if contraintes.contains(paire1)  {
+            return nil
         }
-        return contrainte
+        
+        return paire1
     }
     
     func paires1AligneesDetecteesParElimination(pour valeur: Int) -> [Presence] {

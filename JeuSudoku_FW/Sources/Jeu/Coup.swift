@@ -2,71 +2,68 @@
 //  Coup.swift
 //  JeuSudoku_FW
 //
-//  Created by Gérard Tisseau on 21/02/2023.
+//  Created by Gérard Tisseau on 05/03/2023.
 //
 
 import Foundation
 
+public enum MethodeCoup: String, CustomStringConvertible {
+    case derniereCellule // dernière cellule vide dans une zone.
+    case direct // dernière cellule non éliminée directement dans une zone.
+    case indirect // nécessite de trouver d'autres présences d'abord.
+    case uniqueValeur // unique valeur possible pour une cellule, globalement.
+    
+    public var description: String {
+        rawValue
+    }
+}
 
-public extension Puzzle {
-    
-    /// Ajout d'une contrainte
-    func plus(_ contrainte: Presence) -> Puzzle {
-        if contrainte.type == .singleton1 {
-            assert(estSingleton1Valide(contrainte))
-        }
-        let nouvellesContraintes = contraintes
-            .ensemble.union([contrainte]) // Pour éviter les doublons
-            .array.sorted() // Pour remettre sous forme canonique
-        return Puzzle(contraintes: nouvellesContraintes)
-    }
-    
-    /// Suppression d'une contrainte
-    func moins(_ contrainte: Presence) -> Puzzle {
-        let nouvellesContraintes = contraintes
-            .ensemble.subtracting([contrainte])
-            .array.sorted()
-        return Puzzle(contraintes: nouvellesContraintes)
-    }
-    
-    // Jeu d'une partie aussi longtemps que possible
-    var suiteDeContraintesDetectees: [Presence] {
-        var etat = self
-        var contraintes = [Presence]()
-        var contrainte = etat.contrainteDetectee
-        while let nouvelleContrainte = contrainte {
-            contraintes.append(nouvelleContrainte)
-            etat = etat.plus(nouvelleContrainte)
-            assert(etat.contraintes.contains(nouvelleContrainte))
-            contrainte = etat.contrainteDetectee
-        }
-        print("// \(etat.codeChiffres)")
-        let nombreDeCellulesNonResolues = 81 - etat.cellulesResolues.count
-        if nombreDeCellulesNonResolues == 0 {
-            print("// Succès")
-        } else {
-            print("// Incomplet. Reste \(nombreDeCellulesNonResolues)")
-            print(etat.texteDessin)
-        }
-        return contraintes
-    }
-    
-    
-    func jeuAvecVerification(solution: Puzzle) -> [Presence] {
-        var etat = self
-        var contraintes = [Presence]()
-        var contrainte = etat.contrainteDetectee
-        while let nouvelleContrainte = contrainte {
-            guard contrainteEstCompatible(nouvelleContrainte, solution: solution) else {
-                print("\(nouvelleContrainte.nom) incompatible avec solution")
-                return []
-            }
-            contraintes.append(nouvelleContrainte)
-            etat = etat.plus(nouvelleContrainte)
-            assert(etat.contraintes.contains(nouvelleContrainte))
-            contrainte = etat.contrainteDetectee
-        }
-        return contraintes
-    }
+/// Découverte d'un singleton1 dans une zone.
+/// Avec éventuellement utilisation de presences auxiliaires (paire1, paire2, triplet3)
+/// methode donne une indication sur la méthode utilisée
+public struct Coup {
+    public let singleton: Presence
+    public let zone: any UneZone
+    public let auxiliaires: [Presence]
+    public let methode: MethodeCoup
 
+    public init(_ singleton: Presence, zone: any UneZone, auxiliaires: [Presence] = [], methode: MethodeCoup) {
+        self.singleton = singleton
+        self.zone = zone
+        self.auxiliaires = auxiliaires
+        self.methode = methode
+    }
+    
+    
+    /// Exemples : `Be_9 // dans le carré Mn`
+    public var nom: String {
+        [singleton.nom, "//", texteMethode, texteZone, texteSeparateur, texteAuxiliaires].joined(separator: " ")
+    }
+    
+    var texteMethode: String {
+        methode.rawValue
+    }
+    
+    var texteZone: String {
+        if methode == .uniqueValeur { return "" }
+        return "dans \(zone.texteLaZone)"
+    }
+    
+    var texteSeparateur: String {
+        switch methode {
+        case .derniereCellule:
+            return ""
+        case .direct:
+            return ""
+        case .indirect:
+            return "􀋂"
+        case .uniqueValeur:
+            return "􀑆"
+        }
+    }
+    
+    var texteAuxiliaires: String {
+        auxiliaires.map { $0.nom }.sorted().joined(separator: " ")
+    }
+             
 }

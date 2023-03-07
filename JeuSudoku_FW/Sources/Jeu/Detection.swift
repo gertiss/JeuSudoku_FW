@@ -23,6 +23,8 @@ public extension Puzzle {
             }
     }
     
+    /// Les chiffres classés suivant leurs nombres d'occurrences dans la grille.
+    /// Sauf ceux qui ont 9 occurrences, qui sont déjà entièrement résolus.
     var valeursClasseesParFrequence: [Int] {
         Int.lesChiffres
             .filter { nombreDeSingletons1(pour: $0) < 9 }
@@ -31,39 +33,7 @@ public extension Puzzle {
             }
     }
     
-    func indicesCombinaisons2(parmi n: Int) -> [(Int, Int)] {
-        switch n {
-        case 2: return [(0, 1)]
-        case 3: return [(0, 1), (0, 2), (1, 2)]
-        case 4: return [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
-        case 5: return [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]
-        case 6: return [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5), (2, 3), (2, 4), (2, 5), (3, 4), (3, 5), (4, 5)]
-        default: fatalError("Nombre de combinaisons2 trop grand : \((n * (n - 1))/2)")
-        }
-    }
-    
-    func indicesCombinaisons3(parmi n: Int) -> [(Int, Int, Int)] {
-        switch n {
-        case 3: return [(0, 1, 2)]
-        case 4: return [(0, 1, 2), (0, 1, 3), (0, 2, 3), (1, 2, 3)]
-        case 5: return [(0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 3), (0, 2, 4), (0, 3, 4), (1, 2, 3), (1, 2, 4), (1, 3, 4), (2, 3, 4)]
-        case 6: return [
-            (0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 1, 5),
-            (0, 2, 3), (0, 2, 4), (0, 2, 5),
-            (0, 3, 4), (0, 3, 5),
-            (0, 4, 5),
-            (1, 2, 3), (1, 2, 4), (1, 2, 5),
-            (1, 3, 4), (1, 3, 5),
-            (1, 4, 5),
-            (2, 3, 4), (2, 3, 5),
-            (2, 4, 5),
-            (3, 4, 5)
-        ]
-        default: fatalError("Nombre de combinaisons2 trop grand : \((n * (n - 1) * (n - 2))/6)")
-        }
 
-    }
-    
     /// Le nombre de contraintes singleton1 dans laquelle apparaît la valeur, dans toute la grille.
     /// C'est-à-dire : le nombre de cellules remplies par la valeur.
     /// Plus ce nombre est grand, plus la valeur est prometteuse pour la recherche.
@@ -92,12 +62,12 @@ public extension Puzzle {
 public extension Puzzle {
     
     /// Niveau 1.0
-    /// On peut éventuellement hirarchiser le niveau : carré, puis alignement.
+    /// On peut éventuellement hiérarchiser le niveau : carré, puis alignement.
     /// Une dernière cellule dans un carré peut être plus visible que dans un alignement.
-    var singleton1VisibleDetecte: Presence? {
+    var coupDerniereCellule: Coup? {
         for zone in Grille.zones {
-            if let singleton  = singleton1DetecteLocalement(dans: zone) {
-                return singleton
+            if let singleton  = singleton1DetecteLocalement(dans: zone), estNouveauSingletonValide(singleton) {
+                return Coup(singleton, zone: zone, methode: .derniereCellule)
             }
         }
         return nil
@@ -109,16 +79,15 @@ public extension Puzzle {
 public extension Puzzle {
     
     /// Niveau 1.2 (dans carré) ou 1.5 (dans alignement)
-    var singletonDetecteParEliminationDirecte: Presence? {
+    var coupParEliminationDirecte: Coup? {
         
         let valeurs = valeursClasseesParFrequence
         let zones = zonesClasseesParRemplissage
         
         for valeur in valeurs {
             for zone in zones {
-                if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: zone.cellules) {
-                    assert(!contraintes.contains(singleton))
-                    return singleton
+                if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: zone.cellules), estNouveauSingletonValide(singleton) {
+                    return Coup(singleton, zone: zone, methode: .direct)
                 }
             }
         }
@@ -131,7 +100,7 @@ public extension Puzzle {
 public extension Puzzle {
     
     /// Niveau 1.7. On utilise les paires1 temporairement.
-    var singletonDetecteParEliminationIndirecte: Presence? {
+    var coupParEliminationIndirecte: Coup? {
         // Ordre de parcours des valeurs
         let valeurs = Int.lesChiffres
             .filter { nombreDeSingletons1(pour: $0) < 9 }
@@ -141,12 +110,25 @@ public extension Puzzle {
         for valeur in valeurs {
             // On cherche toutes les paires1 pour cette valeur
             let paires1 = paires1AligneesDetecteesParElimination(pour: valeur).ensemble
+            // On ne retient que les paires1 utiles
+            // c'est-à-dire qui éliminent au moins une cellule non déjà éliminée directement
+            let elimineesDirectement = cellulesEliminees(pour: valeur)
+            let paires1Utiles = paires1.filter { paire1EstUtile($0, cellulesElimineesDirectement: elimineesDirectement)}
             // On fait la recherche dans un puzzle temporaire
-            // avec les paires1
-            let nouvellesContraintes = (contraintes + paires1).ensemble.array.sorted()
+            // avec les paires1 utiles
+            let nouvellesContraintes = (contraintes + paires1Utiles).ensemble.array.sorted()
             let nouveauPuzzle = Puzzle(contraintes: nouvellesContraintes)
-            if let singleton1 = nouveauPuzzle.singletonDetecteParEliminationDirecte {
-                return singleton1
+            if let coup = nouveauPuzzle.coupParEliminationDirecte {
+                /// Les paires détectrices sont celles qui ont permis le coup.
+                /// Elles ont la valeur du coup et envoient des rayons dans la zone du coup.
+                let paires1Detectrices = paires1Utiles.filter { paire1 in
+                    let valeurCoup = coup.singleton.valeurs.uniqueElement
+                    let valeurPaire1 = paire1.valeurs.uniqueElement
+                    let cellulesAlignement = paire1.alignement!.cellules
+                    return valeurPaire1 == valeurCoup
+                    && !cellulesAlignement.intersection(coup.zone.cellules).isEmpty
+                }
+                return Coup(coup.singleton, zone: coup.zone, auxiliaires: paires1Detectrices.array, methode: .indirect)
             }
         }
         return nil
@@ -158,8 +140,8 @@ public extension Puzzle {
 
 public extension Puzzle {
     
-    func coupApresPaire2(parmi nombreCellulesVides: Int) -> Presence? {
-        assert(nombreCellulesVides <= 6)
+    func coupApresPaire(parmi nombreCellulesVides: Int) -> Coup? {
+        assert(nombreCellulesVides <= 9)
         
         let zonesInteressantes = zonesClasseesParRemplissage.filter {
             cellulesNonResolues(dans: $0).ensemble.count == nombreCellulesVides
@@ -168,23 +150,21 @@ public extension Puzzle {
         for zone in zonesInteressantes {
             let cellulesVides = cellulesNonResolues(dans: zone).ensemble
             let valeursAbsentes = valeursNonResolues(dans: zone)
-
+            
             // Vérifications paranoïaques
             assert(cellulesVides.count == nombreCellulesVides)
             assert(valeursAbsentes.ensemble.count == nombreCellulesVides)
             
             // Recherche d'une paire2
-            let combinaisonsValeurs = indicesCombinaisons2(parmi: nombreCellulesVides)
+            let combinaisonsValeurs = combinaisons2(parmi: nombreCellulesVides)
                 .map { i, j in (valeursAbsentes[i], valeursAbsentes[j]) }
             
-            var paires = [Presence]()
             for (x1, x2) in combinaisonsValeurs {
                 let eliminees = cellulesEliminees(pour: x1)
                     .intersection(cellulesEliminees(pour: x2))
                 let cellulesRestantes = zone.cellules.subtracting(eliminees)
                 if cellulesRestantes.count != 2 { continue }
                 let paire2 = Presence([x1, x2], dans: cellulesRestantes)
-                paires.append(paire2)
                 
                 // On a trouvé une paire2.
                 // On étudie la présence complémentaire sur n - 2 cellules :
@@ -195,24 +175,23 @@ public extension Puzzle {
                 // Pour chaque valeur, on cherche les cellules éliminées,
                 // puis un singleton1 par élimination directe.
                 for valeur in valeursComplementaires {
-                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires) {
-                        return singleton
+                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires), estNouveauSingletonValide(singleton) {
+                        return Coup(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect)
                     }
-                }
-            }
-            // On retourne la première paire trouvée s'il y en a une
-            // et si elle n'est pas déjà mémorisée dans le puzzle
-           if let premierePaire = paires.first  {
-                if !contraintes.contains(premierePaire) {
-                    return premierePaire
                 }
             }
         }
         return nil
     }
     
-    func coupApresTriplet3(parmi nombreCellulesVides: Int) -> Presence? {
-        assert(nombreCellulesVides <= 6)
+}
+
+// MARK: - Elimination indirecte avec triplet3
+
+extension Puzzle {
+    
+    func coupApresTriplet(parmi nombreCellulesVides: Int) -> Coup? {
+        assert(nombreCellulesVides <= 9)
         
         let zonesInteressantes = zonesClasseesParRemplissage.filter {
             cellulesNonResolues(dans: $0).ensemble.count == nombreCellulesVides
@@ -227,10 +206,9 @@ public extension Puzzle {
             assert(valeursAbsentes.ensemble.count == nombreCellulesVides)
             
             // Recherche d'un triplet3
-            let combinaisonsValeurs = indicesCombinaisons3(parmi: nombreCellulesVides)
+            let combinaisonsValeurs = combinaisons3(parmi: nombreCellulesVides)
                 .map { i, j, k in (valeursAbsentes[i], valeursAbsentes[j], valeursAbsentes[k]) }
             
-            var triplets = [Presence]()
             for (x1, x2, x3) in combinaisonsValeurs {
                 let eliminees = cellulesEliminees(pour: x1)
                     .intersection(cellulesEliminees(pour: x2))
@@ -238,7 +216,6 @@ public extension Puzzle {
                 let cellulesRestantes = zone.cellules.subtracting(eliminees)
                 if cellulesRestantes.count != 3 { continue }
                 let triplet3 = Presence([x1, x2, x3], dans: cellulesRestantes)
-                triplets.append(triplet3)
                 
                 // On a trouvé un triplet3.
                 // On étudie la présence complémentaire sur n - 3 cellules :
@@ -249,16 +226,9 @@ public extension Puzzle {
                 // Pour chaque valeur, on cherche les cellules éliminées,
                 // puis un singleton1 par élimination directe.
                 for valeur in valeursComplementaires {
-                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires) {
-                        return singleton
+                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires), estNouveauSingletonValide(singleton) {
+                        return Coup(singleton, zone: zone, auxiliaires: [triplet3], methode: .indirect)
                     }
-                }
-            }
-            // On retourne le premier triplet trouvé s'il y en a une
-            // et s'il n'est pas déjà mémorisé dans le puzzle
-            if let premiereTriplet = triplets.first  {
-                if !contraintes.contains(premiereTriplet) {
-                    return premiereTriplet
                 }
             }
         }
@@ -267,21 +237,21 @@ public extension Puzzle {
     
 }
 
-// MARK: - Combinatoire
+// MARK: - Combinatoire globale
 
 public extension Puzzle {
     
     /// On examine chaque cellule pour déteminer ses valeurs candidates.
     /// On retourne une contrainte sur cette cellule s'il y a 1 seule valeur candidate.
     /// Très combinatoire (en gros 81x20)
-    var absenceInvisibleDetectee: Presence? {
+    var coupUniqueValeurCandidate: Coup? {
         for cellule in Grille.cellules {
             let valeursCiblantes = cellule.dependantes.compactMap { valeur($0) }.ensemble
             if valeursCiblantes.count == 8 {
                 let valeursRestantes = Int.lesChiffres.subtracting(valeursCiblantes)
                 let presence =  Presence(valeursRestantes, dans: [cellule])
-                if !contraintes.contains(presence) {
-                    return presence
+                if let  valide = nouveauSingletonValide(presence) {
+                    return Coup(valide, zone: cellule.carre, methode: .uniqueValeur)
                 }
             }
         }

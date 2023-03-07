@@ -24,7 +24,6 @@
 		507B3D6A298C4DBE0051FCB4 /* InstanciableParNom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */; };
 		50820DFE298AC7940087CF21 /* Grille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFD298AC7940087CF21 /* Grille.swift */; };
 		508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B291329A0AA3B006BDBA6 /* UneContrainte.swift */; };
-		508B291629A0DBFA006BDBA6 /* Exemples bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B291529A0DBFA006BDBA6 /* Exemples bootstrap.swift */; };
 		509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C61C129A3A7E8006C0CB0 /* Valeurs.swift */; };
 		509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */ = {isa = PBXBuildFile; fileRef = 509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */; };
 		509EC74329897D6E004B1139 /* JeuSudoku_FW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */; };
@@ -37,8 +36,9 @@
 		509EC76129898666004B1139 /* Extension Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76029898665004B1139 /* Extension Swift.swift */; };
 		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
 		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
-		50CE5DE8299655F6002E36E4 /* Absence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE5DE7299655F6002E36E4 /* Absence.swift */; };
-		50FB543C29A505A6005E5E5E /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB543B29A505A6005E5E5E /* Coup.swift */; };
+		50A8E92029B4E988005ED674 /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8E91F29B4E988005ED674 /* Coup.swift */; };
+		50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EB023529B5C6FB00AA82CD /* Combinatoire.swift */; };
+		50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB543B29A505A6005E5E5E /* Jeu.swift */; };
 		50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEF8529B33B9D001717BB /* Recherche globale.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +72,6 @@
 		507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanciableParNom.swift; sourceTree = "<group>"; };
 		50820DFD298AC7940087CF21 /* Grille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grille.swift; sourceTree = "<group>"; };
 		508B291329A0AA3B006BDBA6 /* UneContrainte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UneContrainte.swift; sourceTree = "<group>"; };
-		508B291529A0DBFA006BDBA6 /* Exemples bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exemples bootstrap.swift"; sourceTree = "<group>"; };
 		509C61C129A3A7E8006C0CB0 /* Valeurs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Valeurs.swift; sourceTree = "<group>"; };
 		509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeuSudoku_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = JeuSudoku_FW.docc; sourceTree = "<group>"; };
@@ -86,11 +85,12 @@
 		509EC76029898665004B1139 /* Extension Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension Swift.swift"; sourceTree = "<group>"; };
 		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
+		50A8E91F29B4E988005ED674 /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
 		50CAD39B29A61F0E004917C2 /* Geometrie doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Geometrie doc.md"; sourceTree = "<group>"; };
-		50CE5DE7299655F6002E36E4 /* Absence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Absence.swift; sourceTree = "<group>"; };
 		50D191D529A64E47000CFA64 /* Contraintes doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Contraintes doc.md"; sourceTree = "<group>"; };
 		50D191DE29A678F9000CFA64 /* Puzzle doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Puzzle doc.md"; sourceTree = "<group>"; };
-		50FB543B29A505A6005E5E5E /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
+		50EB023529B5C6FB00AA82CD /* Combinatoire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combinatoire.swift; sourceTree = "<group>"; };
+		50FB543B29A505A6005E5E5E /* Jeu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jeu.swift; sourceTree = "<group>"; };
 		50FFEF8529B33B9D001717BB /* Recherche globale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recherche globale.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,12 +118,14 @@
 			children = (
 				5068419E29A8ED8B00395531 /* Jeu doc.md */,
 				50FFEF8529B33B9D001717BB /* Recherche globale.swift */,
+				50EB023529B5C6FB00AA82CD /* Combinatoire.swift */,
+				50A8E91F29B4E988005ED674 /* Coup.swift */,
 				502A302929AA54CB00C198EB /* Elimination.swift */,
 				5068419F29A917F300395531 /* Detection locale.swift */,
 				5062258A29AB8D4300AE3362 /* Detection.swift */,
 				5062258829AB633600AE3362 /* Detection par elimination.swift */,
 				507ADB1829ACE79C00D793D5 /* Verification.swift */,
-				50FB543B29A505A6005E5E5E /* Coup.swift */,
+				50FB543B29A505A6005E5E5E /* Jeu.swift */,
 			);
 			path = Jeu;
 			sourceTree = "<group>";
@@ -131,8 +133,8 @@
 		507B255929AE6DFB009217A8 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				507B255A29AE6E20009217A8 /* API.swift */,
 				507B255C29AE6E9E009217A8 /* API doc.md */,
+				507B255A29AE6E20009217A8 /* API.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -144,7 +146,6 @@
 				509C61C129A3A7E8006C0CB0 /* Valeurs.swift */,
 				508B291329A0AA3B006BDBA6 /* UneContrainte.swift */,
 				5032C38C2994EFD50047E3BA /* Presence.swift */,
-				50CE5DE7299655F6002E36E4 /* Absence.swift */,
 			);
 			path = Contraintes;
 			sourceTree = "<group>";
@@ -155,7 +156,6 @@
 				50D191DE29A678F9000CFA64 /* Puzzle doc.md */,
 				507B3D5E298BA5290051FCB4 /* Puzzle.swift */,
 				507B3D67298BAA780051FCB4 /* CodagePuzzle.swift */,
-				508B291529A0DBFA006BDBA6 /* Exemples bootstrap.swift */,
 				507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */,
 				507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */,
 				501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */,
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50FB543C29A505A6005E5E5E /* Coup.swift in Sources */,
+				50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */,
 				506841A029A917F300395531 /* Detection locale.swift in Sources */,
 				505215E3299FE5CC00DEDF57 /* Region.swift in Sources */,
 				509EC76329898839004B1139 /* BandeH.swift in Sources */,
@@ -362,18 +362,18 @@
 				50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */,
 				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
 				507B255B29AE6E20009217A8 /* API.swift in Sources */,
-				508B291629A0DBFA006BDBA6 /* Exemples bootstrap.swift in Sources */,
 				507B3D6A298C4DBE0051FCB4 /* InstanciableParNom.swift in Sources */,
+				50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */,
 				509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */,
 				5062258B29AB8D4300AE3362 /* Detection.swift in Sources */,
 				509EC75B298980C0004B1139 /* Carre.swift in Sources */,
 				509EC76529898843004B1139 /* BandeV.swift in Sources */,
 				509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */,
 				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
-				50CE5DE8299655F6002E36E4 /* Absence.swift in Sources */,
 				5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */,
+				50A8E92029B4E988005ED674 /* Coup.swift in Sources */,
 				508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
 				509EC75D298980CE004B1139 /* Ligne.swift in Sources */,

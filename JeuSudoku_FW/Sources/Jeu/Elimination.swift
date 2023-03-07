@@ -32,6 +32,9 @@ extension Puzzle {
         return res
     }
     
+    
+    /// Une contrainte peut éliminer des cellules à l'intérieur d'ells-même aussi bien qu'à l'extérieur.
+    /// Cela dépend du type de la contrainte et de sa relation avec la valeur.
     func cellulesEliminees(par contrainte: Presence, pour valeur: Int) -> Region {
         let externes = cellulesExternesEliminees(par: contrainte, pour: valeur)
         let internes = cellulesInternesEliminees(par: contrainte, pour: valeur)
@@ -87,18 +90,12 @@ extension Puzzle {
         case .singleton1:
             return contrainte.region
         case .paire1:
-            // Une paire 1 pourra être remplacée par une paire2
-            // ou rendue obsolète par un singleton1
             return []
         case .paire2:
-            // Seule une contrainte possédant une des valeurs de la paire2 peut intersecter une paire2.
-            // Dans le cas d'intersection compatible, il y aura réduction.
             if !contrainte.contient(valeur: valeur) {
                 return contrainte.region
             }
         case .singleton2:
-            // Seule une contrainte possédant une des valeurs du singleton2 peut intersecter un singleton2.
-            // Dans le cas d'intersection compatible, il y aura réduction.
             if !contrainte.contient(valeur: valeur) {
                 return contrainte.region
             }
@@ -108,6 +105,19 @@ extension Puzzle {
             }
         }
         return []
+    }
+    
+    /// Une paire1 est utile si elle élimine au moins une cellule vide
+    /// et non déjà éliminée directement
+    func paire1EstUtile(_ paire1: Presence, cellulesElimineesDirectement : Region) -> Bool {
+        assert(paire1.type == .paire1)
+        if paire1.nom == "HiIi_7" {
+            
+        }
+        let valeur = paire1.valeurs.uniqueElement
+        let eliminees = cellulesExternesEliminees(par: paire1, pour: valeur)
+        let utiles = eliminees.subtracting(cellulesElimineesDirectement)
+        return !utiles.isEmpty
     }
     
 }
