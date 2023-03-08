@@ -12,7 +12,7 @@ import Foundation
 /// Le premier coup trouvé à partir d'un `puzzle` donné par ses 81 chiffres en String.
 /// Si succès : un coup représenté par une ligne. Exemple :
 /// `"Hb_8 // indirect dans le carré Pm 􀋂 DcEc_8 GdGe_8"`
-/// Si échec : `Etat initial invalide` ou `Pas de coup suivant`.
+/// Echecs possibles : `Etat initial invalide` ou `Pas de coup suivant`.
 public func coupSuivant(puzzle: String) -> Result<String, String> {
     let puzzle = Puzzle(chiffres: puzzle)
     guard puzzle.estValide else {
@@ -25,9 +25,9 @@ public func coupSuivant(puzzle: String) -> Result<String, String> {
 }
 
 /// La suite des coups trouvés à partir d'un `puzzle` donné par ses 81 chiffres en String.
-/// Si succès : la suite des coup représentée par un texte multiligne. Exemple :
+/// Si succès : la suite des coups représentée par un texte multiligne. Exemple :
 /// `"Id_3 // derniereCellule dans la colonne d\nDa_7 // direct dans le carré Nm"`
-/// Si échec : `Etat initial invalide`, `Un puzzle ne doit pas être vide`
+/// Echecs possibles :  : `Etat initial invalide`, `Pas de coup suivant`
 /// La suite de coups ne donne pas forcément un puzzle entièrement résolu.
 public func suiteDesCoups(puzzle: String) -> Result<String, String> {
     let puzzle = Puzzle(chiffres: puzzle)

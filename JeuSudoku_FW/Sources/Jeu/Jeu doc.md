@@ -25,7 +25,8 @@ D'après le triangle de Pascal :
     8: 1  8  28 56 70 56  28 8 1
     9: 1  9  36 84 126 126 84  36 9  1
     
-On peut aller jusqu'à C(8, 3) = 56
+Dans la ligne 8, on peut aller jusqu'à C(8, 3) = 56.
+Dans la ligne 9, on peut aller jusqu'à C(9, 2) = 36
 
 Une fois qu'on a trouvé une bijection de cardinal p, on étudie la région complémentaire dans la zone. C'est aussi une bijection, de cardinal n - p. On parcourt les n - p valeurs possibles pour cette zone, et pour chacune d'entre elles on fait émettre tous les rayons possibles de la grille pour éliminer des cellules. Si pour une de ces valeurs on trouve une région restante qui n'a qu'une seule cellule, alors on a réussi à déterminer la valeur qui doit aller dans cette cellule restante.
 

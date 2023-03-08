@@ -149,7 +149,7 @@ public extension Puzzle {
         
         for zone in zonesInteressantes {
             let cellulesVides = cellulesNonResolues(dans: zone).ensemble
-            let valeursAbsentes = valeursNonResolues(dans: zone)
+            let valeursAbsentes = valeursAbsentes(dans: zone)
             
             // Vérifications paranoïaques
             assert(cellulesVides.count == nombreCellulesVides)
@@ -199,7 +199,7 @@ extension Puzzle {
         
         for zone in zonesInteressantes {
             let cellulesVides = cellulesNonResolues(dans: zone).ensemble
-            let valeursAbsentes = valeursNonResolues(dans: zone)
+            let valeursAbsentes = valeursAbsentes(dans: zone)
 
             // Vérifications paranoïaques
             assert(cellulesVides.count == nombreCellulesVides)

@@ -87,6 +87,7 @@
 		509EC76029898665004B1139 /* Extension Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension Swift.swift"; sourceTree = "<group>"; };
 		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
+		50A5FB1729B87AFA001EC2B3 /* Logique doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Logique doc.md"; sourceTree = "<group>"; };
 		50A8E91F29B4E988005ED674 /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
 		50BF6CE029B7A23A0028F583 /* API VueGT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API VueGT.swift"; sourceTree = "<group>"; };
 		50BF6CE229B7AB250028F583 /* API Exemples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Exemples.swift"; sourceTree = "<group>"; };
@@ -213,6 +214,7 @@
 				507B3D5C298BA3480051FCB4 /* Contraintes */,
 				507B3D5D298BA3800051FCB4 /* Puzzles */,
 				5068419D29A8B6AF00395531 /* Jeu */,
+				50A5FB1629B87AA8001EC2B3 /* Logique */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -232,6 +234,14 @@
 				50820DFD298AC7940087CF21 /* Grille.swift */,
 			);
 			path = Geometrie;
+			sourceTree = "<group>";
+		};
+		50A5FB1629B87AA8001EC2B3 /* Logique */ = {
+			isa = PBXGroup;
+			children = (
+				50A5FB1729B87AFA001EC2B3 /* Logique doc.md */,
+			);
+			path = Logique;
 			sourceTree = "<group>";
 		};
 		50D191DA29A6547C000CFA64 /* Outils Swift */ = {

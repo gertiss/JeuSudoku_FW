@@ -62,7 +62,7 @@ public extension Puzzle {
         cellulesResolues(dans: zone).map { valeur($0)! }.ensemble.array.sorted()
     }
 
-    func valeursNonResolues(dans zone: any UneZone) -> [Int] {
+    func valeursAbsentes(dans zone: any UneZone) -> [Int] {
         Int.lesChiffres.subtracting(valeursResolues(dans: zone))
             .array.sorted()
     }
