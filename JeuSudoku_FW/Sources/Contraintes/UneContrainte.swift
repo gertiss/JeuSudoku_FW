@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TypeContrainte: Hashable, Codable {
+public enum TypeContrainte: String, Hashable, Codable {
     case singleton1 // une cellule, une valeur
     case singleton2 // une cellule, deux valeurs
     case paire1 // deux cellules, une valeur

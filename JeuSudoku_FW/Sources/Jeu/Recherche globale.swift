@@ -51,54 +51,63 @@ public extension Puzzle {
         // puis élimination directe dans le complémentaire.
         // Complexité 6
         if let coup = coupApresPaire(parmi: 4) {
+            
             return coup
         }
         // Paire2 dans une zone avec 5 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Niveau 2.0. Complexité 10
         if let coup = coupApresPaire(parmi: 5) {
+            
             return coup
         }
         // Triplet3 dans une zone avec 5 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 10
         if let coup = coupApresTriplet(parmi: 5) {
+            
             return coup
         }
         // Paire2 dans une zone avec 6 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Niveau 2.6. Complexité 15
         if let coup = coupApresPaire(parmi: 6) {
+            
             return coup
         }
         // Triplet3 dans une zone avec 6 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 20
         if let coup = coupApresTriplet(parmi: 6) {
+            
             return coup
         }
         // Paire2 dans une zone avec 7 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 21
         if let coup = coupApresPaire(parmi: 7) {
+            
             return coup
         }
         // Paire2 dans une zone avec 8 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 28
         if let coup = coupApresPaire(parmi: 8) {
+            
             return coup
         }
         // Triplet3 dans une zone avec 7 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 35
         if let coup = coupApresTriplet(parmi: 7) {
+            
             return coup
         }
         // Paire2 dans une zone avec 9 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 36
         if let coup = coupApresPaire(parmi: 9) {
+            
             return coup
         }
         //
@@ -106,6 +115,7 @@ public extension Puzzle {
         // puis élimination directe dans le complémentaire.
         // Complexité 56
         if let coup = coupApresTriplet(parmi: 8) {
+            
             return coup
         }
 

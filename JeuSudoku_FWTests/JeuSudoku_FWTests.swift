@@ -372,7 +372,43 @@ final class JeuSudoku_FWTests: XCTestCase {
         case .failure(let failure):
             print(failure)
         }
-
+    }
+    
+    func testDemonstration() {
+        let puzzle = Puzzle.moyensA[0] // Sans coups difficiles
         
+        // On extrait le premier coup par l'API
+        let chiffres = puzzle.codeChiffres
+        XCTAssertEqual(puzzle.codeChiffres, "002806100000090000300000007003000200600704008820000045000010000140080063030050080")
+        let essai = coupSuivant(puzzle: chiffres)
+        
+        guard let texteCoup = essai.valeur else {
+            XCTFail()
+            return
+        }
+        XCTAssertEqual(texteCoup, "Df_8 // direct dans le carré Nn")
+        
+        // On extrait le premier coup par le calcul interne.
+        // On vérifie que c'est cohérent avec l'API.
+        // C'est un coup direct : pas d'auxiliaire.
+        let coup = puzzle.premierCoup!
+        XCTAssertEqual(coup.nom, texteCoup)
+        
+        // On prévoit la démonstration attendue.
+        // Problème : choix et ordre des données.
+        // On peut toujours ordonner les listes par ordre alphabétique,
+        // mais il y a plusieurs démonstrations possibles.
+        
+        let demonstration = DemonstrationLitterale(
+            presence: "Df_8",
+            zone: "Nn",
+            occupees: ["Ed", "Ef"],
+            eliminatrices: ["Ad_8", "Ei_8", "Fa_8", "He_8"],
+            eliminees: ["Dd", "De", "Ee", "Fd", "Fe", "Ff"],
+            auxiliaires: [])
+        
+        // Mais on peut toujours vérifier qu'une démonstration donnée est bien une démonstration
+        
+        XCTAssert(puzzle.patternEstApplicable(Demonstration(litteral: demonstration)))
     }
 }

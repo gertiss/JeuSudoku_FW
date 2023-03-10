@@ -176,6 +176,9 @@ public extension Puzzle {
                 // puis un singleton1 par élimination directe.
                 for valeur in valeursComplementaires {
                     if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires), estNouveauSingletonValide(singleton) {
+                        // on peut inclure dans le compte rendu :
+                        // eliminees (par x1 et x2)
+                        // singleton rapporte ausssi un compte rendu
                         return Coup(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect)
                     }
                 }

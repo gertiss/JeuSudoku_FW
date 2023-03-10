@@ -92,6 +92,16 @@ extension Carre: Testable {
 
 extension Carre: InstanciableParNom {
     
+    static var noms: [String] {
+        var ensemble = Set<String>()
+        for indexBandeH in [0, 1, 2] {
+            for indexBandeV in [0, 1, 2] {
+                ensemble.insert(Carre(indexBandeH, indexBandeV).nom)
+            }
+        }
+        return ensemble.array.sorted()
+    }
+    
     /// InstanciableParNom
     /// Le nom du carré, qui sert d'id pour  le protocole Identifiable
     public var nom: String {

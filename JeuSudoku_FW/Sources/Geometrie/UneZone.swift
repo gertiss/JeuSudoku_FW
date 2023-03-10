@@ -34,7 +34,7 @@ public protocol UneZone: Testable {
     var nom: String { get }
 }
 
-extension UneZone {
+public extension UneZone {
     var texteLaZone: String {
         switch type {
         case .carre:
@@ -47,3 +47,18 @@ extension UneZone {
     }
 }
 
+public extension Grille {
+    /// Peut échouer, fatalError
+    static func laZone(nom: String) -> (any UneZone) {
+        if Ligne.noms.contains(nom) {
+            return Ligne(nom: nom)
+        }
+        if Colonne.noms.contains(nom) {
+            return Colonne(nom: nom)
+        }
+        if Carre.noms.contains(nom) {
+            return Carre(nom: nom)
+        }
+        fatalError("Nom de zone incorrect \(nom)")
+    }
+}

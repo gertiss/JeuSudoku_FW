@@ -42,5 +42,25 @@ public func suiteDesCoups(puzzle: String) -> Result<String, String> {
 }
 
 
+// MARK: - API Demonstration
+
+public struct DemonstrationLitterale {
+    public var presence: String
+    public var zone: String
+    public var occupees: [String]
+    public var eliminatrices: [String]
+    public var eliminees: [String]
+    public var auxiliaires: [AuxiliaireLitteral]
+}
+
+public struct AuxiliaireLitteral {
+    /// La présence détectée
+    public var presence: String
+    public var zone: String
+    public var occupees: [String]
+    public var eliminees: [String]
+    public var eliminatrices: [String]
+}
+
 
 

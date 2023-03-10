@@ -29,6 +29,7 @@ public struct Presence: UneContrainte, Testable, InstanciableParNom {
         self.region = region
     }
     
+    
     public var description: String {
         "Presence(\(valeurs), dans: \(region))"
     }

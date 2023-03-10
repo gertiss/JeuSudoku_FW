@@ -38,6 +38,7 @@ public struct Coup {
     /// Exemples : `Be_9 // dans le carré Mn`
     public var nom: String {
         [singleton.nom, "//", texteMethode, texteZone, texteSeparateur, texteAuxiliaires].joined(separator: " ")
+            .trimmingCharacters(in: .whitespaces)
     }
     
     var texteMethode: String {

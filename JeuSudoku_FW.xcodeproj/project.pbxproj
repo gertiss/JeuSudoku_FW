@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5010478329BA391500FBC35D /* Demonstration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5010478229BA391500FBC35D /* Demonstration.swift */; };
 		501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */; };
 		502A302A29AA54CB00C198EB /* Elimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A302929AA54CB00C198EB /* Elimination.swift */; };
 		5032C3892994E7060047E3BA /* UneZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032C3882994E7060047E3BA /* UneZone.swift */; };
@@ -23,6 +24,7 @@
 		507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D67298BAA780051FCB4 /* CodagePuzzle.swift */; };
 		507B3D6A298C4DBE0051FCB4 /* InstanciableParNom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */; };
 		50820DFE298AC7940087CF21 /* Grille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFD298AC7940087CF21 /* Grille.swift */; };
+		5087CCCB29BB687D0045EEEF /* ExemplesDemonstrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5087CCCA29BB687D0045EEEF /* ExemplesDemonstrations.swift */; };
 		508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B291329A0AA3B006BDBA6 /* UneContrainte.swift */; };
 		509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C61C129A3A7E8006C0CB0 /* Valeurs.swift */; };
 		509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */ = {isa = PBXBuildFile; fileRef = 509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */; };
@@ -36,6 +38,7 @@
 		509EC76129898666004B1139 /* Extension Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76029898665004B1139 /* Extension Swift.swift */; };
 		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
 		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
+		50A5FB2729B8FC8F001EC2B3 /* API communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A5FB2629B8FC8F001EC2B3 /* API communication.swift */; };
 		50A8E92029B4E988005ED674 /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8E91F29B4E988005ED674 /* Coup.swift */; };
 		50BF6CE129B7A23A0028F583 /* API VueGT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE029B7A23A0028F583 /* API VueGT.swift */; };
 		50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE229B7AB250028F583 /* API Exemples.swift */; };
@@ -55,6 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5010478229BA391500FBC35D /* Demonstration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demonstration.swift; sourceTree = "<group>"; };
 		501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesDifficiles.swift; sourceTree = "<group>"; };
 		502A302929AA54CB00C198EB /* Elimination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elimination.swift; sourceTree = "<group>"; };
 		5032C3882994E7060047E3BA /* UneZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UneZone.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		507B3D67298BAA780051FCB4 /* CodagePuzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodagePuzzle.swift; sourceTree = "<group>"; };
 		507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanciableParNom.swift; sourceTree = "<group>"; };
 		50820DFD298AC7940087CF21 /* Grille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grille.swift; sourceTree = "<group>"; };
+		5087CCCA29BB687D0045EEEF /* ExemplesDemonstrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesDemonstrations.swift; sourceTree = "<group>"; };
 		508B291329A0AA3B006BDBA6 /* UneContrainte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UneContrainte.swift; sourceTree = "<group>"; };
 		509C61C129A3A7E8006C0CB0 /* Valeurs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Valeurs.swift; sourceTree = "<group>"; };
 		509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeuSudoku_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +93,7 @@
 		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
 		50A5FB1729B87AFA001EC2B3 /* Logique doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Logique doc.md"; sourceTree = "<group>"; };
+		50A5FB2629B8FC8F001EC2B3 /* API communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API communication.swift"; sourceTree = "<group>"; };
 		50A8E91F29B4E988005ED674 /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
 		50BF6CE029B7A23A0028F583 /* API VueGT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API VueGT.swift"; sourceTree = "<group>"; };
 		50BF6CE229B7AB250028F583 /* API Exemples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Exemples.swift"; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 				507B255C29AE6E9E009217A8 /* API doc.md */,
 				50BF6CE229B7AB250028F583 /* API Exemples.swift */,
 				507B255A29AE6E20009217A8 /* API coups.swift */,
+				50A5FB2629B8FC8F001EC2B3 /* API communication.swift */,
 				50BF6CE029B7A23A0028F583 /* API VueGT.swift */,
 			);
 			path = API;
@@ -166,6 +173,7 @@
 				507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */,
 				507B3D65298BA7710051FCB4 /* ExemplesMoyens.swift */,
 				501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */,
+				5087CCCA29BB687D0045EEEF /* ExemplesDemonstrations.swift */,
 			);
 			path = Puzzles;
 			sourceTree = "<group>";
@@ -240,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				50A5FB1729B87AFA001EC2B3 /* Logique doc.md */,
+				5010478229BA391500FBC35D /* Demonstration.swift */,
 			);
 			path = Logique;
 			sourceTree = "<group>";
@@ -362,16 +371,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5087CCCB29BB687D0045EEEF /* ExemplesDemonstrations.swift in Sources */,
 				50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */,
 				506841A029A917F300395531 /* Detection locale.swift in Sources */,
 				505215E3299FE5CC00DEDF57 /* Region.swift in Sources */,
 				509EC76329898839004B1139 /* BandeH.swift in Sources */,
+				50A5FB2729B8FC8F001EC2B3 /* API communication.swift in Sources */,
 				507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */,
 				507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */,
 				5032C38D2994EFD50047E3BA /* Presence.swift in Sources */,
 				509EC7592989809A004B1139 /* Cellule.swift in Sources */,
 				509EC76129898666004B1139 /* Extension Swift.swift in Sources */,
 				507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */,
+				5010478329BA391500FBC35D /* Demonstration.swift in Sources */,
 				5032C3892994E7060047E3BA /* UneZone.swift in Sources */,
 				509EC75729898047004B1139 /* Testable.swift in Sources */,
 				502A302A29AA54CB00C198EB /* Elimination.swift in Sources */,
