@@ -319,8 +319,8 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(combinaisons2(parmi: 6).count, 15)
         XCTAssertEqual(combinaisons2(parmi: 7).count, 21)
         XCTAssertEqual(combinaisons2(parmi: 8).count, 28)
-
-       let liste5 = combinaisons2(parmi: 5)
+        
+        let liste5 = combinaisons2(parmi: 5)
         XCTAssertEqual(liste5.count, 10)
         // Tuple ne peut être conforme à Equatable, donc on teste juste la description
         XCTAssertEqual(liste5.description, "[(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]")
@@ -338,7 +338,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(combinaisons3(parmi: 6).count, 20)
         XCTAssertEqual(combinaisons3(parmi: 7).count, 35)
         XCTAssertEqual(combinaisons3(parmi: 8).count, 56)
-
+        
         let liste5 = combinaisons3(parmi: 5)
         XCTAssertEqual(liste5.count, 10)
         // Tuple ne peut être conforme à Equatable, donc on teste juste la description
@@ -410,5 +410,33 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Mais on peut toujours vérifier qu'une démonstration donnée est bien une démonstration
         
         XCTAssert(puzzle.patternEstApplicable(Demonstration(litteral: demonstration)))
+    }
+    
+    func testLitteral() {
+        let litteral = DemonstrationLitterale(
+            presence: "Ae_9",
+            zone: "e",
+            occupees: ["Be", "Ee", "Ge"],
+            eliminatrices: ["Dd_9", "Hf_9"],
+            eliminees: ["De", "He"],
+            auxiliaires: [
+                AuxiliaireLitteral(
+                    presence: "CeFeIe_456",
+                    zone: "e",
+                    occupees: ["Be", "Ee", "Ge"],
+                    eliminees: ["Ae", "De", "He"],
+                    eliminatrices: ["AcAgAh_456", "DbDfDi_456", "HdHhHi_456"])
+            ]
+        )
+        
+        XCTAssertEqual(litteral.texte, """
+DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"], eliminatrices: ["Dd_9", "Hf_9"], eliminees: ["De", "He"], auxiliaires: [AuxiliaireLitteral(presence: "CeFeIe_456", zone: "e", occupees: ["Be", "Ee", "Ge"], eliminatrices: ["AcAgAh_456", "DbDfDi_456", "HdHhHi_456"], eliminees: ["Ae", "De", "He"]]]
+""")
+        
+        let demonstration = Demonstration(litteral: litteral)
+        
+        XCTAssertEqual(demonstration.litteral, litteral)
+        XCTAssertEqual("\(litteral)", litteral.texte)
+        
     }
 }

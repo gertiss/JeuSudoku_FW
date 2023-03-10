@@ -10,7 +10,8 @@ import Foundation
 /// Les faits nécessaires à la démonstration du coup `presence`.
 /// Quel que soit le puzzle, si ces faits sont vérifiés, alors le coup est démontré.
 /// Donc il s'agit d'une sorte de pattern, de règle.
-public struct Demonstration {
+public struct Demonstration: CodableEnLitteral {
+    
     /// La présence détectée
     public var presence: Presence
     public var zone: any UneZone
@@ -36,9 +37,20 @@ public struct Demonstration {
         self.eliminees = litteral.eliminees.map { Cellule(nom: $0) }.sorted()
         self.auxiliaires = litteral.auxiliaires.map { Auxiliaire(litteral: $0) }
     }
+    
+    public var litteral: DemonstrationLitterale {
+        .init(
+            presence: presence.nom,
+            zone: zone.nom,
+            occupees: occupees.map { $0.nom }.sorted(),
+            eliminatrices: eliminatrices.map { $0.nom }.sorted(),
+            eliminees: eliminees.map { $0.nom }.sorted(),
+            auxiliaires: auxiliaires.map { $0.litteral })
+    }
+    
 }
 
-public struct Auxiliaire {
+public struct Auxiliaire: CodableEnLitteral {
     /// La présence détectée
     public var presence: Presence
     public var zone: any UneZone
@@ -53,6 +65,16 @@ public struct Auxiliaire {
         self.eliminatrices = litteral.eliminatrices.map { Presence(nom: $0) }.sorted()
         self.eliminees = litteral.eliminees.map { Cellule(nom: $0) }.sorted()
     }
+    
+    public var litteral: AuxiliaireLitteral {
+        .init(
+            presence: presence.nom,
+            zone: zone.nom,
+            occupees: occupees.map { $0.nom }.sorted(),
+            eliminees: eliminees.map { $0.nom }.sorted(),
+            eliminatrices: eliminatrices.map { $0.nom }.sorted())
+    }
+    
 }
 
 public extension Puzzle {

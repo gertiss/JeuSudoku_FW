@@ -25,6 +25,8 @@
 		507B3D6A298C4DBE0051FCB4 /* InstanciableParNom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */; };
 		50820DFE298AC7940087CF21 /* Grille.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50820DFD298AC7940087CF21 /* Grille.swift */; };
 		5087CCCB29BB687D0045EEEF /* ExemplesDemonstrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5087CCCA29BB687D0045EEEF /* ExemplesDemonstrations.swift */; };
+		5087CCCF29BB95150045EEEF /* Litteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5087CCCE29BB95150045EEEF /* Litteral.swift */; };
+		5087CCD129BBA9EC0045EEEF /* CodableEnLitteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5087CCD029BBA9EC0045EEEF /* CodableEnLitteral.swift */; };
 		508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B291329A0AA3B006BDBA6 /* UneContrainte.swift */; };
 		509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509C61C129A3A7E8006C0CB0 /* Valeurs.swift */; };
 		509EC73D29897D6E004B1139 /* JeuSudoku_FW.docc in Sources */ = {isa = PBXBuildFile; fileRef = 509EC73C29897D6E004B1139 /* JeuSudoku_FW.docc */; };
@@ -78,6 +80,8 @@
 		507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanciableParNom.swift; sourceTree = "<group>"; };
 		50820DFD298AC7940087CF21 /* Grille.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grille.swift; sourceTree = "<group>"; };
 		5087CCCA29BB687D0045EEEF /* ExemplesDemonstrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesDemonstrations.swift; sourceTree = "<group>"; };
+		5087CCCE29BB95150045EEEF /* Litteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Litteral.swift; sourceTree = "<group>"; };
+		5087CCD029BBA9EC0045EEEF /* CodableEnLitteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableEnLitteral.swift; sourceTree = "<group>"; };
 		508B291329A0AA3B006BDBA6 /* UneContrainte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UneContrainte.swift; sourceTree = "<group>"; };
 		509C61C129A3A7E8006C0CB0 /* Valeurs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Valeurs.swift; sourceTree = "<group>"; };
 		509EC73829897D6E004B1139 /* JeuSudoku_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeuSudoku_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,6 +263,8 @@
 				509EC76029898665004B1139 /* Extension Swift.swift */,
 				509EC75629898047004B1139 /* Testable.swift */,
 				507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */,
+				5087CCCE29BB95150045EEEF /* Litteral.swift */,
+				5087CCD029BBA9EC0045EEEF /* CodableEnLitteral.swift */,
 			);
 			path = "Outils Swift";
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 				5032C3892994E7060047E3BA /* UneZone.swift in Sources */,
 				509EC75729898047004B1139 /* Testable.swift in Sources */,
 				502A302A29AA54CB00C198EB /* Elimination.swift in Sources */,
+				5087CCD129BBA9EC0045EEEF /* CodableEnLitteral.swift in Sources */,
 				50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */,
 				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
 				507B255B29AE6E20009217A8 /* API coups.swift in Sources */,
@@ -403,6 +410,7 @@
 				5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */,
+				5087CCCF29BB95150045EEEF /* Litteral.swift in Sources */,
 				50A8E92029B4E988005ED674 /* Coup.swift in Sources */,
 				508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,

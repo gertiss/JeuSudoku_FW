@@ -15,3 +15,5 @@ let demonstrationDerniereCellule = DemonstrationLitterale(
     eliminatrices: [],
     eliminees: [],
     auxiliaires: [])
+
+

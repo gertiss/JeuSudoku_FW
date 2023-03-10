@@ -44,22 +44,40 @@ public func suiteDesCoups(puzzle: String) -> Result<String, String> {
 
 // MARK: - API Demonstration
 
-public struct DemonstrationLitterale {
+public struct DemonstrationLitterale: Litteral, CustomStringConvertible {
+    public var texte: String {
+        "DemonstrationLitterale(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees), auxiliaires: [\(auxiliaires.map { $0.texte }.joined(separator: ", "))]"
+    }
+    
     public var presence: String
     public var zone: String
     public var occupees: [String]
     public var eliminatrices: [String]
     public var eliminees: [String]
     public var auxiliaires: [AuxiliaireLitteral]
+    
+    public var description: String {
+        texte
+    }
 }
 
-public struct AuxiliaireLitteral {
-    /// La présence détectée
+public struct AuxiliaireLitteral: Litteral, CustomStringConvertible {
+ 
+    public var texte: String {
+        "AuxiliaireLitteral(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees)]"
+    }
+    
+/// La présence détectée
     public var presence: String
     public var zone: String
     public var occupees: [String]
     public var eliminees: [String]
     public var eliminatrices: [String]
+    
+    public var description: String {
+        texte
+    }
+
 }
 
 

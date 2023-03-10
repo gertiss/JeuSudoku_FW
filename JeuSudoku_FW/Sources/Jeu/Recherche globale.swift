@@ -32,6 +32,9 @@ public extension Puzzle {
         // Niveau 1.7
         // complexité ?
         if let coup = coupParEliminationIndirecte {
+            if coup.auxiliaires.count == 1 {
+                
+            }
             return coup
         }
         // Paire2 dans une zone avec 3 cellules libres,
