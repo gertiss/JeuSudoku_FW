@@ -117,7 +117,7 @@ extension Triplet3 {
         let eliminees: [String]
         let tripletsEliminateurs: [[String]]
         
-        var texte: String {
+        var codeSwift: String {
             "Triplet3.Litteral(triplet: \(triplet), zone: \(zone), occupees: \(occupees), eliminees: \(eliminees), tripletsEliminateurs: \(tripletsEliminateurs))"
         }
     }

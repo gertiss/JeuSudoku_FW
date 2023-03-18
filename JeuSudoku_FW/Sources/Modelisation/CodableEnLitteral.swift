@@ -15,6 +15,7 @@ public protocol CodableEnLitteral: Hashable, Identifiable, CustomStringConvertib
     associatedtype Litteral: UnLitteral
     
     var litteral: Litteral { get }
+    
     init(litteral: Litteral)
 }
 
@@ -25,7 +26,7 @@ public extension CodableEnLitteral {
     }
     
     var description: String {
-        litteral.texte
+        litteral.codeSwift
     }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -39,6 +40,10 @@ public extension CodableEnLitteral {
     func hash(into hasher: inout Hasher) {
             hasher.combine(litteral)
         }
+    
+    static func avec(litteral: Litteral) -> Self {
+        Self(litteral: litteral)
+    }
     
 }
 

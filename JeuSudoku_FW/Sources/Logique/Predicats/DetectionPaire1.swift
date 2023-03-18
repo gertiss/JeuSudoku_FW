@@ -98,7 +98,7 @@ extension DetectionPaire1: CodableEnLitteral {
         let eliminees: [String]
         let eliminatrices: [String]
         
-        var texte: String {
+        var codeSwift: String {
             "Paire1.Litteral(paire1: \(paire1.description), zone: \(zone.description), occupees: \(occupees.description), eliminees: \(eliminees.description), eliminatrices: \(eliminatrices.description))"
         }
 

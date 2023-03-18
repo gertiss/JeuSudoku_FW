@@ -69,7 +69,7 @@ extension EliminationIndirecte: CodableEnLitteral {
         let zone: String
         let eliminatrices: [DetectionPaire1.Litteral]
         
-        var texte: String {
+        var codeSwift: String {
             "EliminationIndirecte.Litteral(eliminees: \(eliminees), zone: \(zone), eliminatrices: \(eliminatrices))"
         }
     }

@@ -23,6 +23,7 @@
 		506DCFF429BCE06700B05168 /* Regles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506DCFF329BCE06700B05168 /* Regles.swift */; };
 		506EF95129C23B2A0088F5C1 /* SingletonEliminateur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */; };
 		507ABDA429C5EB610064D485 /* CodableEnJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507ABDA329C5EB610064D485 /* CodableEnJson.swift */; };
+		507ABDA629C637830064D485 /* Atomes Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507ABDA529C637830064D485 /* Atomes Swift.swift */; };
 		507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507ADB1829ACE79C00D793D5 /* Verification.swift */; };
 		507B255B29AE6E20009217A8 /* API coups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B255A29AE6E20009217A8 /* API coups.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
@@ -87,6 +88,7 @@
 		506DCFF329BCE06700B05168 /* Regles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regles.swift; sourceTree = "<group>"; };
 		506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonEliminateur.swift; sourceTree = "<group>"; };
 		507ABDA329C5EB610064D485 /* CodableEnJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableEnJson.swift; sourceTree = "<group>"; };
+		507ABDA529C637830064D485 /* Atomes Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Atomes Swift.swift"; sourceTree = "<group>"; };
 		507ADB1829ACE79C00D793D5 /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		507B255A29AE6E20009217A8 /* API coups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API coups.swift"; sourceTree = "<group>"; };
 		507B255C29AE6E9E009217A8 /* API doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "API doc.md"; sourceTree = "<group>"; };
@@ -194,7 +196,6 @@
 		507B3D5C298BA3480051FCB4 /* Contraintes */ = {
 			isa = PBXGroup;
 			children = (
-				50D191D529A64E47000CFA64 /* Contraintes doc.md */,
 				509C61C129A3A7E8006C0CB0 /* Valeurs.swift */,
 				508B291329A0AA3B006BDBA6 /* UneContrainte.swift */,
 				5032C38C2994EFD50047E3BA /* Presence.swift */,
@@ -272,6 +273,7 @@
 				50CAD39B29A61F0E004917C2 /* Geometrie doc.md */,
 				509EC7582989809A004B1139 /* Cellule.swift */,
 				505215E2299FE5CC00DEDF57 /* Region.swift */,
+				50D191D529A64E47000CFA64 /* Contraintes doc.md */,
 				5032C3882994E7060047E3BA /* UneZone.swift */,
 				50A8EABB29C31C7A00DE43C7 /* Zone.swift */,
 				509EC75A298980C0004B1139 /* Carre.swift */,
@@ -302,6 +304,7 @@
 				5087CCCE29BB95150045EEEF /* UnLitteral.swift */,
 				5087CCD029BBA9EC0045EEEF /* CodableEnLitteral.swift */,
 				507ABDA329C5EB610064D485 /* CodableEnJson.swift */,
+				507ABDA529C637830064D485 /* Atomes Swift.swift */,
 			);
 			path = Modelisation;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				5010478329BA391500FBC35D /* Demonstration.swift in Sources */,
 				5032C3892994E7060047E3BA /* UneZone.swift in Sources */,
 				502A302A29AA54CB00C198EB /* Elimination.swift in Sources */,
+				507ABDA629C637830064D485 /* Atomes Swift.swift in Sources */,
 				5087CCD129BBA9EC0045EEEF /* CodableEnLitteral.swift in Sources */,
 				506EF95129C23B2A0088F5C1 /* SingletonEliminateur.swift in Sources */,
 				50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */,

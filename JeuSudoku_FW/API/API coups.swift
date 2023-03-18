@@ -47,8 +47,8 @@ public func suiteDesCoups(puzzle: String) -> Result<String, String> {
 public struct DemonstrationLitterale: UnLitteral, CustomStringConvertible {
     
     
-    public var texte: String {
-        "DemonstrationLitterale(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees), auxiliaires: [\(auxiliaires.map { $0.texte }.joined(separator: ", "))]"
+    public var codeSwift: String {
+        "DemonstrationLitterale(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees), auxiliaires: [\(auxiliaires.map { $0.codeSwift }.joined(separator: ", "))]"
     }
     
     public var presence: String
@@ -59,13 +59,13 @@ public struct DemonstrationLitterale: UnLitteral, CustomStringConvertible {
     public var auxiliaires: [AuxiliaireLitteral]
         
     public var description: String {
-        texte
+        codeSwift
     }
 }
 
 public struct AuxiliaireLitteral: UnLitteral, CustomStringConvertible {
         
-    public var texte: String {
+    public var codeSwift: String {
         "AuxiliaireLitteral(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees)]"
     }
     
@@ -77,7 +77,7 @@ public struct AuxiliaireLitteral: UnLitteral, CustomStringConvertible {
     public var eliminatrices: [String]
     
     public var description: String {
-        texte
+        codeSwift
     }
 
 }

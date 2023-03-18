@@ -85,7 +85,7 @@ extension EliminationDirecte: CodableEnLitteral {
             self.eliminatrice = eliminatrice
         }
         
-        public var texte: String {
+        public var codeSwift: String {
             "EliminationDirecte.Litteral(cellule: \(eliminee), eliminatrice: \(eliminatrice))"
         }
     }

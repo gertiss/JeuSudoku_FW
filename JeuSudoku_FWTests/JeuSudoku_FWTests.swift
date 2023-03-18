@@ -429,14 +429,14 @@ final class JeuSudoku_FWTests: XCTestCase {
             ]
         )
         
-        XCTAssertEqual(litteral.texte, """
+        XCTAssertEqual(litteral.codeSwift, """
 DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"], eliminatrices: ["Dd_9", "Hf_9"], eliminees: ["De", "He"], auxiliaires: [AuxiliaireLitteral(presence: "CeFeIe_456", zone: "e", occupees: ["Be", "Ee", "Ge"], eliminatrices: ["AcAgAh_456", "DbDfDi_456", "HdHhHi_456"], eliminees: ["Ae", "De", "He"]]]
 """)
         
         let demonstration = Demonstration(litteral: litteral)
         
         XCTAssertEqual(demonstration.litteral, litteral)
-        XCTAssertEqual("\(litteral)", litteral.texte)
+        XCTAssertEqual("\(litteral)", litteral.codeSwift)
         
     }
     

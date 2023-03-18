@@ -93,7 +93,7 @@ extension Coup_EliminationIndirecte: CodableEnLitteral {
         let explicationDesIndirectes: [EliminationIndirecte.Litteral]
         
 
-        var texte: String {
+        var codeSwift: String {
             """
 Coup_EliminationIndirecte.Litteral (
     singleton: \(singleton),
