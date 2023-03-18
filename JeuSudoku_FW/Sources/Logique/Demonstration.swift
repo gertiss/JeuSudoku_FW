@@ -79,6 +79,9 @@ public struct Auxiliaire: CodableEnLitteral {
 
 public extension Puzzle {
     
+    
+    /// Etant donnée une Demonstration instanciée, est-elle applicable ?
+    /// Pour une vérification ou une recherche avec des essais.
     func patternEstApplicable(_ pattern: Demonstration) -> Bool {
         guard pattern.presence.type == .singleton1 else {
             fatalError()

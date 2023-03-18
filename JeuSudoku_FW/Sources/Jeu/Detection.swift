@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 // MARK: - Primitives de recherche
 
 public extension Puzzle {
@@ -26,14 +25,14 @@ public extension Puzzle {
     /// Les chiffres classés suivant leurs nombres d'occurrences dans la grille.
     /// Sauf ceux qui ont 9 occurrences, qui sont déjà entièrement résolus.
     var valeursClasseesParFrequence: [Int] {
-        Int.lesChiffres
+        Int.lesChiffres1a9
             .filter { nombreDeSingletons1(pour: $0) < 9 }
             .sorted { chiffre1, chiffre2 in
                 nombreDeSingletons1(pour: chiffre1) > nombreDeSingletons1(pour: chiffre2)
             }
     }
     
-
+    
     /// Le nombre de contraintes singleton1 dans laquelle apparaît la valeur, dans toute la grille.
     /// C'est-à-dire : le nombre de cellules remplies par la valeur.
     /// Plus ce nombre est grand, plus la valeur est prometteuse pour la recherche.
@@ -53,7 +52,7 @@ public extension Puzzle {
     var cellulesResolues: Region {
         Grille.cellules.filter { celluleEstResolue($0) }
     }
-
+    
 }
 
 
@@ -67,7 +66,10 @@ public extension Puzzle {
     var coupDerniereCellule: Coup? {
         for zone in Grille.zones {
             if let singleton  = singleton1DetecteLocalement(dans: zone), estNouveauSingletonValide(singleton) {
-                return Coup(singleton, zone: zone, methode: .derniereCellule)
+                // Provisoire !
+                var provisoire = "refactoriser la démonstration"
+                let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
+                return Coup(singleton, zone: zone, methode: .derniereCellule, demonstration: demonstration)
             }
         }
         return nil
@@ -86,8 +88,11 @@ public extension Puzzle {
         
         for valeur in valeurs {
             for zone in zones {
-                if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: zone.cellules), estNouveauSingletonValide(singleton) {
-                    return Coup(singleton, zone: zone, methode: .direct)
+                if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: zone.cellules, zone: zone), estNouveauSingletonValide(singleton) {
+                    // Provisoire !
+                    var provisoire = "refactoriser la démonstration"
+                    let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
+                    return Coup(singleton, zone: zone, methode: .direct, demonstration: demonstration)
                 }
             }
         }
@@ -102,7 +107,7 @@ public extension Puzzle {
     /// Niveau 1.7. On utilise les paires1 temporairement.
     var coupParEliminationIndirecte: Coup? {
         // Ordre de parcours des valeurs
-        let valeurs = Int.lesChiffres
+        let valeurs = Int.lesChiffres1a9
             .filter { nombreDeSingletons1(pour: $0) < 9 }
             .sorted { chiffre1, chiffre2 in
                 nombreDeSingletons1(pour: chiffre1) > nombreDeSingletons1(pour: chiffre2)
@@ -128,12 +133,14 @@ public extension Puzzle {
                     return valeurPaire1 == valeurCoup
                     && !cellulesAlignement.intersection(coup.zone.cellules).isEmpty
                 }
-                return Coup(coup.singleton, zone: coup.zone, auxiliaires: paires1Detectrices.array, methode: .indirect)
+                let demonstration = Demonstration(presence: coup.singleton, zone: coup.zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
+                
+                return Coup(coup.singleton, zone: coup.zone, auxiliaires: paires1Detectrices.array, methode: .indirect, demonstration: demonstration)
             }
         }
         return nil
     }
-
+    
 }
 
 // MARK: - Elimination indirecte avec paire2
@@ -175,11 +182,14 @@ public extension Puzzle {
                 // Pour chaque valeur, on cherche les cellules éliminées,
                 // puis un singleton1 par élimination directe.
                 for valeur in valeursComplementaires {
-                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires), estNouveauSingletonValide(singleton) {
+                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires, zone: zone), estNouveauSingletonValide(singleton) {
                         // on peut inclure dans le compte rendu :
                         // eliminees (par x1 et x2)
                         // singleton rapporte ausssi un compte rendu
-                        return Coup(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect)
+                        // Provisoire !
+                        var provisoire = "refactoriser la démonstration"
+                        let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
+                        return Coup(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect, demonstration: demonstration)
                     }
                 }
             }
@@ -203,7 +213,7 @@ extension Puzzle {
         for zone in zonesInteressantes {
             let cellulesVides = cellulesNonResolues(dans: zone).ensemble
             let valeursAbsentes = valeursAbsentes(dans: zone)
-
+            
             // Vérifications paranoïaques
             assert(cellulesVides.count == nombreCellulesVides)
             assert(valeursAbsentes.ensemble.count == nombreCellulesVides)
@@ -229,8 +239,10 @@ extension Puzzle {
                 // Pour chaque valeur, on cherche les cellules éliminées,
                 // puis un singleton1 par élimination directe.
                 for valeur in valeursComplementaires {
-                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires), estNouveauSingletonValide(singleton) {
-                        return Coup(singleton, zone: zone, auxiliaires: [triplet3], methode: .indirect)
+                    if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires, zone: zone), estNouveauSingletonValide(singleton) {
+                        // Provisoire !
+                        let demonstration = Demonstration(presence: singleton, zone: zone, occupees: cellulesResolues(dans: zone), eliminatrices: [], eliminees: [], auxiliaires: [])
+                        return Coup(singleton, zone: zone, auxiliaires: [triplet3], methode: .indirect, demonstration: demonstration)
                     }
                 }
             }
@@ -251,10 +263,13 @@ public extension Puzzle {
         for cellule in Grille.cellules {
             let valeursCiblantes = cellule.dependantes.compactMap { valeur($0) }.ensemble
             if valeursCiblantes.count == 8 {
-                let valeursRestantes = Int.lesChiffres.subtracting(valeursCiblantes)
-                let presence =  Presence(valeursRestantes, dans: [cellule])
-                if let  valide = nouveauSingletonValide(presence) {
-                    return Coup(valide, zone: cellule.carre, methode: .uniqueValeur)
+                let valeursRestantes = Int.lesChiffres1a9.subtracting(valeursCiblantes)
+                let singleton =  Presence(valeursRestantes, dans: [cellule])
+                if let  valide = nouveauSingletonValide(singleton) {
+                    // Provisoire !
+                    var provisoire = "refactoriser la démonstration"
+                    let demonstration = Demonstration(presence: singleton, zone: cellule.carre, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
+                    return Coup(valide, zone: cellule.carre, methode: .uniqueValeur, demonstration: demonstration)
                 }
             }
         }

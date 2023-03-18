@@ -81,7 +81,7 @@ public extension Carre {
 
 // MARK: - Testable
 
-extension Carre: Testable {
+extension Carre {
     
     public var description: String {
         "Carre(\(indexBandeH), \(indexBandeV))"
@@ -124,4 +124,5 @@ extension Carre: InstanciableParNom {
     }
 
 }
+
 

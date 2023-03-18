@@ -26,7 +26,7 @@ extension Valeurs {
     /// [3, 1, 4, 2] -> "1234"
     public var nom: String {
         assert(allSatisfy{ $0 >= 0 && $0 <= 9 })
-        return self.array.sorted().map { $0.description }.joined()
+        return self.array.sorted().map { String($0) }.joined()
     }
     
 }

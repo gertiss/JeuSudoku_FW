@@ -50,6 +50,10 @@ public extension Puzzle {
         contraintes(cellule: cellule).contains { $0.type == .singleton1 }
     }
 
+    func celluleEstVide(_ cellule: Cellule) -> Bool {
+        !celluleEstResolue(cellule)
+    }
+
     func cellulesResolues(dans zone: any UneZone) -> [Cellule] {
         zone.cellules.filter { celluleEstResolue($0) }.ensemble.array.sorted()
     }
@@ -63,7 +67,7 @@ public extension Puzzle {
     }
 
     func valeursAbsentes(dans zone: any UneZone) -> [Int] {
-        Int.lesChiffres.subtracting(valeursResolues(dans: zone))
+        Int.lesChiffres1a9.subtracting(valeursResolues(dans: zone))
             .array.sorted()
     }
     

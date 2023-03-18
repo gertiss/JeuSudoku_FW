@@ -43,7 +43,7 @@ extension Ligne: UneZone {
 
 // MARK: - Testable
 
-extension Ligne: Testable {
+extension Ligne {
     
     public var description: String {
         "Ligne(\(index))"

@@ -439,4 +439,302 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         XCTAssertEqual("\(litteral)", litteral.texte)
         
     }
+    
+    func testRegleCelluleElimineeDirectement() {
+        
+        /// Un Puzzle est vu comme une base de données.
+        /// Une règle permet de résoudre des requêtes dans cette base de données
+        /// grâce à ses static func `instances`.
+        
+        let puzzle = Puzzle.difficilesA[0]
+        print(puzzle.texteDessin)
+        
+        /*
+         57· ·6· ··3
+         ·3· ··5 ·6·
+         6·1 ··7 ···
+         
+         ·53 ··· ··1
+         ··· ·8· ···
+         9·· ··· 27·
+         
+         ··· 8·· 4·2
+         ·8· 1·· ·3·
+         2·· ·4· ·19
+         */
+        
+        // Les éliminatrices de la valeur 5 qui éliminent la cellule Ba
+        let eliminatrices = EliminationDirecte
+            .instances(cellule: Cellule(nom: "Ba"), valeur: 5, dans: puzzle)
+            .map { $0.eliminatrice.nom }.sorted()
+        XCTAssertEqual(eliminatrices, ["Aa_5", "Bf_5"])
+        
+        // Les éliminées par `Bf_5` dans `Mm`
+        let eliminees = EliminationDirecte
+            .instances(zone: Carre(nom: "Mm"), eliminatrice: Presence(nom: "Bf_5"), dans: puzzle)
+            .map { $0.eliminee.nom }.sorted()
+        XCTAssertEqual(eliminees, ["Ba", "Bc"])
+        
+    }
+    
+    func testReglePaire1() {
+        let puzzle = Puzzle.difficilesA[0]
+        print(puzzle.texteDessin)
+        
+        /*
+         57· ·6· ··3
+         ·3· ··5 ·6·
+         6·1 ··7 ···
+         
+         ·53 ··· ··1
+         ··· ·8· ···
+         9·· ··· 27·
+         
+         ··· 8·· 4·2
+         ·8· 1·· ·3·
+         2·· ·4· ·19
+         */
+
+        /// Dans `Pn` en bas au centre,  dans la ligne H `HeHf_2`est une paire1 pour la valeur 2
+        /// Parce que 2 est éliminée dans la ligne G par `Gi_2` et dans la ligne I par `Ia_2`
+        /// Les occupées sont Gd Hd Ie
+        /// Les éliminatrices sont Gi Ia
+
+        XCTAssertEqual(
+            SingletonEliminateur.instances(valeur: 2, zone: Carre(nom: "Pn"), dans: puzzle)
+                .map { $0.singleton.nom },
+            ["Gi_2", "Ia_2"]
+        )
+        
+        let instances = DetectionPaire1.instances(valeur: 2, zone: Carre(nom: "Pn"), dans: puzzle)
+        XCTAssertEqual(instances.count, 1)
+        let instance = instances[0]
+        XCTAssertEqual(instance.paire1.nom, "HeHf_2")
+        XCTAssertEqual(instance.occupees.map { $0.nom }, ["Gd", "Hd", "Ie"])
+        XCTAssertEqual(instance.eliminees.map { $0.nom }, ["Ge", "Gf", "Id", "If"])
+        XCTAssertEqual(instance.eliminatrices.map { $0.nom }, ["Gi", "Ia"])
+   }
+    
+    func testReglePaire2() {
+        let puzzle = Puzzle(chiffres: "000801000005064130060700080250610493090040070406000012010489320002576901000123000")
+        print(puzzle.texteDessin)
+        /*
+         ··· 8·1 ···
+         ··5 ·64 13·
+         ·6· 7·· ·8·
+
+         25· 61· 493
+         ·9· ·4· ·7·
+         4·6 ··· ·12
+
+         ·1· 489 32·
+         ··2 576 9·1
+         ··· 123 ···
+         */
+         
+        let premierCoup = puzzle.premierCoup!
+        
+        XCTAssertEqual(premierCoup.singleton.nom, "Hh_4")
+        XCTAssertEqual(premierCoup.zone.nom, "h")
+        XCTAssertEqual(premierCoup.auxiliaires[0].nom, "AhIh_56")
+        
+        
+        // Ce coup est trouvé grâce à une paire2 AhIh_56
+        // qu'on peut découvrir et expliquer par la requête suivante
+        
+        let instance = Paire2.instances(zone: Colonne(nom: "h"), pour: (5, 6), dans: puzzle)[0]
+        
+        XCTAssertEqual(instance.paire.nom, "AhIh_56")
+        
+        XCTAssertEqual(instance.occupees.map { $0.nom }, ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"])
+        
+        XCTAssertEqual(instance.eliminees.map { $0.nom }, ["Hh"])
+        XCTAssertEqual(instance.pairesEliminatrices[0].map { $0.nom }, ["Hd_5", "Hf_6"])
+
+        /*
+         Ce qui signifie :
+         
+         On a trouvé une paire2 AhIh_56 en cherchant dans la colonne h les cellules éliminées pour les valeurs 5 et 6 (pour les deux valeurs à la fois, par seulement pour l'une ou l'autre).
+         
+         Explication :
+         
+         Les cases éliminées pour 5 et 6 à la fois sont ["Hh"]
+         Les paires qui ont permis l'élimination de Hh sont [["Hd_5", "Hf_6"]]
+         Les cases occupées dans la colonne sont ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"]
+         Il ne reste alors plus que les deux cellules Ah et Ih. Deux cellules pour deux valeurs, cela forme une paire2.
+         
+         */
+    
+        
+        
+        
+    }
+    
+    func testTriplet3() {
+        let puzzle = Puzzle(chiffres: "000801000005064100060700080250000493090000070406000012010009020002570901000123000")
+        print(puzzle.texteDessin)
+        /*
+         ··· 8·1 ···
+         ··5 ·64 1.·
+         ·6· 7·· ·8·
+
+         25· 61· 493
+         ·9· ·4· ·7·
+         4·6 ··· ·12
+
+         ·1· 489 32·
+         ··2 576 9·1
+         ··· 123 ···
+         
+         triplet :
+         triplet colonne h parmi 4 libres : AhHhIh_456
+         zone : colonne h
+         occupees (5) : Ch Dh Eh Fh Gh
+         éliminatrices pour 4 : Bf_4
+         éliminatrices pour 5 : Bc_5 Hd_5
+         éliminatrices pour 6 : Be_6
+         eliminees pour 456 : dans ligne B : Bh
+         eliminatrices pour 456 ciblant Bh : dans ligne B : Bf_4 Bc_5 Be_6
+         tripletsEliminateurs: Cellule(1, 5) pour 4, Cellule(1, 2) pour 5, Cellule(1, 4) pour 6
+         restantes (après occupées, éliminées) : AhHhIh_456
+         
+         coup :
+         valeur 3
+         aucune élimination directe
+         élimination indirecte par triplet, dans le triplet : (3) : [Ah, Hh, Ih]
+         occupées : (5) : Ch_8 Dh_9 Eh_7 Fh_1 Gh_2
+         restantes après occupées et triplet 5+3 :  (1) : Bh
+         coup = Bh_3
+         */
+
+        
+        let instance = Triplet3.instances(zone: Colonne(nom: "h"), pour: (4, 5, 6), dans: puzzle)[0]
+        print()
+        XCTAssertEqual(
+            instance.litteral,
+            Triplet3.Litteral(triplet: "AhHhIh_456", zone: "h", occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"], eliminees: ["Bh"], tripletsEliminateurs: [["Bf_4", "Bc_5", "Be_6"]])
+        )
+    }
+    
+    func testDeuxPaires1() {
+        let puzzle = Puzzle(chiffres: "000801000005064130060700080258617493090040070476000012017489320002576941000123000")
+        print(puzzle.texteDessin)
+        /*
+         m   n   p
+         abc def ghi
+         A ··· 8·1 ···
+         M B ··5 ·64 13·
+         C ·6· 7·· ·8·
+         
+         D 258 617 493
+         N E ·9· ·4· ·7·
+         F 476 ··· ·12
+         
+         G ·17 489 32·
+         P H ··2 576 941
+         I ··· 123 ···
+         
+         Deux paires EaEc_3 dans Nm et AeCe_3 dans Mn
+         EaEc_3 parce que ce sont les deux seules libres
+         AeCe_3 à cause des éliminatrices Bh_3 et If_3
+         
+         permet de déduire Fd_3 dans Nn car en plus il y a une élimination directe en Ff à cause de If_3
+         
+         Donc 3 éliminées indirectes, 1 éliminée directe, 4 occupées, 1 seule restante.
+         
+         */
+        
+        let paires1 = DetectionPaire1.instances(valeur: 3, zone: Carre(nom: "Nm"), dans: puzzle)
+        XCTAssertEqual(paires1.count,  1)
+        let EaEc_3 = paires1[0]
+        XCTAssertEqual(EaEc_3.paire1.nom, "EaEc_3")
+        XCTAssertEqual(EaEc_3.occupees.count, 7)
+        XCTAssertEqual(EaEc_3.eliminees, [])
+        XCTAssertEqual(EaEc_3.eliminatrices, [])
+        
+        let paires2 = DetectionPaire1.instances(valeur: 3, zone: Carre(nom: "Mn"), dans: puzzle)
+        XCTAssertEqual(paires2.count,  1)
+        let AeCe_3 = paires2[0]
+        XCTAssertEqual(AeCe_3.paire1.nom, "AeCe_3")
+        XCTAssertEqual(AeCe_3.occupees.count, 5)
+        XCTAssertEqual(AeCe_3.eliminees.map { $0.nom }, ["Bd", "Cf"])
+        XCTAssertEqual(AeCe_3.eliminatrices.map { $0.nom }, ["Bh", "If"])
+        
+        XCTAssertEqual(EaEc_3.litteral, DetectionPaire1.Litteral(paire1: "EaEc_3", zone: "Nm", occupees: ["Da", "Db", "Dc", "Eb", "Fa", "Fb", "Fc"], eliminees: [], eliminatrices: []))
+        XCTAssertEqual(AeCe_3.litteral, DetectionPaire1.Litteral(paire1: "AeCe_3", zone: "Mn", occupees: ["Ad", "Af", "Be", "Bf", "Cd"], eliminees: ["Bd", "Cf"], eliminatrices: ["Bh", "If"]))
+        
+        /*
+         {"occupees":["Ad","Af","Be","Bf","Cd"],"paire1":"AeCe_3","zone":"Mn","eliminees":["Bd","Cf"],"eliminatrices":["Bh","If"]}
+         */
+        
+        
+        
+        let elimination = EliminationIndirecte.instances(eliminatrices: paires1 + paires2, zone: Carre(nom: "Nn"), dans: puzzle)[0]
+        print(elimination.litteral)
+        //
+        XCTAssertEqual(
+            elimination.litteral,
+            EliminationIndirecte.Litteral(
+                eliminees: ["Ed", "Ef", "Fe"],
+                zone: "Nn",
+                eliminatrices: [
+                    DetectionPaire1.Litteral(
+                        paire1: "AeCe_3",
+                        zone: "Mn",
+                        occupees: ["Ad", "Af", "Be", "Bf", "Cd"],
+                        eliminees: ["Bd", "Cf"],
+                        eliminatrices: ["Bh", "If"]),
+                    DetectionPaire1.Litteral(
+                        paire1: "EaEc_3",
+                        zone: "Nm",
+                        occupees: ["Da", "Db", "Dc", "Eb", "Fa", "Fb", "Fc"],
+                        eliminees: [],
+                        eliminatrices: [])
+                ])
+        )
+        XCTAssertEqual(elimination.valeur, 3)
+        
+        let coup = Coup_EliminationIndirecte.instances(valeur: 3, zone: Carre(nom: "Nn"), dans: puzzle)[0]
+        XCTAssertEqual(coup.singleton, Presence(nom: "Fd_3"))
+        
+        print(coup)
+        
+        XCTAssertEqual(
+            coup.litteral,
+            Coup_EliminationIndirecte.Litteral (
+                singleton: "Fd_3",
+                zone: "Nn",
+                occupees: ["Dd", "De", "Df", "Ee"],
+                elimineesDirectement: ["Ef", "Ff"],
+                elimineesIndirectement: ["Ed", "Ef", "Fe"],
+                explicationDesDirectes: [
+                    EliminationDirecte.Litteral(eliminee: "Ef", eliminatrice: "If_3"),
+                    EliminationDirecte.Litteral(eliminee: "Ff", eliminatrice: "If_3")
+                ],
+                explicationDesIndirectes: [
+                    EliminationIndirecte.Litteral(
+                        eliminees: ["Ed", "Ef", "Fe"],
+                        zone: "Nn",
+                        eliminatrices: [
+                            DetectionPaire1.Litteral(paire1: "AeCe_3", zone: "Mn", occupees: ["Ad", "Af", "Be", "Bf", "Cd"], eliminees: ["Bd", "Cf"], eliminatrices: ["Bh", "If"]),
+                            DetectionPaire1.Litteral(paire1: "EaEc_3", zone: "Nm", occupees: ["Da", "Db", "Dc", "Eb", "Fa", "Fb", "Fc"], eliminees: [], eliminatrices: [])])
+                ]
+            )
+        )
+    }
+    
+    func testLitteralSwift() {
+        XCTAssertEqual(123.litteral, "123")
+        XCTAssertEqual(0.123.litteral, "0.123")
+        XCTAssertEqual(true.litteral, "true")
+        XCTAssertEqual(false.litteral, "false")
+        XCTAssertEqual("abc".litteral, "\"abc\"")
+        
+        XCTAssertEqual(Int(litteral: "123"), 123)
+        XCTAssertEqual(Double(litteral: "0.123"), 0.123)
+        XCTAssertEqual(Bool(litteral: "true"), true)
+        XCTAssertEqual(Bool(litteral: "false"), false)
+        XCTAssertEqual(String(litteral: "\"abc\""), "abc")
+ }
 }
+ 

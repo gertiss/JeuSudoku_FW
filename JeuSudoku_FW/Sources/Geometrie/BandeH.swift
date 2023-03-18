@@ -46,7 +46,7 @@ extension BandeH {
 
 // MARK: - Testable
 
-extension BandeH: Testable {
+extension BandeH {
     
     public var description: String {
         "BandeH(\(index))"
@@ -56,6 +56,7 @@ extension BandeH: Testable {
 // MARK: - InstanciableParNom
 
 extension BandeH: InstanciableParNom {
+    
     
     static let noms = ["M", "N", "P"]
     

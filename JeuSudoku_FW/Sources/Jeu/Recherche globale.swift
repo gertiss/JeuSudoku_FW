@@ -32,8 +32,9 @@ public extension Puzzle {
         // Niveau 1.7
         // complexité ?
         if let coup = coupParEliminationIndirecte {
-            if coup.auxiliaires.count == 1 {
-                
+            if coup.auxiliaires.count == 2 {
+                print(codeChiffres)
+                print(coup.auxiliaires.map { $0.nom })
             }
             return coup
         }
@@ -48,6 +49,9 @@ public extension Puzzle {
         // puis élimination directe dans le complémentaire.
         // Complexité 4
         if let coup = coupApresTriplet(parmi: 4) {
+            print(codeChiffres)
+            print(texteDessin)
+            print("triplet \(coup.auxiliaires[0].nom)")
             return coup
         }
         // Paire2 dans une zone avec 4 cellules libres,

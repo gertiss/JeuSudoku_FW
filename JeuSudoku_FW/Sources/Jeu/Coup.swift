@@ -26,12 +26,14 @@ public struct Coup {
     public let zone: any UneZone
     public let auxiliaires: [Presence]
     public let methode: MethodeCoup
+    public let demonstration: Demonstration
 
-    public init(_ singleton: Presence, zone: any UneZone, auxiliaires: [Presence] = [], methode: MethodeCoup) {
+    public init(_ singleton: Presence, zone: any UneZone, auxiliaires: [Presence] = [], methode: MethodeCoup, demonstration: Demonstration) {
         self.singleton = singleton
         self.zone = zone
         self.auxiliaires = auxiliaires
         self.methode = methode
+        self.demonstration = demonstration
     }
     
     

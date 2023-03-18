@@ -8,7 +8,7 @@
 import Foundation
 
 /// Une bande verticale formée de 3 colonnes
-public struct BandeV: Testable, InstanciableParNom {
+public struct BandeV: InstanciableParNom {
     
     public let index: Int // de 0 à 2
     

@@ -8,19 +8,19 @@
 import Foundation
 
 
-/// Un type CodableEnLitteral possède une propriété `litteral` conforme au protocole Litteral.
-/// Cela permet de lui faire profiter de certaines fonctions de Litteral,
-/// en particulier la conformité aux protocoles de Litteral.
+/// Un type CodableEnLitteral possède une propriété `litteral` conforme au protocole UnLitteral.
+/// Cela permet de lui faire profiter de certaines fonctions de UnLitteral,
+/// en particulier la conformité aux protocoles de UnLitteral.
 public protocol CodableEnLitteral: Hashable, Identifiable, CustomStringConvertible, Comparable {
-    associatedtype L: Litteral
+    associatedtype Litteral: UnLitteral
     
-    var litteral: L { get }
-    init(litteral: L)
+    var litteral: Litteral { get }
+    init(litteral: Litteral)
 }
 
 public extension CodableEnLitteral {
     
-    var id: L {
+    var id: Litteral {
         litteral
     }
     

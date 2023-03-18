@@ -66,7 +66,7 @@ public extension Cellule {
 
 // MARK: - Testable
 
-extension Cellule: Testable {
+extension Cellule {
     
     public var description: String {
         "Cellule(\(indexLigne), \(indexColonne))"

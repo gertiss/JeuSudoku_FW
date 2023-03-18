@@ -9,6 +9,23 @@ import Foundation
 
 // MARK: - Elimination
 
+/// Représente le fait suivant :
+/// les `eliminees`sont exactement toutes les cellules éliminées globalement pour la `valeur`
+/// les  éliminations sont causées par les`eliminatrices` (seulement celles qui sont nécessaires)
+struct EliminationDirecteRegion {
+    let valeur: Int
+    let eliminees: Region
+    let eliminatrices: [Presence]
+}
+
+/// La cellule `eliminee` est éliminée par la contrainte `eliminatrice` pour la `valeur`
+struct EliminationDirecteCellule {
+    let valeur: Int
+    let eliminee: Cellule
+    let eliminatrice: Presence
+}
+
+
 /// Les primitives qui permettent de chercher les éliminations de cellules pour une valeur donnée
 
 
@@ -18,11 +35,12 @@ extension Puzzle {
     /// dans toute la grille.
     /// On est définitivement certain que la valeur ne pourra pas être placée dans la région résultat.
     func cellulesEliminees(pour valeur: Int) -> Region {
-        // On commence par éliminer d'office toutes les cellules résolues
+        // On commence par éliminer d'office toutes les cellules résolues globalement
         var region = cellulesResolues
         for contrainte in contraintesEliminantes(pour: valeur) {
             region = region.union(cellulesEliminees(par: contrainte, pour: valeur))
         }
+        var elimination = "à compléter. Retourner elimination au lieu de region. Filtrer les eliminatrices utiles"
         return region
     }
     
@@ -33,7 +51,7 @@ extension Puzzle {
     }
     
     
-    /// Une contrainte peut éliminer des cellules à l'intérieur d'ells-même aussi bien qu'à l'extérieur.
+    /// Une contrainte peut éliminer des cellules à l'intérieur d'elles-même aussi bien qu'à l'extérieur.
     /// Cela dépend du type de la contrainte et de sa relation avec la valeur.
     func cellulesEliminees(par contrainte: Presence, pour valeur: Int) -> Region {
         let externes = cellulesExternesEliminees(par: contrainte, pour: valeur)
@@ -42,7 +60,7 @@ extension Puzzle {
         
     }
     
-    /// Indique si la contrainte éminine des cellules pour une valeur donnée ("émet des rayons")
+    /// Indique si la contrainte élinine des cellules pour une valeur donnée ("émet des rayons")
     /// Les cellules éliminées ne pourront définitivement plus contenir la valeur.
     func contrainteEstEliminante(_ contrainte: Presence, pour valeur: Int) -> Bool {
         switch contrainte.type {
@@ -56,6 +74,21 @@ extension Puzzle {
             return contrainte.contient(valeur: valeur) && contrainte.estDansUnAlignement
         case .triplet3:
             return contrainte.contient(valeur: valeur) && contrainte.estDansUnAlignement
+        }
+    }
+    
+    func estEliminanteDirectement(_ contrainte: Presence) -> Bool {
+        switch contrainte.type {
+        case .singleton1:
+            return true
+        case .singleton2:
+            return false
+        case .paire1:
+            return contrainte.estDansUnAlignement
+        case .paire2:
+            return contrainte.estDansUnAlignement
+        case .triplet3:
+            return contrainte.estDansUnAlignement
         }
     }
     
@@ -107,17 +140,18 @@ extension Puzzle {
         return []
     }
     
-    /// Une paire1 est utile si elle élimine au moins une cellule vide
+    /// Une paire1 est utile pour une élimination indirecte si elle élimine au moins une cellule vide
     /// et non déjà éliminée directement
     func paire1EstUtile(_ paire1: Presence, cellulesElimineesDirectement : Region) -> Bool {
         assert(paire1.type == .paire1)
-        if paire1.nom == "HiIi_7" {
-            
-        }
         let valeur = paire1.valeurs.uniqueElement
         let eliminees = cellulesExternesEliminees(par: paire1, pour: valeur)
         let utiles = eliminees.subtracting(cellulesElimineesDirectement)
         return !utiles.isEmpty
+    }
+    
+    func estEliminatrice(_ contrainte: Presence, eliminee: Cellule, valeur: Int) -> Bool {
+        cellulesEliminees(par: contrainte, pour: valeur).contains(eliminee)
     }
     
 }

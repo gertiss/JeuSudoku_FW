@@ -105,7 +105,7 @@ extension Puzzle {
     /// "absente" = sans contrainte bijective dans la zone.
     /// Lorsque la réponse est non nil, on peut noter un singleton1 avec cette valeur.
     func seuleValeurAbsente(dans zone: any UneZone) -> Int? {
-        let absentes = Int.lesChiffres.subtracting(valeursPresentes(dans: zone))
+        let absentes = Int.lesChiffres1a9.subtracting(valeursPresentes(dans: zone))
         return absentes.count == 1 ? absentes.first! : nil
     }
     
@@ -113,7 +113,7 @@ extension Puzzle {
     /// Liste de deux valeurs ordonnées ou nil.
     /// Lorsque la réponse est non nil, on peut noter une paire2 avec cette valeur.
     func deuxSeulesValeurAbsentes(dans zone: any UneZone) -> [Int]? {
-        let absentes = Int.lesChiffres.subtracting(valeursPresentes(dans: zone))
+        let absentes = Int.lesChiffres1a9.subtracting(valeursPresentes(dans: zone))
         return absentes.count == 2 ? absentes.array.sorted() : nil
     }
 }

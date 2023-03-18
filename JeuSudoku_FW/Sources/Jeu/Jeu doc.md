@@ -32,3 +32,59 @@ Une fois qu'on a trouvé une bijection de cardinal p, on étudie la région comp
 
 Exemple : n = 5, p = 2. On se place dans une zone qui a exactement 5 cellules vides, et dans cette zone on cherche les paires2. Il y a C(5, 2) = 10 couples de valeurs à essayer. Quand on trouve un tel couple, avec par exemple les valeurs 1 et 2, on étudie les valeurs complémentaires pour les cellules complémentaires (il y a 3 cellules complémentaires). Par exemple, admettons qu'il s'agisse de 3, 4, 5. Pour chacune de ces valeurs, on émet tous les rayons venant de toute la grille qui éliminent des cellules et on regarde combien de cellules possibles restent dans la région de 3 cellules considérée. Si par exemple on trouve que la cellule Aa est la seule restante pour la valeur 4, alors on a trouvé un singleton Aa_4.
 
+## Faits détectés
+
+    struct EliminationCellule {
+        let valeur: Int
+        let eliminee: Cellule
+        let eliminatrice: Presence
+    }
+    
+    struct SingletonTrouveParElimination {
+    	let singleton: Presence
+    	let zone: any UneZone
+    	let eliminations: [EliminationCellule]
+    	let occupees: [Cellule]
+    }
+    
+    struct Paire1TrouveeParElimination {
+    	let paire1: Presence
+    	let zone: any UneZone
+    	let eliminations: [EliminationCellule]
+    	let occupees: [Cellule]
+    }
+    
+    struct SingletonTrouveParPaire {
+    	let singleton: Presence
+    	let zone: any UneZone
+    	let eliminations: [EliminationCellule]
+    	let occupees: [Cellule]
+    	let detectionPaire: Paire2TrouveeParElimination
+    }
+    
+    struct Paire2TrouveeParElimination {
+    	let paire2: Presence
+    	let zone: any UneZone
+    	let eliminations: [EliminationCellule]
+    	let occupees: [Cellule]
+    }
+    
+    struct SingletonTrouveParTriplet {
+    	let singleton: Presence
+    	let zone: any UneZone
+    	let eliminations: [EliminationCellule]
+    	let occupees: [Cellule]
+    	let detectionTriplet: Triplet3TrouveParElimination
+    }
+
+    struct Triplet3TrouveParElimination {
+    	let triplet3: Presence
+    	let zone: any UneZone
+    	let eliminations: [EliminationCellule]
+    	let occupees: [Cellule]
+    }
+
+
+
+
+

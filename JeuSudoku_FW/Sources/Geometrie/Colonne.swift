@@ -44,7 +44,7 @@ extension Colonne: UneZone {
 
 // MARK: - Testable
 
-extension Colonne: Testable {
+extension Colonne {
     public var description: String {
         "Colonne(\(index))"
     }

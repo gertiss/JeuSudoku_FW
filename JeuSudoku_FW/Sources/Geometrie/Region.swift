@@ -9,7 +9,8 @@ import Foundation
 
 public typealias Region = Set<Cellule>
 
-extension Region: InstanciableParNom, Testable, Comparable {
+
+extension Region: InstanciableParNom, CodableEnLitteral, Identifiable, Comparable {
     
     /// [C(0,0), C(0,1)] -> "AaAb"
     public var nom: String {
@@ -32,6 +33,11 @@ extension Region: InstanciableParNom, Testable, Comparable {
         assert(ensemble.count == nbCellules)
         self = ensemble
     }
+    
+    public static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.litteral < rhs.litteral
+    }
+
     
 
 }
@@ -119,6 +125,24 @@ public extension Region {
         if let ligne { return ligne }
         if let colonne { return colonne }
         return nil
+    }
+    
+    
+    var cellulesDependantes: Region {
+        if let singleton = uniqueValeur {
+            return singleton.dependantes
+        }
+        if let alignement, let carre {
+            return alignement.cellules.subtracting(self)
+                .union(carre.cellules.subtracting(self))
+        }
+        if let alignement {
+            return alignement.cellules.subtracting(self)
+        }
+        if let carre {
+            return carre.cellules.subtracting(self)
+        }
+        return []
     }
     
     

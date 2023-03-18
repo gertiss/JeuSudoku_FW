@@ -9,6 +9,7 @@ import Foundation
 
 extension String: Error { }
 
+/// Accès directs pratiques à un Result
 public extension Result where Failure == String {
     
     var estSucces: Bool {
@@ -50,10 +51,36 @@ public extension Result where Failure == String {
 
 }
 
-
+/// Conversions Array-Set
 public extension Array where Element: Hashable {
     var ensemble: Set<Element> {
         Set(self)
+    }
+    
+    /// Le nombre d'éléments distincts
+    var cardinal: Int {
+        ensemble.count
+    }
+    
+    var uniqueValeur: Element? {
+        ensemble.uniqueValeur
+    }
+    
+    /// fatalError si cardinal != 1
+    var uniqueElement: Element {
+        ensemble.uniqueElement
+    }
+    
+    var sansDoublons: Self {
+        ensemble.array
+    }
+}
+
+public extension Array where Element: Hashable & Comparable {
+    
+    /// Elimine les doublons et ordonne le résultat.
+    var compact: Self {
+        ensemble.array.sorted()
     }
 }
 
@@ -72,13 +99,15 @@ public extension Dictionary {
 
 public extension Set {
     
-    /// Lorsque l'ensemble est un singleton, on retourne l'unique element.
+    /// Lorsque l'ensemble est un singleton, on retourne l'unique élément.
     /// Erreur sinon
     var uniqueElement: Element {
         assert(count == 1)
         return map{$0}[0]
     }
     
+    /// Lorsque l'ensemble est un singleton, on retourne l'unique élément.
+    /// nil sinon
     var uniqueValeur: Element? {
         if count != 1 { return nil }
         let liste: [Element] = self.map { $0 }
@@ -87,6 +116,17 @@ public extension Set {
 
     var array: [Element] {
         map { $0 }
+    }
+    
+    var cardinal: Int {
+        count
+    }
+}
+
+public extension Set where Element: Comparable {
+    
+    func sorted() -> [Element] {
+        array.sorted()
     }
 }
 
@@ -105,7 +145,7 @@ public extension String {
 
 public extension Int {
 
-    static let lesChiffres = Set([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    static let lesChiffres1a9 = Set([1, 2, 3, 4, 5, 6, 7, 8, 9])
 }
 
 
