@@ -9,16 +9,21 @@ import Foundation
 
 // MARK: - Atomes Swift
 
-/// Les valeurs Swift de base : String, Int, Double, Bool  vérifient le protocole InstanciableParNom, et donc CodableEnLitteral.
+/// Les valeurs Swift de base : String, Int, Double, Bool  vérifient le protocole InstanciableParNom, et donc CodableEnLitteral. Ils sont dans l'univers "sémantique" des objets.
 /// Leur représentation en littéral est une String.
-/// Le type String est spécial car c'est une sorte de boucle du bootstrap. Il doit vérifier UnLitteral
-/// puisque d'autres typs s'en servent comme littéral.
 
 
+/// Le type String est spécial car c'est une sorte de boucle du bootstrap.
+/// Il doit vérifier UnLitteral puisque d'autres types s'en servent comme littéral.
+/// Il est à la fois dans l'univers "sémantique" des objets et dans l'univers "syntaxique" des littéraux.
+/// C'est un littéral atomique, car représentable en String avec `codeSwift`,
+/// et un objet atomique car InstanciableParNom et représentable en String avec `nom`.
+/// La boucle vient de ce que `codeSwift == nom`
+/// Mais contrairement à ce qu'on pourrait penser, le nom d'une String n'est pas self, c'est debugDescription.
 extension String: InstanciableParNom, UnLitteral {
     
     public var nom: String {
-        self.debugDescription
+        self
     }
         
     public var codeSwift: String {

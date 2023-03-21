@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		5006C17129BF186900D82A2E /* EliminationDirecte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17029BF186900D82A2E /* EliminationDirecte.swift */; };
 		5006C17529BF188C00D82A2E /* DetectionPaire1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17429BF188C00D82A2E /* DetectionPaire1.swift */; };
-		5006C17729BF189B00D82A2E /* Paire2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17629BF189A00D82A2E /* Paire2.swift */; };
-		5006C17929BF18A800D82A2E /* Triplet3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17829BF18A800D82A2E /* Triplet3.swift */; };
+		5006C17729BF189B00D82A2E /* DetectionPaire2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17629BF189A00D82A2E /* DetectionPaire2.swift */; };
+		5006C17929BF18A800D82A2E /* DetectionTriplet3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17829BF18A800D82A2E /* DetectionTriplet3.swift */; };
 		5010478329BA391500FBC35D /* Demonstration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5010478229BA391500FBC35D /* Demonstration.swift */; };
 		501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */; };
 		502A302A29AA54CB00C198EB /* Elimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A302929AA54CB00C198EB /* Elimination.swift */; };
@@ -54,6 +54,7 @@
 		50A8EABC29C31C7A00DE43C7 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8EABB29C31C7A00DE43C7 /* Zone.swift */; };
 		50BF6CE129B7A23A0028F583 /* API VueGT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE029B7A23A0028F583 /* API VueGT.swift */; };
 		50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE229B7AB250028F583 /* API Exemples.swift */; };
+		50D4AE6129C89C1A000B9797 /* Coup_Paire2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */; };
 		50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EB023529B5C6FB00AA82CD /* Combinatoire.swift */; };
 		50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB543B29A505A6005E5E5E /* Jeu.swift */; };
 		50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEF8529B33B9D001717BB /* Recherche globale.swift */; };
@@ -73,8 +74,8 @@
 		5003FC7429C0771D00DB724D /* ExemplesPredicats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesPredicats.swift; sourceTree = "<group>"; };
 		5006C17029BF186900D82A2E /* EliminationDirecte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminationDirecte.swift; sourceTree = "<group>"; };
 		5006C17429BF188C00D82A2E /* DetectionPaire1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionPaire1.swift; sourceTree = "<group>"; };
-		5006C17629BF189A00D82A2E /* Paire2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paire2.swift; sourceTree = "<group>"; };
-		5006C17829BF18A800D82A2E /* Triplet3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triplet3.swift; sourceTree = "<group>"; };
+		5006C17629BF189A00D82A2E /* DetectionPaire2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionPaire2.swift; sourceTree = "<group>"; };
+		5006C17829BF18A800D82A2E /* DetectionTriplet3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionTriplet3.swift; sourceTree = "<group>"; };
 		5010478229BA391500FBC35D /* Demonstration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demonstration.swift; sourceTree = "<group>"; };
 		501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesDifficiles.swift; sourceTree = "<group>"; };
 		502A302929AA54CB00C198EB /* Elimination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elimination.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonEliminateur.swift; sourceTree = "<group>"; };
 		507ABDA329C5EB610064D485 /* CodableEnJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableEnJson.swift; sourceTree = "<group>"; };
 		507ABDA529C637830064D485 /* Atomes Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Atomes Swift.swift"; sourceTree = "<group>"; };
+		507ABDA729C64A410064D485 /* Modelisation doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Modelisation doc.md"; sourceTree = "<group>"; };
 		507ADB1829ACE79C00D793D5 /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		507B255A29AE6E20009217A8 /* API coups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API coups.swift"; sourceTree = "<group>"; };
 		507B255C29AE6E9E009217A8 /* API doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "API doc.md"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		50CAD39B29A61F0E004917C2 /* Geometrie doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Geometrie doc.md"; sourceTree = "<group>"; };
 		50D191D529A64E47000CFA64 /* Contraintes doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Contraintes doc.md"; sourceTree = "<group>"; };
 		50D191DE29A678F9000CFA64 /* Puzzle doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Puzzle doc.md"; sourceTree = "<group>"; };
+		50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_Paire2.swift; sourceTree = "<group>"; };
 		50EB023529B5C6FB00AA82CD /* Combinatoire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combinatoire.swift; sourceTree = "<group>"; };
 		50FB543B29A505A6005E5E5E /* Jeu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jeu.swift; sourceTree = "<group>"; };
 		50FFEF8529B33B9D001717BB /* Recherche globale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recherche globale.swift"; sourceTree = "<group>"; };
@@ -154,12 +157,13 @@
 			children = (
 				506DCFF329BCE06700B05168 /* Regles.swift */,
 				5098E62E29C4876700821414 /* Coup_EliminationIndirecte.swift */,
+				50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */,
 				506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */,
 				5006C17029BF186900D82A2E /* EliminationDirecte.swift */,
 				50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */,
 				5006C17429BF188C00D82A2E /* DetectionPaire1.swift */,
-				5006C17629BF189A00D82A2E /* Paire2.swift */,
-				5006C17829BF18A800D82A2E /* Triplet3.swift */,
+				5006C17629BF189A00D82A2E /* DetectionPaire2.swift */,
+				5006C17829BF18A800D82A2E /* DetectionTriplet3.swift */,
 			);
 			path = Predicats;
 			sourceTree = "<group>";
@@ -300,9 +304,10 @@
 			isa = PBXGroup;
 			children = (
 				509EC76029898665004B1139 /* Extension Swift.swift */,
-				507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */,
+				507ABDA729C64A410064D485 /* Modelisation doc.md */,
 				5087CCCE29BB95150045EEEF /* UnLitteral.swift */,
 				5087CCD029BBA9EC0045EEEF /* CodableEnLitteral.swift */,
+				507B3D69298C4DBE0051FCB4 /* InstanciableParNom.swift */,
 				507ABDA329C5EB610064D485 /* CodableEnJson.swift */,
 				507ABDA529C637830064D485 /* Atomes Swift.swift */,
 			);
@@ -426,7 +431,7 @@
 				50A5FB2729B8FC8F001EC2B3 /* API communication.swift in Sources */,
 				5006C17129BF186900D82A2E /* EliminationDirecte.swift in Sources */,
 				507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */,
-				5006C17729BF189B00D82A2E /* Paire2.swift in Sources */,
+				5006C17729BF189B00D82A2E /* DetectionPaire2.swift in Sources */,
 				50A8EABA29C3037700DE43C7 /* EliminationIndirecte.swift in Sources */,
 				507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */,
 				5032C38D2994EFD50047E3BA /* Presence.swift in Sources */,
@@ -451,7 +456,7 @@
 				5098E62F29C4876700821414 /* Coup_EliminationIndirecte.swift in Sources */,
 				5062258B29AB8D4300AE3362 /* Detection.swift in Sources */,
 				509EC75B298980C0004B1139 /* Carre.swift in Sources */,
-				5006C17929BF18A800D82A2E /* Triplet3.swift in Sources */,
+				5006C17929BF18A800D82A2E /* DetectionTriplet3.swift in Sources */,
 				509EC76529898843004B1139 /* BandeV.swift in Sources */,
 				509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */,
 				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
@@ -464,6 +469,7 @@
 				508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
 				509EC75D298980CE004B1139 /* Ligne.swift in Sources */,
+				50D4AE6129C89C1A000B9797 /* Coup_Paire2.swift in Sources */,
 				5006C17529BF188C00D82A2E /* DetectionPaire1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

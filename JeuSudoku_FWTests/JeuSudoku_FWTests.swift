@@ -274,6 +274,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Niveau 2.5
         // Demande une recherche de 3 parmi 8
         // Complexité : 56
+        // Mais aussi une recherche de paire2 parmi 6
         let puzzle = Puzzle.difficilesA[5]
         let _ = puzzle.suiteDeCoups()
     }
@@ -515,7 +516,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         XCTAssertEqual(instance.eliminatrices.map { $0.nom }, ["Gi", "Ia"])
    }
     
-    func testReglePaire2() {
+    func testReglePaire2Parmi3() {
         let puzzle = Puzzle(chiffres: "000801000005064130060700080250610493090040070406000012010489320002576901000123000")
         print(puzzle.texteDessin)
         /*
@@ -542,9 +543,9 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         // Ce coup est trouvé grâce à une paire2 AhIh_56
         // qu'on peut découvrir et expliquer par la requête suivante
         
-        let instance = Paire2.instances(zone: Colonne(nom: "h"), pour: (5, 6), dans: puzzle)[0]
+        let instance = DetectionPaire2.instances(zone: Colonne(nom: "h"), pour: (5, 6), dans: puzzle)[0]
         
-        XCTAssertEqual(instance.paire.nom, "AhIh_56")
+        XCTAssertEqual(instance.paire2.nom, "AhIh_56")
         
         XCTAssertEqual(instance.occupees.map { $0.nom }, ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"])
         
@@ -560,15 +561,41 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
          
          Les cases éliminées pour 5 et 6 à la fois sont ["Hh"]
          Les paires qui ont permis l'élimination de Hh sont [["Hd_5", "Hf_6"]]
-         Les cases occupées dans la colonne sont ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"]
+         Les 6 cases occupées dans la colonne sont ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"]
          Il ne reste alors plus que les deux cellules Ah et Ih. Deux cellules pour deux valeurs, cela forme une paire2.
          
          */
     
+        let litteralAttendu =
+        DetectionPaire2.Litteral(
+            paire2: "AhIh_56",
+            zone: "h",
+            occupees: ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"],
+            eliminees: ["Hh"],
+            pairesEliminatrices: [["Hd_5", "Hf_6"]])
         
+        // Il y avait 3 cellules vides dans la ligne h, la paire en occupe 2,
+        // il n'en reste plus qu'une Hh, pour la veleur 4.
+        let coup = Coup_Paire2.instances(zone: Colonne(nom: "h"), parmi: 3, dans: puzzle)[0]
+        print(coup.litteral)
         
-        
+        let coupAttendu =
+        Coup_Paire2.Litteral (
+            singleton: "Hh_4",
+            zone: "h",
+            occupees: ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"],
+            eliminationsDirectes: [],
+            detectionPaire2: DetectionPaire2.Litteral(
+                paire2: "AhIh_56",
+                zone: "h",
+                occupees: ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"],
+                eliminees: ["Hh"],
+                pairesEliminatrices: [["Hd_5", "Hf_6"]]))
+
+
     }
+    
+
     
     func testTriplet3() {
         let puzzle = Puzzle(chiffres: "000801000005064100060700080250000493090000070406000012010009020002570901000123000")
@@ -608,11 +635,11 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
          */
 
         
-        let instance = Triplet3.instances(zone: Colonne(nom: "h"), pour: (4, 5, 6), dans: puzzle)[0]
+        let instance = DetectionTriplet3.instances(zone: Colonne(nom: "h"), pour: (4, 5, 6), dans: puzzle)[0]
         print()
         XCTAssertEqual(
             instance.litteral,
-            Triplet3.Litteral(triplet: "AhHhIh_456", zone: "h", occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"], eliminees: ["Bh"], tripletsEliminateurs: [["Bf_4", "Bc_5", "Be_6"]])
+            DetectionTriplet3.Litteral(triplet: "AhHhIh_456", zone: "h", occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"], eliminees: ["Bh"], tripletsEliminateurs: [["Bf_4", "Bc_5", "Be_6"]])
         )
     }
     
@@ -721,6 +748,32 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
                 ]
             )
         )
+    }
+    
+    func testPaire2Parmi6() {
+        let puzzle = Puzzle(chiffres: "952678314384521679100349258400002090200000405010400000743065900690037540020004000")
+        /*
+         Ig_7
+         */
+        
+        let coup = Coup_Paire2.instances(zone: Carre(nom: "Pp"), parmi: 6, dans: puzzle)[0]
+        print(coup.litteral)
+        
+        let attendu =
+        Coup_Paire2.Litteral (
+            singleton: "Ig_7",
+            zone: "Pp",
+            occupees: ["Gg", "Hg", "Hh"],
+            eliminationsDirectes: [
+                EliminationDirecte.Litteral(eliminee: "Gi", eliminatrice: "Ga_7"),
+                EliminationDirecte.Litteral(eliminee: "Gh", eliminatrice: "Ga_7"),
+                EliminationDirecte.Litteral(eliminee: "Hi", eliminatrice: "Hf_7")],
+            detectionPaire2: DetectionPaire2.Litteral(
+                paire2: "IhIi_36",
+                zone: "Pp",
+                occupees: ["Gg", "Hg", "Hh"],
+                eliminees: ["Gh", "Gi", "Hi", "Ig"],
+                pairesEliminatrices: [["He_3", "Ha_6"], ["Ag_3", "Bg_6"], ["Gc_3", "Ge_6"]]))
     }
     
     func testLitteralSwift() {

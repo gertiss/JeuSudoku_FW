@@ -10,7 +10,7 @@ import Foundation
 /// Il existe un `triplet` détecté dans la `zone` parce qu'il ne reste plus que deux cellules
 /// pour 2 valeurs en dehors des `occupees` et des `eliminees`.
 /// `tripletsEliminateurs` est l'ensemble des triplets de singletons qui permettent de trouver les éliminées
-struct Triplet3 {
+struct DetectionTriplet3 {
     // Sujet
     let triplet: Presence
     // Parametres
@@ -21,7 +21,7 @@ struct Triplet3 {
 }
 
 
-extension Triplet3 {
+extension DetectionTriplet3 {
     
     var valeurs: [Int] {
         triplet.valeurs.array.sorted()
@@ -34,7 +34,7 @@ extension Triplet3 {
 
 // MARK: - Requetes
     
-extension Triplet3 {
+extension DetectionTriplet3 {
     
     /// Les triplet3 bijectifs découverts (un ou zéro) dans la zone pour le triplet de valeurs.
     static func instances(zone: AnyZone, pour valeurs: (Int, Int, Int), dans puzzle: Puzzle) -> [Self] {
@@ -48,7 +48,7 @@ extension Triplet3 {
             return []
         }
         
-        return [Triplet3(triplet: triplet3, zone: zone, occupees: occupees.array.sorted(), eliminees: eliminees.sorted(), tripletsEliminateurs: tripletsEliminateurs)]
+        return [DetectionTriplet3(triplet: triplet3, zone: zone, occupees: occupees.array.sorted(), eliminees: eliminees.sorted(), tripletsEliminateurs: tripletsEliminateurs)]
     }
 
     // MARK: Utilitaires pour requêtes
@@ -107,7 +107,7 @@ extension Triplet3 {
 // MARK: - Litteral
 
 
-extension Triplet3 {
+extension DetectionTriplet3 {
     
     struct Litteral: UnLitteral {
         
@@ -124,7 +124,7 @@ extension Triplet3 {
 
 }
 
-extension Triplet3: CodableEnLitteral {
+extension DetectionTriplet3: CodableEnLitteral {
     
     var litteral: Self.Litteral {
         Self.Litteral(triplet: triplet.nom, zone: zone.nom, occupees: occupees.map { $0.nom }, eliminees: eliminees.map { $0.litteral }, tripletsEliminateurs: tripletsEliminateurs.map { t in t.map { $0.nom }})

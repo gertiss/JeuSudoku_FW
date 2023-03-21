@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol CodableEnJson: Codable {
+public protocol CodableEnJson {
     
     // Fonctions directes avec fatalError si échec
     
@@ -27,7 +27,9 @@ public protocol CodableEnJson: Codable {
 
 }
 
-public extension CodableEnJson {
+
+
+public extension CodableEnJson where Self: Codable {
     
     // MARK: Encodage
     
@@ -44,6 +46,26 @@ public extension CodableEnJson {
         }
     }
     
+
+    // MARK: Decodage
+    
+    static func avecJsonResult(_ json: String) -> Result<Self, String> {
+        let decoder = JSONDecoder()
+        guard let data = json.data(using: .utf8) else {
+            return .failure("\(Self.self) Decodage: Impossible de créer data. Le code est censé être du json valide en utf8")
+        }
+        do {
+            let instance = try decoder.decode(Self.self, from: data)
+            return .success(instance)
+        } catch {
+            return .failure("\(Self.self) Erreur de décodage json : \(error)")
+        }
+    }
+    
+}
+
+public extension CodableEnJson {
+    
     func jsonThrows() throws -> String {
         switch jsonResult {
         case.success(let code):
@@ -58,23 +80,8 @@ public extension CodableEnJson {
         try! jsonThrows()
     }
 
-    // MARK: Decodage
-    
-    static func avecJsonResult(_ code: String) -> Result<Self, String> where Self: Codable {
-        let decoder = JSONDecoder()
-        guard let data = code.data(using: .utf8) else {
-            return .failure("\(Self.self) Decodage: Impossible de créer data. Le code est censé être du json valide en utf8")
-        }
-        do {
-            let instance = try decoder.decode(Self.self, from: data)
-            return .success(instance)
-        } catch {
-            return .failure("\(Self.self) Erreur de décodage json : \(error)")
-        }
-    }
-    
-    static func avecJsonThrows(_ code: String) throws -> Self {
-        switch avecJsonResult(code) {
+    static func avecJsonThrows(_ json: String) throws -> Self {
+        switch avecJsonResult(json) {
         case .success(let objet):
             return objet
         case .failure(let erreur):
@@ -83,8 +90,8 @@ public extension CodableEnJson {
     }
 
     /// decode depuis json ou sinon fatalError()
-    static func avecJson(_ code: String) throws -> Self {
-        try! avecJsonThrows(code)
+    static func avecJson(_ json: String) -> Self {
+        try! avecJsonThrows(json)
     }
 
 }

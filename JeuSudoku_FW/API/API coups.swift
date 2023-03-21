@@ -45,8 +45,7 @@ public func suiteDesCoups(puzzle: String) -> Result<String, String> {
 // MARK: - API Demonstration
 
 public struct DemonstrationLitterale: UnLitteral, CustomStringConvertible {
-    
-    
+
     public var codeSwift: String {
         "DemonstrationLitterale(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees), auxiliaires: [\(auxiliaires.map { $0.codeSwift }.joined(separator: ", "))]"
     }

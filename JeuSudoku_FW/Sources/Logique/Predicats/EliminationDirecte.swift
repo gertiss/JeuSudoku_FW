@@ -86,10 +86,40 @@ extension EliminationDirecte: CodableEnLitteral {
         }
         
         public var codeSwift: String {
-            "EliminationDirecte.Litteral(cellule: \(eliminee), eliminatrice: \(eliminatrice))"
+            "EliminationDirecte.Litteral(eliminee: \(eliminee.debugDescription), eliminatrice: \(eliminatrice.debugDescription))"
         }
     }
 }
 
 
-
+extension [EliminationDirecte] {
+    
+    /// Minimise l'ensemble des éliminations pour éliminer seulement les cibles
+    /// On suppose que self est suffisant pour les cibles
+    func avecMinimisation(cibles: Region, dans puzzle: Puzzle) -> [EliminationDirecte] {
+        assert(self.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle))
+        var essai = self
+        while essai.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
+            assert(!essai.isEmpty)
+            let reduit = essai.dropFirst().map { $0 }
+            if !reduit.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
+                return essai // suffisant mais pas reductible
+            }
+            essai = reduit
+        }
+        return self
+    }
+    
+    
+    /// l'ensemble des éliminations suffit-il pour éliminer toutes les cibles sauf une ?
+    func estSuffisantPourDetectionSingleton(cibles: Region, dans puzzle: Puzzle) -> Bool {
+        let eliminees = self.eliminees(dans: puzzle)
+        return cibles.intersection(eliminees).count == cibles.count - 1
+    }
+    
+    /// Les cellules éliminées par l'ensemble des éliminations
+    func eliminees(dans puzzle: Puzzle) -> Region {
+        map { $0.eliminee }.ensemble
+    }
+    
+}

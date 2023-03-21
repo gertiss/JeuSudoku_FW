@@ -8,7 +8,7 @@
 import Foundation
 
 /// POurrait permettre de remplacer any UneZone
-enum Zone: UneZone, InstanciableParNom {
+enum Zone: UneZone, InstanciableParNom, CodableEnJson {
     
     case carre(Carre)
     case ligne(Ligne)

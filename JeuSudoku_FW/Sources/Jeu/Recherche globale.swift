@@ -42,6 +42,8 @@ public extension Puzzle {
         // puis élimination directe dans le complémentaire.
         // Complexité 3
         if let coup = coupApresPaire(parmi: 3) {
+            print(codeChiffres)
+            print("paire parmi 3, \(coup.singleton)")
             return coup
         }
 
@@ -51,70 +53,79 @@ public extension Puzzle {
         if let coup = coupApresTriplet(parmi: 4) {
             print(codeChiffres)
             print(texteDessin)
-            print("triplet \(coup.auxiliaires[0].nom)")
+            print("triplet \(coup.auxiliaires[0].nom) parmi 4")
             return coup
         }
         // Paire2 dans une zone avec 4 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 6
         if let coup = coupApresPaire(parmi: 4) {
-            
+            print(codeChiffres)
+            print("paire parmi 4, \(coup.singleton)")
             return coup
         }
         // Paire2 dans une zone avec 5 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Niveau 2.0. Complexité 10
         if let coup = coupApresPaire(parmi: 5) {
-            
+            print(codeChiffres)
+            print("paire parmi 5, \(coup.singleton)")
             return coup
         }
         // Triplet3 dans une zone avec 5 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 10
         if let coup = coupApresTriplet(parmi: 5) {
-            
+            print(codeChiffres)
+            print("triplet \(coup.auxiliaires[0].nom) parmi 5")
             return coup
         }
         // Paire2 dans une zone avec 6 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Niveau 2.6. Complexité 15
         if let coup = coupApresPaire(parmi: 6) {
-            
+            print(codeChiffres)
+            print("paire parmi 6, \(coup.singleton)")
             return coup
         }
         // Triplet3 dans une zone avec 6 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 20
         if let coup = coupApresTriplet(parmi: 6) {
-            
+            print(codeChiffres)
+            print("triplet \(coup.auxiliaires[0].nom) parmi 6")
             return coup
         }
         // Paire2 dans une zone avec 7 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 21
         if let coup = coupApresPaire(parmi: 7) {
-            
+            print(codeChiffres)
+            print("paire parmi 7, \(coup.singleton)")
             return coup
         }
         // Paire2 dans une zone avec 8 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 28
         if let coup = coupApresPaire(parmi: 8) {
-            
+            print(codeChiffres)
+            print("paire parmi 8, \(coup.singleton)")
             return coup
         }
         // Triplet3 dans une zone avec 7 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 35
         if let coup = coupApresTriplet(parmi: 7) {
-            
+            print(codeChiffres)
+            print("triplet \(coup.auxiliaires[0].nom) parmi 7")
             return coup
         }
         // Paire2 dans une zone avec 9 cellules libres,
         // puis élimination directe dans le complémentaire.
         // Complexité 36
         if let coup = coupApresPaire(parmi: 9) {
-            
+            print(codeChiffres)
+            print("paire parmi 9, \(coup.singleton)")
             return coup
         }
         //
@@ -122,7 +133,8 @@ public extension Puzzle {
         // puis élimination directe dans le complémentaire.
         // Complexité 56
         if let coup = coupApresTriplet(parmi: 8) {
-            
+            print(codeChiffres)
+            print("triplet \(coup.auxiliaires[0].nom) parmi 8")
             return coup
         }
 
@@ -132,6 +144,8 @@ public extension Puzzle {
         // Recherche combinatoire globale ne correspondant pas à une perception humaine.
         // C'est un coup "joker" quand on ne trouve rien d'autre.
         if let coup = coupUniqueValeurCandidate {
+            print(codeChiffres)
+            print("unique valeur \(coup.singleton)")
             return coup
         }
         
