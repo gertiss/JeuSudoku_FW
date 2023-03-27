@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 public struct Carre {
     

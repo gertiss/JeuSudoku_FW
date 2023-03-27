@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées. Certaines éliminations sont indirectes par paire1.
 struct Coup_EliminationIndirecte {
@@ -60,6 +61,7 @@ extension Coup_EliminationIndirecte {
 }
 
 extension Coup_EliminationIndirecte: CodableEnLitteral {
+    typealias Litteral = Coup_EliminationIndirecte_
     
     public var litteral: Self.Litteral {
         Litteral(
@@ -80,30 +82,31 @@ extension Coup_EliminationIndirecte: CodableEnLitteral {
         self.eliminationsDirectes = litteral.explicationDesDirectes.map { EliminationDirecte(litteral: $0) }
         self.eliminationsIndirectes = litteral.explicationDesIndirectes.map { EliminationIndirecte(litteral: $0) }
     }
-    
-    struct Litteral: UnLitteral {
-        
-        let singleton: String
-        let zone: String
-        let occupees: [String]
-        let elimineesDirectement: [String]
-        let elimineesIndirectement: [String]
-        
-        let explicationDesDirectes: [EliminationDirecte.Litteral]
-        let explicationDesIndirectes: [EliminationIndirecte.Litteral]
-        
 
-        var codeSwift: String {
-            """
-Coup_EliminationIndirecte.Litteral (
-    singleton: \(singleton),
-    zone: \(zone),
-    occupees: \(occupees),
-    elimineesDirectement: \(elimineesDirectement),
-    elimineesIndirectement: \(elimineesIndirectement),
-    explicationDesDirectes: \(explicationDesDirectes),
-    explicationDesIndirectes: \(explicationDesIndirectes)
+}
+
+public struct Coup_EliminationIndirecte_: UnLitteral {
+    
+    public let singleton: String
+    public let zone: String
+    public let occupees: [String]
+    public let elimineesDirectement: [String]
+    public let elimineesIndirectement: [String]
+    
+    public let explicationDesDirectes: [EliminationDirecte_]
+    public let explicationDesIndirectes: [EliminationIndirecte_]
+    
+
+    public var codeSwift: String {
+        """
+Coup_EliminationIndirecte_ (
+singleton: \(singleton),
+zone: \(zone),
+occupees: \(occupees),
+elimineesDirectement: \(elimineesDirectement),
+elimineesIndirectement: \(elimineesIndirectement),
+explicationDesDirectes: \(explicationDesDirectes),
+explicationDesIndirectes: \(explicationDesIndirectes))
 """
-        }
     }
 }

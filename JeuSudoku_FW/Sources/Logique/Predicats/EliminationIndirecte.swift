@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Les `eliminees` sont des cellules vides  éliminées indirectement par les `eliminatrices` dans la zone.
 /// Les éliminatrices sont des paires1 de même valeur.
@@ -53,8 +54,9 @@ extension EliminationIndirecte {
 
 
 extension EliminationIndirecte: CodableEnLitteral {
+    typealias Litteral = EliminationIndirecte_
     
-    public var litteral: Self.Litteral {
+    public var litteral: Litteral {
         Self.Litteral(eliminees: eliminees.map {$0.nom}, zone: zone.nom, eliminatrices: eliminatrices.map { $0.litteral })
     }
     
@@ -63,15 +65,14 @@ extension EliminationIndirecte: CodableEnLitteral {
         self.zone = Grille.laZone(nom: litteral.zone)
         self.eliminatrices = litteral.eliminatrices.map { DetectionPaire1(litteral: $0) }
     }
+}
 
-    struct Litteral: UnLitteral {
-        let eliminees: [String]
-        let zone: String
-        let eliminatrices: [DetectionPaire1.Litteral]
-        
-        var codeSwift: String {
-            "EliminationIndirecte.Litteral(eliminees: \(eliminees), zone: \(zone), eliminatrices: \(eliminatrices))"
-        }
-    }
+public struct EliminationIndirecte_: UnLitteral {
+    public let eliminees: [String]
+    public let zone: String
+    public let eliminatrices: [DetectionPaire1_]
     
+    public var codeSwift: String {
+        "EliminationIndirecte_(eliminees: \(eliminees), zone: \(zone), eliminatrices: \(eliminatrices))"
+    }
 }

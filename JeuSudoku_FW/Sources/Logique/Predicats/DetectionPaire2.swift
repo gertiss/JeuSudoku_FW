@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Il existe une `paire` détectée dans la zone parce qu'il ne reste plus que deux cellules
 /// pour 2 valeurs en dehors des occupées et et des éliminées
@@ -98,6 +99,7 @@ extension DetectionPaire2 {
 }
 
 extension DetectionPaire2: CodableEnLitteral {
+    typealias Litteral = DetectionPaire2_
     
     var litteral: Self.Litteral {
         Self.Litteral(paire2: paire2.litteral, zone: zone.litteral, occupees: occupees.map { $0.litteral }, eliminees: eliminees.map { $0.litteral }, pairesEliminatrices: pairesEliminatrices.map { $0.map { $0.litteral }} )
@@ -110,24 +112,24 @@ extension DetectionPaire2: CodableEnLitteral {
         self.eliminees = litteral.eliminees.map { Cellule(litteral: $0.litteral) }
         self.pairesEliminatrices = litteral.pairesEliminatrices.map { $0.map { Presence(litteral: $0)} }
     }
+
+}
+
+public struct DetectionPaire2_: UnLitteral {
+    public let paire2: String
+    public let zone: String
+    public let occupees: [String]
+    public let eliminees: [String]
+    public let pairesEliminatrices: [[String]]
     
-    struct Litteral: UnLitteral {
-        let paire2: String
-        let zone: String
-        let occupees: [String]
-        let eliminees: [String]
-        let pairesEliminatrices: [[String]]
-        
-        
-        var codeSwift: String {
-            """
-DetectionPaire2.Litteral(
-    paire2: \(paire2.debugDescription),
-    zone: \(zone.debugDescription),
-    occupees: \(occupees.debugDescription),
-    eliminees: \(eliminees.debugDescription),
-    pairesEliminatrices: \(pairesEliminatrices.debugDescription))
+    public var codeSwift: String {
+        """
+DetectionPaire2_(
+paire2: \(paire2.debugDescription),
+zone: \(zone.debugDescription),
+occupees: \(occupees.debugDescription),
+eliminees: \(eliminees.debugDescription),
+pairesEliminatrices: \(pairesEliminatrices.debugDescription))
 """
-        }
     }
 }

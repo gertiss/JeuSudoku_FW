@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 
 /// Prédicats dont le sujet est une cellule
@@ -64,6 +65,7 @@ extension EliminationDirecte {
 
 
 extension EliminationDirecte: CodableEnLitteral {
+    typealias Litteral = EliminationDirecte_
     
     public var litteral: Self.Litteral {
         Self.Litteral(eliminee: eliminee.nom, eliminatrice: eliminatrice.nom)
@@ -75,20 +77,7 @@ extension EliminationDirecte: CodableEnLitteral {
     }
     
     /// Mêmes champs, avec les noms
-    public  struct Litteral: UnLitteral {
-        
-        let eliminee: String
-        let eliminatrice: String
-        
-        public init(eliminee: String, eliminatrice: String) {
-            self.eliminee = eliminee
-            self.eliminatrice = eliminatrice
-        }
-        
-        public var codeSwift: String {
-            "EliminationDirecte.Litteral(eliminee: \(eliminee.debugDescription), eliminatrice: \(eliminatrice.debugDescription))"
-        }
-    }
+
 }
 
 
@@ -99,7 +88,7 @@ extension [EliminationDirecte] {
     func avecMinimisation(cibles: Region, dans puzzle: Puzzle) -> [EliminationDirecte] {
         assert(self.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle))
         var essai = self
-        while essai.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
+        while essai.count > 1 && essai.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
             assert(!essai.isEmpty)
             let reduit = essai.dropFirst().map { $0 }
             if !reduit.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
@@ -122,4 +111,19 @@ extension [EliminationDirecte] {
         map { $0.eliminee }.ensemble
     }
     
+}
+
+public struct EliminationDirecte_: UnLitteral {
+    
+    public let eliminee: String
+    public let eliminatrice: String
+    
+    public init(eliminee: String, eliminatrice: String) {
+        self.eliminee = eliminee
+        self.eliminatrice = eliminatrice
+    }
+    
+    public var codeSwift: String {
+        "EliminationDirecte_(eliminee: \(eliminee.debugDescription), eliminatrice: \(eliminatrice.debugDescription))"
+    }
 }

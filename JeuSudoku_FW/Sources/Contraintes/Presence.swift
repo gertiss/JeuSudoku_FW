@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Une Presence est une contrainte qui affirme que les `valeurs` doivent être obligatoirement présentes dans la `region`
 /// Voir les protocoles pour les méthodes par défaut

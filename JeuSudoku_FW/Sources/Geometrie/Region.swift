@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 public typealias Region = Set<Cellule>
 
 
-extension Region: InstanciableParNom, CodableEnLitteral, Identifiable, Comparable, CodableEnJson {
+extension Region: InstanciableParNom, AvecLangage, CodableEnLitteral, Comparable, CodableEnJson {
     
     /// [C(0,0), C(0,1)] -> "AaAb"
     public var nom: String {
@@ -37,8 +38,6 @@ extension Region: InstanciableParNom, CodableEnLitteral, Identifiable, Comparabl
     public static func < (lhs: Self, rhs: Self) -> Bool {
         lhs.litteral < rhs.litteral
     }
-
-    
 
 }
 

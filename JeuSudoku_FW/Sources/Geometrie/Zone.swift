@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// POurrait permettre de remplacer any UneZone
 enum Zone: UneZone, InstanciableParNom, CodableEnJson {

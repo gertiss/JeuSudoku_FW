@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Les faits nécessaires à la démonstration du coup `presence`.
 /// Quel que soit le puzzle, si ces faits sont vérifiés, alors le coup est démontré.

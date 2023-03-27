@@ -44,7 +44,7 @@ public func nom(presence: Presence) -> String {
     presence.nom
 }
 
-// MARK: - AnyCellule
+// MARK: - Cellule
 
 public func indexLigne(cellule: Cellule) -> Int {
     cellule.indexLigne

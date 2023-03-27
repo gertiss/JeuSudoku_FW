@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 // MARK: - API coups
 

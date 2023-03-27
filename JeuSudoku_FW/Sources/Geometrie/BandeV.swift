@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Une bande verticale formée de 3 colonnes
 public struct BandeV: InstanciableParNom, CodableEnJson {

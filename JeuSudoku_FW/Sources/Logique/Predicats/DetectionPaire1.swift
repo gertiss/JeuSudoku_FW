@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// La `paire1` alignée est détectée dans la zone parce qu'il ne reste plus que deux cellules alignées
 /// pour une valeur en dehors des occupées et et des éliminées
@@ -76,6 +77,7 @@ extension DetectionPaire1 {
 // MARK: - Litteral
 
 extension DetectionPaire1: CodableEnLitteral {
+    typealias Litteral = DetectionPaire1_
     
     var litteral: Self.Litteral {
         Self.Litteral(paire1: paire1.litteral, zone: zone.litteral, occupees: occupees.map { $0.litteral }, eliminees: eliminees.map { $0.litteral }, eliminatrices: eliminatrices.map { $0.litteral } )
@@ -90,19 +92,20 @@ extension DetectionPaire1: CodableEnLitteral {
     }
     
     /// Les attributs de Paire1.Litteral correspondent directement aux littéraux des attributs de Paire1
-    struct Litteral: UnLitteral {
-        let paire1: String
-        
-        let zone: String
-        let occupees: [String]
-        let eliminees: [String]
-        let eliminatrices: [String]
-        
-        var codeSwift: String {
-            "DetectionPaire1.Litteral(paire1: \(paire1.description), zone: \(zone.description), occupees: \(occupees.description), eliminees: \(eliminees.description), eliminatrices: \(eliminatrices.description))"
-        }
-
-    }
     
+}
+
+public struct DetectionPaire1_: UnLitteral {
+    public let paire1: String
+    
+    public let zone: String
+    public let occupees: [String]
+    public let eliminees: [String]
+    public let eliminatrices: [String]
+    
+    public var codeSwift: String {
+        "DetectionPaire1_(paire1: \(paire1.description), zone: \(zone.description), occupees: \(occupees.description), eliminees: \(eliminees.description), eliminatrices: \(eliminatrices.description))"
+    }
+
 }
 

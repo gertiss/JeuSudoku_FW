@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Il existe un `triplet` détecté dans la `zone` parce qu'il ne reste plus que deux cellules
 /// pour 2 valeurs en dehors des `occupees` et des `eliminees`.
@@ -109,22 +110,12 @@ extension DetectionTriplet3 {
 
 extension DetectionTriplet3 {
     
-    struct Litteral: UnLitteral {
-        
-        let triplet: String
-        let zone: String
-        let occupees: [String]
-        let eliminees: [String]
-        let tripletsEliminateurs: [[String]]
-        
-        var codeSwift: String {
-            "Triplet3.Litteral(triplet: \(triplet), zone: \(zone), occupees: \(occupees), eliminees: \(eliminees), tripletsEliminateurs: \(tripletsEliminateurs))"
-        }
-    }
+
 
 }
 
 extension DetectionTriplet3: CodableEnLitteral {
+    typealias Litteral = DetectionTriplet3_
     
     var litteral: Self.Litteral {
         Self.Litteral(triplet: triplet.nom, zone: zone.nom, occupees: occupees.map { $0.nom }, eliminees: eliminees.map { $0.litteral }, tripletsEliminateurs: tripletsEliminateurs.map { t in t.map { $0.nom }})
@@ -136,5 +127,18 @@ extension DetectionTriplet3: CodableEnLitteral {
         self.occupees = litteral.occupees.map { Cellule(nom: $0) }
         self.eliminees = litteral.eliminees.map { Cellule(nom: $0) }
         self.tripletsEliminateurs = litteral.tripletsEliminateurs.map { t in t.map { Presence(nom: $0) }}
+    }
+}
+
+public struct DetectionTriplet3_: UnLitteral {
+    
+    public let triplet: String
+    public let zone: String
+    public let occupees: [String]
+    public let eliminees: [String]
+    public let tripletsEliminateurs: [[String]]
+    
+    public var codeSwift: String {
+        "DetectionTriplet3_(triplet: \(triplet.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminees: \(eliminees), tripletsEliminateurs: \(tripletsEliminateurs))"
     }
 }

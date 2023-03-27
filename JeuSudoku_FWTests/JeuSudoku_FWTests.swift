@@ -448,9 +448,12 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         /// grâce à ses static func `instances`.
         
         let puzzle = Puzzle.difficilesA[0]
+        print(puzzle.codeChiffres)
         print(puzzle.texteDessin)
         
         /*
+         570060003030005060601007000053000001000080000900000270000800402080100030200040019
+         
          57· ·6· ··3
          ·3· ··5 ·6·
          6·1 ··7 ···
@@ -476,6 +479,22 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
             .map { $0.eliminee.nom }.sorted()
         XCTAssertEqual(eliminees, ["Ba", "Bc"])
         
+        /*
+         coup : Eg_3 dans Np à cause de Ai_3, Dc_3, Hh_3
+         */
+        let coup = Coup_EliminationDirecte.instances(valeur: 3, zone: Carre(nom: "Np"), dans: puzzle)[0]
+        XCTAssertEqual(
+            coup.litteral,
+            Coup_EliminationDirecte.Litteral (
+                singleton: "Eg_3",
+                zone: "Np",
+                occupees: ["Di", "Fg", "Fh"],
+                eliminees: ["Dg", "Dh", "Eh", "Ei", "Fi"],
+                eliminatrices: ["Ai_3", "Dc_3", "Hh_3"]
+            )
+        )
+        
+        print(coup)
     }
     
     func testReglePaire1() {
@@ -543,14 +562,14 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         // Ce coup est trouvé grâce à une paire2 AhIh_56
         // qu'on peut découvrir et expliquer par la requête suivante
         
-        let instance = DetectionPaire2.instances(zone: Colonne(nom: "h"), pour: (5, 6), dans: puzzle)[0]
+        let detectionPaire2 = DetectionPaire2.instances(zone: Colonne(nom: "h"), pour: (5, 6), dans: puzzle)[0]
         
-        XCTAssertEqual(instance.paire2.nom, "AhIh_56")
+        XCTAssertEqual(detectionPaire2.paire2.nom, "AhIh_56")
         
-        XCTAssertEqual(instance.occupees.map { $0.nom }, ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"])
+        XCTAssertEqual(detectionPaire2.occupees.map { $0.nom }, ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"])
         
-        XCTAssertEqual(instance.eliminees.map { $0.nom }, ["Hh"])
-        XCTAssertEqual(instance.pairesEliminatrices[0].map { $0.nom }, ["Hd_5", "Hf_6"])
+        XCTAssertEqual(detectionPaire2.eliminees.map { $0.nom }, ["Hh"])
+        XCTAssertEqual(detectionPaire2.pairesEliminatrices[0].map { $0.nom }, ["Hd_5", "Hf_6"])
 
         /*
          Ce qui signifie :
@@ -573,6 +592,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
             occupees: ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"],
             eliminees: ["Hh"],
             pairesEliminatrices: [["Hd_5", "Hf_6"]])
+        XCTAssertEqual(detectionPaire2.litteral, litteralAttendu)
         
         // Il y avait 3 cellules vides dans la ligne h, la paire en occupe 2,
         // il n'en reste plus qu'une Hh, pour la veleur 4.
@@ -580,7 +600,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         print(coup.litteral)
         
         let coupAttendu =
-        Coup_Paire2.Litteral (
+        Coup_Paire2_ (
             singleton: "Hh_4",
             zone: "h",
             occupees: ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"],
@@ -591,8 +611,11 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
                 occupees: ["Bh", "Ch", "Dh", "Eh", "Fh", "Gh"],
                 eliminees: ["Hh"],
                 pairesEliminatrices: [["Hd_5", "Hf_6"]]))
-
-
+        
+        XCTAssertEqual (
+            coup.litteral,
+            coupAttendu
+        )
     }
     
 
@@ -604,11 +627,11 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
          ··· 8·1 ···
          ··5 ·64 1.·
          ·6· 7·· ·8·
-
+         
          25· 61· 493
          ·9· ·4· ·7·
          4·6 ··· ·12
-
+         
          ·1· 489 32·
          ··2 576 9·1
          ··· 123 ···
@@ -633,7 +656,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
          restantes après occupées et triplet 5+3 :  (1) : Bh
          coup = Bh_3
          */
-
+        
         
         let instance = DetectionTriplet3.instances(zone: Colonne(nom: "h"), pour: (4, 5, 6), dans: puzzle)[0]
         print()
@@ -641,6 +664,25 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
             instance.litteral,
             DetectionTriplet3.Litteral(triplet: "AhHhIh_456", zone: "h", occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"], eliminees: ["Bh"], tripletsEliminateurs: [["Bf_4", "Bc_5", "Be_6"]])
         )
+        
+        let coups = Coup_Triplet3.instances(zone: Colonne(nom: "h"), parmi: 4, dans: puzzle)
+        XCTAssertEqual(coups.count, 1)
+        let coup = coups[0]
+        
+        print(coup.litteral)
+        print(coup.litteral.codeSwift)
+        
+        
+        let coupAttendu =
+        Coup_Triplet3_ (
+            singleton: "Bh_3",
+            zone: "h",
+            occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"],
+            eliminationsDirectes: [EliminationDirecte_(eliminee: "Ih", eliminatrice: "If_3")],
+            detectionTriplet3: DetectionTriplet3_(triplet: "AhHhIh_456", zone: "h", occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"], eliminees: ["Bh"], tripletsEliminateurs: [["Bf_4", "Bc_5", "Be_6"]]))
+        
+        XCTAssertEqual(coup.litteral, coupAttendu)
+        
     }
     
     func testDeuxPaires1() {
@@ -781,7 +823,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         XCTAssertEqual(0.123.litteral, "0.123")
         XCTAssertEqual(true.litteral, "true")
         XCTAssertEqual(false.litteral, "false")
-        XCTAssertEqual("abc".litteral, "\"abc\"")
+        XCTAssertEqual("abc".litteral, "abc")
         
         XCTAssertEqual(Int(litteral: "123"), 123)
         XCTAssertEqual(Double(litteral: "0.123"), 0.123)

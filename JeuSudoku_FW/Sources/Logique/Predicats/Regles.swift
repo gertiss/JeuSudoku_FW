@@ -20,30 +20,6 @@ struct Coup_DerniereCellule {
     let occupees: [Cellule]
 }
 
-/// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées
-struct Coup_EliminationDirecte {
-    // Sujet
-    let singleton: Presence
-    // Parametres
-    let zone: AnyZone
-    let occupees: [Cellule]
-    let eliminees: [EliminationDirecte]
-}
-
-
-
-
-/// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées. et du triplet3
-struct Coup_Triplet3 {
-    // Sujet
-    let singleton: Presence
-    // Parametres
-    let zone: AnyZone
-    let occupees: [Cellule]
-    let eliminees: [EliminationDirecte]
-    let triplet3: DetectionTriplet3
-}
-
 /// Le singleton est détecté parce qu'il est dans le champ d'élimination de 8 valeurs distinctes.
 struct Singleton_DerniereValeur {
     // Sujet

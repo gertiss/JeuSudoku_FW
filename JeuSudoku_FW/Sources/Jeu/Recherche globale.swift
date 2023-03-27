@@ -12,8 +12,8 @@ public extension Puzzle {
     /// La stratégie de recherche globale de plus haut niveau :
     /// quel est le premier coup nouveau qu'on peut trouver à partir de l'état actuel ?
     /// Toutes les fonctions de recherche utilisées retournent un coup ou nil.
-    /// On garantit que le coup découvre un singleton valide non encore dans l'état actuel.
-    /// Classement : la méthode la moins combinatoire d'abord.
+    /// On garantit que le coup découvre un singleton valide qui ne figure pas dans l'état actuel.
+    /// Ordre des essais : la méthode la moins combinatoire d'abord.
     var premierCoup: Coup? {
         
         // Niveau 1.0 : dernière cellule vide dans une zone, valeur obligée.
