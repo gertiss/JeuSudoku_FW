@@ -14,7 +14,7 @@ public extension Puzzle {
     /// Toutes les fonctions de recherche utilisées retournent un coup ou nil.
     /// On garantit que le coup découvre un singleton valide qui ne figure pas dans l'état actuel.
     /// Ordre des essais : la méthode la moins combinatoire d'abord.
-    var premierCoup: Coup? {
+    var premierCoup: CoupOld? {
         
         // Niveau 1.0 : dernière cellule vide dans une zone, valeur obligée.
         // complexité 1

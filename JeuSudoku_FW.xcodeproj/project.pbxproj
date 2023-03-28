@@ -20,10 +20,12 @@
 		5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258829AB633600AE3362 /* Detection par elimination.swift */; };
 		5062258B29AB8D4300AE3362 /* Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258A29AB8D4300AE3362 /* Detection.swift */; };
 		506841A029A917F300395531 /* Detection locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068419F29A917F300395531 /* Detection locale.swift */; };
-		506DCFF429BCE06700B05168 /* Regles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506DCFF329BCE06700B05168 /* Regles.swift */; };
+		506DCFF429BCE06700B05168 /* Coup_DerniereValeur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506DCFF329BCE06700B05168 /* Coup_DerniereValeur.swift */; };
 		506EF95129C23B2A0088F5C1 /* SingletonEliminateur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */; };
 		506F334B29D16BB500148AAC /* Modelisation_FW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506F334A29D16BB500148AAC /* Modelisation_FW.framework */; };
 		506F334C29D16BB500148AAC /* Modelisation_FW.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 506F334A29D16BB500148AAC /* Modelisation_FW.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		506F334F29D16EC400148AAC /* Coup_DerniereCellule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */; };
+		506F335329D1EA9C00148AAC /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F335229D1EA9C00148AAC /* Coup.swift */; };
 		507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507ADB1829ACE79C00D793D5 /* Verification.swift */; };
 		507B255B29AE6E20009217A8 /* API coups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B255A29AE6E20009217A8 /* API coups.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
@@ -45,9 +47,8 @@
 		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
 		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
 		50A5FB2729B8FC8F001EC2B3 /* API communication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A5FB2629B8FC8F001EC2B3 /* API communication.swift */; };
-		50A8E92029B4E988005ED674 /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8E91F29B4E988005ED674 /* Coup.swift */; };
+		50A8E92029B4E988005ED674 /* CoupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8E91F29B4E988005ED674 /* CoupOld.swift */; };
 		50A8EABA29C3037700DE43C7 /* EliminationIndirecte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */; };
-		50A8EABC29C31C7A00DE43C7 /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8EABB29C31C7A00DE43C7 /* Zone.swift */; };
 		50BF6CE129B7A23A0028F583 /* API VueGT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE029B7A23A0028F583 /* API VueGT.swift */; };
 		50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE229B7AB250028F583 /* API Exemples.swift */; };
 		50D4AE6129C89C1A000B9797 /* Coup_Paire2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */; };
@@ -98,9 +99,11 @@
 		5062258A29AB8D4300AE3362 /* Detection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detection.swift; sourceTree = "<group>"; };
 		5068419E29A8ED8B00395531 /* Jeu doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Jeu doc.md"; sourceTree = "<group>"; };
 		5068419F29A917F300395531 /* Detection locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection locale.swift"; sourceTree = "<group>"; };
-		506DCFF329BCE06700B05168 /* Regles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regles.swift; sourceTree = "<group>"; };
+		506DCFF329BCE06700B05168 /* Coup_DerniereValeur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_DerniereValeur.swift; sourceTree = "<group>"; };
 		506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonEliminateur.swift; sourceTree = "<group>"; };
 		506F334A29D16BB500148AAC /* Modelisation_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Modelisation_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_DerniereCellule.swift; sourceTree = "<group>"; };
+		506F335229D1EA9C00148AAC /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
 		507ADB1829ACE79C00D793D5 /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		507B255A29AE6E20009217A8 /* API coups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API coups.swift"; sourceTree = "<group>"; };
 		507B255C29AE6E9E009217A8 /* API doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "API doc.md"; sourceTree = "<group>"; };
@@ -125,9 +128,8 @@
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
 		50A5FB1729B87AFA001EC2B3 /* Logique doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Logique doc.md"; sourceTree = "<group>"; };
 		50A5FB2629B8FC8F001EC2B3 /* API communication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API communication.swift"; sourceTree = "<group>"; };
-		50A8E91F29B4E988005ED674 /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
+		50A8E91F29B4E988005ED674 /* CoupOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupOld.swift; sourceTree = "<group>"; };
 		50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminationIndirecte.swift; sourceTree = "<group>"; };
-		50A8EABB29C31C7A00DE43C7 /* Zone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		50BF6CE029B7A23A0028F583 /* API VueGT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API VueGT.swift"; sourceTree = "<group>"; };
 		50BF6CE229B7AB250028F583 /* API Exemples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Exemples.swift"; sourceTree = "<group>"; };
 		50CAD39B29A61F0E004917C2 /* Geometrie doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Geometrie doc.md"; sourceTree = "<group>"; };
@@ -164,7 +166,9 @@
 		5006C16F29BF183D00D82A2E /* Predicats */ = {
 			isa = PBXGroup;
 			children = (
-				506DCFF329BCE06700B05168 /* Regles.swift */,
+				506F335229D1EA9C00148AAC /* Coup.swift */,
+				506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */,
+				506DCFF329BCE06700B05168 /* Coup_DerniereValeur.swift */,
 				50FEA34729D0334D00CBDF74 /* Coup_EliminationDirecte.swift */,
 				5098E62E29C4876700821414 /* Coup_EliminationIndirecte.swift */,
 				50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */,
@@ -185,7 +189,7 @@
 				5068419E29A8ED8B00395531 /* Jeu doc.md */,
 				50FFEF8529B33B9D001717BB /* Recherche globale.swift */,
 				50EB023529B5C6FB00AA82CD /* Combinatoire.swift */,
-				50A8E91F29B4E988005ED674 /* Coup.swift */,
+				50A8E91F29B4E988005ED674 /* CoupOld.swift */,
 				502A302929AA54CB00C198EB /* Elimination.swift */,
 				5068419F29A917F300395531 /* Detection locale.swift */,
 				5062258A29AB8D4300AE3362 /* Detection.swift */,
@@ -298,7 +302,6 @@
 				505215E2299FE5CC00DEDF57 /* Region.swift */,
 				50D191D529A64E47000CFA64 /* Contraintes doc.md */,
 				5032C3882994E7060047E3BA /* UneZone.swift */,
-				50A8EABB29C31C7A00DE43C7 /* Zone.swift */,
 				509EC75A298980C0004B1139 /* Carre.swift */,
 				509EC75C298980CE004B1139 /* Ligne.swift */,
 				509EC75E298980D9004B1139 /* Colonne.swift */,
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5087CCCB29BB687D0045EEEF /* ExemplesDemonstrations.swift in Sources */,
+				506F334F29D16EC400148AAC /* Coup_DerniereCellule.swift in Sources */,
 				50FEA34829D0334D00CBDF74 /* Coup_EliminationDirecte.swift in Sources */,
 				50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */,
 				506841A029A917F300395531 /* Detection locale.swift in Sources */,
@@ -450,7 +454,7 @@
 				50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */,
 				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
 				507B255B29AE6E20009217A8 /* API coups.swift in Sources */,
-				506DCFF429BCE06700B05168 /* Regles.swift in Sources */,
+				506DCFF429BCE06700B05168 /* Coup_DerniereValeur.swift in Sources */,
 				50BF6CE129B7A23A0028F583 /* API VueGT.swift in Sources */,
 				50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */,
 				50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */,
@@ -465,9 +469,9 @@
 				5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */,
-				50A8EABC29C31C7A00DE43C7 /* Zone.swift in Sources */,
-				50A8E92029B4E988005ED674 /* Coup.swift in Sources */,
+				50A8E92029B4E988005ED674 /* CoupOld.swift in Sources */,
 				50FEA34A29D0A84500CBDF74 /* Coup_Triplet3.swift in Sources */,
+				506F335329D1EA9C00148AAC /* Coup.swift in Sources */,
 				508B291429A0AA3B006BDBA6 /* UneContrainte.swift in Sources */,
 				509EC75F298980DA004B1139 /* Colonne.swift in Sources */,
 				509EC75D298980CE004B1139 /* Ligne.swift in Sources */,

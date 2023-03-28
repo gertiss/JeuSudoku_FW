@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Modelisation_FW
 
 /// Un Puzzle est défini par un ensemble de contraintes et le problème à résoudre est de réduire cet ensemble à un ensemble équivalent de 81 singletons (une valeur, une cellule)
 public struct Puzzle: Equatable  {
@@ -146,3 +147,18 @@ public extension Puzzle {
         CodagePuzzle(code).texteDessin
     }
 }
+
+public typealias Puzzle_ = String
+
+extension Puzzle: CodableEnLitteral {
+    public typealias Litteral = Puzzle_
+    
+    public var litteral: Puzzle_ {
+        codeChiffres
+    }
+    
+    public init(litteral: Puzzle_) {
+        self = Self(chiffres: litteral)
+    }
+}
+

@@ -108,8 +108,8 @@ extension DetectionPaire2: CodableEnLitteral {
     init(litteral: Self.Litteral) {
         self.paire2 = Presence(litteral: litteral.paire2)
         self.zone = Grille.laZone(litteral: litteral.zone)
-        self.occupees = litteral.occupees.map { Cellule(litteral: $0.litteral) }
-        self.eliminees = litteral.eliminees.map { Cellule(litteral: $0.litteral) }
+        self.occupees = litteral.occupees.map { Cellule(litteral: $0) }
+        self.eliminees = litteral.eliminees.map { Cellule(litteral: $0) }
         self.pairesEliminatrices = litteral.pairesEliminatrices.map { $0.map { Presence(litteral: $0)} }
     }
 

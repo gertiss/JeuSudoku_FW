@@ -76,7 +76,7 @@ extension Cellule {
 
 // MARK: - InstanciableParNom
 
-extension Cellule: InstanciableParNom {
+extension Cellule: InstanciableParNom, CodableEnLitteral {
     
     /// InstanciableParNom
     /// Exemple :  `Cellule(0, 0)` a pour nom `"Aa"`

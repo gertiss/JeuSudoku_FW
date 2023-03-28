@@ -816,20 +816,84 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
                 occupees: ["Gg", "Hg", "Hh"],
                 eliminees: ["Gh", "Gi", "Hi", "Ig"],
                 pairesEliminatrices: [["He_3", "Ha_6"], ["Ag_3", "Bg_6"], ["Gc_3", "Ge_6"]]))
+        
+        XCTAssertEqual(
+            Coup_.paire2(attendu),
+            Coup_.paire2(Coup_Paire2_ (
+                singleton: "Ig_7",
+                zone: "Pp",
+                occupees: ["Gg", "Hg", "Hh"],
+                eliminationsDirectes: [EliminationDirecte_(eliminee: "Gi", eliminatrice: "Ga_7"), EliminationDirecte_(eliminee: "Gh", eliminatrice: "Ga_7"), EliminationDirecte_(eliminee: "Hi", eliminatrice: "Hf_7")],
+                detectionPaire2: DetectionPaire2_(
+                    paire2: "IhIi_36",
+                    zone: "Pp",
+                    occupees: ["Gg", "Hg", "Hh"],
+                    eliminees: ["Gh", "Gi", "Hi", "Ig"],
+                    pairesEliminatrices: [["He_3", "Ha_6"], ["Ag_3", "Bg_6"], ["Gc_3", "Ge_6"]])))
+        )
     }
     
-    func testLitteralSwift() {
-        XCTAssertEqual(123.litteral, "123")
-        XCTAssertEqual(0.123.litteral, "0.123")
-        XCTAssertEqual(true.litteral, "true")
-        XCTAssertEqual(false.litteral, "false")
-        XCTAssertEqual("abc".litteral, "abc")
+    
+    func testCodeSwift() {
+        XCTAssertEqual("abc".codeSwift, "\"abc\"")
+    }
+    
+    func testCoup_DerniereCellule_() {
+        let coup_ = Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"])
+        print(coup_)
+        /*
+         Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"])
+         */
+        let coup = Coup_DerniereCellule(litteral: coup_)
+        print(coup)
+        /*
+         Coup_DerniereCellule(litteral: Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"]))
+         */
+        print(coup_.description)
+        let coupBis = Coup_DerniereCellule(
+            litteral: Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"]))
+        XCTAssertEqual(coupBis, coup)
+
+    }
+    
+    func testCoup_DerniereCellule() {
+        let puzzle = Puzzle(chiffres: "002876130000090000300040007403008200600724308820030045000010000140080063030050081")
+        print(puzzle.texteDessin)
+
+        let attendu_ = Coup_DerniereCellule_(singleton: "De_6", zone: "e", occupees: ["Ae", "Be", "Ce", "Ee", "Fe", "Ge", "He", "Ie"])
         
-        XCTAssertEqual(Int(litteral: "123"), 123)
-        XCTAssertEqual(Double(litteral: "0.123"), 0.123)
-        XCTAssertEqual(Bool(litteral: "true"), true)
-        XCTAssertEqual(Bool(litteral: "false"), false)
-        XCTAssertEqual(String(litteral: "\"abc\""), "abc")
- }
+        let coups = Coup_DerniereCellule.instances(zone: Colonne(nom: "e"), dans: puzzle)
+        XCTAssert(coups.count == 1)
+        let coup = coups.uniqueElement
+        XCTAssertEqual(coup.litteral, attendu_)
+        
+        let leCoup: Coup = .derniereCellule(coup)
+        print(leCoup.codeSwift)
+        print(leCoup)
+        
+        let litteralCoup = Coup_.derniereCellule(Coup_DerniereCellule_(singleton: "De_6", zone: "e", occupees: ["Ae", "Be", "Ce", "Ee", "Fe", "Ge", "He", "Ie"]))
+        
+        print(litteralCoup) // OK
+        
+        let coupDepuisPrint = Coup.derniereCellule(Coup_DerniereCellule(litteral: Coup_DerniereCellule_(singleton: "De_6", zone: "e", occupees: ["Ae", "Be", "Ce", "Ee", "Fe", "Ge", "He", "Ie"])))
+        
+        XCTAssertEqual(coupDepuisPrint, leCoup)
+    }
+    
+    func testSingletonEliminateur() {
+        let litteral = SingletonEliminateur_(singleton: "Aa_1")
+        let objet = SingletonEliminateur(litteral: litteral)
+        XCTAssertEqual(
+            objet,
+            SingletonEliminateur(litteral: SingletonEliminateur_(singleton: "Aa_1"))
+        )
+        
+        print(objet.debugDescription)
+        /*
+         "SingletonEliminateur(litteral: SingletonEliminateur_(singleton: \"Aa_1\"))"
+         */
+        
+    }
+
 }
  

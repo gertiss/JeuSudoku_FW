@@ -121,7 +121,7 @@ Coup_Paire2_ (
     zone: \(zone.debugDescription),
     occupees: \(occupees.debugDescription),
     eliminationsDirectes: \(eliminationsDirectes.debugDescription),
-    detectionPaire2: \(detectionPaire2)
+    detectionPaire2: \(detectionPaire2))
 """
     }
 }

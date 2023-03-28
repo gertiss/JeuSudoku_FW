@@ -55,7 +55,7 @@ extension Ligne {
 
 // MARK: - InstanciableParNom
 
-extension Ligne: InstanciableParNom, CodableEnJson {
+extension Ligne: InstanciableParNom, CodableEnLitteral, CodableEnJson {
  
     /// Le nom de la ligne, qui sert d'id pour  le protocole Identifiable
     public var nom: String {

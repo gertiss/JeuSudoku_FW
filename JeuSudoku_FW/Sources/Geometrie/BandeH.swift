@@ -57,7 +57,7 @@ extension BandeH {
 
 // MARK: - InstanciableParNom
 
-extension BandeH: InstanciableParNom, CodableEnJson {
+extension BandeH: InstanciableParNom, CodableEnLitteral, CodableEnJson {
     
     
     static let noms = ["M", "N", "P"]

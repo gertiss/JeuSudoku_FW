@@ -36,9 +36,9 @@ public extension Puzzle {
     /// Le paramètre `solution` est l'état final du puzzle résolu, si on le connaît.
     /// S'arrête dès qu'un coup n'est pas conforme à la solution connue, et rend alors `[]`
     /// Affichages de debug dans la console.
-    func suiteDeCoups(solution: Puzzle? = nil) -> [Coup] {
+    func suiteDeCoups(solution: Puzzle? = nil) -> [CoupOld] {
         var etatCourant = self
-        var resultat = [Coup]()
+        var resultat = [CoupOld]()
         print("-- \(etatCourant.codeChiffres)")
         while let nouveauCoup = etatCourant.premierCoup, estNouveauSingletonValide(nouveauCoup.singleton) {
             if let solution {

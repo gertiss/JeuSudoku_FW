@@ -54,7 +54,7 @@ extension Colonne {
 
 // MARK: - InstanciableParNom
 
-extension Colonne: InstanciableParNom, CodableEnJson {
+extension Colonne: InstanciableParNom, CodableEnLitteral, CodableEnJson {
     
     /// InstanciableParNom
     /// Le nom de la colonne self, qui sert d'id pour  le protocole Identifiable

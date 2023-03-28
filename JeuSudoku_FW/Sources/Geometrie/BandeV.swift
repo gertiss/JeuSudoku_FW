@@ -9,7 +9,7 @@ import Foundation
 import Modelisation_FW
 
 /// Une bande verticale formée de 3 colonnes
-public struct BandeV: InstanciableParNom, CodableEnJson {
+public struct BandeV: InstanciableParNom, CodableEnLitteral, CodableEnJson {
     
     public let index: Int // de 0 à 2
     

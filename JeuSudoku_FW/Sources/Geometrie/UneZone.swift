@@ -50,6 +50,7 @@ public extension UneZone {
     }
 }
 
+
 public extension Grille {
     /// Peut échouer, fatalError
     static func laZone(nom: String) -> (any UneZone) {
@@ -69,4 +70,10 @@ public extension Grille {
         Grille.laZone(nom: litteral)
     }
     
+}
+
+/// Zone est un domaine de noms, non instanciable.
+/// Permet d'écrire Zone.Litteral sans que Zone soit conforme à CodableEnLitteral
+public enum Zone {
+    public typealias Litteral = String
 }

@@ -21,7 +21,7 @@ public enum MethodeCoup: String, CustomStringConvertible {
 /// Découverte d'un singleton1 dans une zone.
 /// Avec éventuellement utilisation de presences auxiliaires (paire1, paire2, triplet3)
 /// methode donne une indication sur la méthode utilisée
-public struct Coup {
+public struct CoupOld {
     public let singleton: Presence
     public let zone: any UneZone
     public let auxiliaires: [Presence]

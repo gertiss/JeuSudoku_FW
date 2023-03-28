@@ -26,7 +26,7 @@ public extension Puzzle {
         assert(singleton.type == .singleton1)
         assert(!contraintes.contains(singleton))
         let demonstration = Demonstration(presence: singleton, zone: zone, occupees: cellulesResolues(dans: zone), eliminatrices: [], eliminees: eliminees.array.sorted(), auxiliaires: [])
-        let coup = Coup(singleton, zone: zone, methode: .direct, demonstration: demonstration)
+        let coup = CoupOld(singleton, zone: zone, methode: .direct, demonstration: demonstration)
         var todo = "retourner le coup et pas la présence. Compléter éliminatrices"
         return singleton
     }

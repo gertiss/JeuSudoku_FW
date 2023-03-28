@@ -10,21 +10,6 @@ import Foundation
 
 // MARK: - Coup
 
-public func singleton(coup: Coup) -> Presence {
-    coup.singleton
-}
-
-public func zone(coup: Coup) -> String {
-    coup.zone.nom
-}
-
-public func auxiliaires(coup: Coup) -> [Presence] {
-    coup.auxiliaires
-}
-
-public func methode(coup: Coup) -> String {
-    coup.methode.rawValue
-}
 
 // MARK: - Presence
 

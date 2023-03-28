@@ -63,13 +63,13 @@ public extension Puzzle {
     /// Niveau 1.0
     /// On peut éventuellement hiérarchiser le niveau : carré, puis alignement.
     /// Une dernière cellule dans un carré peut être plus visible que dans un alignement.
-    var coupDerniereCellule: Coup? {
+    var coupDerniereCellule: CoupOld? {
         for zone in Grille.zones {
             if let singleton  = singleton1DetecteLocalement(dans: zone), estNouveauSingletonValide(singleton) {
                 // Provisoire !
                 var provisoire = "refactoriser la démonstration"
                 let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
-                return Coup(singleton, zone: zone, methode: .derniereCellule, demonstration: demonstration)
+                return CoupOld(singleton, zone: zone, methode: .derniereCellule, demonstration: demonstration)
             }
         }
         return nil
@@ -81,7 +81,7 @@ public extension Puzzle {
 public extension Puzzle {
     
     /// Niveau 1.2 (dans carré) ou 1.5 (dans alignement)
-    var coupParEliminationDirecte: Coup? {
+    var coupParEliminationDirecte: CoupOld? {
         
         let valeurs = valeursClasseesParFrequence
         let zones = zonesClasseesParRemplissage
@@ -92,7 +92,7 @@ public extension Puzzle {
                     // Provisoire !
                     var provisoire = "refactoriser la démonstration"
                     let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
-                    return Coup(singleton, zone: zone, methode: .direct, demonstration: demonstration)
+                    return CoupOld(singleton, zone: zone, methode: .direct, demonstration: demonstration)
                 }
             }
         }
@@ -105,7 +105,7 @@ public extension Puzzle {
 public extension Puzzle {
     
     /// Niveau 1.7. On utilise les paires1 temporairement.
-    var coupParEliminationIndirecte: Coup? {
+    var coupParEliminationIndirecte: CoupOld? {
         // Ordre de parcours des valeurs
         let valeurs = Int.lesChiffres1a9
             .filter { nombreDeSingletons1(pour: $0) < 9 }
@@ -135,7 +135,7 @@ public extension Puzzle {
                 }
                 let demonstration = Demonstration(presence: coup.singleton, zone: coup.zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
                 
-                return Coup(coup.singleton, zone: coup.zone, auxiliaires: paires1Detectrices.array, methode: .indirect, demonstration: demonstration)
+                return CoupOld(coup.singleton, zone: coup.zone, auxiliaires: paires1Detectrices.array, methode: .indirect, demonstration: demonstration)
             }
         }
         return nil
@@ -147,7 +147,7 @@ public extension Puzzle {
 
 public extension Puzzle {
     
-    func coupApresPaire(parmi nombreCellulesVides: Int) -> Coup? {
+    func coupApresPaire(parmi nombreCellulesVides: Int) -> CoupOld? {
         assert(nombreCellulesVides <= 9)
         
         let zonesInteressantes = zonesClasseesParRemplissage.filter {
@@ -189,7 +189,7 @@ public extension Puzzle {
                         // Provisoire !
                         var provisoire = "refactoriser la démonstration"
                         let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
-                        return Coup(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect, demonstration: demonstration)
+                        return CoupOld(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect, demonstration: demonstration)
                     }
                 }
             }
@@ -203,7 +203,7 @@ public extension Puzzle {
 
 extension Puzzle {
     
-    func coupApresTriplet(parmi nombreCellulesVides: Int) -> Coup? {
+    func coupApresTriplet(parmi nombreCellulesVides: Int) -> CoupOld? {
         assert(nombreCellulesVides <= 9)
         
         let zonesInteressantes = zonesClasseesParRemplissage.filter {
@@ -242,7 +242,7 @@ extension Puzzle {
                     if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires, zone: zone), estNouveauSingletonValide(singleton) {
                         // Provisoire !
                         let demonstration = Demonstration(presence: singleton, zone: zone, occupees: cellulesResolues(dans: zone), eliminatrices: [], eliminees: [], auxiliaires: [])
-                        return Coup(singleton, zone: zone, auxiliaires: [triplet3], methode: .indirect, demonstration: demonstration)
+                        return CoupOld(singleton, zone: zone, auxiliaires: [triplet3], methode: .indirect, demonstration: demonstration)
                     }
                 }
             }
@@ -259,7 +259,7 @@ public extension Puzzle {
     /// On examine chaque cellule pour déteminer ses valeurs candidates.
     /// On retourne une contrainte sur cette cellule s'il y a 1 seule valeur candidate.
     /// Très combinatoire (en gros 81x20)
-    var coupUniqueValeurCandidate: Coup? {
+    var coupUniqueValeurCandidate: CoupOld? {
         for cellule in Grille.cellules {
             let valeursCiblantes = cellule.dependantes.compactMap { valeur($0) }.ensemble
             if valeursCiblantes.count == 8 {
@@ -269,7 +269,7 @@ public extension Puzzle {
                     // Provisoire !
                     var provisoire = "refactoriser la démonstration"
                     let demonstration = Demonstration(presence: singleton, zone: cellule.carre, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
-                    return Coup(valide, zone: cellule.carre, methode: .uniqueValeur, demonstration: demonstration)
+                    return CoupOld(valide, zone: cellule.carre, methode: .uniqueValeur, demonstration: demonstration)
                 }
             }
         }

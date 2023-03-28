@@ -10,7 +10,7 @@ import Modelisation_FW
 
 /// Une Presence est une contrainte qui affirme que les `valeurs` doivent être obligatoirement présentes dans la `region`
 /// Voir les protocoles pour les méthodes par défaut
-public struct Presence: UneContrainte, InstanciableParNom {
+public struct Presence: UneContrainte, InstanciableParNom , CodableEnLitteral {
     
     public let valeurs: Valeurs
     public let region: Region

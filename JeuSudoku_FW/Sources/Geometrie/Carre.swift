@@ -91,7 +91,7 @@ extension Carre {
 
 // MARK: - InstanciableParNom
 
-extension Carre: InstanciableParNom, CodableEnJson {
+extension Carre: InstanciableParNom, CodableEnLitteral, CodableEnJson {
     
     static var noms: [String] {
         var ensemble = Set<String>()
