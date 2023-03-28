@@ -125,6 +125,7 @@ public extension Puzzle {
         return codeFactice + " " + codeChiffres + "  " + niveauFactice
     }
     
+    /// Les 81 chiffres
     var codeChiffres: String {
         let singletons = contraintes.filter { $0.type == .singleton1 }
         var dico = [Cellule: Int]()
@@ -148,17 +149,40 @@ public extension Puzzle {
     }
 }
 
-public typealias Puzzle_ = String
+public struct Puzzle_: UnLitteral {
+    public let contraintes: [Presence.Litteral]
+    
+    public var chiffres: String {
+        Puzzle(litteral: self).codeChiffres
+    }
+    
+    public init(chiffres: String) {
+        let puzzle = Puzzle(chiffres: chiffres)
+        contraintes = puzzle.contraintes.map { $0.litteral }
+    }
+    
+    public init(contraintes: [String]) {
+        self.contraintes = contraintes
+    }
+    
+    
+    public var codeSwift: String {
+        "Puzzle_(contraintes: \(contraintes))"
+    }
+    
+}
+
 
 extension Puzzle: CodableEnLitteral {
     public typealias Litteral = Puzzle_
     
     public var litteral: Puzzle_ {
-        codeChiffres
+        Puzzle_(contraintes: contraintes.map { $0.litteral })
     }
     
     public init(litteral: Puzzle_) {
-        self = Self(chiffres: litteral)
+        self.contraintes = litteral.contraintes.map { Presence(litteral: $0) }
     }
 }
+
 
