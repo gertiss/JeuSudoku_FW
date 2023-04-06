@@ -15,11 +15,11 @@ import Modelisation_FW
 /// `"Hb_8 // indirect dans le carré Pm 􀋂 DcEc_8 GdGe_8"`
 /// Echecs possibles : `Etat initial invalide` ou `Pas de coup suivant`.
 public func coupSuivant(puzzle: String) -> Result<String, String> {
-    let puzzle = Puzzle(chiffres: puzzle)
+    let puzzle = try! Puzzle(chiffres: puzzle)
     guard puzzle.estValide else {
         return .failure("Etat initial invalide")
     }
-    guard let coup = puzzle.premierCoup else {
+    guard let coup = puzzle.premierCoupOld else {
         return .failure("Pas de coup suivant")
     }
     return .success(coup.nom)
@@ -31,21 +31,21 @@ public func coupSuivant(puzzle: String) -> Result<String, String> {
 /// Echecs possibles :  : `Etat initial invalide`, `Pas de coup suivant`
 /// La suite de coups ne donne pas forcément un puzzle entièrement résolu.
 public func suiteDesCoups(puzzle: String) -> Result<String, String> {
-    let puzzle = Puzzle(chiffres: puzzle)
+    let puzzle = try! Puzzle(chiffres: puzzle)
     guard puzzle.estValide else {
         return .failure("Etat initial invalide")
     }
-    guard puzzle.premierCoup != nil else {
+    guard puzzle.premierCoupOld != nil else {
         return .failure("Pas de coup suivant")
     }
-    let coups = puzzle.suiteDeCoups()
+    let coups = puzzle.suiteDeCoupsOld()
     return .success(coups.map { $0.nom }.joined(separator: "\n"))
 }
 
 
 // MARK: - API Demonstration
 
-public struct DemonstrationLitterale: UnLitteral, CustomStringConvertible {
+public struct DemonstrationLitterale: UnLitteral, Codable, CustomStringConvertible {
 
     public var codeSwift: String {
         "DemonstrationLitterale(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees), auxiliaires: [\(auxiliaires.map { $0.codeSwift }.joined(separator: ", "))]"
@@ -63,7 +63,8 @@ public struct DemonstrationLitterale: UnLitteral, CustomStringConvertible {
     }
 }
 
-public struct AuxiliaireLitteral: UnLitteral, CustomStringConvertible {
+public struct AuxiliaireLitteral: UnLitteral, Codable, CustomStringConvertible {
+    
         
     public var codeSwift: String {
         "AuxiliaireLitteral(presence: \(presence.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminatrices: \(eliminatrices), eliminees: \(eliminees)]"

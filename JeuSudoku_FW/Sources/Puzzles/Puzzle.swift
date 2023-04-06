@@ -9,11 +9,11 @@ import Foundation
 import Modelisation_FW
 
 /// Un Puzzle est défini par un ensemble de contraintes et le problème à résoudre est de réduire cet ensemble à un ensemble équivalent de 81 singletons (une valeur, une cellule)
-public struct Puzzle: Equatable  {
+struct Puzzle: Equatable  {
     
-    public var contraintes: [Presence]
+    var contraintes: [Presence]
     
-    public init(contraintes: [Presence] = []) {
+    init(contraintes: [Presence] = []) {
         self.contraintes = contraintes
     }
     
@@ -24,7 +24,7 @@ public struct Puzzle: Equatable  {
 
 // Différentes requêtes permettant de décrire l'état de résolution du puzzle
 
-public extension Puzzle {
+extension Puzzle {
     
     /// La valeur de la cellule si elle est résolue, nil sinon.
     func valeur(_ cellule: Cellule) -> Int? {
@@ -56,11 +56,11 @@ public extension Puzzle {
     }
 
     func cellulesResolues(dans zone: any UneZone) -> [Cellule] {
-        zone.cellules.filter { celluleEstResolue($0) }.ensemble.array.sorted()
+        zone.cellules.filter { celluleEstResolue($0) }
     }
     
     func cellulesNonResolues(dans zone: any UneZone) -> [Cellule] {
-        zone.cellules.filter { !celluleEstResolue($0) }.ensemble.array.sorted()
+        zone.cellules.filter { !celluleEstResolue($0) }
     }
     
     func valeursResolues(dans zone: any UneZone) -> [Int] {
@@ -72,7 +72,8 @@ public extension Puzzle {
             .array.sorted()
     }
     
-    
+    /// singleton est bien une cellule - une valeur
+    /// il n'est interdit par aucune autre cellule
     func estSingleton1Valide(_ singleton: Presence) -> Bool {
         guard singleton.type == .singleton1 else {
             return false
@@ -95,8 +96,10 @@ public extension Puzzle {
 
 // MARK: - Codage SudokuExchangeBank
 
-public extension Puzzle {
+extension Puzzle {
     
+    /// Le code pris dans la base SudokuExchange
+    /// On suppose que le code est valide s'il provient de la base
     init(code: String) {
         let codage = CodagePuzzle(code)
         let chiffres = codage.chiffres
@@ -114,8 +117,8 @@ public extension Puzzle {
         self.contraintes = contraintes
     }
     
-    init(chiffres: String) {
-        self = Self(code: CodagePuzzle.codeDepuisSaisie(chiffres))
+    init(chiffres: String) throws {
+        self = Self(code: try CodagePuzzle.codeDepuisSaisie(chiffres))
     }
     
     /// Code avec id et niveaux factices
@@ -149,28 +152,6 @@ public extension Puzzle {
     }
 }
 
-public struct Puzzle_: UnLitteral {
-    public let contraintes: [Presence.Litteral]
-    
-    public var chiffres: String {
-        Puzzle(litteral: self).codeChiffres
-    }
-    
-    public init(chiffres: String) {
-        let puzzle = Puzzle(chiffres: chiffres)
-        contraintes = puzzle.contraintes.map { $0.litteral }
-    }
-    
-    public init(contraintes: [String]) {
-        self.contraintes = contraintes
-    }
-    
-    
-    public var codeSwift: String {
-        "Puzzle_(contraintes: \(contraintes))"
-    }
-    
-}
 
 
 extension Puzzle: CodableEnLitteral {
@@ -184,5 +165,60 @@ extension Puzzle: CodableEnLitteral {
         self.contraintes = litteral.contraintes.map { Presence(litteral: $0) }
     }
 }
+
+// MARK: - Litteral
+
+public struct Puzzle_: UnLitteral, Equatable {
+    
+    public let contraintes: [Presence_]
+}
+
+public extension Puzzle_ {
+    
+    var chiffres: String {
+        Puzzle(litteral: self).codeChiffres
+    }
+    
+    init(chiffres: String) throws {
+        let puzzle = try Puzzle(chiffres: chiffres)
+        contraintes = puzzle.contraintes.map { $0.litteral }
+    }
+        
+    var codeSwift: String {
+        "Puzzle_(contraintes: \(contraintes))"
+    }
+    
+    var texteDessin: String {
+        Puzzle(litteral: self).texteDessin
+    }
+    
+    func premierCoup() -> Coup_? {
+        Puzzle(litteral: self).premierCoup?.litteral
+    }
+    
+    func plus(_ singleton: Presence_) -> Puzzle_ {
+        let singleton = Presence(litteral: singleton)
+        return Puzzle(litteral: self).plus(singleton).litteral
+    }
+        
+}
+
+// MARK: - Exemples
+
+public extension Puzzle_ {
+    
+    static let moyensA = Puzzle.moyensA.map { $0.litteral }
+    static let moyensB = Puzzle.moyensB.map { $0.litteral }
+    static let moyensC = Puzzle.moyensC.map { $0.litteral }
+    static let moyensD = Puzzle.moyensD.map { $0.litteral }
+    
+    static let difficilesA = Puzzle.difficilesA.map { $0.litteral }
+    static let difficilesB = Puzzle.difficilesB.map { $0.litteral }
+    static let difficilesC = Puzzle.difficilesC.map { $0.litteral }
+    static let difficilesD = Puzzle.difficilesD.map { $0.litteral }
+}
+
+
+
 
 

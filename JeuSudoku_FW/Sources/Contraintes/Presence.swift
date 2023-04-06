@@ -8,9 +8,11 @@
 import Foundation
 import Modelisation_FW
 
+public typealias Presence_ = String
+
 /// Une Presence est une contrainte qui affirme que les `valeurs` doivent être obligatoirement présentes dans la `region`
 /// Voir les protocoles pour les méthodes par défaut
-public struct Presence: UneContrainte, InstanciableParNom , CodableEnLitteral {
+public struct Presence: UneContrainte, Comparable, CodableParNom {
     
     public let valeurs: Valeurs
     public let region: Region

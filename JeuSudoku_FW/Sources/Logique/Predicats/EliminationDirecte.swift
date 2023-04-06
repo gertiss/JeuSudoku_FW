@@ -53,7 +53,7 @@ extension EliminationDirecte {
     /// Les cellules vides éliminées directement dans la zone pour la valeur
     /// sans préciser par quelles éliminatrices
     static func instances(valeur: Int, zone: AnyZone, dans puzzle: Puzzle) -> [Self] {
-        let eliminatrices = SingletonEliminateur.instances(valeur: valeur, zone: zone, dans: puzzle).map { $0.singleton }
+        let eliminatrices = SingletonConnu.instances(valeur: valeur, zone: zone, dans: puzzle).map { $0.singleton }
         let eliminees = eliminatrices.flatMap {
             EliminationDirecte.instances(zone: zone, eliminatrice: $0, dans: puzzle) }
         return eliminees.map { Self(eliminee: $0.eliminee, eliminatrice: $0.eliminatrice) }
@@ -73,7 +73,7 @@ extension EliminationDirecte: CodableEnLitteral {
     
     init(litteral: Litteral) {
         self.eliminee = Cellule(nom: litteral.eliminee)
-        self.eliminatrice = Presence(nom: litteral.eliminee)
+        self.eliminatrice = Presence(nom: litteral.eliminatrice)
     }
     
     /// Mêmes champs, avec les noms
@@ -113,10 +113,10 @@ extension [EliminationDirecte] {
     
 }
 
-public struct EliminationDirecte_: UnLitteral {
+public struct EliminationDirecte_: UnLitteral, Equatable {
     
-    public let eliminee: String
-    public let eliminatrice: String
+    public let eliminee: Cellule_
+    public let eliminatrice: Presence_ 
     
     public init(eliminee: String, eliminatrice: String) {
         self.eliminee = eliminee
@@ -124,6 +124,6 @@ public struct EliminationDirecte_: UnLitteral {
     }
     
     public var codeSwift: String {
-        "EliminationDirecte_(eliminee: \(eliminee.debugDescription), eliminatrice: \(eliminatrice.debugDescription))"
+        "EliminationDirecte_(eliminee: \(eliminee.codeSwift), eliminatrice: \(eliminatrice.codeSwift))"
     }
 }

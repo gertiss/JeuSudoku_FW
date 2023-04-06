@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Puzzle {
+extension Puzzle {
     
     
     /// Les 10 premiers exemples difficiles de niveau 2.5 : le minimum pour un difficile.

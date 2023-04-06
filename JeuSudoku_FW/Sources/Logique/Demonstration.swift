@@ -78,7 +78,7 @@ public struct Auxiliaire: CodableEnLitteral {
     
 }
 
-public extension Puzzle {
+extension Puzzle {
     
     
     /// Etant donnée une Demonstration instanciée, est-elle applicable ?

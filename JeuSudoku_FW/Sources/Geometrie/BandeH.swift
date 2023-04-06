@@ -9,7 +9,7 @@ import Foundation
 import Modelisation_FW
 
 
-public struct BandeH {
+public struct BandeH: Codable {
     
     public let index: Int // de 0 à 2
     
@@ -55,10 +55,11 @@ extension BandeH {
     }
 }
 
-// MARK: - InstanciableParNom
+// MARK: - CodableParNom
 
-extension BandeH: InstanciableParNom, CodableEnLitteral, CodableEnJson {
-    
+public typealias BandeH_ = String
+
+extension BandeH: CodableParNom {
     
     static let noms = ["M", "N", "P"]
     

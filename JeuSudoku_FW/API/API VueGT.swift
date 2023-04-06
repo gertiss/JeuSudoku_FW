@@ -23,7 +23,7 @@ public struct VueGT: View {
     var puzzle: String
     
     var lePuzzle: Puzzle {
-        Puzzle(chiffres: puzzle)
+        try! Puzzle(chiffres: puzzle)
     }
 
     public var body: some View {

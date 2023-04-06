@@ -9,7 +9,8 @@ import Foundation
 import Modelisation_FW
 
 /// Il existe une `paire` détectée dans la zone parce qu'il ne reste plus que deux cellules
-/// pour 2 valeurs en dehors des occupées et et des éliminées
+/// pour 2 valeurs en dehors des occupées et et des éliminées.
+/// Les éliminations sont provoquées par les paires éliminatrices.
 struct DetectionPaire2 {
     // Sujet
     let paire2: Presence
@@ -17,7 +18,7 @@ struct DetectionPaire2 {
     let zone: AnyZone
     let occupees: [Cellule]
     let eliminees: [Cellule]
-    let pairesEliminatrices: [[Presence]] // ensemble de couples de présences
+    let pairesEliminatrices: [[Presence]] // ensemble de couples de singletons
 }
 
 extension DetectionPaire2 {
@@ -115,21 +116,21 @@ extension DetectionPaire2: CodableEnLitteral {
 
 }
 
-public struct DetectionPaire2_: UnLitteral {
-    public let paire2: String
-    public let zone: String
-    public let occupees: [String]
-    public let eliminees: [String]
-    public let pairesEliminatrices: [[String]]
+public struct DetectionPaire2_: UnLitteral, Equatable {
+    public let paire2: Presence_
+    public let zone: AnyZone_
+    public let occupees: [Cellule_]
+    public let eliminees: [Cellule_]
+    public let pairesEliminatrices: [[Presence_]]
     
     public var codeSwift: String {
         """
 DetectionPaire2_(
-paire2: \(paire2.debugDescription),
-zone: \(zone.debugDescription),
-occupees: \(occupees.debugDescription),
-eliminees: \(eliminees.debugDescription),
-pairesEliminatrices: \(pairesEliminatrices.debugDescription))
+paire2: \(paire2.codeSwift),
+zone: \(zone.codeSwift),
+occupees: \(occupees.codeSwift),
+eliminees: \(eliminees.codeSwift),
+pairesEliminatrices: \(pairesEliminatrices.codeSwift))
 """
     }
 }

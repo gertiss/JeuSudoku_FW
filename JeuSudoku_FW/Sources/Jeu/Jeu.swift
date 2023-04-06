@@ -9,7 +9,7 @@ import Foundation
 
 
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Ajout d'une contrainte
     /// Vérifie sa validité si c'est un singleton (fatalError sinon)
@@ -36,11 +36,11 @@ public extension Puzzle {
     /// Le paramètre `solution` est l'état final du puzzle résolu, si on le connaît.
     /// S'arrête dès qu'un coup n'est pas conforme à la solution connue, et rend alors `[]`
     /// Affichages de debug dans la console.
-    func suiteDeCoups(solution: Puzzle? = nil) -> [CoupOld] {
+    func suiteDeCoupsOld(solution: Puzzle? = nil) -> [CoupOld] {
         var etatCourant = self
         var resultat = [CoupOld]()
         print("-- \(etatCourant.codeChiffres)")
-        while let nouveauCoup = etatCourant.premierCoup, estNouveauSingletonValide(nouveauCoup.singleton) {
+        while let nouveauCoup = etatCourant.premierCoupOld, estNouveauSingletonValide(nouveauCoup.singleton) {
             if let solution {
                 guard contrainteEstCompatible(nouveauCoup.singleton, solution: solution) else {
                     print("-- Erreur : \(nouveauCoup.singleton.nom) incompatible avec solution")

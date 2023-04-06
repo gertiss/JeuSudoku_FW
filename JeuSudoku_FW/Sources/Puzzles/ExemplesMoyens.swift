@@ -13,7 +13,7 @@ import Foundation
 
 // MARK: - Moyens A : 1.5
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Difficulté 1.5
     static let codeMoyensA = """
@@ -68,7 +68,7 @@ extension Puzzle {
 
 // MARK: - Moyens C : 2.0
 
-public extension Puzzle {
+extension Puzzle {
     
     static let codeMoyensC = """
 0000c45fb232 100800570000009210090040000300900050007000300020006008000020040071400000064007003  2.0
@@ -95,7 +95,7 @@ public extension Puzzle {
 
 // MARK: - Moyens D : 2.3
 
-public extension Puzzle {
+extension Puzzle {
     static let codeMoyensD = """
 0000847b216e 020900000048000031000063020009407003003080200400105600030570000250000180000006050  2.3
 0000fc7c6b96 002000800005020100460000029130060052009080400000302000006070200700000008020519070  2.3

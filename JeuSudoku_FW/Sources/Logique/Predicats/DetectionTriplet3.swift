@@ -130,15 +130,15 @@ extension DetectionTriplet3: CodableEnLitteral {
     }
 }
 
-public struct DetectionTriplet3_: UnLitteral {
+public struct DetectionTriplet3_: UnLitteral, Equatable {
     
-    public let triplet: String
-    public let zone: String
-    public let occupees: [String]
-    public let eliminees: [String]
-    public let tripletsEliminateurs: [[String]]
+    public let triplet: Presence_
+    public let zone: AnyZone_
+    public let occupees: [Cellule_]
+    public let eliminees: [Cellule_]
+    public let tripletsEliminateurs: [[Presence_]]
     
     public var codeSwift: String {
-        "DetectionTriplet3_(triplet: \(triplet.debugDescription), zone: \(zone.debugDescription), occupees: \(occupees), eliminees: \(eliminees), tripletsEliminateurs: \(tripletsEliminateurs))"
+        "DetectionTriplet3_(triplet: \(triplet.codeSwift), zone: \(zone.codeSwift), occupees: \(occupees.codeSwift), eliminees: \(eliminees.codeSwift), tripletsEliminateurs: \(tripletsEliminateurs.codeSwift))"
     }
 }

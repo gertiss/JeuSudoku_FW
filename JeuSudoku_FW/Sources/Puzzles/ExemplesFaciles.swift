@@ -10,7 +10,7 @@ import Foundation
 // Exemples tirés de la banque publiée sur Sudoku Exchange "Puzzle Bank"
 // https://sudokuexchange.com
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Les 10 premiers exemples faciles
     static let codeExemplesFaciles = """

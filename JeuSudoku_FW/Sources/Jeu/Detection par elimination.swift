@@ -12,7 +12,7 @@ import Foundation
 /// On essaye de trouver des contraintes contenant une valeur dans une zone,
 /// après élimination des cellules pour cette valeur.
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Une seule cellule restante après élimination directe, sinon nil
     func singleton1DetecteParEliminationDirecte(pour valeur: Int, dans region: Region, zone: any UneZone) -> Presence? {
@@ -26,8 +26,7 @@ public extension Puzzle {
         assert(singleton.type == .singleton1)
         assert(!contraintes.contains(singleton))
         let demonstration = Demonstration(presence: singleton, zone: zone, occupees: cellulesResolues(dans: zone), eliminatrices: [], eliminees: eliminees.array.sorted(), auxiliaires: [])
-        let coup = CoupOld(singleton, zone: zone, methode: .direct, demonstration: demonstration)
-        var todo = "retourner le coup et pas la présence. Compléter éliminatrices"
+        _ = CoupOld(singleton, zone: zone, methode: .direct, demonstration: demonstration)
         return singleton
     }
  

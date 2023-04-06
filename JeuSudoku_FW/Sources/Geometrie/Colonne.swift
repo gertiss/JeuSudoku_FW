@@ -52,9 +52,11 @@ extension Colonne {
 }
 
 
-// MARK: - InstanciableParNom
+// MARK: - CodableParNom
 
-extension Colonne: InstanciableParNom, CodableEnLitteral, CodableEnJson {
+public typealias Colonne_ = String
+
+extension Colonne: CodableParNom {
     
     /// InstanciableParNom
     /// Le nom de la colonne self, qui sert d'id pour  le protocole Identifiable

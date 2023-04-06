@@ -10,17 +10,14 @@ import Modelisation_FW
 
 /// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées
 struct Coup_EliminationDirecte {
+    // affirmation
     let singleton: Presence
+    // explication niveau 0
     let zone: AnyZone
     let occupees: [Cellule]
     let eliminees: [Cellule]
+    // explication niveau 1
     let eliminatrices: [Presence]
-    /*
-     Mémoriser eliminationsDirectes n'est pas la meilleure chose à faire.
-     L'explication doit minimiser à la fois la liste des cellules éliminées et la liste des cellules éliminatrices
-     let eliminees = [Cellule]
-     let eliminatrices = [Cellule]
-     */
 }
 
 extension Coup_EliminationDirecte {
@@ -88,21 +85,21 @@ extension Coup_EliminationDirecte: CodableEnLitteral {
     }
 }
 
-public struct Coup_EliminationDirecte_: UnLitteral {
-    public let singleton: String
-    public let zone: String
-    public let occupees: [String]
-    public let eliminees: [String]
-    public let eliminatrices: [String]
+public struct Coup_EliminationDirecte_: UnLitteral, Equatable {
+    public let singleton: Presence_
+    public let zone: AnyZone_
+    public let occupees: [Cellule_]
+    public let eliminees: [Cellule_]
+    public let eliminatrices: [Presence_] 
 
     public var codeSwift: String {
         """
 Coup_EliminationDirecte_ (
-singleton: \(singleton.debugDescription),
-zone: \(zone.debugDescription),
-occupees: \(occupees),
-eliminees: \(eliminees),
-eliminatrices: \(eliminatrices)
+singleton: \(singleton.codeSwift),
+zone: \(zone.codeSwift),
+occupees: \(occupees.codeSwift),
+eliminees: \(eliminees.codeSwift),
+eliminatrices: \(eliminatrices.codeSwift)
 )
 """
     }

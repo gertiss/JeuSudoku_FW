@@ -9,7 +9,11 @@ import Foundation
 import Modelisation_FW
 
 /// Le singleton est détecté parce qu'il est la dernière cellule libre en dehors des 8 occupées
-struct Coup_DerniereCellule {
+struct Coup_DerniereCellule: Equatable {
+    static func == (lhs: Coup_DerniereCellule, rhs: Coup_DerniereCellule) -> Bool {
+        lhs.litteral == rhs.litteral
+    }
+    
     
     let singleton: Presence
     let zone: AnyZone
@@ -31,11 +35,11 @@ extension Coup_DerniereCellule: CodableEnLitteral {
     }
 }
 
-public struct Coup_DerniereCellule_: UnLitteral {
+public struct Coup_DerniereCellule_: UnLitteral, Equatable {
     
-    public let singleton: Presence.Litteral
-    public let zone: Zone.Litteral
-    public let occupees: [Cellule.Litteral]
+    public let singleton: Presence_ // Presence
+    public let zone: AnyZone_ // Zone
+    public let occupees: [Cellule_] // [Cellule]
     
     public var codeSwift: String {
         "Coup_DerniereCellule_(singleton: \(singleton.codeSwift), zone: \(zone.codeSwift), occupees: \(occupees.codeSwift))"

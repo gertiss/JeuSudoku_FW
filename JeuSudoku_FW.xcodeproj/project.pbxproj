@@ -13,6 +13,8 @@
 		5006C17929BF18A800D82A2E /* DetectionTriplet3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006C17829BF18A800D82A2E /* DetectionTriplet3.swift */; };
 		5010478329BA391500FBC35D /* Demonstration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5010478229BA391500FBC35D /* Demonstration.swift */; };
 		501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */; };
+		502885AB29DDADD900BB3671 /* RechercheCoupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502885AA29DDADD900BB3671 /* RechercheCoupOld.swift */; };
+		502885AD29DDAE2D00BB3671 /* RechercheCoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502885AC29DDAE2D00BB3671 /* RechercheCoup.swift */; };
 		502A302A29AA54CB00C198EB /* Elimination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502A302929AA54CB00C198EB /* Elimination.swift */; };
 		5032C3892994E7060047E3BA /* UneZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032C3882994E7060047E3BA /* UneZone.swift */; };
 		5032C38D2994EFD50047E3BA /* Presence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5032C38C2994EFD50047E3BA /* Presence.swift */; };
@@ -21,7 +23,7 @@
 		5062258B29AB8D4300AE3362 /* Detection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5062258A29AB8D4300AE3362 /* Detection.swift */; };
 		506841A029A917F300395531 /* Detection locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5068419F29A917F300395531 /* Detection locale.swift */; };
 		506DCFF429BCE06700B05168 /* Coup_DerniereValeur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506DCFF329BCE06700B05168 /* Coup_DerniereValeur.swift */; };
-		506EF95129C23B2A0088F5C1 /* SingletonEliminateur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */; };
+		506EF95129C23B2A0088F5C1 /* SingletonConnu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506EF95029C23B2A0088F5C1 /* SingletonConnu.swift */; };
 		506F334B29D16BB500148AAC /* Modelisation_FW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506F334A29D16BB500148AAC /* Modelisation_FW.framework */; };
 		506F334C29D16BB500148AAC /* Modelisation_FW.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 506F334A29D16BB500148AAC /* Modelisation_FW.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		506F334F29D16EC400148AAC /* Coup_DerniereCellule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */; };
@@ -56,7 +58,6 @@
 		50FB543C29A505A6005E5E5E /* Jeu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB543B29A505A6005E5E5E /* Jeu.swift */; };
 		50FEA34829D0334D00CBDF74 /* Coup_EliminationDirecte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA34729D0334D00CBDF74 /* Coup_EliminationDirecte.swift */; };
 		50FEA34A29D0A84500CBDF74 /* Coup_Triplet3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FEA34929D0A84500CBDF74 /* Coup_Triplet3.swift */; };
-		50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFEF8529B33B9D001717BB /* Recherche globale.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,8 @@
 		5006C17829BF18A800D82A2E /* DetectionTriplet3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionTriplet3.swift; sourceTree = "<group>"; };
 		5010478229BA391500FBC35D /* Demonstration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demonstration.swift; sourceTree = "<group>"; };
 		501B5A5929B126DB0025BE56 /* ExemplesDifficiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExemplesDifficiles.swift; sourceTree = "<group>"; };
+		502885AA29DDADD900BB3671 /* RechercheCoupOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechercheCoupOld.swift; sourceTree = "<group>"; };
+		502885AC29DDAE2D00BB3671 /* RechercheCoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechercheCoup.swift; sourceTree = "<group>"; };
 		502A302929AA54CB00C198EB /* Elimination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elimination.swift; sourceTree = "<group>"; };
 		5032C3882994E7060047E3BA /* UneZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UneZone.swift; sourceTree = "<group>"; };
 		5032C38C2994EFD50047E3BA /* Presence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presence.swift; sourceTree = "<group>"; };
@@ -100,7 +103,7 @@
 		5068419E29A8ED8B00395531 /* Jeu doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Jeu doc.md"; sourceTree = "<group>"; };
 		5068419F29A917F300395531 /* Detection locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detection locale.swift"; sourceTree = "<group>"; };
 		506DCFF329BCE06700B05168 /* Coup_DerniereValeur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_DerniereValeur.swift; sourceTree = "<group>"; };
-		506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonEliminateur.swift; sourceTree = "<group>"; };
+		506EF95029C23B2A0088F5C1 /* SingletonConnu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonConnu.swift; sourceTree = "<group>"; };
 		506F334A29D16BB500148AAC /* Modelisation_FW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Modelisation_FW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_DerniereCellule.swift; sourceTree = "<group>"; };
 		506F335229D1EA9C00148AAC /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
@@ -140,7 +143,6 @@
 		50FB543B29A505A6005E5E5E /* Jeu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jeu.swift; sourceTree = "<group>"; };
 		50FEA34729D0334D00CBDF74 /* Coup_EliminationDirecte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_EliminationDirecte.swift; sourceTree = "<group>"; };
 		50FEA34929D0A84500CBDF74 /* Coup_Triplet3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_Triplet3.swift; sourceTree = "<group>"; };
-		50FFEF8529B33B9D001717BB /* Recherche globale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recherche globale.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,9 +175,9 @@
 				5098E62E29C4876700821414 /* Coup_EliminationIndirecte.swift */,
 				50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */,
 				50FEA34929D0A84500CBDF74 /* Coup_Triplet3.swift */,
-				506EF95029C23B2A0088F5C1 /* SingletonEliminateur.swift */,
 				5006C17029BF186900D82A2E /* EliminationDirecte.swift */,
 				50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */,
+				506EF95029C23B2A0088F5C1 /* SingletonConnu.swift */,
 				5006C17429BF188C00D82A2E /* DetectionPaire1.swift */,
 				5006C17629BF189A00D82A2E /* DetectionPaire2.swift */,
 				5006C17829BF18A800D82A2E /* DetectionTriplet3.swift */,
@@ -187,9 +189,10 @@
 			isa = PBXGroup;
 			children = (
 				5068419E29A8ED8B00395531 /* Jeu doc.md */,
-				50FFEF8529B33B9D001717BB /* Recherche globale.swift */,
-				50EB023529B5C6FB00AA82CD /* Combinatoire.swift */,
+				502885AA29DDADD900BB3671 /* RechercheCoupOld.swift */,
+				502885AC29DDAE2D00BB3671 /* RechercheCoup.swift */,
 				50A8E91F29B4E988005ED674 /* CoupOld.swift */,
+				50EB023529B5C6FB00AA82CD /* Combinatoire.swift */,
 				502A302929AA54CB00C198EB /* Elimination.swift */,
 				5068419F29A917F300395531 /* Detection locale.swift */,
 				5062258A29AB8D4300AE3362 /* Detection.swift */,
@@ -380,7 +383,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					509EC73729897D6E004B1139 = {
 						CreatedOnToolsVersion = 14.2;
@@ -450,8 +453,7 @@
 				5010478329BA391500FBC35D /* Demonstration.swift in Sources */,
 				5032C3892994E7060047E3BA /* UneZone.swift in Sources */,
 				502A302A29AA54CB00C198EB /* Elimination.swift in Sources */,
-				506EF95129C23B2A0088F5C1 /* SingletonEliminateur.swift in Sources */,
-				50FFEF8629B33B9D001717BB /* Recherche globale.swift in Sources */,
+				506EF95129C23B2A0088F5C1 /* SingletonConnu.swift in Sources */,
 				50820DFE298AC7940087CF21 /* Grille.swift in Sources */,
 				507B255B29AE6E20009217A8 /* API coups.swift in Sources */,
 				506DCFF429BCE06700B05168 /* Coup_DerniereValeur.swift in Sources */,
@@ -465,6 +467,8 @@
 				5006C17929BF18A800D82A2E /* DetectionTriplet3.swift in Sources */,
 				509EC76529898843004B1139 /* BandeV.swift in Sources */,
 				509C61C229A3A7E8006C0CB0 /* Valeurs.swift in Sources */,
+				502885AB29DDADD900BB3671 /* RechercheCoupOld.swift in Sources */,
+				502885AD29DDAE2D00BB3671 /* RechercheCoup.swift in Sources */,
 				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
 				5062258929AB633600AE3362 /* Detection par elimination.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
@@ -533,6 +537,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -596,6 +601,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -624,10 +630,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -637,6 +645,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = "gt.JeuSudoku-FW";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -651,10 +661,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -664,6 +676,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = "gt.JeuSudoku-FW";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -678,6 +692,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "gt.JeuSudoku-FWTests";
@@ -693,6 +708,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "gt.JeuSudoku-FWTests";

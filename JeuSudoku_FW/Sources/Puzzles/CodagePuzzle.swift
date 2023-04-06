@@ -70,14 +70,23 @@ public extension CodagePuzzle {
         return Double(source)!
     }
     
-    
+    /// Devrait vérifier la validité syntaxique : 81 chiffres de 0 à 9
     /// `saisieChiffres` ne contient que les 81 chiffres.
     /// Ils peuvent être écrits avec des espaces, tabs et return qui seront supprimés.
     /// L'indication d'absence peut être ce qu'on veut à part espace tab return (pas forcément 0).
     /// On retourne un code normalisé, avec un id et un niveau factices.
-    static func codeDepuisSaisie(_ saisieChiffres: String) -> String {
+    static func codeDepuisSaisie(_ saisieChiffres: String) throws -> String {
         let chiffres = saisieChiffres.avecSuppressionEspacesTabsNewlines
             .map { Int(String($0)) == nil ? "0" : $0 }
+        guard chiffres.count == 81 else {
+            throw("chiffres : on attend 81 chiffres")
+        }
+        guard chiffres.allSatisfy({ c in
+            ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ]
+                .contains(c)
+        }) else {
+            throw("chiffres : on attend des chiffres de 0 à 9")
+        }
         return "012345678901" + " " + chiffres + "  " + "1.0"
     }
     

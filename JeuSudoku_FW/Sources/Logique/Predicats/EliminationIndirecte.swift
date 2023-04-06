@@ -46,7 +46,7 @@ extension EliminationIndirecte {
                 .filter { puzzle.celluleEstVide($0) }
             eliminees = eliminees.union(elims)
         }
-        return [Self(eliminees: eliminees.array.sorted(), zone: zone, eliminatrices: eliminatrices.sorted())]
+        return [Self(eliminees: eliminees.array.sorted(), zone: zone, eliminatrices: eliminatrices)]
     }
 }
 
@@ -67,12 +67,12 @@ extension EliminationIndirecte: CodableEnLitteral {
     }
 }
 
-public struct EliminationIndirecte_: UnLitteral {
-    public let eliminees: [String]
-    public let zone: String
+public struct EliminationIndirecte_: UnLitteral, Equatable {
+    public let eliminees: [Cellule_]
+    public let zone: AnyZone_
     public let eliminatrices: [DetectionPaire1_]
     
     public var codeSwift: String {
-        "EliminationIndirecte_(eliminees: \(eliminees), zone: \(zone), eliminatrices: \(eliminatrices))"
+        "EliminationIndirecte_(eliminees: \(eliminees.codeSwift), zone: \(zone.codeSwift), eliminatrices: \(eliminatrices.codeSwift))"
     }
 }

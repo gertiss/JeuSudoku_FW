@@ -10,15 +10,15 @@ import Modelisation_FW
 
 public typealias Region = Set<Cellule>
 
+public typealias Region_ = String
 
-extension Region: InstanciableParNom, AvecLangage, CodableEnLitteral, Comparable, CodableEnJson {
+extension Region: CodableParNom, AvecLangage {
     
     /// [C(0,0), C(0,1)] -> "AaAb"
     public var nom: String {
         return self.array.map { $0.nom }.sorted().joined()
     }
     
-
     /// "AaAb" -> [C(0,0), C(0,1)]
     /// On suppose les noms syntaxiquement valides et tous distincts
     public init(nom: String) {
@@ -35,9 +35,6 @@ extension Region: InstanciableParNom, AvecLangage, CodableEnLitteral, Comparable
         self = ensemble
     }
     
-    public static func < (lhs: Self, rhs: Self) -> Bool {
-        lhs.litteral < rhs.litteral
-    }
 
 }
 

@@ -140,11 +140,11 @@ final class JeuSudoku_FWTests: XCTestCase {
         )
         // Jeu
         
-        var nouveauCoup = puzzle.premierCoup!
+        var nouveauCoup = puzzle.premierCoupOld!
         print("détectée :", nouveauCoup.nom) // paire1 GbGc_8
         var etat = puzzle.plus(nouveauCoup.singleton)
         
-        nouveauCoup = etat.premierCoup!
+        nouveauCoup = etat.premierCoupOld!
         print("détectée :", nouveauCoup.nom) // Df_8
         etat = puzzle.plus(nouveauCoup.singleton)
         
@@ -170,7 +170,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 """
         let solution = Puzzle(chiffres: chiffresSolution)
         
-        let _ = puzzle.suiteDeCoups(solution: solution)
+        let _ = puzzle.suiteDeCoupsOld(solution: solution)
     }
     
     func testPartieMoyenB0() {
@@ -192,7 +192,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 """
         
         let solution = Puzzle(chiffres: codeSolution)
-        let _ = puzzle.suiteDeCoups(solution: solution)
+        let _ = puzzle.suiteDeCoupsOld(solution: solution)
     }
     
     func testPartieMoyenC0() {
@@ -213,7 +213,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 564187923
 """
         let solution = Puzzle(chiffres: codeSolution)
-        let _ = puzzle.suiteDeCoups(solution: solution)
+        let _ = puzzle.suiteDeCoupsOld(solution: solution)
         
     }
     
@@ -222,7 +222,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // 100%
         for (n, puzzle) in Puzzle.moyensA.enumerated() {
             print("\n-- moyensA[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -233,7 +233,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // 100%
         for (n, puzzle) in Puzzle.moyensB.enumerated() {
             print("\n-- moyensB[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -242,7 +242,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // 100%
         for (n, puzzle) in Puzzle.moyensC.enumerated() {
             print("\n-- moyensC[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
         
     }
@@ -252,7 +252,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // 100%
         for (n, puzzle) in Puzzle.moyensD.enumerated() {
             print("\n-- moyensD[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -261,7 +261,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // 100%
         for (n, puzzle) in Puzzle.difficilesA.enumerated() {
             print("\n-- difficilesA[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
         
         /*
@@ -276,7 +276,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Complexité : 56
         // Mais aussi une recherche de paire2 parmi 6
         let puzzle = Puzzle.difficilesA[5]
-        let _ = puzzle.suiteDeCoups()
+        let _ = puzzle.suiteDeCoupsOld()
     }
     
     func testPartiesDifficilesB() {
@@ -284,7 +284,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // 50%
         for (n, puzzle) in Puzzle.difficilesB.enumerated() {
             print("\n-- difficilesB[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -292,7 +292,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Niveau 2.8
         for (n, puzzle) in Puzzle.difficilesC.enumerated() {
             print("\n-- difficilesC[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -300,7 +300,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Niveau 3.0
         for (n, puzzle) in Puzzle.difficilesD.enumerated() {
             print("\n-- difficilesD[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -308,7 +308,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Niveau 3.2
         for (n, puzzle) in Puzzle.difficilesE.enumerated() {
             print("\n-- difficilesE[\(n)]")
-            let _ = puzzle.suiteDeCoups()
+            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -392,7 +392,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         // On extrait le premier coup par le calcul interne.
         // On vérifie que c'est cohérent avec l'API.
         // C'est un coup direct : pas d'auxiliaire.
-        let coup = puzzle.premierCoup!
+        let coup = puzzle.premierCoupOld!
         XCTAssertEqual(coup.nom, texteCoup)
         
         // On prévoit la démonstration attendue.
@@ -413,33 +413,6 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssert(puzzle.patternEstApplicable(Demonstration(litteral: demonstration)))
     }
     
-    func testLitteral() {
-        let litteral = DemonstrationLitterale(
-            presence: "Ae_9",
-            zone: "e",
-            occupees: ["Be", "Ee", "Ge"],
-            eliminatrices: ["Dd_9", "Hf_9"],
-            eliminees: ["De", "He"],
-            auxiliaires: [
-                AuxiliaireLitteral(
-                    presence: "CeFeIe_456",
-                    zone: "e",
-                    occupees: ["Be", "Ee", "Ge"],
-                    eliminees: ["Ae", "De", "He"],
-                    eliminatrices: ["AcAgAh_456", "DbDfDi_456", "HdHhHi_456"])
-            ]
-        )
-        
-        XCTAssertEqual(litteral.codeSwift, """
-DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"], eliminatrices: ["Dd_9", "Hf_9"], eliminees: ["De", "He"], auxiliaires: [AuxiliaireLitteral(presence: "CeFeIe_456", zone: "e", occupees: ["Be", "Ee", "Ge"], eliminatrices: ["AcAgAh_456", "DbDfDi_456", "HdHhHi_456"], eliminees: ["Ae", "De", "He"]]]
-""")
-        
-        let demonstration = Demonstration(litteral: litteral)
-        
-        XCTAssertEqual(demonstration.litteral, litteral)
-        XCTAssertEqual("\(litteral)", litteral.codeSwift)
-        
-    }
     
     func testRegleCelluleElimineeDirectement() {
         
@@ -521,7 +494,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         /// Les éliminatrices sont Gi Ia
 
         XCTAssertEqual(
-            SingletonEliminateur.instances(valeur: 2, zone: Carre(nom: "Pn"), dans: puzzle)
+            SingletonConnu.instances(valeur: 2, zone: Carre(nom: "Pn"), dans: puzzle)
                 .map { $0.singleton.nom },
             ["Gi_2", "Ia_2"]
         )
@@ -552,7 +525,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
          ··· 123 ···
          */
          
-        let premierCoup = puzzle.premierCoup!
+        let premierCoup = puzzle.premierCoupOld!
         
         XCTAssertEqual(premierCoup.singleton.nom, "Hh_4")
         XCTAssertEqual(premierCoup.zone.nom, "h")
@@ -798,6 +771,18 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
          Ig_7
          */
         
+        XCTAssertEqual(
+            valeursDesCellules(puzzle: puzzle.litteral),
+            ["Aa": 9, "Ab": 5, "Ac": 2, "Ad": 6, "Ae": 7, "Af": 8, "Ag": 3, "Ah": 1, "Ai": 4,
+             "Bf": 1, "Bi": 9, "Bb": 8, "Bh": 7, "Bg": 6, "Bd": 5, "Be": 2, "Bc": 4, "Ba": 3,
+             "Cg": 2, "Gg": 9, "Cf": 9, "Ca": 1, "Ce": 4, "Ch": 5, "Cd": 3, "Ci": 8,
+             "Df": 2, "Dh": 9, "Da": 4,
+             "Ei": 5, "Eg": 4, "Ea": 2,
+             "Fb": 1, "Fd": 4,
+             "Ge": 6, "Gb": 4, "Gf": 5, "Ga": 7, "Gc": 3,
+             "Hg": 5, "Ha": 6, "Hf": 7, "Hb": 9, "He": 3, "Hh": 4,
+             "Ib": 2, "If": 4]
+        )
         let coup = Coup_Paire2.instances(zone: Carre(nom: "Pp"), parmi: 6, dans: puzzle)[0]
         print(coup.litteral)
         
@@ -831,7 +816,17 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
                     eliminees: ["Gh", "Gi", "Hi", "Ig"],
                     pairesEliminatrices: [["He_3", "Ha_6"], ["Ag_3", "Bg_6"], ["Gc_3", "Ge_6"]])))
         )
-    }
+        
+        XCTAssertEqual(valeur(singleton: "Ig_7"), 7)
+        XCTAssertEqual(cellule(singleton: "Ig_7"), "Ig")
+        XCTAssertEqual(type(zone: "Pp"), .carre)
+        XCTAssertEqual(valeurs(presence: "IhIi_36"), [3, 6])
+        XCTAssertEqual(cellules(presence: "IhIi_36"), ["Ih", "Ii"])
+        XCTAssertEqual(attendu.eliminees, ["Gh", "Gi", "Hi"])
+        XCTAssertEqual(attendu.eliminatrices, ["Ga_7", "Hf_7"])
+        XCTAssertEqual(indexLigne(cellule: "Ig"), 8)
+        XCTAssertEqual(indexColonne(cellule: "Ig"), 6)
+   }
     
     
     func testCodeSwift() {
@@ -849,7 +844,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         /*
          Coup_DerniereCellule(litteral: Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"]))
          */
-        print(coup_.description)
+        print(coup_.codeSwift)
         let coupBis = Coup_DerniereCellule(
             litteral: Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"]))
         XCTAssertEqual(coupBis, coup)
@@ -864,7 +859,7 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
         
         let coups = Coup_DerniereCellule.instances(zone: Colonne(nom: "e"), dans: puzzle)
         XCTAssert(coups.count == 1)
-        let coup = coups.uniqueElement
+        let coup = coups[0]
         XCTAssertEqual(coup.litteral, attendu_)
         
         let leCoup: Coup = .derniereCellule(coup)
@@ -882,13 +877,13 @@ DemonstrationLitterale(presence: "Ae_9", zone: "e", occupees: ["Be", "Ee", "Ge"]
     
     func testSingletonEliminateur() {
         let litteral = SingletonEliminateur_(singleton: "Aa_1")
-        let objet = SingletonEliminateur(litteral: litteral)
+        let objet = SingletonConnu(litteral: litteral)
         XCTAssertEqual(
             objet,
-            SingletonEliminateur(litteral: SingletonEliminateur_(singleton: "Aa_1"))
+            SingletonConnu(litteral: SingletonEliminateur_(singleton: "Aa_1"))
         )
         
-        print(objet.debugDescription)
+        print(objet.litteral)
         /*
          "SingletonEliminateur(litteral: SingletonEliminateur_(singleton: \"Aa_1\"))"
          */

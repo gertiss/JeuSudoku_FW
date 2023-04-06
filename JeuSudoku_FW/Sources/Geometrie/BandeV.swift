@@ -8,8 +8,10 @@
 import Foundation
 import Modelisation_FW
 
+public typealias BandeV_  = String
+
 /// Une bande verticale formée de 3 colonnes
-public struct BandeV: InstanciableParNom, CodableEnLitteral, CodableEnJson {
+public struct BandeV: CodableParNom {
     
     public let index: Int // de 0 à 2
     
@@ -56,7 +58,6 @@ public extension BandeV {
     
     static let noms = ["m", "n", "p"]
     
-    /// Le nom de la bande, qui sert d'id pour  le protocole Identifiable
     var nom: String {
         Self.noms[index]
     }

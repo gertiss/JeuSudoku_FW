@@ -53,11 +53,12 @@ extension Ligne {
 
 
 
-// MARK: - InstanciableParNom
+// MARK: - CodableParNom
 
-extension Ligne: InstanciableParNom, CodableEnLitteral, CodableEnJson {
+public typealias Ligne_ = String
+
+extension Ligne: CodableParNom {
  
-    /// Le nom de la ligne, qui sert d'id pour  le protocole Identifiable
     public var nom: String {
          Self.noms[index]
      }

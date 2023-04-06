@@ -8,16 +8,21 @@
 import Foundation
 import Modelisation_FW
 
-enum Coup {
+enum Coup: Equatable {
     case derniereCellule(Coup_DerniereCellule)
     case eliminationDirecte(Coup_EliminationDirecte)
     case eliminationIndirecte(Coup_EliminationIndirecte)
     case paire2(Coup_Paire2)
     case triplet3(Coup_Triplet3)
     case derniereValeur(Coup_DerniereValeur)
+    
+    static func == (lhs: Coup, rhs: Coup) -> Bool {
+        lhs.codeSwift == rhs.codeSwift
+    }
+    
 }
 
-public enum Coup_: UnLitteral {
+public enum Coup_: UnLitteral, Equatable {
     case derniereCellule(Coup_DerniereCellule_)
     case eliminationDirecte(Coup_EliminationDirecte_)
     case eliminationIndirecte(Coup_EliminationIndirecte_)
@@ -41,6 +46,11 @@ public enum Coup_: UnLitteral {
             return "Coup_.derniereValeur(\(litteral.codeSwift))"
         }
     }
+    
+    public static func == (lhs: Coup_, rhs: Coup_) -> Bool {
+        lhs.codeSwift == rhs.codeSwift
+    }
+    
 }
 
 extension Coup: CodableEnLitteral {

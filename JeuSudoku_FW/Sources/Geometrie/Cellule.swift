@@ -8,7 +8,12 @@
 import Foundation
 import Modelisation_FW
 
-public struct Cellule {
+public struct Cellule: Codable, Comparable {
+    public static func < (lhs: Cellule, rhs: Cellule) -> Bool {
+        lhs.indexLigne < rhs.indexLigne ||
+        (lhs.indexLigne == rhs.indexLigne  && lhs.indexColonne < rhs.indexColonne)
+    }
+    
     
     public let indexLigne: Int // de 0 à 8
     public let indexColonne: Int // de 0 à 8
@@ -74,9 +79,12 @@ extension Cellule {
     }
 }
 
-// MARK: - InstanciableParNom
+// MARK: - CodableParNom
 
-extension Cellule: InstanciableParNom, CodableEnLitteral {
+public typealias Cellule_ = String
+
+extension Cellule: CodableParNom {
+    
     
     /// InstanciableParNom
     /// Exemple :  `Cellule(0, 0)` a pour nom `"Aa"`

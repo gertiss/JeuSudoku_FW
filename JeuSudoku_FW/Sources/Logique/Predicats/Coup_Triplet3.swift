@@ -104,21 +104,21 @@ extension Coup_Triplet3: CodableEnLitteral {
     
 }
 
-public struct Coup_Triplet3_: UnLitteral {
-    public let singleton: String
-    public let zone: String
-    public let occupees: [String]
+public struct Coup_Triplet3_: UnLitteral, Equatable {
+    public let singleton: Presence_
+    public let zone: AnyZone_
+    public let occupees: [Cellule_] 
     public let eliminationsDirectes: [EliminationDirecte_]
     public let detectionTriplet3: DetectionTriplet3_
     
     public var codeSwift: String {
         """
 Coup_Triplet3_ (
-    singleton: \(singleton.debugDescription),
-    zone: \(zone.debugDescription),
-    occupees: \(occupees.debugDescription),
-    eliminationsDirectes: \(eliminationsDirectes.debugDescription),
-        detectionTriplet3: \(detectionTriplet3))
+    singleton: \(singleton.codeSwift),
+    zone: \(zone.codeSwift),
+    occupees: \(occupees.codeSwift),
+    eliminationsDirectes: \(eliminationsDirectes.codeSwift),
+        detectionTriplet3: \(detectionTriplet3.codeSwift))
 """
     }
 }

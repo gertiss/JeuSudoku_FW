@@ -9,6 +9,7 @@ import Foundation
 import Modelisation_FW
 
 public typealias AnyZone = any UneZone
+public typealias AnyZone_ = String // Le nom de la zone
 
 public enum TypeZone: Hashable, Codable {
     case carre
@@ -30,11 +31,11 @@ public enum TypeZone: Hashable, Codable {
 /// UneZone est une Ligne ou une Colonne ou un Carre
 /// Si on veut une collection de UneZone, il faut écrire `[any UneZone]`,
 /// car `Set<UneZone>` est impossible à résoudre pour l'inférence de types.
-public protocol UneZone: InstanciableParNom {
+public protocol UneZone: CodableParNom {
+    var nom: String { get }
+    
     var cellules: Region { get }
     var type: TypeZone { get }
-    
-    var nom: String { get }
 }
 
 public extension UneZone {
@@ -66,7 +67,7 @@ public extension Grille {
         fatalError("Nom de zone incorrect \(nom)")
     }
     
-    static func laZone(litteral: String) -> (any UneZone) {
+    static func laZone(litteral: AnyZone_) -> (any UneZone) {
         Grille.laZone(nom: litteral)
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Primitives de recherche
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Toutes les zones de la grille, les plus remplies d'abord, et les carrés d'abord.
     var zonesClasseesParRemplissage: [any UneZone] {
@@ -58,7 +58,7 @@ public extension Puzzle {
 
 // MARK: - Niveau 1.0. Dernière cellule vide.
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Niveau 1.0
     /// On peut éventuellement hiérarchiser le niveau : carré, puis alignement.
@@ -66,8 +66,6 @@ public extension Puzzle {
     var coupDerniereCellule: CoupOld? {
         for zone in Grille.zones {
             if let singleton  = singleton1DetecteLocalement(dans: zone), estNouveauSingletonValide(singleton) {
-                // Provisoire !
-                var provisoire = "refactoriser la démonstration"
                 let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
                 return CoupOld(singleton, zone: zone, methode: .derniereCellule, demonstration: demonstration)
             }
@@ -78,7 +76,7 @@ public extension Puzzle {
 
 // MARK: - Niveau 1.2, 1.5. Elimination directe sans paires
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Niveau 1.2 (dans carré) ou 1.5 (dans alignement)
     var coupParEliminationDirecte: CoupOld? {
@@ -89,8 +87,6 @@ public extension Puzzle {
         for valeur in valeurs {
             for zone in zones {
                 if let singleton = singleton1DetecteParEliminationDirecte(pour: valeur, dans: zone.cellules, zone: zone), estNouveauSingletonValide(singleton) {
-                    // Provisoire !
-                    var provisoire = "refactoriser la démonstration"
                     let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
                     return CoupOld(singleton, zone: zone, methode: .direct, demonstration: demonstration)
                 }
@@ -102,7 +98,7 @@ public extension Puzzle {
 
 // MARK: - Niveau 1.7. Elimination indirecte avec paire1
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Niveau 1.7. On utilise les paires1 temporairement.
     var coupParEliminationIndirecte: CoupOld? {
@@ -145,7 +141,7 @@ public extension Puzzle {
 
 // MARK: - Elimination indirecte avec paire2
 
-public extension Puzzle {
+extension Puzzle {
     
     func coupApresPaire(parmi nombreCellulesVides: Int) -> CoupOld? {
         assert(nombreCellulesVides <= 9)
@@ -186,8 +182,6 @@ public extension Puzzle {
                         // on peut inclure dans le compte rendu :
                         // eliminees (par x1 et x2)
                         // singleton rapporte ausssi un compte rendu
-                        // Provisoire !
-                        var provisoire = "refactoriser la démonstration"
                         let demonstration = Demonstration(presence: singleton, zone: zone, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
                         return CoupOld(singleton, zone: zone, auxiliaires: [paire2], methode: .indirect, demonstration: demonstration)
                     }
@@ -254,7 +248,7 @@ extension Puzzle {
 
 // MARK: - Combinatoire globale
 
-public extension Puzzle {
+extension Puzzle {
     
     /// On examine chaque cellule pour déteminer ses valeurs candidates.
     /// On retourne une contrainte sur cette cellule s'il y a 1 seule valeur candidate.
@@ -266,8 +260,6 @@ public extension Puzzle {
                 let valeursRestantes = Int.lesChiffres1a9.subtracting(valeursCiblantes)
                 let singleton =  Presence(valeursRestantes, dans: [cellule])
                 if let  valide = nouveauSingletonValide(singleton) {
-                    // Provisoire !
-                    var provisoire = "refactoriser la démonstration"
                     let demonstration = Demonstration(presence: singleton, zone: cellule.carre, occupees: [], eliminatrices: [], eliminees: [], auxiliaires: [])
                     return CoupOld(valide, zone: cellule.carre, methode: .uniqueValeur, demonstration: demonstration)
                 }

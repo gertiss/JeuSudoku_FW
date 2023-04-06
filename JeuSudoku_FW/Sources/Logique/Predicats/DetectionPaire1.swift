@@ -18,10 +18,14 @@ struct DetectionPaire1 {
     let zone: AnyZone
     let occupees: [Cellule]
     let eliminees: [Cellule]
-    let eliminatrices: [Cellule] 
+    let eliminatrices: [Cellule] // ou [Presence] ? Peut être reconstituée
     
     var valeur: Int {
         paire1.valeurs.uniqueElement
+    }
+    
+    var singletonsEliminateurs: [Presence] {
+        eliminatrices.map { Presence([valeur], dans: [$0]) }
     }
 }
 
@@ -95,16 +99,16 @@ extension DetectionPaire1: CodableEnLitteral {
     
 }
 
-public struct DetectionPaire1_: UnLitteral {
-    public let paire1: String
+public struct DetectionPaire1_: UnLitteral, Equatable {
+    public let paire1: Presence_
     
-    public let zone: String
-    public let occupees: [String]
-    public let eliminees: [String]
-    public let eliminatrices: [String]
+    public let zone: AnyZone_
+    public let occupees: [Cellule_]
+    public let eliminees: [Cellule_]
+    public let eliminatrices: [Cellule_]
     
     public var codeSwift: String {
-        "DetectionPaire1_(paire1: \(paire1.description), zone: \(zone.description), occupees: \(occupees.description), eliminees: \(eliminees.description), eliminatrices: \(eliminatrices.description))"
+        "DetectionPaire1_(paire1: \(paire1.codeSwift), zone: \(zone.codeSwift), occupees: \(occupees.codeSwift), eliminees: \(eliminees.codeSwift), eliminatrices: \(eliminatrices.codeSwift))"
     }
 
 }

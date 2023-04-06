@@ -1,20 +1,20 @@
 //
-//  Detection globale.swift
+//  RechercheCoup.swift
 //  JeuSudoku_FW
 //
-//  Created by Gérard Tisseau on 04/03/2023.
+//  Created by Gérard Tisseau on 05/04/2023.
 //
 
 import Foundation
 
-public extension Puzzle {
+extension Puzzle {
     
     /// La stratégie de recherche globale de plus haut niveau :
     /// quel est le premier coup nouveau qu'on peut trouver à partir de l'état actuel ?
     /// Toutes les fonctions de recherche utilisées retournent un coup ou nil.
     /// On garantit que le coup découvre un singleton valide qui ne figure pas dans l'état actuel.
     /// Ordre des essais : la méthode la moins combinatoire d'abord.
-    var premierCoup: CoupOld? {
+    var premierCoupOld: CoupOld? {
         
         // Niveau 1.0 : dernière cellule vide dans une zone, valeur obligée.
         // complexité 1

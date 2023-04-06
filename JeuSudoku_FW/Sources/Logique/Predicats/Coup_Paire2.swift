@@ -23,6 +23,15 @@ extension Coup_Paire2 {
     var valeur: Int {
         singleton.valeurs.uniqueElement
     }
+    
+    var eliminees: [Cellule] {
+        eliminationsDirectes.map { $0.eliminee }.ensemble.array.sorted()
+    }
+    
+    var eliminatrices: [Presence] {
+        eliminationsDirectes.map { $0.eliminatrice }.ensemble.array.sorted()
+    }
+
 }
 
 // MARK: - Requêtes
@@ -107,21 +116,34 @@ extension Coup_Paire2: CodableEnLitteral {
     }
 }
 
-public struct Coup_Paire2_: UnLitteral {
-    public let singleton: String
-    public let zone: String
-    public let occupees: [String]
+public struct Coup_Paire2_: UnLitteral, Equatable {
+    public let singleton: Presence_
+    public let zone: AnyZone_
+    public let occupees: [Cellule_]
     public let eliminationsDirectes: [EliminationDirecte_]
     public let detectionPaire2: DetectionPaire2_
     
     public var codeSwift: String {
         """
 Coup_Paire2_ (
-    singleton: \(singleton.debugDescription),
-    zone: \(zone.debugDescription),
-    occupees: \(occupees.debugDescription),
-    eliminationsDirectes: \(eliminationsDirectes.debugDescription),
-    detectionPaire2: \(detectionPaire2))
+    singleton: \(singleton.codeSwift),
+    zone: \(zone.codeSwift),
+    occupees: \(occupees.codeSwift),
+    eliminationsDirectes: \(eliminationsDirectes.codeSwift),
+    detectionPaire2: \(detectionPaire2.codeSwift))
 """
     }
+}
+
+public extension Coup_Paire2_ {
+    
+    var eliminees: [Cellule_] {
+        Coup_Paire2(litteral: self).eliminees.map { $0.litteral }.sorted()
+    }
+    
+    var eliminatrices: [Presence_] {
+        Coup_Paire2(litteral: self).eliminatrices.map { $0.litteral }.sorted()
+    }
+
+
 }

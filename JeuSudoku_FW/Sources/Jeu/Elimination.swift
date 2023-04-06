@@ -40,7 +40,7 @@ extension Puzzle {
         for contrainte in contraintesEliminantes(pour: valeur) {
             region = region.union(cellulesEliminees(par: contrainte, pour: valeur))
         }
-        var elimination = "à compléter. Retourner elimination au lieu de region. Filtrer les eliminatrices utiles"
+        _ = "à compléter. Retourner elimination au lieu de region. Filtrer les eliminatrices utiles"
         return region
     }
     

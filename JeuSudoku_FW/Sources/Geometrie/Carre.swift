@@ -8,7 +8,7 @@
 import Foundation
 import Modelisation_FW
 
-public struct Carre {
+public struct Carre: Codable {
     
     // Un carré est l'intersection d'une bande horizontale et d'une bande verticale
     
@@ -80,7 +80,6 @@ public extension Carre {
     
 }
 
-// MARK: - Testable
 
 extension Carre {
     
@@ -89,9 +88,11 @@ extension Carre {
     }
 }
 
-// MARK: - InstanciableParNom
+// MARK: - CodableParNom
 
-extension Carre: InstanciableParNom, CodableEnLitteral, CodableEnJson {
+public typealias Carre_ = String
+
+extension Carre: CodableParNom {
     
     static var noms: [String] {
         var ensemble = Set<String>()

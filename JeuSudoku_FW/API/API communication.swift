@@ -8,35 +8,62 @@
 import Foundation
 
 
-// MARK: - Coup
+
+// MARK: - Cellule
+
+public func indexLigne(cellule: Cellule_) -> Int {
+    Cellule(litteral: cellule).indexLigne
+}
+
+public func indexColonne(cellule: Cellule_) -> Int {
+    Cellule(litteral: cellule).indexColonne
+}
 
 
 // MARK: - Presence
 
-public func valeurs(presence: Presence) -> Set<Int> {
-    presence.valeurs
+public func valeurs(presence: Presence_) -> [Int] {
+    Presence(litteral: presence).valeurs.array.sorted()
 }
 
-public func region(presence: Presence) -> Set<Cellule> {
-    presence.region
+public func cellules(presence: Presence_) -> [Cellule_] {
+    Presence(litteral: presence).region.map { $0.nom }.sorted()
 }
 
-public func type(presence: Presence) -> String {
-    presence.type.rawValue
+// MARK: - Singleton
+
+public func estSingleton(presence: Presence_) -> Bool {
+    Presence(litteral: presence).type == .singleton1
 }
 
-public func nom(presence: Presence) -> String {
-    presence.nom
+public func valeur(singleton: Presence_) -> Int {
+    Presence(litteral: singleton).valeurs.uniqueElement
 }
 
-// MARK: - Cellule
-
-public func indexLigne(cellule: Cellule) -> Int {
-    cellule.indexLigne
+public func cellule(singleton: Presence_) -> Cellule_ {
+    Presence(litteral: singleton).region.map { $0.nom }.uniqueElement
 }
 
-public func indexColonne(cellule: Cellule) -> Int {
-    cellule.indexColonne
+// MARK: - Zone
+
+public func type(zone: AnyZone_) -> TypeZone {
+    Grille.laZone(litteral: zone).type
+}
+
+public func cellules(zone: AnyZone_) -> [Cellule_] {
+    Grille.laZone(litteral: zone).cellules.map { $0.litteral }
+}
+
+
+// MARK: - Puzzle
+
+public func valeursDesCellules(puzzle: Puzzle_) -> [Cellule_: Int] {
+    var dico = [Cellule_: Int]()
+    for singleton in Puzzle(litteral: puzzle).contraintes {
+        let singleton_ = singleton.litteral
+        dico[cellule(singleton: singleton_)] = valeur(singleton: singleton_)
+    }
+    return dico
 }
 
 

@@ -15,8 +15,8 @@ struct Coup_DerniereValeur {
     let eliminations: [EliminationDirecte]
 }
 
-public struct Coup_DerniereValeur_: UnLitteral {
-    public let singleton: Presence.Litteral
+public struct Coup_DerniereValeur_:  UnLitteral {
+    public let singleton: Presence_ // Presence
     public let eliminations: [EliminationDirecte_]
     
     public var codeSwift: String {

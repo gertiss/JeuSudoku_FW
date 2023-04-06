@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Puzzle {
+extension Puzzle {
     
     /// Vérification avec la solution connue.
     /// solution est un puzzle entièrement réduit à des singleton1, entièrement résolu.

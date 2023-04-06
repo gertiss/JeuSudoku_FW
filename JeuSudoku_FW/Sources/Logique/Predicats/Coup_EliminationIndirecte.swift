@@ -10,6 +10,7 @@ import Modelisation_FW
 
 /// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées. Certaines éliminations sont indirectes par paire1.
 struct Coup_EliminationIndirecte {
+    
     let singleton: Presence
     let zone: AnyZone
     let occupees: [Cellule]
@@ -35,12 +36,11 @@ extension Coup_EliminationIndirecte {
         let eliminationsDirectes = EliminationDirecte.instances(valeur: valeur, zone: zone, dans: puzzle)
         let elimineesDirectes = eliminationsDirectes.map { $0.eliminee }.sorted()
         
-        let paires1 = DetectionPaire1.instances(valeur: valeur, ciblant: zone, dejaEliminees: elimineesDirectes, dans: puzzle).sorted()
+        let paires1 = DetectionPaire1.instances(valeur: valeur, ciblant: zone, dejaEliminees: elimineesDirectes, dans: puzzle)
         if paires1.isEmpty { return [] }
         
-        let eliminationsIndirectes = EliminationIndirecte.instances(eliminatrices: paires1, zone: zone, dans: puzzle).sorted()
+        let eliminationsIndirectes = EliminationIndirecte.instances(eliminatrices: paires1, zone: zone, dans: puzzle)
         if eliminationsIndirectes.isEmpty { return [] }
-        assert(eliminationsIndirectes.cardinal == 1)
         let occupees = zone.cellules.filter { puzzle.celluleEstResolue($0) }
 
         let elimineesIndirectes = eliminationsIndirectes.flatMap { $0.eliminees }.sorted()
@@ -53,8 +53,8 @@ extension Coup_EliminationIndirecte {
             singleton: singleton,
             zone: zone,
             occupees: occupees.sorted(),
-            eliminationsDirectes: eliminationsDirectes.sorted(),
-            eliminationsIndirectes: eliminationsIndirectes.sorted())
+            eliminationsDirectes: eliminationsDirectes,
+            eliminationsIndirectes: eliminationsIndirectes)
         
         return [fait]
     }
@@ -70,8 +70,8 @@ extension Coup_EliminationIndirecte: CodableEnLitteral {
             occupees: occupees.map { $0.nom }.sorted(),
             elimineesDirectement: eliminationsDirectes.map { $0.eliminee.nom }.sorted(),
             elimineesIndirectement: eliminationsIndirectes.flatMap { $0.eliminees }.map { $0.nom }.sorted(),
-            explicationDesDirectes: eliminationsDirectes.map { $0.litteral }.sorted(),
-            explicationDesIndirectes: eliminationsIndirectes.map { $0.litteral}.sorted()
+            explicationDesDirectes: eliminationsDirectes.map { $0.litteral },
+            explicationDesIndirectes: eliminationsIndirectes.map { $0.litteral}
         )
     }
     
@@ -85,13 +85,15 @@ extension Coup_EliminationIndirecte: CodableEnLitteral {
 
 }
 
-public struct Coup_EliminationIndirecte_: UnLitteral {
+// MARK: - Litteral
+
+public struct Coup_EliminationIndirecte_: UnLitteral, Equatable {
     
-    public let singleton: String
-    public let zone: String
-    public let occupees: [String]
-    public let elimineesDirectement: [String]
-    public let elimineesIndirectement: [String]
+    public let singleton: Presence_
+    public let zone: AnyZone_
+    public let occupees: [Cellule_]
+    public let elimineesDirectement: [Cellule_]
+    public let elimineesIndirectement: [Cellule_] 
     
     public let explicationDesDirectes: [EliminationDirecte_]
     public let explicationDesIndirectes: [EliminationIndirecte_]
@@ -100,13 +102,13 @@ public struct Coup_EliminationIndirecte_: UnLitteral {
     public var codeSwift: String {
         """
 Coup_EliminationIndirecte_ (
-singleton: \(singleton),
-zone: \(zone),
-occupees: \(occupees),
-elimineesDirectement: \(elimineesDirectement),
-elimineesIndirectement: \(elimineesIndirectement),
-explicationDesDirectes: \(explicationDesDirectes),
-explicationDesIndirectes: \(explicationDesIndirectes))
+singleton: \(singleton.codeSwift),
+zone: \(zone.codeSwift),
+occupees: \(occupees.codeSwift),
+elimineesDirectement: \(elimineesDirectement.codeSwift),
+elimineesIndirectement: \(elimineesIndirectement.codeSwift),
+explicationDesDirectes: \(explicationDesDirectes.codeSwift),
+explicationDesIndirectes: \(explicationDesIndirectes.codeSwift))
 """
     }
 }
