@@ -7,26 +7,11 @@
 
 import Foundation
 
-// MARK: - Elimination
+// MARK: - Elimination pour valeur
 
-/// Représente le fait suivant :
-/// les `eliminees`sont exactement toutes les cellules éliminées globalement pour la `valeur`
-/// les  éliminations sont causées par les`eliminatrices` (seulement celles qui sont nécessaires)
-struct EliminationDirecteRegion {
-    let valeur: Int
-    let eliminees: Region
-    let eliminatrices: [Presence]
-}
-
-/// La cellule `eliminee` est éliminée par la contrainte `eliminatrice` pour la `valeur`
-struct EliminationDirecteCellule {
-    let valeur: Int
-    let eliminee: Cellule
-    let eliminatrice: Presence
-}
-
-
-/// Les primitives qui permettent de chercher les éliminations de cellules pour une valeur donnée
+/// Les primitives qui permettent de chercher les éliminations pour une valeur donnée.
+/// Elles ont toutes un paramètre `valeur`
+/// Elles effectuent une recherche globale, c'est-à-dire n'ont pas de paramètre `zone`.
 
 
 extension Puzzle {
@@ -34,6 +19,7 @@ extension Puzzle {
     /// Calcul des cellules éliminées pour une valeur, directement et indirectement,
     /// dans toute la grille.
     /// On est définitivement certain que la valeur ne pourra pas être placée dans la région résultat.
+    /// Utilisé par `Coup_Paire2` et `Coup_Triplet3`
     func cellulesEliminees(pour valeur: Int) -> Region {
         // On commence par éliminer d'office toutes les cellules résolues globalement
         var region = cellulesResolues
@@ -45,6 +31,7 @@ extension Puzzle {
     }
     
     /// Toutes les contraintes qui permettent d'éliminer la valeur.
+    /// Utilisé par `Coup_Paire2` et `Coup_Triplet3`
     func contraintesEliminantes(pour valeur: Int) -> [Presence] {
         let res = contraintes.filter { contrainteEstEliminante($0, pour: valeur) }
         return res
@@ -53,6 +40,7 @@ extension Puzzle {
     
     /// Une contrainte peut éliminer des cellules à l'intérieur d'elles-même aussi bien qu'à l'extérieur.
     /// Cela dépend du type de la contrainte et de sa relation avec la valeur.
+    /// Utilisé par `Coup_Paire2` et `Coup_Triplet3`
     func cellulesEliminees(par contrainte: Presence, pour valeur: Int) -> Region {
         let externes = cellulesExternesEliminees(par: contrainte, pour: valeur)
         let internes = cellulesInternesEliminees(par: contrainte, pour: valeur)
@@ -62,7 +50,8 @@ extension Puzzle {
     
     /// Indique si la contrainte élinine des cellules pour une valeur donnée ("émet des rayons")
     /// Les cellules éliminées ne pourront définitivement plus contenir la valeur.
-    func contrainteEstEliminante(_ contrainte: Presence, pour valeur: Int) -> Bool {
+    /// Utilisé par `Coup_Paire2` et `Coup_Triplet3`
+   func contrainteEstEliminante(_ contrainte: Presence, pour valeur: Int) -> Bool {
         switch contrainte.type {
         case .singleton1:
             return contrainte.contient(valeur: valeur)
@@ -77,7 +66,8 @@ extension Puzzle {
         }
     }
     
-    func estEliminanteDirectement(_ contrainte: Presence) -> Bool {
+    /// Utilisé par tous les types de coups
+   func estEliminanteDirectement(_ contrainte: Presence) -> Bool {
         switch contrainte.type {
         case .singleton1:
             return true
@@ -92,8 +82,9 @@ extension Puzzle {
         }
     }
     
-    /// Les cellules éliminées hors de la région de la contrainte
-    /// toutes les cellules dans le champ de dépendance
+    /// Les cellules éliminées hors de la région de la contrainte.
+    /// toutes les cellules dans le champ de dépendance.
+    /// Utilisé par tous les types de coups.
     func cellulesExternesEliminees(par contrainte: Presence, pour valeur: Int) -> Region {
         guard let alignement = contrainte.alignement else {
             return []
@@ -118,7 +109,8 @@ extension Puzzle {
     
     /// Les cellules éliminées à l'intérieur de la région de la contrainte.
     /// "Eliminée" veut dire "ne pouvant plus faire partie d'une nouvelle contrainte avec la valeur"
-    func cellulesInternesEliminees(par contrainte: Presence, pour valeur: Int) -> Region {
+    /// Utilisé par `Coup_Paire2` et `Coup_Triplet3`
+   func cellulesInternesEliminees(par contrainte: Presence, pour valeur: Int) -> Region {
         switch contrainte.type {
         case .singleton1:
             return contrainte.region
@@ -140,18 +132,17 @@ extension Puzzle {
         return []
     }
     
-    /// Une paire1 est utile pour une élimination indirecte si elle élimine au moins une cellule vide
-    /// et non déjà éliminée directement
-    func paire1EstUtile(_ paire1: Presence, cellulesElimineesDirectement : Region) -> Bool {
-        assert(paire1.type == .paire1)
-        let valeur = paire1.valeurs.uniqueElement
-        let eliminees = cellulesExternesEliminees(par: paire1, pour: valeur)
-        let utiles = eliminees.subtracting(cellulesElimineesDirectement)
-        return !utiles.isEmpty
+    /// le nombre de `cibles` éliminées par la `contrainte`
+    func pouvoirEliminateur(singleton: Presence, cibles: Region) -> Int {
+        assert(singleton.type == .singleton1)
+        let eliminatrice = singleton.uniqueCellule
+        var pouvoir = 0
+        for cible in cibles {
+            if eliminatrice.dependantes.contains(cible) {
+                pouvoir += 1
+            }
+        }
+        return pouvoir
     }
-    
-    func estEliminatrice(_ contrainte: Presence, eliminee: Cellule, valeur: Int) -> Bool {
-        cellulesEliminees(par: contrainte, pour: valeur).contains(eliminee)
-    }
-    
 }
+

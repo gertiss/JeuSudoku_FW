@@ -58,6 +58,13 @@ public struct Presence: UneContrainte, Comparable, CodableParNom {
         let valeurs = Valeurs(nom: nomValeurs)
         self = Self(valeurs, dans: region)
     }
+}
+
+public extension Presence {
     
+    /// Pour un singleton, retourne l'unique cellule de la région. Erreur sinon.
+    var uniqueCellule: Cellule {
+        region.uniqueElement
+    }
 }
 

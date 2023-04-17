@@ -11,7 +11,7 @@ import Modelisation_FW
 public typealias AnyZone = any UneZone
 public typealias AnyZone_ = String // Le nom de la zone
 
-public enum TypeZone: Hashable, Codable {
+public enum TypeZone: String, Hashable, Codable {
     case carre
     case ligne
     case colonne

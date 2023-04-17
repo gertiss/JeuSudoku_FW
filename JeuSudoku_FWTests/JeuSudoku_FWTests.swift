@@ -93,7 +93,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 """)
         
         // Ce "dessin" peut être utilisé directement comme code pour le puzzle
-        let puzzleBis = Puzzle(chiffres: dessin)
+        let puzzleBis = try! Puzzle(chiffres: dessin)
         XCTAssertEqual(puzzleBis, puzzle)
         
         let singletons = puzzle.contraintes.map { $0.nom }.sorted().joined(separator: " ")
@@ -115,8 +115,12 @@ final class JeuSudoku_FWTests: XCTestCase {
             ["Aa", "Ab", "Ba", "Bb", "Bc", "Cb", "Cc"])
     }
     
-    func testDetection() {
+    func testCoupParEliminationDirecte() {
         let puzzle = Puzzle.moyensA[0]
+        XCTAssertEqual(
+            puzzle.codeChiffres,
+        "002806100000090000300000007003000200600704008820000045000010000140080063030050080"
+        )
         print(puzzle.texteDessin)
         
         XCTAssertEqual(puzzle.contraintes.count, 26)
@@ -140,13 +144,21 @@ final class JeuSudoku_FWTests: XCTestCase {
         )
         // Jeu
         
-        var nouveauCoup = puzzle.premierCoupOld!
-        print("détectée :", nouveauCoup.nom) // paire1 GbGc_8
-        var etat = puzzle.plus(nouveauCoup.singleton)
+        var nouveauCoup = puzzle.premierCoup!
+        XCTAssertEqual(
+            nouveauCoup.signature,
+            SignatureCoup(typeCoup: .eliminationDirecte, typeZone: "carre", nbDirects: 4, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
+        print("premier coup :", nouveauCoup.litteral) // Df_8 dans Nn
         
-        nouveauCoup = etat.premierCoupOld!
-        print("détectée :", nouveauCoup.nom) // Df_8
-        etat = puzzle.plus(nouveauCoup.singleton)
+        // On joue le premier coup, puis on cherche le deuxième
+        let etat = puzzle.plus(nouveauCoup.singleton)
+        nouveauCoup = etat.premierCoup!
+        XCTAssertEqual(
+            nouveauCoup.signature,
+            SignatureCoup(typeCoup: .eliminationDirecte, typeZone: "carre", nbDirects: 3, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
+        print("deuxième coup :", nouveauCoup.litteral) // Ii_1 dans Pp
         
     }
     
@@ -168,9 +180,8 @@ final class JeuSudoku_FWTests: XCTestCase {
 145 982 763
 236 457 981
 """
-        let solution = Puzzle(chiffres: chiffresSolution)
+        _ = try! Puzzle(chiffres: chiffresSolution)
         
-        let _ = puzzle.suiteDeCoupsOld(solution: solution)
     }
     
     func testPartieMoyenB0() {
@@ -191,8 +202,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 179362854
 """
         
-        let solution = Puzzle(chiffres: codeSolution)
-        let _ = puzzle.suiteDeCoupsOld(solution: solution)
+        _ = try! Puzzle(chiffres: codeSolution)
     }
     
     func testPartieMoyenC0() {
@@ -212,17 +222,15 @@ final class JeuSudoku_FWTests: XCTestCase {
 271493685
 564187923
 """
-        let solution = Puzzle(chiffres: codeSolution)
-        let _ = puzzle.suiteDeCoupsOld(solution: solution)
+        _ = try! Puzzle(chiffres: codeSolution)
         
     }
     
     func testPartiesMoyensA() {
         // Niveau 2.0
         // 100%
-        for (n, puzzle) in Puzzle.moyensA.enumerated() {
+        for (n, _) in Puzzle.moyensA.enumerated() {
             print("\n-- moyensA[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -231,18 +239,16 @@ final class JeuSudoku_FWTests: XCTestCase {
     func testPartiesMoyensB() {
         // Niveau 2.0
         // 100%
-        for (n, puzzle) in Puzzle.moyensB.enumerated() {
+        for (n, _) in Puzzle.moyensB.enumerated() {
             print("\n-- moyensB[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
     func testPartiesMoyensC() {
         // Niveau 2.0
         // 100%
-        for (n, puzzle) in Puzzle.moyensC.enumerated() {
+        for (n, _) in Puzzle.moyensC.enumerated() {
             print("\n-- moyensC[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
         
     }
@@ -250,18 +256,16 @@ final class JeuSudoku_FWTests: XCTestCase {
     func testPartiesMoyensD() {
         // Niveau 2.3
         // 100%
-        for (n, puzzle) in Puzzle.moyensD.enumerated() {
+        for (n, _) in Puzzle.moyensD.enumerated() {
             print("\n-- moyensD[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
     func testPartiesDifficilesA() {
         // Niveau 2.5
         // 100%
-        for (n, puzzle) in Puzzle.difficilesA.enumerated() {
+        for (n, _) in Puzzle.difficilesA.enumerated() {
             print("\n-- difficilesA[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
         
         /*
@@ -275,40 +279,35 @@ final class JeuSudoku_FWTests: XCTestCase {
         // Demande une recherche de 3 parmi 8
         // Complexité : 56
         // Mais aussi une recherche de paire2 parmi 6
-        let puzzle = Puzzle.difficilesA[5]
-        let _ = puzzle.suiteDeCoupsOld()
+        _ = Puzzle.difficilesA[5]
     }
     
     func testPartiesDifficilesB() {
         // Niveau 2.6
         // 50%
-        for (n, puzzle) in Puzzle.difficilesB.enumerated() {
+        for (n, _) in Puzzle.difficilesB.enumerated() {
             print("\n-- difficilesB[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
     func testPartiesDifficilesC() {
         // Niveau 2.8
-        for (n, puzzle) in Puzzle.difficilesC.enumerated() {
+        for (n, _) in Puzzle.difficilesC.enumerated() {
             print("\n-- difficilesC[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
     func testPartiesDifficilesD() {
         // Niveau 3.0
-        for (n, puzzle) in Puzzle.difficilesD.enumerated() {
+        for (n, _) in Puzzle.difficilesD.enumerated() {
             print("\n-- difficilesD[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
     func testPartiesDifficilesE() {
         // Niveau 3.2
-        for (n, puzzle) in Puzzle.difficilesE.enumerated() {
+        for (n, _) in Puzzle.difficilesE.enumerated() {
             print("\n-- difficilesE[\(n)]")
-            let _ = puzzle.suiteDeCoupsOld()
         }
     }
     
@@ -350,68 +349,14 @@ final class JeuSudoku_FWTests: XCTestCase {
     }
     
     func testAPIDifficileA1() {
-        let puzzle = Puzzle.difficilesA[1]
-        let essai = suiteDesCoups(puzzle: puzzle.codeChiffres)
-        print()
-        switch essai {
-        case .success(let success):
-            print(success)
-        case .failure(let failure):
-            print(failure)
-        }
+        _ = Puzzle.difficilesA[1]
     }
     
     func testAPIMoyenB0() {
         // Pour tester l'affichage des éliminations indirectes par paire1
-        let puzzle = Puzzle.moyensB[0]
-        let essai = suiteDesCoups(puzzle: puzzle.codeChiffres)
-        print()
-        
-        switch essai {
-        case .success(let success):
-            print(success)
-        case .failure(let failure):
-            print(failure)
-        }
+        _ = Puzzle.moyensB[0]
     }
     
-    func testDemonstration() {
-        let puzzle = Puzzle.moyensA[0] // Sans coups difficiles
-        
-        // On extrait le premier coup par l'API
-        let chiffres = puzzle.codeChiffres
-        XCTAssertEqual(puzzle.codeChiffres, "002806100000090000300000007003000200600704008820000045000010000140080063030050080")
-        let essai = coupSuivant(puzzle: chiffres)
-        
-        guard let texteCoup = essai.valeur else {
-            XCTFail()
-            return
-        }
-        XCTAssertEqual(texteCoup, "Df_8 // direct dans le carré Nn")
-        
-        // On extrait le premier coup par le calcul interne.
-        // On vérifie que c'est cohérent avec l'API.
-        // C'est un coup direct : pas d'auxiliaire.
-        let coup = puzzle.premierCoupOld!
-        XCTAssertEqual(coup.nom, texteCoup)
-        
-        // On prévoit la démonstration attendue.
-        // Problème : choix et ordre des données.
-        // On peut toujours ordonner les listes par ordre alphabétique,
-        // mais il y a plusieurs démonstrations possibles.
-        
-        let demonstration = DemonstrationLitterale(
-            presence: "Df_8",
-            zone: "Nn",
-            occupees: ["Ed", "Ef"],
-            eliminatrices: ["Ad_8", "Ei_8", "Fa_8", "He_8"],
-            eliminees: ["Dd", "De", "Ee", "Fd", "Fe", "Ff"],
-            auxiliaires: [])
-        
-        // Mais on peut toujours vérifier qu'une démonstration donnée est bien une démonstration
-        
-        XCTAssert(puzzle.patternEstApplicable(Demonstration(litteral: demonstration)))
-    }
     
     
     func testRegleCelluleElimineeDirectement() {
@@ -467,12 +412,19 @@ final class JeuSudoku_FWTests: XCTestCase {
             )
         )
         
-        print(coup)
+        print(coup.explication)
+        XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: .eliminationDirecte, typeZone: "carre", nbDirects: 3, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
     }
     
     func testReglePaire1() {
         let puzzle = Puzzle.difficilesA[0]
         print(puzzle.texteDessin)
+        XCTAssertEqual(
+            puzzle.codeChiffres,
+            "570060003030005060601007000053000001000080000900000270000800402080100030200040019")
         
         /*
          57· ·6· ··3
@@ -506,10 +458,18 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(instance.occupees.map { $0.nom }, ["Gd", "Hd", "Ie"])
         XCTAssertEqual(instance.eliminees.map { $0.nom }, ["Ge", "Gf", "Id", "If"])
         XCTAssertEqual(instance.eliminatrices.map { $0.nom }, ["Gi", "Ia"])
+        
+        // La paire1 HeHf_2 détectée n'est pas utile pour trouver le coup Ga_3
+        let coup = puzzle.premierCoup!
+        XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: JeuSudoku_FW.TypeCoup.eliminationDirecte, typeZone: "carre", nbDirects: 3, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
+        print(coup.singleton.litteral)
    }
     
     func testReglePaire2Parmi3() {
-        let puzzle = Puzzle(chiffres: "000801000005064130060700080250610493090040070406000012010489320002576901000123000")
+        let puzzle = try! Puzzle(chiffres: "000801000005064130060700080250610493090040070406000012010489320002576901000123000")
         print(puzzle.texteDessin)
         /*
          ··· 8·1 ···
@@ -525,12 +485,9 @@ final class JeuSudoku_FWTests: XCTestCase {
          ··· 123 ···
          */
          
-        let premierCoup = puzzle.premierCoupOld!
+        let premierCoup = puzzle.premierCoup!
         
         XCTAssertEqual(premierCoup.singleton.nom, "Hh_4")
-        XCTAssertEqual(premierCoup.zone.nom, "h")
-        XCTAssertEqual(premierCoup.auxiliaires[0].nom, "AhIh_56")
-        
         
         // Ce coup est trouvé grâce à une paire2 AhIh_56
         // qu'on peut découvrir et expliquer par la requête suivante
@@ -567,10 +524,14 @@ final class JeuSudoku_FWTests: XCTestCase {
             pairesEliminatrices: [["Hd_5", "Hf_6"]])
         XCTAssertEqual(detectionPaire2.litteral, litteralAttendu)
         
-        // Il y avait 3 cellules vides dans la ligne h, la paire en occupe 2,
+        // Il y avait 3 cellules vides dans la colonne h, la paire en occupe 2,
         // il n'en reste plus qu'une Hh, pour la veleur 4.
         let coup = Coup_Paire2.instances(zone: Colonne(nom: "h"), parmi: 3, dans: puzzle)[0]
         print(coup.litteral)
+        XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: .paire2, typeZone: "colonne", nbDirects: 0, nbIndirects: 0, nbPaires2: 1, nbTriplets3: 0)
+        )
         
         let coupAttendu =
         Coup_Paire2_ (
@@ -594,7 +555,7 @@ final class JeuSudoku_FWTests: XCTestCase {
 
     
     func testTriplet3() {
-        let puzzle = Puzzle(chiffres: "000801000005064100060700080250000493090000070406000012010009020002570901000123000")
+        let puzzle = try! Puzzle(chiffres: "000801000005064100060700080250000493090000070406000012010009020002570901000123000")
         print(puzzle.texteDessin)
         /*
          ··· 8·1 ···
@@ -645,6 +606,15 @@ final class JeuSudoku_FWTests: XCTestCase {
         print(coup.litteral)
         print(coup.litteral.codeSwift)
         
+        XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: .triplet3, typeZone: "colonne", nbDirects: 0, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 1)
+        )
+        XCTAssertEqual(
+            coup.litteral.signature,
+            SignatureCoup(typeCoup: .triplet3, typeZone: "colonne", nbDirects: 0, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 1)
+        )
+
         
         let coupAttendu =
         Coup_Triplet3_ (
@@ -659,31 +629,32 @@ final class JeuSudoku_FWTests: XCTestCase {
     }
     
     func testDeuxPaires1() {
-        let puzzle = Puzzle(chiffres: "000801000005064130060700080258617493090040070476000012017489320002576941000123000")
+        let puzzle = try! Puzzle(chiffres: "000801000005064130060700080258617493090040070476000012017489320002576941000123000")
         print(puzzle.texteDessin)
         /*
-         m   n   p
-         abc def ghi
-         A ··· 8·1 ···
+              m   n   p
+             abc def ghi
+           A ··· 8·1 ···
          M B ··5 ·64 13·
-         C ·6· 7·· ·8·
+           C ·6· 7·· ·8·
          
-         D 258 617 493
+           D 258 617 493
          N E ·9· ·4· ·7·
-         F 476 ··· ·12
+           F 476 ··· ·12
          
-         G ·17 489 32·
+           G ·17 489 32·
          P H ··2 576 941
-         I ··· 123 ···
+           I ··· 123 ···
          
          Deux paires EaEc_3 dans Nm et AeCe_3 dans Mn
          EaEc_3 parce que ce sont les deux seules libres
          AeCe_3 à cause des éliminatrices Bh_3 et If_3
          
-         permet de déduire Fd_3 dans Nn car en plus il y a une élimination directe en Ff à cause de If_3
+         permet de déduire Fd_3 dans Nn car en plus il y a une élimination directe en Ef et Ff à cause de If_3
          
-         Donc 3 éliminées indirectes, 1 éliminée directe, 4 occupées, 1 seule restante.
-         
+         Donc 3 éliminées indirectes, 2 éliminées directes, 4 occupées, 1 seule restante.
+         Mais il y a recouvrement des éliminées avec Ef, éliminée directement par If_3 et indirectement par EaEc_3.
+         Dans la réponse, priorité à l'élimination directe.
          */
         
         let paires1 = DetectionPaire1.instances(valeur: 3, zone: Carre(nom: "Nm"), dans: puzzle)
@@ -739,8 +710,14 @@ final class JeuSudoku_FWTests: XCTestCase {
         let coup = Coup_EliminationIndirecte.instances(valeur: 3, zone: Carre(nom: "Nn"), dans: puzzle)[0]
         XCTAssertEqual(coup.singleton, Presence(nom: "Fd_3"))
         
-        print(coup)
-        
+        print()
+        print(coup.explication)
+        print()
+       XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: .eliminationIndirecte, typeZone: "carre", nbDirects: 1, nbIndirects: 2, nbPaires2: 0, nbTriplets3: 0)
+        )
+
         XCTAssertEqual(
             coup.litteral,
             Coup_EliminationIndirecte.Litteral (
@@ -753,22 +730,34 @@ final class JeuSudoku_FWTests: XCTestCase {
                     EliminationDirecte.Litteral(eliminee: "Ef", eliminatrice: "If_3"),
                     EliminationDirecte.Litteral(eliminee: "Ff", eliminatrice: "If_3")
                 ],
-                explicationDesIndirectes: [
+                explicationDesIndirectes:
                     EliminationIndirecte.Litteral(
                         eliminees: ["Ed", "Ef", "Fe"],
                         zone: "Nn",
                         eliminatrices: [
                             DetectionPaire1.Litteral(paire1: "AeCe_3", zone: "Mn", occupees: ["Ad", "Af", "Be", "Bf", "Cd"], eliminees: ["Bd", "Cf"], eliminatrices: ["Bh", "If"]),
                             DetectionPaire1.Litteral(paire1: "EaEc_3", zone: "Nm", occupees: ["Da", "Db", "Dc", "Eb", "Fa", "Fb", "Fc"], eliminees: [], eliminatrices: [])])
-                ]
             )
         )
+        
     }
     
     func testPaire2Parmi6() {
-        let puzzle = Puzzle(chiffres: "952678314384521679100349258400002090200000405010400000743065900690037540020004000")
+        let puzzle = try! Puzzle(chiffres: "952678314384521679100349258400002090200000405010400000743065900690037540020004000")
+        
+        print(puzzle.texteDessin)
         /*
-         Ig_7
+         952 678 314
+         384 521 679
+         1·· 349 258
+
+         4·· ··2 ·9·
+         2·· ··· 4·5
+         ·1· 4·· ···
+
+         743 ·65 9··
+         69· ·37 54·
+         ·2· ··4 ···
          */
         
         XCTAssertEqual(
@@ -785,7 +774,15 @@ final class JeuSudoku_FWTests: XCTestCase {
         )
         let coup = Coup_Paire2.instances(zone: Carre(nom: "Pp"), parmi: 6, dans: puzzle)[0]
         print(coup.litteral)
-        
+        XCTAssertEqual(
+            coup.litteral.signature,
+            SignatureCoup(typeCoup: .paire2, typeZone: "carre", nbDirects: 2, nbIndirects: 0, nbPaires2: 1, nbTriplets3: 0)
+        )
+       XCTAssertEqual(
+            coup.litteral.eliminatrices,
+            ["Ga_7", "Hf_7"]
+        )
+        print("...")
         let attendu =
         Coup_Paire2.Litteral (
             singleton: "Ig_7",
@@ -801,7 +798,10 @@ final class JeuSudoku_FWTests: XCTestCase {
                 occupees: ["Gg", "Hg", "Hh"],
                 eliminees: ["Gh", "Gi", "Hi", "Ig"],
                 pairesEliminatrices: [["He_3", "Ha_6"], ["Ag_3", "Bg_6"], ["Gc_3", "Ge_6"]]))
-        
+        let coup_ = Coup_.paire2(attendu)
+        print("roles")
+        print(coup_.rolesCellules)
+
         XCTAssertEqual(
             Coup_.paire2(attendu),
             Coup_.paire2(Coup_Paire2_ (
@@ -826,6 +826,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssertEqual(attendu.eliminatrices, ["Ga_7", "Hf_7"])
         XCTAssertEqual(indexLigne(cellule: "Ig"), 8)
         XCTAssertEqual(indexColonne(cellule: "Ig"), 6)
+        
    }
     
     
@@ -835,24 +836,17 @@ final class JeuSudoku_FWTests: XCTestCase {
     
     func testCoup_DerniereCellule_() {
         let coup_ = Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"])
-        print(coup_)
-        /*
-         Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"])
-         */
         let coup = Coup_DerniereCellule(litteral: coup_)
-        print(coup)
-        /*
-         Coup_DerniereCellule(litteral: Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"]))
-         */
+        XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: .derniereCellule, typeZone: "carre", nbDirects: 0, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
         print(coup_.codeSwift)
-        let coupBis = Coup_DerniereCellule(
-            litteral: Coup_DerniereCellule_(singleton: "Aa_1", zone: "Mn", occupees: ["Bb", "Cc"]))
-        XCTAssertEqual(coupBis, coup)
-
+        print(coup_.explication)
     }
     
     func testCoup_DerniereCellule() {
-        let puzzle = Puzzle(chiffres: "002876130000090000300040007403008200600724308820030045000010000140080063030050081")
+        let puzzle = try! Puzzle(chiffres: "002876130000090000300040007403008200600724308820030045000010000140080063030050081")
         print(puzzle.texteDessin)
 
         let attendu_ = Coup_DerniereCellule_(singleton: "De_6", zone: "e", occupees: ["Ae", "Be", "Ce", "Ee", "Fe", "Ge", "He", "Ie"])
@@ -861,10 +855,18 @@ final class JeuSudoku_FWTests: XCTestCase {
         XCTAssert(coups.count == 1)
         let coup = coups[0]
         XCTAssertEqual(coup.litteral, attendu_)
+        XCTAssertEqual(
+            coup.signature,
+            SignatureCoup(typeCoup: .derniereCellule, typeZone: "colonne", nbDirects: 0, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
         
         let leCoup: Coup = .derniereCellule(coup)
         print(leCoup.codeSwift)
         print(leCoup)
+        XCTAssertEqual(
+            leCoup.signature,
+            SignatureCoup(typeCoup: .derniereCellule, typeZone: "colonne", nbDirects: 0, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+        )
         
         let litteralCoup = Coup_.derniereCellule(Coup_DerniereCellule_(singleton: "De_6", zone: "e", occupees: ["Ae", "Be", "Ce", "Ee", "Fe", "Ge", "He", "Ie"]))
         
@@ -887,8 +889,83 @@ final class JeuSudoku_FWTests: XCTestCase {
         /*
          "SingletonEliminateur(litteral: SingletonEliminateur_(singleton: \"Aa_1\"))"
          */
-        
     }
+    
+    func testProblemesResolus() {
+        for pb in ProblemeResolu.predefinis {
+            print(pb.titre)
+        }
+        /*
+         derniereCellule dans colonne
+         eliminationDirecte dans carre avec 3 éliminatrices
+         eliminationDirecte dans carre avec 4 éliminatrices
+         eliminationIndirecte dans carre avec 1 éliminatrices, 2 paires1
+         paire2 dans colonne avec 0 éliminatrices, 1 paires2
+         paire2 dans carre avec 2 éliminatrices, 1 paires2
+         triplet3 dans colonne avec 0 éliminatrices, 1 triplets3
+         */
+    }
+    
+    func testProblemes() {
+        for pb in Probleme.predefinis {
+            print(pb.titre)
+            print(pb.commentaire)
+           print(pb.puzzle.chiffres)
+        }
+
+    }
+    
+    func testRoleCellule() {
+        // Mise en place des données
+        let puzzle = Puzzle.difficilesA[0]
+        XCTAssertEqual(
+            puzzle.codeChiffres,
+            "570060003030005060601007000053000001000080000900000270000800402080100030200040019"
+        )
+        print(puzzle.texteDessin)
+        /*
+         57· ·6· ··3
+         ·3· ··5 ·6·
+         6·1 ··7 ···
+
+         ·53 ··· ··1
+         ··· ·8· ···
+         9·· ··· 27·
+
+         ··· 8·· 4·2
+         ·8· 1·· ·3·
+         2·· ·4· ·19
+         */
+        
+        let puzzle_ = puzzle.litteral
+        guard let coup_ = puzzle_.premierCoup() else {
+            XCTFail()
+            return
+        }
+        print(coup_.codeSwift)
+        XCTAssertEqual(
+            coup_,
+            Coup_.eliminationDirecte(Coup_EliminationDirecte_ (
+            singleton: "Eg_3",
+            zone: "Np",
+            occupees: ["Di", "Fg", "Fh"],
+            eliminees: ["Dg", "Dh", "Eh", "Ei", "Fi"],
+            eliminatrices: ["Ai_3", "Dc_3", "Hh_3"]
+            ))
+        )
+        print(coup_.explication)
+        // Calcul des rôles des cellules dans le coup
+        let attendu: [Cellule_: Coup_.RoleCellule] =
+        
+        ["Hh": .eliminatrice, "Eg": .cible, "Fi": .eliminee, "Dh": .eliminee, "Eh": .eliminee, "Dg": .eliminee, "Ei": .eliminee, "Ai": .eliminatrice, "Dc": .eliminatrice]        
+        print(coup_.rolesCellules)
+        XCTAssertEqual(
+            coup_.rolesCellules,
+            attendu
+        )
+    }
+    
+    
 
 }
  

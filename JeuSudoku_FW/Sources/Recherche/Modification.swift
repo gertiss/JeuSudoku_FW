@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-
+/// Ces méthodes modifient le puzzle, c'est-à-dire fournissent un nouveau puzzle
 extension Puzzle {
     
     /// Ajout d'une contrainte
@@ -31,34 +30,9 @@ extension Puzzle {
         return Puzzle(contraintes: nouvellesContraintes)
     }
     
-    
-    /// Jeu d'une partie aussi longtemps que possible. Retourne une liste de coups.
-    /// Le paramètre `solution` est l'état final du puzzle résolu, si on le connaît.
-    /// S'arrête dès qu'un coup n'est pas conforme à la solution connue, et rend alors `[]`
-    /// Affichages de debug dans la console.
-    func suiteDeCoupsOld(solution: Puzzle? = nil) -> [CoupOld] {
-        var etatCourant = self
-        var resultat = [CoupOld]()
-        print("-- \(etatCourant.codeChiffres)")
-        while let nouveauCoup = etatCourant.premierCoupOld, estNouveauSingletonValide(nouveauCoup.singleton) {
-            if let solution {
-                guard contrainteEstCompatible(nouveauCoup.singleton, solution: solution) else {
-                    print("-- Erreur : \(nouveauCoup.singleton.nom) incompatible avec solution")
-                    return []
-                }
-            }
-            resultat.append(nouveauCoup)
-            etatCourant = etatCourant.plus(nouveauCoup.singleton)
-        }
-        print("-- \(etatCourant.codeChiffres)")
-        let nombreDeCellulesNonResolues = 81 - etatCourant.cellulesResolues.count
-        if nombreDeCellulesNonResolues == 0 {
-            print("-- Succès")
-        } else {
-            print("-- Incomplet. Reste \(nombreDeCellulesNonResolues)")
-        }
-        return resultat
-    }
+}
+
+extension Puzzle {
     
     /// Rend `presence` si c'est un singleton valide non encore présent, nil sinon.
     func nouveauSingletonValide(_ presence: Presence) -> Presence? {

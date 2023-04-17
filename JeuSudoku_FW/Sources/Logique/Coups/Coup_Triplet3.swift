@@ -8,7 +8,7 @@
 import Foundation
 import Modelisation_FW
 
-struct Coup_Triplet3 {
+struct Coup_Triplet3: UnCoup {
     let singleton: Presence
     let zone: AnyZone
     let occupees: [Cellule]
@@ -21,6 +21,80 @@ extension Coup_Triplet3 {
     var valeur: Int {
         singleton.valeurs.uniqueElement
     }
+    
+    var triplet: Presence {
+        detectionTriplet3.triplet
+    }
+    
+    var nombreDeCellulesVides: Int {
+        9 - occupees.count
+    }
+    
+    // On ne garde que les cellules éliminées qui ne sont pas dans le triplet
+    var eliminees: [Cellule] {
+        eliminationsDirectes
+            .filter { !triplet.region.contains($0.eliminee) }
+            .map { $0.eliminee }
+            .ensemble.array.sorted()
+    }
+
+    // On ne garde que les éliminatrices directes des cellules qui ne sont pas dans le triplet
+    var eliminatrices: [Presence] {
+        eliminationsDirectes
+            .filter { !triplet.region.contains($0.eliminee) }
+            .map { $0.eliminatrice }
+            .sorted()
+    }
+
+    var signature: SignatureCoup {
+        .init(typeCoup: .triplet3, typeZone: zone.type.rawValue, nbDirects: eliminatrices.count, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 1)
+    }
+    
+    var typeCoup: TypeCoup { .triplet3 }
+
+    var typeZone: TypeZone { zone.type }
+
+    var triplet3: DetectionTriplet3? { detectionTriplet3 }
+    
+    var explication: String {
+"""
+On joue \(singleton.litteral) dans \(zone.texteLaZone).
+En effet :
+\(triplet3!.explication)
+De plus on élimine \(eliminationsDirectes.map { $0.eliminee.litteral }) par \(eliminationsDirectes.map { $0.eliminatrice.litteral }.ensemble.array.sorted()).
+La seule cellule libre restante pour \(valeur) dans \(zone.texteLaZone) est \(singleton.region.uniqueElement.litteral).
+"""
+    }
+    var rolesCellules: [Cellule_: Coup_.RoleCellule] {
+        
+        var dico = [Cellule_: Coup_.RoleCellule]()
+        // Eliminations directes
+        for elimineeDirecte in eliminationsDirectes.map({ $0.eliminee }) {
+            dico[elimineeDirecte.litteral] = .eliminee
+        }
+        for eliminatriceDirecte in eliminatrices.map({ $0.uniqueCellule }) {
+            dico[eliminatriceDirecte.litteral] = .eliminatrice
+        }
+        // Triplet3. Eliminations pour détecter la paire
+        for eliminee in detectionTriplet3.eliminees {
+            dico[eliminee.litteral] = .eliminee
+        }
+        let eliminatricesPourPaire = detectionTriplet3.tripletsEliminateurs.flatMap { triplet in
+            triplet.map { $0.uniqueCellule }
+        }
+        for eliminatrice in eliminatricesPourPaire {
+            dico[eliminatrice.litteral] = .eliminatrice
+        }
+        for auxiliaire in detectionTriplet3.triplet.region {
+            dico[auxiliaire.litteral] = .auxiliaire
+        }
+        // A faire à la fin parce que cette cellule était considérée comme éliminée
+        // pour trouver la paire2
+        dico[singleton.uniqueCellule.litteral] = .cible
+        return dico
+    }
+
+    
 }
 
 extension Coup_Triplet3 {
@@ -60,9 +134,7 @@ extension Coup_Triplet3 {
                 for valeur in valeursComplementaires {
                     if let singleton = puzzle.singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires, zone: zone), puzzle.estNouveauSingletonValide(singleton) {
                         let eliminationsDirectes = EliminationDirecte.instances(valeur: valeur, zone: zone, dans: puzzle)
-                        // Ici, minimiser les éliminations directes
-                        // pour éliminer seulement les cellules en dehors de la paire
-                        let eliminationsDirectesSuffisantes = eliminationsDirectes.avecMinimisation(cibles: cellulesComplementaires, dans: puzzle)
+                         let eliminationsDirectesSuffisantes = eliminationsDirectes.avecMinimisation(cibles: cellulesComplementaires, dans: puzzle)
                         let coup = Coup_Triplet3 (
                             singleton: singleton,
                             zone: zone,
@@ -121,4 +193,12 @@ Coup_Triplet3_ (
         detectionTriplet3: \(detectionTriplet3.codeSwift))
 """
     }
+}
+
+public extension Coup_Triplet3_ {
+    
+    var signature: SignatureCoup {
+        Coup_Triplet3(litteral: self).signature
+    }
+
 }

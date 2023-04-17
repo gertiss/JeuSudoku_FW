@@ -91,6 +91,10 @@ extension Puzzle {
             estSingleton1Valide(singleton1)
         }
     }
+    
+    var estResolu: Bool {
+        estValide && contraintes.count == 81
+    }
 
 }
 
@@ -150,6 +154,10 @@ extension Puzzle {
     var texteDessin: String {
         CodagePuzzle(code).texteDessin
     }
+    
+    var nbCellulesVidesRestantes: Int {
+        81 - contraintes.count
+    }
 }
 
 
@@ -200,7 +208,24 @@ public extension Puzzle_ {
         let singleton = Presence(litteral: singleton)
         return Puzzle(litteral: self).plus(singleton).litteral
     }
-        
+    
+    func valeur(cellule: Cellule_) -> Int? {
+        Puzzle(litteral: self).valeur(Cellule(litteral: cellule))
+    }
+
+    var estResolu: Bool {
+        Puzzle(litteral: self).estResolu
+    }
+    
+    var nbCellulesVidesRestantes: Int {
+        Puzzle(litteral: self).nbCellulesVidesRestantes
+    }
+    
+    var estValide: Bool {
+        Puzzle(litteral: self).estValide
+    }
+
+    
 }
 
 // MARK: - Exemples

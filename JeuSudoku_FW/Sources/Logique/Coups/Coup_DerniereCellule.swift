@@ -9,15 +9,48 @@ import Foundation
 import Modelisation_FW
 
 /// Le singleton est détecté parce qu'il est la dernière cellule libre en dehors des 8 occupées
-struct Coup_DerniereCellule: Equatable {
+struct Coup_DerniereCellule: Equatable, UnCoup {
+    
+    let singleton: Presence
+    let zone: AnyZone
+    let occupees: [Cellule]
+    
     static func == (lhs: Coup_DerniereCellule, rhs: Coup_DerniereCellule) -> Bool {
         lhs.litteral == rhs.litteral
     }
     
     
-    let singleton: Presence
-    let zone: AnyZone
-    let occupees: [Cellule]
+}
+
+extension Coup_DerniereCellule {
+    
+    var signature: SignatureCoup {
+        .init(typeCoup: .derniereCellule, typeZone: zone.type.rawValue, nbDirects: 0, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+    }
+    
+    var typeCoup: TypeCoup { .derniereCellule }
+    
+    var typeZone: TypeZone {
+        zone.type
+    }
+    
+    var eliminatrices: [Presence] {
+        []
+    }
+    
+    var indirecte: EliminationIndirecte? { nil }
+    
+    var explication: String {
+        """
+On joue \(singleton.litteral) dans \(zone.texteLaZone).
+C'est la dernière cellule libre.
+"""
+    }
+
+    var rolesCellules: [Cellule_: Coup_.RoleCellule] {
+        [singleton.region.uniqueElement.litteral: .cible]
+    }
+
 }
 
 
@@ -46,6 +79,18 @@ public struct Coup_DerniereCellule_: UnLitteral, Equatable {
     }
 }
 
+public extension Coup_DerniereCellule_ {
+    var signature: SignatureCoup {
+        Coup_DerniereCellule(litteral: self).signature
+    }
+    
+    var explication: String {
+        Coup_DerniereCellule(litteral: self).explication
+    }
+    
+    
+}
+
 // MARK: - Requêtes
 
 extension Coup_DerniereCellule {
@@ -63,4 +108,5 @@ extension Coup_DerniereCellule {
 
         return [Self(singleton: singleton, zone: zone, occupees: occupees)]
     }
+
 }

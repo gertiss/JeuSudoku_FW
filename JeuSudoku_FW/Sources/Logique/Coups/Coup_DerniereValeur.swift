@@ -10,6 +10,8 @@ import Modelisation_FW
 
 /// Le `singleton` peut être détecté parce que les `eliminations` éliminent sa cellule
 /// pour toutes les valeurs sauf une
+/// Seul type de coup qui n'a pas de zone associée.
+/// On pourrait lui en attribuer une : la zone la plus remplie qui contient la cellule.
 struct Coup_DerniereValeur {
     let singleton: Presence
     let eliminations: [EliminationDirecte]
@@ -41,6 +43,7 @@ extension Coup_DerniereValeur: CodableEnLitteral {
 
 extension Coup_DerniereValeur {
     static func instances(zone: AnyZone, dans: Puzzle) -> [Self] {
-        return []
+        fatalError("à terminer")
     }
+    
 }

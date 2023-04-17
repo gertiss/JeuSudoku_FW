@@ -9,12 +9,11 @@ import Foundation
 import Modelisation_FW
 
 
-/// Prédicats dont le sujet est une cellule
 
 
 /// `eliminee` est une cellule vide éliminée directement par `eliminatrice` (un singleton)
 /// pour la valeur du singleton
-struct EliminationDirecte {
+struct EliminationDirecte: Hashable {
     let eliminee: Cellule
     let eliminatrice: Presence // Un singleton
 }
@@ -39,6 +38,9 @@ extension EliminationDirecte {
         return eliminatrice.region.cellulesDependantes.intersection(zone.cellules)
             .filter { puzzle.celluleEstVide($0) }
             .map { Self(eliminee: $0, eliminatrice: eliminatrice) }
+            .sorted { e1, e2 in
+                e1.eliminee < e2.eliminee
+            }
     }
     
     /// Trouve toutes les éliminatrices qui éliminent la cellule pour une valeur donnée
@@ -47,6 +49,9 @@ extension EliminationDirecte {
             puzzle.valeur($0) == valeur
         }.map {
             Self(eliminee: cellule, eliminatrice: Presence([valeur], dans: [$0]))
+        }
+        .sorted { e1, e2 in
+            e1.eliminee < e2.eliminee
         }
     }
     
@@ -57,7 +62,11 @@ extension EliminationDirecte {
         let eliminees = eliminatrices.flatMap {
             EliminationDirecte.instances(zone: zone, eliminatrice: $0, dans: puzzle) }
         return eliminees.map { Self(eliminee: $0.eliminee, eliminatrice: $0.eliminatrice) }
+            .sorted { e1, e2 in
+                e1.eliminee < e2.eliminee
+            }
     }
+
 }
 
 
@@ -83,22 +92,40 @@ extension EliminationDirecte: CodableEnLitteral {
 
 extension [EliminationDirecte] {
     
-    /// Minimise l'ensemble des éliminations pour éliminer seulement les cibles
-    /// On suppose que self est suffisant pour les cibles
+    /// Minimise l'ensemble des éliminations pour éliminer seulement les cibles.
+    /// On suppose que les éliminations éliminent effectivement les cibles au départ.
     func avecMinimisation(cibles: Region, dans puzzle: Puzzle) -> [EliminationDirecte] {
-        assert(self.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle))
-        var essai = self
-        while essai.count > 1 && essai.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
-            assert(!essai.isEmpty)
-            let reduit = essai.dropFirst().map { $0 }
-            if !reduit.estSuffisantPourDetectionSingleton(cibles: cibles, dans: puzzle) {
-                return essai // suffisant mais pas reductible
-            }
-            essai = reduit
+//        assert(estSuffisantPourElimination(cibles: cibles, dans: puzzle))
+        
+        // On ordonne les eliminatrices suivant leurs pouvoirs éliminateurs
+        // pour les cibles.
+        let eliminationsClassees = self.sorted { e1, e2 in
+            let pouvoir1 = puzzle.pouvoirEliminateur(singleton: e1.eliminatrice, cibles: cibles)
+            let pouvoir2 = puzzle.pouvoirEliminateur(singleton: e2.eliminatrice, cibles: cibles)
+            return pouvoir1 > pouvoir2
         }
-        return self
+        // On actionne chaque éliminatrice dans l'ordre jusqu'à éliminer toutes les cibles
+        var eliminationsSuffisantes = [EliminationDirecte]()
+        var ciblesRestantes = cibles
+        var dejaEliminees = Region()
+        for e in eliminationsClassees {
+            if dejaEliminees.contains(e.eliminee) {
+                continue
+            }
+            if eliminationsSuffisantes.estSuffisantPourElimination(cibles: cibles, dans: puzzle) {
+                return eliminationsSuffisantes
+            }
+            eliminationsSuffisantes.append(e)
+            ciblesRestantes = ciblesRestantes.subtracting([e.eliminee])
+            dejaEliminees.insert(e.eliminee)
+        }
+        return eliminationsSuffisantes
     }
     
+    func estSuffisantPourElimination(cibles: Region, dans puzzle: Puzzle) -> Bool {
+        let eliminees = self.eliminees(dans: puzzle)
+        return cibles.intersection(eliminees).count == cibles.count
+    }
     
     /// l'ensemble des éliminations suffit-il pour éliminer toutes les cibles sauf une ?
     func estSuffisantPourDetectionSingleton(cibles: Region, dans puzzle: Puzzle) -> Bool {

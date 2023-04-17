@@ -18,7 +18,7 @@ struct DetectionPaire1 {
     let zone: AnyZone
     let occupees: [Cellule]
     let eliminees: [Cellule]
-    let eliminatrices: [Cellule] // ou [Presence] ? Peut être reconstituée
+    let eliminatrices: [Cellule]
     
     var valeur: Int {
         paire1.valeurs.uniqueElement
@@ -26,6 +26,13 @@ struct DetectionPaire1 {
     
     var singletonsEliminateurs: [Presence] {
         eliminatrices.map { Presence([valeur], dans: [$0]) }
+    }
+    
+    var explication: String {
+        let texteCause = singletonsEliminateurs.litteral.isEmpty ? "" : " à cause de \(singletonsEliminateurs.litteral)"
+       return  """
+On détecte une paire1 \(paire1.litteral) dans \(zone.texteLaZone)\(texteCause)
+"""
     }
 }
 

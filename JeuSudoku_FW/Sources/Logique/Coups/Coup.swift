@@ -8,18 +8,51 @@
 import Foundation
 import Modelisation_FW
 
-enum Coup: Equatable {
+enum Coup: Equatable, UnCoup {
+    
+    
     case derniereCellule(Coup_DerniereCellule)
     case eliminationDirecte(Coup_EliminationDirecte)
     case eliminationIndirecte(Coup_EliminationIndirecte)
     case paire2(Coup_Paire2)
     case triplet3(Coup_Triplet3)
-    case derniereValeur(Coup_DerniereValeur)
     
     static func == (lhs: Coup, rhs: Coup) -> Bool {
         lhs.codeSwift == rhs.codeSwift
     }
     
+    /// Toutes les valeurs associées vérifient le protocole `UnCoup`.
+    /// C'est une façon de simuler la délégation, et cela de manière statique :
+    /// une instance de `Coup` peut déléguer les méthodes du protocole à sa `valeur`
+    /// et donc Coup peut être rendu conforme au protocole.
+    var valeur: any UnCoup {
+        switch self {
+        case .derniereCellule(let coup_DerniereCellule):
+            return coup_DerniereCellule
+        case .eliminationDirecte(let coup_EliminationDirecte):
+            return coup_EliminationDirecte
+        case .eliminationIndirecte(let coup_EliminationIndirecte):
+            return coup_EliminationIndirecte
+        case .paire2(let coup_Paire2):
+            return coup_Paire2
+        case .triplet3(let coup_Triplet3):
+            return coup_Triplet3
+        }
+    }
+    
+    // Délégations à la valeur, sans switch
+    
+    var typeZone: TypeZone { valeur.typeZone }
+    var zone: AnyZone { valeur.zone }
+    var eliminatrices: [Presence] { valeur.eliminatrices}
+    var singleton: Presence { valeur.singleton }
+    var signature: SignatureCoup { valeur.signature }
+    var typeCoup: TypeCoup { valeur.typeCoup }
+    
+    var indirecte: EliminationIndirecte? { valeur.indirecte }
+    var paire2: DetectionPaire2? { valeur.paire2 }
+    var triplet3: DetectionTriplet3? { valeur.triplet3 }
+    var explication: String { valeur.explication }
 }
 
 public enum Coup_: UnLitteral, Equatable {
@@ -28,7 +61,6 @@ public enum Coup_: UnLitteral, Equatable {
     case eliminationIndirecte(Coup_EliminationIndirecte_)
     case paire2(Coup_Paire2_)
     case triplet3(Coup_Triplet3_)
-    case derniereValeur(Coup_DerniereValeur_)
     
     public var codeSwift: String {
         switch self {
@@ -42,13 +74,82 @@ public enum Coup_: UnLitteral, Equatable {
             return "Coup_.paire2(\(litteral.codeSwift))"
         case .triplet3(let litteral):
             return "Coup_.triplet3(\(litteral.codeSwift))"
-        case .derniereValeur(let litteral):
-            return "Coup_.derniereValeur(\(litteral.codeSwift))"
         }
     }
     
     public static func == (lhs: Coup_, rhs: Coup_) -> Bool {
         lhs.codeSwift == rhs.codeSwift
+    }
+    
+}
+
+// MARK: Méthodes issues du protocole UnCoup
+
+// Permettent de voir toutes ces méthodes sans faire de switch et de les adapter aux littéraux.
+
+public extension Coup_ {
+    
+    
+    var typeCoup: TypeCoup {
+        Coup(litteral: self).typeCoup
+    }
+    
+    var typeZone: TypeZone {
+        Coup(litteral: self).typeZone
+    }
+    
+    var zone: String {
+        Coup(litteral: self).zone.litteral
+    }
+    
+    var singleton: Presence_ {
+        Coup(litteral: self).singleton.litteral
+    }
+    
+    var eliminatrices: [Presence_ ] {
+        Coup(litteral: self).eliminatrices.litteral
+    }
+    
+    var signature: SignatureCoup {
+        Coup(litteral: self).signature
+    }
+    
+    var indirecte: EliminationIndirecte_? {
+        Coup(litteral: self).indirecte?.litteral
+    }
+    
+    var paire2: DetectionPaire2_? {
+        Coup(litteral: self).paire2?.litteral
+    }
+    
+    var triplet3: DetectionTriplet3_? {
+        Coup(litteral: self).triplet3?.litteral
+    }
+    
+    var explication: String {
+        Coup(litteral: self).explication
+    }
+    
+    /// Rôle d'une cellule dans l'explication d'un coup
+    enum RoleCellule: String, UnLitteral, CustomStringConvertible {
+        
+        case cible
+        case eliminee
+        case eliminatrice
+        case auxiliaire
+        
+        public var codeSwift: String {
+            "Coup_.RoleCellule.\(rawValue)"
+        }
+        
+        public var description: String {
+            ".\(rawValue)"
+        }
+
+    }
+    
+    var rolesCellules: [Cellule_: Coup_.RoleCellule] {
+        Coup(litteral: self).valeur.rolesCellules
     }
     
 }
@@ -68,8 +169,6 @@ extension Coup: CodableEnLitteral {
             return .paire2(coup_Paire2.litteral)
         case .triplet3(let coup_Triplet3):
             return .triplet3(coup_Triplet3.litteral)
-        case .derniereValeur(let coup_DerniereValeur):
-            return .derniereValeur(coup_DerniereValeur.litteral)
         }
     }
     
@@ -85,8 +184,6 @@ extension Coup: CodableEnLitteral {
             self = .paire2(Coup_Paire2(litteral: litteral))
         case .triplet3(let litteral):
             self = .triplet3(Coup_Triplet3(litteral: litteral))
-        case .derniereValeur(let litteral):
-            self = .derniereValeur(Coup_DerniereValeur(litteral: litteral))
         }
     }
     
@@ -104,14 +201,12 @@ extension Coup: CodableEnLitteral {
             return "Coup.paire2(\(objet))"
         case .triplet3(let objet):
             return "Coup.triplet3(\(objet))"
-        case .derniereValeur(let objet):
-            return "Coup.derniereValeur(\(objet))"
         }
     }
     
     public var description: String {
         codeSwift
     }
-
+    
     
 }

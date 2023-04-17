@@ -8,15 +8,13 @@
 import Foundation
 import Modelisation_FW
 
-/// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées
-struct Coup_EliminationDirecte {
-    // affirmation
+/// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées et des occupées. Et cela est expliqué par les éliminatrices.
+struct Coup_EliminationDirecte: UnCoup {
+    
     let singleton: Presence
-    // explication niveau 0
     let zone: AnyZone
     let occupees: [Cellule]
     let eliminees: [Cellule]
-    // explication niveau 1
     let eliminatrices: [Presence]
 }
 
@@ -25,7 +23,42 @@ extension Coup_EliminationDirecte {
     var valeur: Int {
         singleton.valeurs.uniqueElement
     }
+    
+    var nombreDeCellulesVides: Int {
+        9 - occupees.count
+    }
+    
+    var signature: SignatureCoup {
+        .init(typeCoup: .eliminationDirecte, typeZone: zone.type.rawValue, nbDirects: eliminatrices.count, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+    }
+    
+    var typeCoup: TypeCoup { .eliminationDirecte }
+    
+    var typeZone: TypeZone { zone.type }
+    
+    var indirecte: EliminationIndirecte? { nil }
+    
+    var explication: String {
+        """
+On joue \(singleton.litteral) dans \(zone.texteLaZone).
+C'est la dernière cellule libre après élimination par \(eliminatrices.litteral.sorted())
+"""
+    }
+    
+    var rolesCellules: [Cellule_: Coup_.RoleCellule] {
+        var dico = [Cellule_: Coup_.RoleCellule]()
+        dico[singleton.uniqueCellule.litteral] = .cible
+        for eliminee in eliminees {
+            dico[eliminee.litteral] = .eliminee
+        }
+        for eliminatrice in eliminatrices {
+            dico[eliminatrice.uniqueCellule.litteral] = .eliminatrice
+        }
+       return dico
+    }
+
 }
+
 
 // MARK: - Requêtes
 
@@ -34,6 +67,8 @@ extension Coup_EliminationDirecte {
     /// Trouve tous les coups par élimination directe pour la valeur dans la zone.
     /// Un coup au plus.
     /// Explication : il ne reste plus qu'une cellule possible en dehors des éliminées directes et des occupées.
+    /// Les éliminatrices sont minimisées pour être suffisantes pour éliminer les éliminées.
+    /// Attention : pour être testable, la réponse doit être ordonnée. Ici d'après le singleton.
     static func instances(valeur: Int, zone: AnyZone, dans puzzle: Puzzle) -> [Self] {
         
         // On cherche la liste des (eliminee, eliminatrice)
@@ -41,11 +76,13 @@ extension Coup_EliminationDirecte {
         // On trouve un coup s'il n'y a plus qu'une cellule restante
         let elimineesDirectes = eliminationsDirectes
             .map { $0.eliminee }.ensemble.array.sorted()
+        let eliminationsDirectesSuffisantes = eliminationsDirectes.avecMinimisation(cibles: elimineesDirectes.ensemble, dans: puzzle)
+
         let occupees = zone.cellules.filter { puzzle.celluleEstResolue($0) }
         let interdites = occupees.union(elimineesDirectes)
         let restantes = zone.cellules.subtracting(interdites)
         guard restantes.cardinal == 1 else { return [] }
-        let eliminatrices = eliminationsDirectes
+        let eliminatrices = eliminationsDirectesSuffisantes
             .map { $0.eliminatrice }.ensemble.array.sorted()
 
         let singleton = Presence([valeur], dans: [restantes.uniqueElement])
@@ -57,8 +94,11 @@ extension Coup_EliminationDirecte {
             eliminatrices: eliminatrices
         )
         
-        return [fait]
+        return [fait].sorted { coup1, coup2 in
+            coup1.singleton < coup2.singleton
+        }
     }
+    
 }
 
 // MARK: - Litteral
@@ -103,6 +143,18 @@ eliminatrices: \(eliminatrices.codeSwift)
 )
 """
     }
+}
+
+public extension Coup_EliminationDirecte_ {
+    var signature: SignatureCoup {
+        Coup_EliminationDirecte(litteral: self).signature
+    }
+    
+    var explication: String {
+        Coup_EliminationDirecte(litteral: self).explication
+    }
+
+    
 }
 
 

@@ -43,19 +43,23 @@ Une règle d'élimination a une conclusion de type "c ne contient pas x"
 Une règle de résolution de cellule a une conclusion de type "c contient x"
 
 - Si une zone contient 8 cellules résolues, alors la dernière cellule non résolue de la zone contient la seule valeur restante ne figurant pas dans les 8 cellules résolues
-- Si une zone contient 8 cellules ne contenant pas x, alors alors la dernière cellule restante contient x.
+- Si une zone contient 8 cellules ne contenant pas x, alors la dernière cellule restante contient x.
 - Si une bijection est de cardinal 1, alors sa cellule contient sa valeur.
 
 ### Règles de bijection
 
 Une règle de bijection a une conclusion de type "la région R est en bijection avec l'ensemble de valeurs V".
 
-- Si dans une zone il existe une région R et et un ensemble V de valeurs, avec R et V de même cardinal, tels qu'aucune des cellules complémentaires de R ne contient aucune des valeurs de V, alors R est en bijection avec V.
+- Si dans une zone il existe une région R et un ensemble V de valeurs, avec R et V de même cardinal, tels qu'aucune des cellules complémentaires de R ne contient aucune des valeurs de V, alors R est en bijection avec V.
 - Si une région R d'une zone est en bijection avec un ensemble de valeurs V, alors l'ensemble des cellules du complémentaire de R dans la zone qui ne sont pas résolues est en bijection avec le complémentaire de l'ensemble (valeurs de la bijection U valeurs présentes dans la zone). C'est une sorte de réciproque de la règle précédente.
 
 ### Règles de présence
 
 Une règle de présence a une conclusion de type "les cellules de R sont les seules de la zone où la valeur x est candidate", ce qui peut se traduire par "x ne peut aller que dans R". Lorsqu'on est dans cette situation, aucune cellule du complémentaire de R dans la zone ne contient x et pour aucune des cellules de R on n'a pu prouver "c ne contient pas x".
 
-- Si une région R d'une zone est une bijection et que x est une de ses valeurs, alors x ne peut aller que dans R.
+- Si une région R d'une zone est une bijection et que x est une de ses valeurs, alors x ne peut aller que dans R. Donc elle ne peut pas aller dans le complémentaire de R.
 - Si une région R d'une zone ne contient aucune cellule résolue, si aucune des cellules du complémentaire de R ne contient x, et si pour aucune des cellules de R on n'a pu prouver "c ne contient pas x", alors x ne peut aller que dans R.
+
+### Règles utiles
+
+Une règle prouvant une absence est utile si elle permet de prouver une absence non déjà prouvable par ailleurs. On peut alors éventuellement mémoriser la possibilité d'appliquer cette règle (la règle et son instanciation)

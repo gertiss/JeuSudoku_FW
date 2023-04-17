@@ -29,6 +29,14 @@ extension DetectionPaire2 {
     var cellules: [Cellule] {
         paire2.region.array.sorted()
     }
+    
+    var explication: String {
+        """
+On détecte une paire2 \(paire2.litteral) dans \(zone.texteLaZone) à cause des couples \(pairesEliminatrices.map { $0.map { $0.litteral }})
+"""
+    }
+    
+    
 }
 
 extension DetectionPaire2 {

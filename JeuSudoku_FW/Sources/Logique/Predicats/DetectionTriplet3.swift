@@ -31,6 +31,13 @@ extension DetectionTriplet3 {
     var cellules: [Cellule] {
         triplet.region.array.sorted()
     }
+    
+    var explication: String {
+        """
+On détecte un triplet3 \(triplet.litteral) dans \(zone.texteLaZone) à cause des triplets \(tripletsEliminateurs.map { $0.map { $0.litteral }})
+"""
+    }
+
 }
 
 // MARK: - Requetes

@@ -46,7 +46,9 @@ extension EliminationIndirecte {
                 .filter { puzzle.celluleEstVide($0) }
             eliminees = eliminees.union(elims)
         }
-        return [Self(eliminees: eliminees.array.sorted(), zone: zone, eliminatrices: eliminatrices)]
+        return [Self(eliminees: eliminees.array.sorted(), zone: zone, eliminatrices: eliminatrices.sorted(by: { e1, e2 in
+            e1.paire1.nom < e2.paire1.nom
+        }))]
     }
 }
 

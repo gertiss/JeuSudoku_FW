@@ -9,8 +9,8 @@ import Foundation
 import Modelisation_FW
 
 /// Le singleton est détecté parce qu'il est la dernière cellule restante dans la zone en dehors des éliminées, des occupées.et de la paire2.
-struct Coup_Paire2 {
-        
+struct Coup_Paire2: UnCoup {
+    
     let singleton: Presence
     let zone: AnyZone
     let occupees: [Cellule]
@@ -24,13 +24,79 @@ extension Coup_Paire2 {
         singleton.valeurs.uniqueElement
     }
     
+    // On ne garde que les cellules éliminées qui ne sont pas dans la paire
     var eliminees: [Cellule] {
-        eliminationsDirectes.map { $0.eliminee }.ensemble.array.sorted()
+        eliminationsDirectes
+            .filter { !paire.region.contains($0.eliminee) }
+            .map { $0.eliminee }
+            .ensemble.array.sorted()
     }
     
-    var eliminatrices: [Presence] {
-        eliminationsDirectes.map { $0.eliminatrice }.ensemble.array.sorted()
+    var paire: Presence {
+        detectionPaire2.paire2
     }
+    
+    // On ne garde que les éliminatrices directes des cellules qui ne sont pas dans la paire
+    var eliminatrices: [Presence] {
+        eliminationsDirectes
+            .filter { !paire.region.contains($0.eliminee) }
+            .map { $0.eliminatrice }
+            .ensemble.array.sorted()
+    }
+
+    var nombreDeCellulesVides: Int {
+        9 - occupees.count
+    }
+    
+    var signature: SignatureCoup {
+        .init(typeCoup: .paire2, typeZone: zone.type.rawValue, nbDirects: eliminatrices.count, nbIndirects: 0, nbPaires2: 1, nbTriplets3: 0)
+    }
+
+    var typeCoup: TypeCoup { .paire2 }
+    
+    var typeZone: TypeZone { zone.type }
+
+    var paire2: DetectionPaire2? { detectionPaire2 }
+    
+    var explication: String {
+"""
+On joue \(singleton.litteral) dans \(zone.texteLaZone).
+En effet :
+\(paire2!.explication)
+De plus on élimine \(eliminationsDirectes.map { $0.eliminee.litteral }) par \(eliminationsDirectes.map { $0.eliminatrice.litteral }.ensemble.array.sorted()).
+La seule cellule libre restante pour \(valeur) dans \(zone.texteLaZone) est \(singleton.region.uniqueElement.litteral).
+"""
+        
+    }
+    
+    var rolesCellules: [Cellule_: Coup_.RoleCellule] {
+        var dico = [Cellule_: Coup_.RoleCellule]()
+        // Eliminations directes
+        for elimineeDirecte in eliminationsDirectes.map({ $0.eliminee }) {
+            dico[elimineeDirecte.litteral] = .eliminee
+        }
+        for eliminatriceDirecte in eliminatrices.map({ $0.uniqueCellule }) {
+            dico[eliminatriceDirecte.litteral] = .eliminatrice
+        }
+        // Paire2. Eliminations pour détecter la paire
+        for eliminee in detectionPaire2.eliminees {
+            dico[eliminee.litteral] = .eliminee
+        }
+        let eliminatricesPourPaire = detectionPaire2.pairesEliminatrices.flatMap { couple in
+            couple.map { $0.uniqueCellule }
+        }
+        for eliminatrice in eliminatricesPourPaire {
+            dico[eliminatrice.litteral] = .eliminatrice
+        }
+        for auxiliaire in detectionPaire2.paire2.region {
+            dico[auxiliaire.litteral] = .auxiliaire
+        }
+        // A faire à la fin parce que cette cellule était considérée comme éliminée
+        // pour trouver la paire2
+        dico[singleton.uniqueCellule.litteral] = .cible
+        return dico
+    }
+
 
 }
 
@@ -72,10 +138,17 @@ extension Coup_Paire2 {
                 valeursAbsentes.ensemble.subtracting(detection.paire2.valeurs)
                 for valeur in valeursComplementaires {
                     if let singleton = puzzle.singleton1DetecteParEliminationDirecte(pour: valeur, dans: cellulesComplementaires, zone: zone), puzzle.estNouveauSingletonValide(singleton) {
+                        /// On a bien trouvé un `singleton` dans la `zone` pour la `valeur`, à partir de la `paire2` trouvée dans `detection`.
+                        /// Il faut construire le coup
+                        /// On ne s'intéresse qu'aux éliminations directes avec des eliminees en dehors de la paire2, c'est-à-dire à cellulesComplementaires
                         let eliminationsDirectes = EliminationDirecte.instances(valeur: valeur, zone: zone, dans: puzzle)
-                        // Ici, minimiser les éliminations directes
-                        // pour éliminer seulement les cellules en dehors de la paire
-                        let eliminationsDirectesSuffisantes = eliminationsDirectes.avecMinimisation(cibles: cellulesComplementaires, dans: puzzle)
+                            .filter { !detection.paire2.region.contains($0.eliminee) }
+                        print("eliminationsDirectes: \(eliminationsDirectes.litteral)")
+                        let cibles = cellulesComplementaires.subtracting([singleton.uniqueCellule])
+                        print("cibles: \(cibles.litteral.compact)")
+                        let eliminationsDirectesSuffisantes = eliminationsDirectes.avecMinimisation(cibles: cibles, dans: puzzle)
+                        print("suffisantes: \(eliminationsDirectesSuffisantes.litteral)")
+                        
                         let coup = Coup_Paire2(
                             singleton: singleton,
                             zone: zone,
@@ -143,6 +216,10 @@ public extension Coup_Paire2_ {
     
     var eliminatrices: [Presence_] {
         Coup_Paire2(litteral: self).eliminatrices.map { $0.litteral }.sorted()
+    }
+    
+    var signature: SignatureCoup {
+        Coup_Paire2(litteral: self).signature
     }
 
 
