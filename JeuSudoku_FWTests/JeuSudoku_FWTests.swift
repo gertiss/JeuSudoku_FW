@@ -147,7 +147,7 @@ final class JeuSudoku_FWTests: XCTestCase {
         var nouveauCoup = puzzle.premierCoup!
         XCTAssertEqual(
             nouveauCoup.signature,
-            SignatureCoup(typeCoup: .eliminationDirecte, typeZone: "carre", nbDirects: 4, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
+            SignatureCoup(typeCoup: .eliminationDirecte, typeZone: "carre", nbDirects: 3, nbIndirects: 0, nbPaires2: 0, nbTriplets3: 0)
         )
         print("premier coup :", nouveauCoup.litteral) // Df_8 dans Nn
         
@@ -626,6 +626,32 @@ final class JeuSudoku_FWTests: XCTestCase {
         
         XCTAssertEqual(coup.litteral, coupAttendu)
         
+        let coup_ = Coup_.triplet3(Coup_Triplet3_ (
+            singleton: "Bh_3",
+            zone: "h",
+            occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"],
+            eliminationsDirectes: [EliminationDirecte_(eliminee: "Ih", eliminatrice: "If_3")],
+                detectionTriplet3: DetectionTriplet3_(triplet: "AhHhIh_456", zone: "h", occupees: ["Ch", "Dh", "Eh", "Fh", "Gh"], eliminees: ["Bh"], tripletsEliminateurs: [["Bf_4", "Bc_5", "Be_6"]])))
+        
+        XCTAssertEqual(
+            coup_.rolesCellules,
+            ["Hh": .auxiliaire, "Ih": .auxiliaire, "Bf": .eliminatrice, "Be": .eliminatrice, "Bc": .eliminatrice, "Bh": .cible, "Ah": .auxiliaire]
+        )
+        
+        XCTAssertEqual(
+            coup_.explication,
+            """
+On joue Bh_3 dans la colonne h.
+
+En effet :
+On détecte un triplet3 AhHhIh_456 dans la colonne h à cause des triplets [["Bf_4", "Bc_5", "Be_6"]]
+
+De plus on élimine ["Ih"] par ["If_3"].
+
+La seule cellule libre restante pour 3 dans la colonne h est Bh.
+"""
+        )
+        
     }
     
     func testDeuxPaires1() {
@@ -761,7 +787,7 @@ final class JeuSudoku_FWTests: XCTestCase {
          */
         
         XCTAssertEqual(
-            valeursDesCellules(puzzle: puzzle.litteral),
+            API.valeursDesCellules(puzzle: puzzle.litteral),
             ["Aa": 9, "Ab": 5, "Ac": 2, "Ad": 6, "Ae": 7, "Af": 8, "Ag": 3, "Ah": 1, "Ai": 4,
              "Bf": 1, "Bi": 9, "Bb": 8, "Bh": 7, "Bg": 6, "Bd": 5, "Be": 2, "Bc": 4, "Ba": 3,
              "Cg": 2, "Gg": 9, "Cf": 9, "Ca": 1, "Ce": 4, "Ch": 5, "Cd": 3, "Ci": 8,
@@ -817,15 +843,15 @@ final class JeuSudoku_FWTests: XCTestCase {
                     pairesEliminatrices: [["He_3", "Ha_6"], ["Ag_3", "Bg_6"], ["Gc_3", "Ge_6"]])))
         )
         
-        XCTAssertEqual(valeur(singleton: "Ig_7"), 7)
-        XCTAssertEqual(cellule(singleton: "Ig_7"), "Ig")
-        XCTAssertEqual(type(zone: "Pp"), .carre)
-        XCTAssertEqual(valeurs(presence: "IhIi_36"), [3, 6])
-        XCTAssertEqual(cellules(presence: "IhIi_36"), ["Ih", "Ii"])
+        XCTAssertEqual(API.valeur(singleton: "Ig_7"), 7)
+        XCTAssertEqual(API.cellule(singleton: "Ig_7"), "Ig")
+        XCTAssertEqual(API.type(zone: "Pp"), .carre)
+        XCTAssertEqual(API.valeurs(presence: "IhIi_36"), [3, 6])
+        XCTAssertEqual(API.cellules(presence: "IhIi_36"), ["Ih", "Ii"])
         XCTAssertEqual(attendu.eliminees, ["Gh", "Gi", "Hi"])
         XCTAssertEqual(attendu.eliminatrices, ["Ga_7", "Hf_7"])
-        XCTAssertEqual(indexLigne(cellule: "Ig"), 8)
-        XCTAssertEqual(indexColonne(cellule: "Ig"), 6)
+        XCTAssertEqual(API.indexLigne(cellule: "Ig"), 8)
+        XCTAssertEqual(API.indexColonne(cellule: "Ig"), 6)
         
    }
     
@@ -892,7 +918,7 @@ final class JeuSudoku_FWTests: XCTestCase {
     }
     
     func testProblemesResolus() {
-        for pb in ProblemeResolu.predefinis {
+        for pb in Probleme.predefinis {
             print(pb.titre)
         }
         /*
@@ -909,7 +935,6 @@ final class JeuSudoku_FWTests: XCTestCase {
     func testProblemes() {
         for pb in Probleme.predefinis {
             print(pb.titre)
-            print(pb.commentaire)
            print(pb.puzzle.chiffres)
         }
 

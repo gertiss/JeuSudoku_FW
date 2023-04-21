@@ -224,6 +224,10 @@ public extension Puzzle_ {
     var estValide: Bool {
         Puzzle(litteral: self).estValide
     }
+    
+    func estNouveauSingletonValide(_ presence: Presence_) -> Bool {
+        Puzzle(litteral: self).estNouveauSingletonValide(Presence(litteral: presence))
+    }
 
     
 }

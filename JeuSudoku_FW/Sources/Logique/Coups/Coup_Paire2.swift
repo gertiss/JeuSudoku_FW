@@ -61,9 +61,12 @@ extension Coup_Paire2 {
     var explication: String {
 """
 On joue \(singleton.litteral) dans \(zone.texteLaZone).
+
 En effet :
 \(paire2!.explication)
+
 De plus on élimine \(eliminationsDirectes.map { $0.eliminee.litteral }) par \(eliminationsDirectes.map { $0.eliminatrice.litteral }.ensemble.array.sorted()).
+
 La seule cellule libre restante pour \(valeur) dans \(zone.texteLaZone) est \(singleton.region.uniqueElement.litteral).
 """
         
@@ -143,11 +146,8 @@ extension Coup_Paire2 {
                         /// On ne s'intéresse qu'aux éliminations directes avec des eliminees en dehors de la paire2, c'est-à-dire à cellulesComplementaires
                         let eliminationsDirectes = EliminationDirecte.instances(valeur: valeur, zone: zone, dans: puzzle)
                             .filter { !detection.paire2.region.contains($0.eliminee) }
-                        print("eliminationsDirectes: \(eliminationsDirectes.litteral)")
                         let cibles = cellulesComplementaires.subtracting([singleton.uniqueCellule])
-                        print("cibles: \(cibles.litteral.compact)")
                         let eliminationsDirectesSuffisantes = eliminationsDirectes.avecMinimisation(cibles: cibles, dans: puzzle)
-                        print("suffisantes: \(eliminationsDirectesSuffisantes.litteral)")
                         
                         let coup = Coup_Paire2(
                             singleton: singleton,

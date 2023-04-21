@@ -59,9 +59,12 @@ extension Coup_Triplet3 {
     var explication: String {
 """
 On joue \(singleton.litteral) dans \(zone.texteLaZone).
+
 En effet :
 \(triplet3!.explication)
+
 De plus on élimine \(eliminationsDirectes.map { $0.eliminee.litteral }) par \(eliminationsDirectes.map { $0.eliminatrice.litteral }.ensemble.array.sorted()).
+
 La seule cellule libre restante pour \(valeur) dans \(zone.texteLaZone) est \(singleton.region.uniqueElement.litteral).
 """
     }

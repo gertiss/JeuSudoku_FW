@@ -8,13 +8,11 @@
 import Foundation
 import Modelisation_FW
 
-/// Il existe un `triplet` détecté dans la `zone` parce qu'il ne reste plus que deux cellules
-/// pour 2 valeurs en dehors des `occupees` et des `eliminees`.
+/// Il existe un `triplet` détecté dans la `zone` parce qu'il ne reste plus que trois cellules
+/// pour 3 valeurs en dehors des `occupees` et des `eliminees`.
 /// `tripletsEliminateurs` est l'ensemble des triplets de singletons qui permettent de trouver les éliminées
 struct DetectionTriplet3 {
-    // Sujet
     let triplet: Presence
-    // Parametres
     let zone: AnyZone
     let occupees: [Cellule]
     let eliminees: [Cellule]

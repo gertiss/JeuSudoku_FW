@@ -25,7 +25,7 @@
 		506F334C29D16BB500148AAC /* Modelisation_FW.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 506F334A29D16BB500148AAC /* Modelisation_FW.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		506F334F29D16EC400148AAC /* Coup_DerniereCellule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */; };
 		506F335329D1EA9C00148AAC /* Coup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F335229D1EA9C00148AAC /* Coup.swift */; };
-		50719D9929E16A1C00DFE007 /* ProblemeResolu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50719D9829E16A1C00DFE007 /* ProblemeResolu.swift */; };
+		50719D9929E16A1C00DFE007 /* Probleme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50719D9829E16A1C00DFE007 /* Probleme.swift */; };
 		507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507ADB1829ACE79C00D793D5 /* Verification.swift */; };
 		507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D5E298BA5290051FCB4 /* Puzzle.swift */; };
 		507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507B3D63298BA75C0051FCB4 /* ExemplesFaciles.swift */; };
@@ -48,7 +48,6 @@
 		50A8EABA29C3037700DE43C7 /* EliminationIndirecte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */; };
 		50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE229B7AB250028F583 /* API Exemples.swift */; };
 		50CD269B29E00793001AB107 /* SignatureCoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CD269A29E00793001AB107 /* SignatureCoup.swift */; };
-		50CDA6E129E3E964007882A2 /* Probleme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CDA6E029E3E964007882A2 /* Probleme.swift */; };
 		50D4AE6129C89C1A000B9797 /* Coup_Paire2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */; };
 		50EB023629B5C6FB00AA82CD /* Combinatoire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50EB023529B5C6FB00AA82CD /* Combinatoire.swift */; };
 		50FB543C29A505A6005E5E5E /* Modification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB543B29A505A6005E5E5E /* Modification.swift */; };
@@ -103,7 +102,7 @@
 		506F334E29D16EC400148AAC /* Coup_DerniereCellule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_DerniereCellule.swift; sourceTree = "<group>"; };
 		506F335229D1EA9C00148AAC /* Coup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup.swift; sourceTree = "<group>"; };
 		50719D9729E1670100DFE007 /* Problemes doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Problemes doc.md"; sourceTree = "<group>"; };
-		50719D9829E16A1C00DFE007 /* ProblemeResolu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProblemeResolu.swift; sourceTree = "<group>"; };
+		50719D9829E16A1C00DFE007 /* Probleme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Probleme.swift; sourceTree = "<group>"; };
 		507ADB1829ACE79C00D793D5 /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		507B255C29AE6E9E009217A8 /* API doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "API doc.md"; sourceTree = "<group>"; };
 		507B3D5E298BA5290051FCB4 /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
@@ -130,7 +129,6 @@
 		50BF6CE229B7AB250028F583 /* API Exemples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Exemples.swift"; sourceTree = "<group>"; };
 		50CAD39B29A61F0E004917C2 /* Geometrie doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Geometrie doc.md"; sourceTree = "<group>"; };
 		50CD269A29E00793001AB107 /* SignatureCoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureCoup.swift; sourceTree = "<group>"; };
-		50CDA6E029E3E964007882A2 /* Probleme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Probleme.swift; sourceTree = "<group>"; };
 		50D191D529A64E47000CFA64 /* Contraintes doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Contraintes doc.md"; sourceTree = "<group>"; };
 		50D191DE29A678F9000CFA64 /* Puzzle doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Puzzle doc.md"; sourceTree = "<group>"; };
 		50D4AE6029C89C1A000B9797 /* Coup_Paire2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coup_Paire2.swift; sourceTree = "<group>"; };
@@ -201,8 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				50719D9729E1670100DFE007 /* Problemes doc.md */,
-				50719D9829E16A1C00DFE007 /* ProblemeResolu.swift */,
-				50CDA6E029E3E964007882A2 /* Probleme.swift */,
+				50719D9829E16A1C00DFE007 /* Probleme.swift */,
 			);
 			path = Problemes;
 			sourceTree = "<group>";
@@ -458,7 +455,6 @@
 				5006C17729BF189B00D82A2E /* DetectionPaire2.swift in Sources */,
 				50A8EABA29C3037700DE43C7 /* EliminationIndirecte.swift in Sources */,
 				507B3D64298BA75C0051FCB4 /* ExemplesFaciles.swift in Sources */,
-				50CDA6E129E3E964007882A2 /* Probleme.swift in Sources */,
 				5032C38D2994EFD50047E3BA /* Presence.swift in Sources */,
 				509EC7592989809A004B1139 /* Cellule.swift in Sources */,
 				507B3D5F298BA5290051FCB4 /* Puzzle.swift in Sources */,
@@ -482,7 +478,7 @@
 				507B3D68298BAA780051FCB4 /* CodagePuzzle.swift in Sources */,
 				507B3D66298BA7710051FCB4 /* ExemplesMoyens.swift in Sources */,
 				501B5A5A29B126DB0025BE56 /* ExemplesDifficiles.swift in Sources */,
-				50719D9929E16A1C00DFE007 /* ProblemeResolu.swift in Sources */,
+				50719D9929E16A1C00DFE007 /* Probleme.swift in Sources */,
 				50FEA34A29D0A84500CBDF74 /* Coup_Triplet3.swift in Sources */,
 				50CD269B29E00793001AB107 /* SignatureCoup.swift in Sources */,
 				506F335329D1EA9C00148AAC /* Coup.swift in Sources */,

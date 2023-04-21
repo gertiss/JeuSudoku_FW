@@ -46,10 +46,13 @@ extension Coup_EliminationIndirecte {
     var explication: String {
         """
 On joue \(singleton.litteral) dans \(zone.texteLaZone).
+
 En effet :
 \(eliminationIndirecte.eliminatrices.map { $0.explication }.joined(separator: "\n"))
 Cela élimine \(eliminationIndirecte.eliminees.litteral) pour la valeur \(valeur) dans \(zone.texteLaZone).
+
 De plus on élimine \(eliminationsDirectes.map { $0.eliminee.litteral }) par \(eliminationsDirectes.map { $0.eliminatrice.litteral }.ensemble.array.sorted()).
+
 La seule cellule libre restante pour \(valeur) est \(singleton.region.uniqueElement.litteral).
 """
     }
