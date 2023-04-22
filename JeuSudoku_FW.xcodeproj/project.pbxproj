@@ -44,7 +44,7 @@
 		509EC75F298980DA004B1139 /* Colonne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC75E298980D9004B1139 /* Colonne.swift */; };
 		509EC76329898839004B1139 /* BandeH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76229898839004B1139 /* BandeH.swift */; };
 		509EC76529898843004B1139 /* BandeV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509EC76429898843004B1139 /* BandeV.swift */; };
-		50A5FB2729B8FC8F001EC2B3 /* API fonctions littérales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A5FB2629B8FC8F001EC2B3 /* API fonctions littérales.swift */; };
+		50A5FB2729B8FC8F001EC2B3 /* API fonctions litterales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A5FB2629B8FC8F001EC2B3 /* API fonctions litterales.swift */; };
 		50A8EABA29C3037700DE43C7 /* EliminationIndirecte.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */; };
 		50BF6CE329B7AB250028F583 /* API Exemples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BF6CE229B7AB250028F583 /* API Exemples.swift */; };
 		50CD269B29E00793001AB107 /* SignatureCoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CD269A29E00793001AB107 /* SignatureCoup.swift */; };
@@ -124,7 +124,7 @@
 		509EC76229898839004B1139 /* BandeH.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeH.swift; sourceTree = "<group>"; };
 		509EC76429898843004B1139 /* BandeV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandeV.swift; sourceTree = "<group>"; };
 		50A5FB1729B87AFA001EC2B3 /* Logique doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Logique doc.md"; sourceTree = "<group>"; };
-		50A5FB2629B8FC8F001EC2B3 /* API fonctions littérales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API fonctions littérales.swift"; sourceTree = "<group>"; };
+		50A5FB2629B8FC8F001EC2B3 /* API fonctions litterales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API fonctions litterales.swift"; sourceTree = "<group>"; };
 		50A8EAB929C3037700DE43C7 /* EliminationIndirecte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EliminationIndirecte.swift; sourceTree = "<group>"; };
 		50BF6CE229B7AB250028F583 /* API Exemples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API Exemples.swift"; sourceTree = "<group>"; };
 		50CAD39B29A61F0E004917C2 /* Geometrie doc.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Geometrie doc.md"; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 			children = (
 				507B255C29AE6E9E009217A8 /* API doc.md */,
 				50BF6CE229B7AB250028F583 /* API Exemples.swift */,
-				50A5FB2629B8FC8F001EC2B3 /* API fonctions littérales.swift */,
+				50A5FB2629B8FC8F001EC2B3 /* API fonctions litterales.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 				506841A029A917F300395531 /* Methodes de zone.swift in Sources */,
 				505215E3299FE5CC00DEDF57 /* Region.swift in Sources */,
 				509EC76329898839004B1139 /* BandeH.swift in Sources */,
-				50A5FB2729B8FC8F001EC2B3 /* API fonctions littérales.swift in Sources */,
+				50A5FB2729B8FC8F001EC2B3 /* API fonctions litterales.swift in Sources */,
 				5006C17129BF186900D82A2E /* EliminationDirecte.swift in Sources */,
 				507ADB1929ACE79C00D793D5 /* Verification.swift in Sources */,
 				5006C17729BF189B00D82A2E /* DetectionPaire2.swift in Sources */,
