@@ -990,7 +990,11 @@ La seule cellule libre restante pour 3 dans la colonne h est Bh.
         )
     }
     
-    
+    func testSelf() {
+        XCTAssertEqual("\(String.self)", "String")
+        XCTAssertEqual("\(type(of: String.self))", "String.Type")
+        let xxx = [Int].Element
+    }
 
 }
  
