@@ -70,7 +70,7 @@ public extension CodagePuzzle {
         return Double(source)!
     }
     
-    /// Devrait vérifier la validité syntaxique : 81 chiffres de 0 à 9
+    /// Vérifie la validité syntaxique : 81 chiffres de 0 à 9. Mais pas la validité sémantique (sudoku).
     /// `saisieChiffres` ne contient que les 81 chiffres.
     /// Ils peuvent être écrits avec des espaces, tabs et return qui seront supprimés.
     /// L'indication d'absence peut être ce qu'on veut à part espace tab return (pas forcément 0).

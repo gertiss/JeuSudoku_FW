@@ -122,7 +122,11 @@ extension Puzzle {
     }
     
     init(chiffres: String) throws {
-        self = Self(code: try CodagePuzzle.codeDepuisSaisie(chiffres))
+        let proposition = Self(code: try CodagePuzzle.codeDepuisSaisie(chiffres))
+        guard proposition.estValide else {
+            throw "Ce puzzle n'est pas valide pour les règles du sudoku"
+        }
+        self = proposition
     }
     
     /// Code avec id et niveaux factices
