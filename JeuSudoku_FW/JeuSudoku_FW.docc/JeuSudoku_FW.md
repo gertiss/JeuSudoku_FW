@@ -20,7 +20,7 @@ La plupart de ces règles se déclenchent sur apparition d'une contrainte nouvel
 
 ### Règles permettant de trouver des absences 
 
-La forme de ces règles est "certaines présences impliquent des absences". Mais ce ne sont pas des règles sur événement. Ce sont des implications logiques statiques. Elles découlent des règles du jeu.
+La forme de ces règles est "certaines présences impliquent des absences". Mais ce ne sont pas des règles sur événement. Ce sont des implications logiques statiques. Elles découlent des règles du puzzle.
 
 - Si `singleton1 c_x` dans zone Z alors x est absent de Z - c (si pas encore connu)
 - Si `paire1 cd_x` dans zone Z  alors x est absent dans Z - cd 

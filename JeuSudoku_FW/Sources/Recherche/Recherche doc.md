@@ -1,6 +1,6 @@
 #  Recherche doc
 
-Jouer au sudoku consiste à faire évoluer un ensemble de contraintes relatives à un Puzzle donné, jusqu'à obtenir un ensemble équivalent de 81 singletons 1 conformes à la règle du jeu.
+Jouer au sudoku consiste à faire évoluer un ensemble de contraintes relatives à un Puzzle donné, jusqu'à obtenir un ensemble équivalent de 81 singletons 1 conformes à la règle du puzzle.
 
 Cette évolution se produit pas à pas : on cherche un coup, puis on le joue. La difficulté consiste à trouver les coups possibles et à choisir à chaque pas le premier qui soit "le plus facile", ou "le plus visible".
 

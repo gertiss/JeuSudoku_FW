@@ -1,10 +1,10 @@
 #  Puzzle doc
 
-Un *puzzle* est défini par les connaissances sur la structure de la grille, les règles du jeu du sudoku et la donnée d'un ensemble de contraintes de présence de type singleton1 sur une grille de sudoku (les cellules pré-remplies au démarrage).
+Un *puzzle* est défini par les connaissances sur la structure de la grille, les règles du puzzle du sudoku et la donnée d'un ensemble de contraintes de présence de type singleton1 sur une grille de sudoku (les cellules pré-remplies au démarrage).
 
 Ces connaissances constituent les axiomes d'un système formel logique. On le suppose cohérent.
 
-Le but du jeu est de déduire de ces axiomes un ensemble de 81 contraintes de type singleton1 donnant les valeurs de toutes les cellules de la grille.
+Le but du puzzle est de déduire de ces axiomes un ensemble de 81 contraintes de type singleton1 donnant les valeurs de toutes les cellules de la grille.
 
 On suppose que le système permet effectivement de déduire un ensemble unique de telles contraintes.
 
@@ -24,7 +24,7 @@ On peut considérer que les "tables" SQL sont les ensembles des instances d'un t
 
 Exemples de requêtes `select` purement structurelles : toutes les valeurs des contraintes, toutes les régions des contraintes, tous les types des contraintes, tous les couples (type, région), etc. Fonctionnellement, c'est map.
 
-Exemples de requêtes `select where` : toutes les contraintes d'une zone, toutes les contraintes bijectives d'une zone, toutes les valeurs présentes dans une zone, toutes les cellules libres dans une zone. Fonctionnellement, c'est équivalent à une combinaison de filter et de map. Et cela peut utiliser des connaissances spécifiques du domaine qui ne sont pas dans la base (Geometrie, règles du jeu).
+Exemples de requêtes `select where` : toutes les contraintes d'une zone, toutes les contraintes bijectives d'une zone, toutes les valeurs présentes dans une zone, toutes les cellules libres dans une zone. Fonctionnellement, c'est équivalent à une combinaison de filter et de map. Et cela peut utiliser des connaissances spécifiques du domaine qui ne sont pas dans la base (Geometrie, règles du puzzle).
 
 On peut aussi avoir des requêtes qui imposent des conditions sur l'ensemble des résultats d'une requête, unicité en particulier : la seule cellule libre dans une zone, la seule valeur absente dans une zone.
 

@@ -1,10 +1,10 @@
 #  Contraintes doc
 
-Contraintes regroupe les définitions nécessaires à la représentation du concept de *contrainte* dans le jeu du sudoku.
+Contraintes regroupe les définitions nécessaires à la représentation du concept de *contrainte* dans le puzzle du sudoku.
 
 Une contrainte met en relation la grille de sudoku avec les chiffres de 1 à 9.
 
-Le vocabulaire correspond à l'idée qu'une cellule peut "contenir" un chiffre, et pas plus d'un chiffre. Les contraintes résultent de la structure de la grille, des règles du jeu et d'un ensemble de contraintes données initialement comme axiomes sous la forme : telle cellule contient tel chiffre.
+Le vocabulaire correspond à l'idée qu'une cellule peut "contenir" un chiffre, et pas plus d'un chiffre. Les contraintes résultent de la structure de la grille, des règles du puzzle et d'un ensemble de contraintes données initialement comme axiomes sous la forme : telle cellule contient tel chiffre.
 
 Mathématiquement : il y a une application de l'ensemble des cellules dans l'ensemble des chiffres, et les 27 restrictions de cette application aux zones sont bijectives. Une contrainte parle d'une restriction de cette application à une région incluse dans une zone. Donc dans cette région, l'application est injective.
 

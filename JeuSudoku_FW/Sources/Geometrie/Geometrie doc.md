@@ -6,7 +6,7 @@ L'élément de base est la *cellule*. Une cellule est repérée par ses coordonn
 
 Une *région* est un ensemble de cellules.
 
-Certaines régions ont un rôle particulier : ce sont les *zones* (*carrés*, *lignes*, *colonnes*). Lorsqu'on remplit une grille, chaque chiffre de 1 à 9 doit apparaître une fois et une seule dans chaque zone, c'est la règle du jeu.
+Certaines régions ont un rôle particulier : ce sont les *zones* (*carrés*, *lignes*, *colonnes*). Lorsqu'on remplit une grille, chaque chiffre de 1 à 9 doit apparaître une fois et une seule dans chaque zone, c'est la règle du puzzle.
 
 En plus des zones, on définit les *bandes* horizontales et verticales, qui sont des groupes de 3 lignes (trois bandes horizontales et trois bandes verticales). Chaque bande est repérée par un index de 0 à 2. Les bandes permettent de définir la position des carrés (un carré est l'intersection d'une bande horizontale et d'une bande verticale).
 

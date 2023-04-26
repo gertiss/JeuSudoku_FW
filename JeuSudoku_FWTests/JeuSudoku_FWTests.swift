@@ -142,7 +142,7 @@ final class JeuSudoku_FWTests: XCTestCase {
             elimineesParHe_8.map {$0.nom}.sorted(),
             ["Ae", "Be", "Ce", "De", "Ee", "Fe", "Gd", "Ge", "Gf", "Ha", "Hb", "Hc", "Hd", "He", "Hf", "Hg", "Hh", "Hi", "Id", "Ie", "If"]
         )
-        // Jeu
+        // Puzzle_
         
         var nouveauCoup = puzzle.premierCoup!
         XCTAssertEqual(
